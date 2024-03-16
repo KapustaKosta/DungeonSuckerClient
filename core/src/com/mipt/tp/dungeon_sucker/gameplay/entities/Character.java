@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
 
 public class Character extends Entity {
     public void getInput() {

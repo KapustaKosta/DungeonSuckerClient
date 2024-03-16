@@ -3,8 +3,6 @@ package com.mipt.tp.dungeon_sucker.gameplay;
 import com.mipt.tp.dungeon_sucker.UI.Drawable;
 import com.mipt.tp.dungeon_sucker.math.RandomNumGenerator;
 
-import java.util.Vector;
-
 public class Level implements Drawable {
     private Map map;
     private final MapGenerator mapGenerator;
