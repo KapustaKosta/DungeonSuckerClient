@@ -25,7 +25,7 @@ public class Level implements Drawable {
     }
 
     public boolean canIGoTo(int y, int x) {
-        return true;
+        return !map.isRoomEmpty(y, x);
     }
 
     @Override

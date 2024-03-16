@@ -10,27 +10,27 @@ import com.mipt.tp.dungeon_sucker.math.IntVector2;
 public class Character extends Entity {
     public void getInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
-            if (level.canIGoTo(levelPosition.x, levelPosition.y + 36)) {
+            if (level.canIGoTo(levelPosition.y + 1, levelPosition.x)) {
                 levelPosition.y += 1;
                 updateRealPosition();
             }
 
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
-            if (level.canIGoTo(levelPosition.x + 1, levelPosition.y)) {
+            if (level.canIGoTo(levelPosition.y, levelPosition.x + 1)) {
                 levelPosition.x += 1;
                 updateRealPosition();
             }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
-            if (level.canIGoTo(levelPosition.x - 1, levelPosition.y)) {
+            if (level.canIGoTo(levelPosition.y, levelPosition.x - 1)) {
                 levelPosition.x -= 1;
                 updateRealPosition();
             }
 
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-            if (level.canIGoTo(levelPosition.x, levelPosition.y - 1)) {
+            if (level.canIGoTo(levelPosition.y - 1, levelPosition.x)) {
                 levelPosition.y -= 1;
                 updateRealPosition();
             }

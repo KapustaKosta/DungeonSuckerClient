@@ -10,5 +10,6 @@ public class EmptyRoom extends Room {
   public EmptyRoom(IntVector2 levelPosition,
                    Texture texture) {
     super(levelPosition, texture);
+    isLocked = true;
   }
 }

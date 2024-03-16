@@ -12,6 +12,8 @@ public class Room implements Drawable {
   private Texture texture;
   private SpriteBatch batch;
 
+  protected boolean isLocked = false;
+
   public Room(IntVector2 levelPosition, Texture texture)
   {
     this.levelPosition = levelPosition;
@@ -28,5 +30,9 @@ public class Room implements Drawable {
 
   public IntVector2 getPosition() {
     return levelPosition;
+  }
+
+  public boolean isLocked() {
+    return isLocked;
   }
 }
