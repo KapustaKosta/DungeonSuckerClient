@@ -23,4 +23,8 @@ public class Room implements Drawable {
     batch.draw(texture, position.x, position.y);
     batch.end();
   }
+
+  public Vector2 getPosition() {
+    return position;
+  }
 }

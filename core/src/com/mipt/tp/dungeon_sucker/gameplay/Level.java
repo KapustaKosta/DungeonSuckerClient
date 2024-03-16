@@ -20,6 +20,10 @@ public class Level implements Drawable {
         map = mapGenerator.generate(map, targetRoomCount);
     }
 
+    public Map getMap() {
+        return map;
+    }
+
     public boolean canIGoTo(int y, int x) {
         return true;
     }

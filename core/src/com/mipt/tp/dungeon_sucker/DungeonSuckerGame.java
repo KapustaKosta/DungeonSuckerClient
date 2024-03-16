@@ -38,9 +38,8 @@ public class DungeonSuckerGame extends ApplicationAdapter {
     texturesPack.shopTexture = new Texture("room.png");
     MapGenerator mapGenerator = new DFSMapGenerator(texturesPack);
 
-    level = new Level(mapGenerator);
-    this.character = new Character(new Vector2(0, 0), new Texture("character.png"), level);
-
+    this.level = new Level(mapGenerator);
+    this.character = new Character(level.getMap().spawn.getPosition(), new Texture("character.png"), level);
   }
 
   @Override

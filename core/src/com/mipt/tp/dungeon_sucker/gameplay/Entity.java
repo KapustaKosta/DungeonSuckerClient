@@ -14,9 +14,9 @@ public class Entity implements Drawable {
     private SpriteBatch batch;
 
 
-    public Entity(Vector2 levelPosition, Texture texture, Level level) {
-        this.levelPosition = levelPosition;
-        this.position = new Vector2(levelPosition.x * 36, levelPosition.y * 36);
+    public Entity(Vector2 position, Texture texture, Level level) {
+        this.levelPosition = position;
+        this.position = new Vector2(position.x, position.y);
         this.texture = texture;
         this.batch = new SpriteBatch();
         this.level = level;
