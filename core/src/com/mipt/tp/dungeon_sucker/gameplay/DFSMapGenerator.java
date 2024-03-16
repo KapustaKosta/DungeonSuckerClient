@@ -2,6 +2,7 @@ package com.mipt.tp.dungeon_sucker.gameplay;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.mipt.tp.dungeon_sucker.UI.texturePacks.RoomsTexturesPack;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 import com.mipt.tp.dungeon_sucker.math.RandomNumGenerator;
 
@@ -12,11 +13,9 @@ public class DFSMapGenerator extends MapGenerator {
   private int counter;
   private int targetRoomCount;
 
-  public DFSMapGenerator(Texture emptyRoomTexture, Texture hauntedRoomTexture,
-      Texture exitRoomTexture, Texture oasisTexture, Texture peaceRoomTexture, Texture spawnTexture,
-      Texture shopTexture) {
-    super(emptyRoomTexture, hauntedRoomTexture, exitRoomTexture, oasisTexture, peaceRoomTexture,
-        spawnTexture, shopTexture);
+  public DFSMapGenerator(
+      RoomsTexturesPack roomsTexturesPack) {
+    super(roomsTexturesPack);
   }
 
   @Override
@@ -29,7 +28,7 @@ public class DFSMapGenerator extends MapGenerator {
     for (int i = 0; i < rooms.length; i++) {
       for (int j = 0; j < rooms[0].length; j++) {
         Vector2 position = new Vector2(j * 36, i * 36);
-        rooms[i][j] = new EmptyRoom(position, emptyRoomTexture);
+        rooms[i][j] = new EmptyRoom(position, roomsTexturesPack.emptyRoomTexture);
       }
     }
 
@@ -49,7 +48,7 @@ public class DFSMapGenerator extends MapGenerator {
       for (int j = 0; j < rooms[0].length; j++) {
         if (!(rooms[i][j] instanceof EmptyRoom)) {
           Vector2 position = new Vector2(j * 36, i * 36);
-          spawn = new Spawn(position, spawnTexture);
+          spawn = new Spawn(position, roomsTexturesPack.spawnTexture);
           rooms[i][j] = spawn;
           found = true;
           break;
@@ -65,7 +64,7 @@ public class DFSMapGenerator extends MapGenerator {
       for (int j = rooms[0].length - 1; j >= 0; j--) {
         if (!(rooms[i][j] instanceof EmptyRoom)) {
           Vector2 position = new Vector2(j * 36, i * 36);
-          exitRoom = new ExitRoom(position, exitRoomTexture);
+          exitRoom = new ExitRoom(position, roomsTexturesPack.exitRoomTexture);
           rooms[i][j] = exitRoom;
           found = true;
           break;
@@ -100,16 +99,19 @@ public class DFSMapGenerator extends MapGenerator {
     Vector2 roomPosition = new Vector2(coordinates.x * 36, coordinates.y * 36);
     int roomType = RandomNumGenerator.generateFromRange(0, 10);
     if (roomType == 0) {
-      rooms[coordinates.y][coordinates.x] = new Oasis(roomPosition, oasisTexture);
+      rooms[coordinates.y][coordinates.x] = new Oasis(roomPosition, roomsTexturesPack.oasisTexture);
     }
     if (roomType > 0 && roomType < 6) {
-      rooms[coordinates.y][coordinates.x] = new HauntedRoom(roomPosition, hauntedRoomTexture);
+      rooms[coordinates.y][coordinates.x] = new HauntedRoom(roomPosition,
+          roomsTexturesPack.hauntedRoomTexture);
     }
     if (roomType >= 6 && roomType < 9) {
-      rooms[coordinates.y][coordinates.x] = new PeaceRoom(roomPosition, peaceRoomTexture);
+      rooms[coordinates.y][coordinates.x] = new PeaceRoom(roomPosition,
+          roomsTexturesPack.peaceRoomTexture);
     }
     if (roomType >= 9 && roomType <= 10) {
-      rooms[coordinates.y][coordinates.x] = new PeaceRoom(roomPosition, shopTexture);
+      rooms[coordinates.y][coordinates.x] = new PeaceRoom(roomPosition,
+          roomsTexturesPack.shopTexture);
     }
   }
 

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mipt.tp.dungeon_sucker.UI.texturePacks.RoomsTexturesPack;
 import com.mipt.tp.dungeon_sucker.gameplay.DFSMapGenerator;
 import com.mipt.tp.dungeon_sucker.gameplay.HauntedRoom;
 import com.mipt.tp.dungeon_sucker.gameplay.Level;
@@ -18,15 +19,15 @@ public class DungeonSuckerGame extends ApplicationAdapter {
 
   @Override
   public void create() {
-    Texture emptyRoom = new Texture("emptyRoom.png");
-    Texture hauntedRoom = new Texture("room.png");
-    Texture exitRoom = new Texture("exitRoom.png");
-    Texture oasisRoom = new Texture("room.png");
-    Texture peaceRoom = new Texture("room.png");
-    Texture spawnRoom = new Texture("spawn.png");
-    Texture shopRoom = new Texture("room.png");
-    MapGenerator mapGenerator = new DFSMapGenerator(emptyRoom, hauntedRoom, exitRoom, oasisRoom,
-        peaceRoom, spawnRoom, shopRoom);
+    RoomsTexturesPack texturesPack = new RoomsTexturesPack();
+    texturesPack.emptyRoomTexture = new Texture("emptyRoom.png");
+    texturesPack.hauntedRoomTexture = new Texture("room.png");
+    texturesPack.exitRoomTexture = new Texture("exitRoom.png");
+    texturesPack.oasisTexture = new Texture("room.png");
+    texturesPack.peaceRoomTexture = new Texture("room.png");
+    texturesPack.spawnTexture = new Texture("spawn.png");
+    texturesPack.shopTexture = new Texture("room.png");
+    MapGenerator mapGenerator = new DFSMapGenerator(texturesPack);
     level = new Level(mapGenerator);
   }
 
