@@ -2,6 +2,7 @@ package com.mipt.tp.dungeon_sucker.gameplay.level;
 
 import com.mipt.tp.dungeon_sucker.UI.Drawable;
 import com.mipt.tp.dungeon_sucker.gameplay.level.logic.MapGenerator;
+import com.mipt.tp.dungeon_sucker.math.IntVector2;
 import com.mipt.tp.dungeon_sucker.math.RandomNumGenerator;
 
 public class Level implements Drawable {
@@ -15,7 +16,7 @@ public class Level implements Drawable {
     }
 
     private void generateMap() {
-        int targetRoomCount = RandomNumGenerator.generateFromRange(15, 25);
+        int targetRoomCount = RandomNumGenerator.generateFromRange(15, 42);
         map = mapGenerator.generate(map, targetRoomCount);
     }
 

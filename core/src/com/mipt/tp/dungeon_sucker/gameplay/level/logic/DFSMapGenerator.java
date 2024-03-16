@@ -28,7 +28,7 @@ public class DFSMapGenerator extends MapGenerator {
 
     for (int i = 0; i < rooms.length; i++) {
       for (int j = 0; j < rooms[0].length; j++) {
-        Vector2 position = new Vector2(j * 36, i * 36);
+        IntVector2 position = new IntVector2(j, i);
         rooms[i][j] = new EmptyRoom(position, roomsTexturesPack.emptyRoomTexture);
       }
     }
@@ -48,7 +48,7 @@ public class DFSMapGenerator extends MapGenerator {
     for (int i = rooms.length - 1; i >= 0; i--) {
       for (int j = 0; j < rooms[0].length; j++) {
         if (!(rooms[i][j] instanceof EmptyRoom)) {
-          Vector2 position = new Vector2(j * 36, i * 36);
+          IntVector2 position = new IntVector2(j, i);
           spawn = new Spawn(position, roomsTexturesPack.spawnTexture);
           rooms[i][j] = spawn;
           found = true;
@@ -64,7 +64,7 @@ public class DFSMapGenerator extends MapGenerator {
     for (int i = 0; i < rooms.length; i++) {
       for (int j = rooms[0].length - 1; j >= 0; j--) {
         if (!(rooms[i][j] instanceof EmptyRoom)) {
-          Vector2 position = new Vector2(j * 36, i * 36);
+          IntVector2 position = new IntVector2(j, i);
           exitRoom = new ExitRoom(position, roomsTexturesPack.exitRoomTexture);
           rooms[i][j] = exitRoom;
           found = true;
@@ -97,7 +97,7 @@ public class DFSMapGenerator extends MapGenerator {
   }
 
   public void spawnRandomRoom(IntVector2 coordinates) {
-    Vector2 roomPosition = new Vector2(coordinates.x * 36, coordinates.y * 36);
+    IntVector2 roomPosition = new IntVector2(coordinates.x, coordinates.y);
     int roomType = RandomNumGenerator.generateFromRange(0, 10);
     if (roomType == 0) {
       rooms[coordinates.y][coordinates.x] = new Oasis(roomPosition, roomsTexturesPack.oasisTexture);

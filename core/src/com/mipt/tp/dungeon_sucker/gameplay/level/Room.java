@@ -4,15 +4,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mipt.tp.dungeon_sucker.UI.Drawable;
+import com.mipt.tp.dungeon_sucker.helper.Constants;
+import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 public class Room implements Drawable {
-  private Vector2 position;
+  private final IntVector2 levelPosition;
   private Texture texture;
   private SpriteBatch batch;
 
-  public Room(Vector2 position, Texture texture)
+  public Room(IntVector2 levelPosition, Texture texture)
   {
-    this.position = position;
+    this.levelPosition = levelPosition;
     this.texture = texture;
     this.batch = new SpriteBatch();
   }
@@ -20,11 +22,11 @@ public class Room implements Drawable {
   @Override
   public void draw() {
     batch.begin();
-    batch.draw(texture, position.x, position.y);
+    batch.draw(texture, levelPosition.x * Constants.cellSize, levelPosition.y * Constants.cellSize);
     batch.end();
   }
 
-  public Vector2 getPosition() {
-    return position;
+  public IntVector2 getPosition() {
+    return levelPosition;
   }
 }

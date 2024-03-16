@@ -36,7 +36,7 @@ public class DungeonSuckerGame extends ApplicationAdapter {
     MapGenerator mapGenerator = new DFSMapGenerator(texturesPack);
 
     this.level = new Level(mapGenerator);
-    IntVector2 characterPosition = new IntVector2((int) level.getMap().spawn.getPosition().x / Constants.cellSize, (int) level.getMap().spawn.getPosition().y / Constants.cellSize);
+    IntVector2 characterPosition = new IntVector2(level.getMap().spawn.getPosition().x, level.getMap().spawn.getPosition().y);
     this.character = new Character(characterPosition, new Texture("character.png"), level);
   }
 
