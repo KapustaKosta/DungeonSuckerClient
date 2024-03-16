@@ -15,7 +15,7 @@ public class Entity implements Drawable {
 
 
     public Entity(Vector2 position, Texture texture, Level level) {
-        this.levelPosition = position;
+        this.levelPosition = new Vector2(position);
         this.position = new Vector2(position.x, position.y);
         this.texture = texture;
         this.batch = new SpriteBatch();
@@ -30,7 +30,7 @@ public class Entity implements Drawable {
     }
 
     public void updateRealPosition() {
-        this.position = new Vector2(levelPosition.x * 36, levelPosition.y * 36);
+        this.position = new Vector2(levelPosition.x, levelPosition.y);
     }
 
 }
