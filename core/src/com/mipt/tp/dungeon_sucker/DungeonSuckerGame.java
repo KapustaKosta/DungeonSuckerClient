@@ -1,19 +1,16 @@
 package com.mipt.tp.dungeon_sucker;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mipt.tp.dungeon_sucker.UI.texturePacks.RoomsTexturesPack;
-import com.mipt.tp.dungeon_sucker.gameplay.Character;
-import com.mipt.tp.dungeon_sucker.gameplay.DFSMapGenerator;
-import com.mipt.tp.dungeon_sucker.gameplay.HauntedRoom;
-import com.mipt.tp.dungeon_sucker.gameplay.Level;
-import com.mipt.tp.dungeon_sucker.gameplay.MapGenerator;
-import com.mipt.tp.dungeon_sucker.gameplay.Room;
+import com.mipt.tp.dungeon_sucker.gameplay.entities.Character;
+import com.mipt.tp.dungeon_sucker.gameplay.level.logic.DFSMapGenerator;
+import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
+import com.mipt.tp.dungeon_sucker.gameplay.level.logic.MapGenerator;
+import com.mipt.tp.dungeon_sucker.helper.Constants;
+import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 public class DungeonSuckerGame extends ApplicationAdapter {
 
@@ -39,7 +36,8 @@ public class DungeonSuckerGame extends ApplicationAdapter {
     MapGenerator mapGenerator = new DFSMapGenerator(texturesPack);
 
     this.level = new Level(mapGenerator);
-    this.character = new Character(level.getMap().spawn.getPosition(), new Texture("character.png"), level);
+    IntVector2 characterPosition = new IntVector2((int) level.getMap().spawn.getPosition().x / Constants.cellSize, (int) level.getMap().spawn.getPosition().y / Constants.cellSize);
+    this.character = new Character(characterPosition, new Texture("character.png"), level);
   }
 
   @Override

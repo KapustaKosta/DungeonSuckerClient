@@ -1,4 +1,4 @@
-package com.mipt.tp.dungeon_sucker.gameplay;
+package com.mipt.tp.dungeon_sucker.gameplay.level.logic;
 
 import com.mipt.tp.dungeon_sucker.UI.texturePacks.RoomsTexturesPack;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Map;

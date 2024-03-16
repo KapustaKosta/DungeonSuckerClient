@@ -1,13 +1,15 @@
-package com.mipt.tp.dungeon_sucker.gameplay;
+package com.mipt.tp.dungeon_sucker.gameplay.entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mipt.tp.dungeon_sucker.UI.Drawable;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
+import com.mipt.tp.dungeon_sucker.helper.Constants;
+import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 public class Entity implements Drawable {
-    protected Vector2 levelPosition;
+    protected IntVector2 levelPosition;
 
     protected Vector2 position;
     protected Level level;
@@ -15,9 +17,9 @@ public class Entity implements Drawable {
     private SpriteBatch batch;
 
 
-    public Entity(Vector2 position, Texture texture, Level level) {
-        this.levelPosition = new Vector2(position);
-        this.position = new Vector2(position.x, position.y);
+    public Entity(IntVector2 position, Texture texture, Level level) {
+        this.levelPosition = position;
+        this.position = new Vector2(position.x * Constants.cellSize, position.y * Constants.cellSize);
         this.texture = texture;
         this.batch = new SpriteBatch();
         this.level = level;
@@ -31,7 +33,7 @@ public class Entity implements Drawable {
     }
 
     public void updateRealPosition() {
-        this.position = new Vector2(levelPosition.x, levelPosition.y);
+        this.position = new Vector2(levelPosition.x * Constants.cellSize, levelPosition.y * Constants.cellSize);
     }
 
 }

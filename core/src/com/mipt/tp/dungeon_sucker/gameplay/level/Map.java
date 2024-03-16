@@ -1,4 +1,7 @@
-package com.mipt.tp.dungeon_sucker.gameplay;
+package com.mipt.tp.dungeon_sucker.gameplay.level;
+
+import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.ExitRoom;
+import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.Spawn;
 
 public class Map {
   public Room[][] rooms;

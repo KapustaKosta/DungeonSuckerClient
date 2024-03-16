@@ -1,4 +1,4 @@
-package com.mipt.tp.dungeon_sucker.gameplay;
+package com.mipt.tp.dungeon_sucker.gameplay.level.logic;
 
 import java.util.Random;
 
