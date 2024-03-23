@@ -1,8 +1,7 @@
 package com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
-import com.mipt.tp.dungeon_sucker.gameplay.Creature;
+import com.mipt.tp.dungeon_sucker.gameplay.entities.Creature;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.mipt.tp.dungeon_sucker.gameplay.entities.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
@@ -13,7 +12,7 @@ public class HauntedRoom extends Room {
 
   public HauntedRoom(IntVector2 position, Texture texture, Creature[] creatures, DungeonMasster master) {
     super(position, texture, master);
-    this.isHaunted = true;
+    super.isHaunted = true;
     this.hostileEntities = creatures;
     for (int i = 0; i < this.hostileEntities.length; ++i) {
       creatures[i].setPlace(this);

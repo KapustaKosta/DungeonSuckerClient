@@ -1,5 +1,6 @@
 package com.mipt.tp.dungeon_sucker.gameplay;
 
+import com.mipt.tp.dungeon_sucker.gameplay.entities.Creature;
 import com.mipt.tp.dungeon_sucker.gameplay.entities.Entity;
 import java.util.LinkedList;
 
@@ -30,9 +31,6 @@ public class DungeonMasster {
         return;
       }
     }
-    if (this.orderOfSteps.isEmpty()) {
-      this.orderOfSteps.add(new StepOrder(timeOfStep, entity));
-    }
   }
 
   public void move() {
@@ -41,10 +39,10 @@ public class DungeonMasster {
       this.orderOfSteps.getFirst().entity.makeMove();
       Class<Creature> creatureClass = Creature.class;
       if (this.orderOfSteps.getFirst().entity.getClass() == creatureClass) {
-        this.add(((Creature) this.orderOfSteps.getFirst().entity).weight
+        this.add((this.orderOfSteps.getFirst().entity).weight
             + this.orderOfSteps.getFirst().timeOfStep, this.orderOfSteps.getFirst().entity);
       } else {
-        this.add(((Creature) this.orderOfSteps.getFirst().entity).weight
+        this.add((this.orderOfSteps.getFirst().entity).weight
             + this.orderOfSteps.getFirst().timeOfStep, this.orderOfSteps.getFirst().entity);
       }
       this.orderOfSteps.removeFirst();

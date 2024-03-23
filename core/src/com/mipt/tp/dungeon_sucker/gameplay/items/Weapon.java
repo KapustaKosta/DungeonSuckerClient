@@ -7,8 +7,11 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 public class Weapon {
   int weight;
   protected String name;
-  Skill[] skills = new Skill[1];
+  protected Skill[] skills;
   protected int amount = 0;
+  public Weapon(int numberOdSkills){
+    this.skills = new Skill[numberOdSkills];
+  }
   public void useSkill(int index, Room room){
     this.skills[index].use(room);
   }

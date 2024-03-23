@@ -40,7 +40,7 @@ public class DungeonSuckerGame extends ApplicationAdapter {
 
     this.level = new Level(mapGenerator);
     IntVector2 characterPosition = new IntVector2(level.getMap().spawn.getPosition().x, level.getMap().spawn.getPosition().y);
-    this.character = new Character(characterPosition, new Texture("character.png"), level);
+    this.character = new Character(characterPosition, new Texture("character.png"), level, 1, 1);
 
     Texture texture = new Texture("room.png");
     room = new Room(new IntVector2(10, 10), texture, new DungeonMasster());

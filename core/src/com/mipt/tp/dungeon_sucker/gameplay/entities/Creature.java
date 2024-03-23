@@ -1,37 +1,35 @@
-package com.mipt.tp.dungeon_sucker.gameplay;
+package com.mipt.tp.dungeon_sucker.gameplay.entities;
 
 import com.mipt.tp.dungeon_sucker.gameplay.entities.Entity;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 import java.util.Objects;
 import java.util.Random;
 
 public class Creature extends Entity {
   int physicalArmor;
-  boolean isHostile;
-  int power;
-  int weight;
-  HauntedRoom place;
+  protected boolean isHostile;
+  protected int power;
+  public int weight;
+  protected HauntedRoom place;
   public String name;
+  protected Weapon weapon;
 
   public Creature(int health, int power, int weight, boolean isHostile, HauntedRoom place, String name) {
-    super();
+    super(health, weight, place, name);
     this.power = power;
-    this.health = health;
-    this.weight = weight;
     this.isHostile = isHostile;
-    this.place = place;
-    this.name = name;
   }
 
   public void makeMove() {
     if (this.isHostile) {
       Entity[] victims = this.place.friendlyEntities;
       Entity victim = victims[new Random().nextInt(this.place.amountOfFriendlyEntities)];
-      this.damage(victim, this.power, name);
+      this.damage(victim, this.power, this.name);
     } else {
       Entity[] enemies = this.place.hostileEntities;
       Entity enemy = enemies[new Random().nextInt(enemies.length)];
-      this.damage(enemy, this.power, name);
+      this.damage(enemy, this.power, this.name);
     }
   }
 

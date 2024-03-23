@@ -10,12 +10,11 @@ import java.util.Scanner;
 
 public class Club extends Weapon {
   int damage;
-  Skill[] skills;
 
   public Club(int damage, String name) {
+    super(3);
     this.damage = damage;
     this.name = name;
-    this.skills = new Skill[3];
     this.generateSkill(new PhysicallyDamageOneEntity(this, this.damage));
     this.generateSkill(new PhysicallyDamageThreeEntities(this,this.damage, 0.5, 1, 0.5));
     this.generateSkill(new PhysicallyDamageThreeEntities(this,this.damage, 0.75, 0.5, 0.75));

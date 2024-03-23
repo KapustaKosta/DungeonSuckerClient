@@ -8,6 +8,8 @@ public class Skill {
   protected int damage;
   protected Weapon weapon;
   String description;
-  public void use(Room room){}
-  public void use(HauntedRoom room){}
+  public void use(Room room){
+  }
+  public void use(HauntedRoom room){
+    System.out.println("FUCK");}
 }

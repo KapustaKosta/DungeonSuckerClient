@@ -2,10 +2,12 @@ package com.mipt.tp.dungeon_sucker.Skills;
 
 import com.mipt.tp.dungeon_sucker.gameplay.*;
 
+import com.mipt.tp.dungeon_sucker.gameplay.entities.Creature;
 import com.mipt.tp.dungeon_sucker.gameplay.entities.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
+
 import java.util.Scanner;
 
 public class PhysicallyDamageOneEntity extends Skill {
@@ -22,14 +24,22 @@ public class PhysicallyDamageOneEntity extends Skill {
       return;
     }
     Scanner in = new Scanner(System.in);
+    HauntedRoom hauntedRoom = (HauntedRoom) room;
     System.out.println("choose enemy to punch");
-    for (int i = 0; i < ((HauntedRoom) room).hostileEntities.length; ++i) {
-      if (((Creature) ((HauntedRoom) room).hostileEntities[i]).isAlive) {
-        System.out.println(i + 1 + ": " + ((Creature) ((HauntedRoom) room).hostileEntities[i]).name);
+    for (int i = 0; i < (hauntedRoom).hostileEntities.length; ++i) {
+      if (hauntedRoom.hostileEntities[i].isAlive) {
+        System.out.println(i + 1 + ": " + (((Creature) hauntedRoom.hostileEntities[i])).name + ": "
+            + ((hauntedRoom).hostileEntities[i]).health + " hp");
       }
     }
     int index = in.nextInt();
-    entities[index - 1].getDamaged(this.damage, "Physical");
+    while (!entities[Math.min(Math.max(index - 1, 0), entities.length-1)].isAlive) {
+      System.out.println("do not play with dead!");
+      System.out.println("choose another one");
+      index = in.nextInt();
+    }
+    index = Math.min(Math.max(index - 1, 0), entities.length-1);
+    entities[index].getDamaged(this.damage, "Physical");
   }
 
   public String toString() {

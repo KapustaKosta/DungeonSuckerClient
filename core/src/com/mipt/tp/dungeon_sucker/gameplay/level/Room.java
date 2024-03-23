@@ -16,9 +16,9 @@ public class Room implements Drawable {
   private final IntVector2 levelPosition;
   private Texture texture;
   private SpriteBatch batch;
-  public int amountOfFriendlyEntities;
+  public int amountOfFriendlyEntities = 0;
   public boolean isHaunted = false;
-  private int amountOfHostileEntities;
+  public int amountOfHostileEntities = 0;
 
   protected boolean isLocked = false;
 

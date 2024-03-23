@@ -2,10 +2,12 @@ package com.mipt.tp.dungeon_sucker.Skills;
 
 import com.mipt.tp.dungeon_sucker.gameplay.*;
 
+import com.mipt.tp.dungeon_sucker.gameplay.entities.Creature;
 import com.mipt.tp.dungeon_sucker.gameplay.entities.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
+
 import java.util.Scanner;
 
 public class PhysicallyDamageThreeEntities extends Skill {
@@ -13,7 +15,7 @@ public class PhysicallyDamageThreeEntities extends Skill {
   double secondCoefficient;
   double thirdCoefficient;
 
-  public PhysicallyDamageThreeEntities(Weapon weapon,int damage, double firstCoefficient, double secondCoefficient, double thirdCoefficient) {
+  public PhysicallyDamageThreeEntities(Weapon weapon, int damage, double firstCoefficient, double secondCoefficient, double thirdCoefficient) {
     this.weapon = weapon;
     this.firstCoefficient = firstCoefficient;
     this.secondCoefficient = secondCoefficient;
@@ -22,13 +24,25 @@ public class PhysicallyDamageThreeEntities extends Skill {
   }
 
   public void use(Room room) {
-    if(!room.isHaunted){
+    if (!room.isHaunted) {
       return;
     }
     Entity[] entities = ((HauntedRoom) room).hostileEntities;
     Scanner in = new Scanner(System.in);
     System.out.println("choose enemy to punch");
+    HauntedRoom hauntedRoom = (HauntedRoom) room;
+    for (int i = 0; i < (hauntedRoom).hostileEntities.length; ++i) {
+      if ((hauntedRoom).hostileEntities[i].isAlive) {
+        System.out.println(i + 1 + ": " + ((Creature) (hauntedRoom).hostileEntities[i]).name + ": "
+            + ((hauntedRoom).hostileEntities[i]).health + " hp");
+      }
+    }
     int index = in.nextInt();
+    while (!entities[Math.min(Math.max(index - 1, 0), entities.length-1)].isAlive) {
+      System.out.println("do not play with dead!");
+      System.out.println("choose another one");
+      index = in.nextInt();
+    }
     if (index <= 0) {
       entities[0].getDamaged((int) (this.damage * this.secondCoefficient), "Physical");
       if (entities.length > 1) {
