@@ -9,7 +9,6 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Objects;
 
@@ -30,6 +29,7 @@ public class Entity implements Drawable {
   // Базовые статы из РПГ. Ловкость для каких-нибудь рапир, сила для булав, мудрость для магии
 
   public Entity(int health, int weight, HauntedRoom place, String name) {
+    this.maxHealth = health;
     this.health = health;
     this.weight = weight;
     this.place = place;

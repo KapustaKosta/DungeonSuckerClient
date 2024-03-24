@@ -2,7 +2,6 @@ package com.mipt.tp.dungeon_sucker.Skills;
 
 import com.mipt.tp.dungeon_sucker.gameplay.*;
 
-import com.mipt.tp.dungeon_sucker.gameplay.entities.Creature;
 import com.mipt.tp.dungeon_sucker.gameplay.entities.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
@@ -21,6 +20,9 @@ public class PhysicallyDamageThreeEntities extends Skill {
     this.secondCoefficient = secondCoefficient;
     this.thirdCoefficient = thirdCoefficient;
     this.damage = damage;
+    this.description = "deals " + this.damage * this.secondCoefficient + " damage to enemy by your choice." +
+        " Also if possible deals " + this.damage * this.secondCoefficient + " damage to enemy before him and " +
+        this.damage * this.secondCoefficient + " damage to enemy right after him";
   }
 
   public void use(Room room) {
@@ -33,12 +35,12 @@ public class PhysicallyDamageThreeEntities extends Skill {
     HauntedRoom hauntedRoom = (HauntedRoom) room;
     for (int i = 0; i < (hauntedRoom).hostileEntities.length; ++i) {
       if ((hauntedRoom).hostileEntities[i].isAlive) {
-        System.out.println(i + 1 + ": " + ((Creature) (hauntedRoom).hostileEntities[i]).name + ": "
+        System.out.println(i + 1 + ": " + ((hauntedRoom).hostileEntities[i]).name + ": "
             + ((hauntedRoom).hostileEntities[i]).health + " hp");
       }
     }
     int index = in.nextInt();
-    while (!entities[Math.min(Math.max(index - 1, 0), entities.length-1)].isAlive) {
+    while (!entities[Math.min(Math.max(index - 1, 0), entities.length - 1)].isAlive) {
       System.out.println("do not play with dead!");
       System.out.println("choose another one");
       index = in.nextInt();

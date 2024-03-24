@@ -11,7 +11,6 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.logic.DFSMapGenerator;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
 import com.mipt.tp.dungeon_sucker.gameplay.level.logic.MapGenerator;
-import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 public class DungeonSuckerGame extends ApplicationAdapter {

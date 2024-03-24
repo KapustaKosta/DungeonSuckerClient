@@ -1,9 +1,7 @@
 package com.mipt.tp.dungeon_sucker.gameplay.entities;
 
-import com.mipt.tp.dungeon_sucker.gameplay.entities.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
-import java.util.Objects;
 import java.util.Random;
 
 public class Creature extends Entity {
@@ -37,16 +35,4 @@ public class Creature extends Entity {
     who.getDamaged(damage, type);
   }
 
-  public void getDamaged(int damage, String type) {
-    if (Objects.equals(type, "Magic")) {
-      damage = Math.max(0, damage - magicalArmor);
-    } else {
-      damage = Math.max(0, damage - physicalArmor);
-    }
-    this.health -= damage;
-    System.out.println(this.name + " got damaged. Current health: " + this.health);
-    if (this.health <= 0) {
-      this.die();
-    }
-  }
 }

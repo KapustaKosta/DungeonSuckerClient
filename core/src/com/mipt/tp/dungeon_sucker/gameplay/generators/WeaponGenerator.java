@@ -8,11 +8,11 @@ import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import java.util.Random;
 
 public class WeaponGenerator {
-  final int WEAPONAMOUNT = 1;
+  final int AmountOfWeaponTypesInGame = 1;
   ElementSet elementSet = new ElementSet();
   RaritySet raritySet = new RaritySet();
   public Weapon generateWeapon(int level){
-    int WhatToCreate = new Random().nextInt(WEAPONAMOUNT);
+    int WhatToCreate = new Random().nextInt(AmountOfWeaponTypesInGame);
     String element = elementSet.generate();
     String rarity = raritySet.generate();
     level = level + new Random().nextInt(3) - 1;

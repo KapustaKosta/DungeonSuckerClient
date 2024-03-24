@@ -1,6 +1,5 @@
 package com.mipt.tp.dungeon_sucker.gameplay.level;
 
-import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.EmptyRoom;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.ExitRoom;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.Spawn;
 

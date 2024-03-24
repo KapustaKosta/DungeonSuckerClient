@@ -2,7 +2,6 @@ package com.mipt.tp.dungeon_sucker.Skills;
 
 import com.mipt.tp.dungeon_sucker.gameplay.*;
 
-import com.mipt.tp.dungeon_sucker.gameplay.entities.Creature;
 import com.mipt.tp.dungeon_sucker.gameplay.entities.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
@@ -14,6 +13,7 @@ public class PhysicallyDamageOneEntity extends Skill {
   public PhysicallyDamageOneEntity(Weapon weapon, int damage) {
     this.weapon = weapon;
     this.damage = damage;
+    this.description = "Deals " + this.damage + " damage to enemy by your choice";
   }
 
   public void use(Room room) {
@@ -28,7 +28,7 @@ public class PhysicallyDamageOneEntity extends Skill {
     System.out.println("choose enemy to punch");
     for (int i = 0; i < (hauntedRoom).hostileEntities.length; ++i) {
       if (hauntedRoom.hostileEntities[i].isAlive) {
-        System.out.println(i + 1 + ": " + (((Creature) hauntedRoom.hostileEntities[i])).name + ": "
+        System.out.println(i + 1 + ": " + ((hauntedRoom.hostileEntities[i])).name + ": "
             + ((hauntedRoom).hostileEntities[i]).health + " hp");
       }
     }

@@ -1,6 +1,5 @@
 package com.mipt.tp.dungeon_sucker.gameplay.generators.weaponGenerators;
 
-import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer.Club;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 

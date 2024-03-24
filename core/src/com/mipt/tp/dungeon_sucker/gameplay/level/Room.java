@@ -2,7 +2,6 @@ package com.mipt.tp.dungeon_sucker.gameplay.level;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.mipt.tp.dungeon_sucker.UI.Drawable;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.mipt.tp.dungeon_sucker.gameplay.entities.Entity;

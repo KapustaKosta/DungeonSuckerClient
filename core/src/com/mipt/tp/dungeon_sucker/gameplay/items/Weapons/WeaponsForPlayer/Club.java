@@ -2,7 +2,6 @@ package com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer;
 
 import com.mipt.tp.dungeon_sucker.Skills.PhysicallyDamageOneEntity;
 import com.mipt.tp.dungeon_sucker.Skills.PhysicallyDamageThreeEntities;
-import com.mipt.tp.dungeon_sucker.gameplay.*;
 
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
@@ -18,10 +17,6 @@ public class Club extends Weapon {
     this.generateSkill(new PhysicallyDamageOneEntity(this, this.damage));
     this.generateSkill(new PhysicallyDamageThreeEntities(this,this.damage, 0.5, 1, 0.5));
     this.generateSkill(new PhysicallyDamageThreeEntities(this,this.damage, 0.75, 0.5, 0.75));
-  }
-
-  protected void generateSkill(Skill skill) {
-    this.skills[this.amount++] = skill;
   }
 
   public void use(Room room) {

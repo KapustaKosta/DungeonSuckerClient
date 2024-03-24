@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 public class DungeonMasster {
 
-  int time = 0;
+  long time = 0;
   public LinkedList<StepOrder> orderOfSteps;
 
   public DungeonMasster() {
@@ -36,6 +36,7 @@ public class DungeonMasster {
   public void move() {
     System.out.println(this.orderOfSteps.size());
     if (this.orderOfSteps.getFirst().entity.isAlive) {
+      this.time = this.orderOfSteps.getFirst().timeOfStep;
       this.orderOfSteps.getFirst().entity.makeMove();
       Class<Creature> creatureClass = Creature.class;
       if (this.orderOfSteps.getFirst().entity.getClass() == creatureClass) {
