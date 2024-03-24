@@ -1,4 +1,4 @@
-package com.mipt.tp.dungeon_sucker.Weapons.WeaponsForEnemies;
+package com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForEnemies;
 
 import com.mipt.tp.dungeon_sucker.Skills.NonControllableSkills.NonControllablePhysicallyDamageOneEntity;
 import com.mipt.tp.dungeon_sucker.Skills.PhysicallyDamageOneEntity;

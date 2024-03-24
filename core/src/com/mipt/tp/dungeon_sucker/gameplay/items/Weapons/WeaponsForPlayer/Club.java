@@ -1,4 +1,4 @@
-package com.mipt.tp.dungeon_sucker.Weapons.WeaponsForPlayer;
+package com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer;
 
 import com.mipt.tp.dungeon_sucker.Skills.PhysicallyDamageOneEntity;
 import com.mipt.tp.dungeon_sucker.Skills.PhysicallyDamageThreeEntities;

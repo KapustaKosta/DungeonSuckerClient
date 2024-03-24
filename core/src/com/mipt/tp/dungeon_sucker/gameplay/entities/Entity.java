@@ -16,7 +16,7 @@ import java.util.Objects;
 public class Entity implements Drawable {
   public int health;
   int maxHealth;
-  int physicalArmor;
+  public int physicalArmor;
   protected int magicalArmor;
   public boolean isAlive = true;
   protected IntVector2 levelPosition;
@@ -27,6 +27,7 @@ public class Entity implements Drawable {
   public int weight;
   public Room place;
   public String name;
+  // Базовые статы из РПГ. Ловкость для каких-нибудь рапир, сила для булав, мудрость для магии
 
   public Entity(int health, int weight, HauntedRoom place, String name) {
     this.health = health;

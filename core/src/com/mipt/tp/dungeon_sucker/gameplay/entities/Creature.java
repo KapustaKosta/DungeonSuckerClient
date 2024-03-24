@@ -7,12 +7,8 @@ import java.util.Objects;
 import java.util.Random;
 
 public class Creature extends Entity {
-  int physicalArmor;
   protected boolean isHostile;
   protected int power;
-  public int weight;
-  protected HauntedRoom place;
-  public String name;
   protected Weapon weapon;
 
   public Creature(int health, int power, int weight, boolean isHostile, HauntedRoom place, String name) {

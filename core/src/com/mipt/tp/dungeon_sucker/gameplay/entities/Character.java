@@ -3,9 +3,8 @@ package com.mipt.tp.dungeon_sucker.gameplay.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artefact;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Spell;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
@@ -18,7 +17,7 @@ import java.util.Objects;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Character extends Entity {
-  Artefact[] artefacts;
+  Artifact[] artifacts;
   Weapon weapon = null;
   Spell[] spells;
   int spellsAmount;
