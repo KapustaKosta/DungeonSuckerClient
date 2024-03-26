@@ -11,7 +11,7 @@ public class RaritySet extends Set<String> {
         "Rare", // 12%
         "Epic", // 2,5%
         "Legendary", // 0,5%
-    };// коммент - шанс соответствующего дропа
+    };// коммент - шанс соответствующего  дропа
   }
   public String generate() {
    int a = new Random().nextInt(200)+1;

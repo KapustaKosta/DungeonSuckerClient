@@ -5,7 +5,6 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 import java.util.Random;
 
 public class Creature extends Entity {
-  protected boolean isHostile;
   protected int power;
   protected Weapon weapon;
 

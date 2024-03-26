@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mipt.tp.dungeon_sucker.UI.Drawable;
+import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
@@ -13,6 +14,7 @@ import com.mipt.tp.dungeon_sucker.math.IntVector2;
 import java.util.Objects;
 
 public class Entity implements Drawable {
+  public DungeonMasster master;
   public int health;
   int maxHealth;
   public int physicalArmor;
@@ -26,6 +28,7 @@ public class Entity implements Drawable {
   public int weight;
   public Room place;
   public String name;
+  protected boolean isHostile;
   // Базовые статы из РПГ. Ловкость для каких-нибудь рапир, сила для булав, мудрость для магии
 
   public Entity(int health, int weight, HauntedRoom place, String name) {
@@ -67,11 +70,30 @@ public class Entity implements Drawable {
       this.die();
     }
   }
+    // НАПИСАТЬ ЗАВИСИМОСТЬ ОТ ТИПА УРОНА!!!
+  public void getDamaged(int damage, String MagicOrPhysical, String typeOfDamage) {
+    if (Objects.equals(MagicOrPhysical, "Magic")) {
+      damage = Math.max(0, damage - magicalArmor);
+    } else {
+      damage = Math.max(0, damage - physicalArmor);
+    }
+    this.health -= damage;
+    System.out.println(this.name + " got damaged. Current health: " + this.health);
+    if (this.health <= 0) {
+      this.die();
+    }
+  }
 
   public void makeMove() {
   }
 
   public void die() {
     this.isAlive = false;
+    if(this.isHostile){
+      this.place.checkHostileAlive();
+    }
+    else{
+      this.place.checkFriendlyAlive();
+    }
   }
 }

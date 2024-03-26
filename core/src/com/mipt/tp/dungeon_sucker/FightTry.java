@@ -13,11 +13,10 @@ import com.mipt.tp.dungeon_sucker.math.IntVector2;
 public class FightTry {
   public static void aboba() {
     DungeonMasster DM = new DungeonMasster();
-    Character vasya = new Character(15, 9999, "Vasya", DM);
+    Character vasya = new Character(15, 1, "Vasya", DM);
     IronChestplate chestplate = new IronChestplate();
     chestplate.getObtained(vasya);
     DM.add(vasya.weight, vasya);
-    vasya.getDamaged(10, "Physical");
     Creature[] entities = new Creature[4];
     for (int i = 0; i < 4; ++i) {
       entities[i] = new Rat(10,
@@ -29,7 +28,7 @@ public class FightTry {
     }
     System.out.println("Passed String 23");
     HauntedRoom room = new HauntedRoom(new IntVector2(), new Texture("room.png"), entities, DM);
-    Club club = new Club(1, "club");
+    Club club = new Club(10, "club");
     System.out.println(vasya.weight);
     vasya.addWeapon(club);
     vasya.moveToRoom(room);

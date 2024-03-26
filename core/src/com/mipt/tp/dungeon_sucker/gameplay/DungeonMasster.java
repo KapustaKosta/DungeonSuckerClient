@@ -14,6 +14,7 @@ public class DungeonMasster {
   }
 
   public void add(long timeOfStep, Entity entity) {
+    entity.master = this;
     if (this.orderOfSteps.isEmpty()) {
       this.orderOfSteps.addLast(new StepOrder(timeOfStep, entity));
       return;

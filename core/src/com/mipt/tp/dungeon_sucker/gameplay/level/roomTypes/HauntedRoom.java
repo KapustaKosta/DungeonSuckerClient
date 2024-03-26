@@ -13,6 +13,7 @@ public class HauntedRoom extends Room {
   public HauntedRoom(IntVector2 position, Texture texture, Creature[] creatures, DungeonMasster master) {
     super(position, texture, master);
     super.isHaunted = true;
+    this.isCleared = false;
     this.hostileEntities = creatures;
     for (int i = 0; i < this.hostileEntities.length; ++i) {
       creatures[i].setPlace(this);

@@ -13,6 +13,8 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 import java.util.Objects;
+import java.util.Random;
+import java.util.Scanner;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -93,7 +95,22 @@ public class Character extends Entity {
 
   public void makeMove() {
     if (this.isFighting) {
-      this.attack();
+      Scanner in = new Scanner(System.in);
+      System.out.println("wanna try to escape?");
+      System.out.println("1 - YES; 0 - NO");
+      int i = in.nextInt();
+      if (i == 1) {
+        this.escape();
+      } else {
+        this.attack();
+      }
+    }
+  }
+
+  private void escape() {
+    int effect = new Random().nextInt(2);
+    if(effect == 1){
+      this.moveToRoom(new Room(new IntVector2(), new Texture("room.png"), this.master));
     }
   }
 
@@ -113,19 +130,6 @@ public class Character extends Entity {
 
   public void die() {
     System.out.println("Oh no! I, " + this.name + " failed!");
-    this.isAlive = false;
-  }
-
-  public void getDamaged(int damage, String type) {
-    if (Objects.equals(type, "Magic")) {
-      damage = Math.max(0, damage - magicalArmor);
-    } else {
-      damage = Math.max(0, damage - physicalArmor);
-    }
-    this.health -= damage;
-    System.out.println(this.name + " got damaged. Current health: " + this.health);
-    if (this.health <= 0) {
-      this.die();
-    }
+    super.die();
   }
 }

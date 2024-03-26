@@ -10,6 +10,7 @@ import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 public class Room implements Drawable {
   DungeonMasster master;
+  protected boolean isCleared;
   public Entity[] friendlyEntities = new Entity[8];
   public Entity[] hostileEntities = new Entity[1];
   private final IntVector2 levelPosition;
@@ -21,11 +22,11 @@ public class Room implements Drawable {
 
   protected boolean isLocked = false;
 
-  public Room(IntVector2 levelPosition, Texture texture)
-  {
+  public Room(IntVector2 levelPosition, Texture texture) {
     this.levelPosition = levelPosition;
     this.texture = texture;
     this.batch = new SpriteBatch();
+    this.isCleared = true;
   }
 
   public Room(IntVector2 levelPosition, Texture texture, DungeonMasster master) {
@@ -33,6 +34,7 @@ public class Room implements Drawable {
     this.texture = texture;
     this.batch = new SpriteBatch();
     this.master = master;
+    this.isCleared = true;
   }
 
 
@@ -52,11 +54,36 @@ public class Room implements Drawable {
   }
 
   public void insert(Entity entity, boolean isHostile) {
-    if(isHostile){
+    if (isHostile) {
       this.hostileEntities[this.amountOfHostileEntities++] = entity;
       return;
     }
     entity.place = this;
     this.friendlyEntities[this.amountOfFriendlyEntities++] = entity;
+  }
+
+  public void checkHostileAlive() {
+    boolean battleMustEnd = true;
+    for (int i = 0; i < this.amountOfHostileEntities; ++i) {
+      if (this.hostileEntities[i].isAlive) {
+        battleMustEnd = false;
+      }
+    }
+    if (battleMustEnd) {
+      System.out.println("No enemies in room");
+      this.isCleared = true;
+    }
+  }
+
+  public void checkFriendlyAlive() {
+    boolean battleMustEnd = true;
+    for (int i = 0; i < this.amountOfFriendlyEntities; ++i) {
+      if (this.friendlyEntities[i].isAlive) {
+        battleMustEnd = false;
+      }
+    }
+    if (battleMustEnd) {
+      System.out.println("Room was taken by evil");
+    }
   }
 }

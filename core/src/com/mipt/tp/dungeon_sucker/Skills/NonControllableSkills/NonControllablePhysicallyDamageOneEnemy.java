@@ -3,7 +3,7 @@ package com.mipt.tp.dungeon_sucker.Skills.NonControllableSkills;
 import com.mipt.tp.dungeon_sucker.gameplay.Skill;
 import com.mipt.tp.dungeon_sucker.gameplay.entities.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
-import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
+import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -18,7 +18,7 @@ public class NonControllablePhysicallyDamageOneEnemy extends Skill {
     this.description = "Deal " + this.damage + " to a random enemy";
   }
 
-  public void use(HauntedRoom room) {
+  public void use(Room room) {
     System.out.println("choosing guy to punch");
     Entity[] enemies;
     int maxIndex;

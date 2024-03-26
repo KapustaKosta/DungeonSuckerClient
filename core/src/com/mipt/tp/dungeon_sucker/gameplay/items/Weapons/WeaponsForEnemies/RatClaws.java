@@ -2,6 +2,7 @@ package com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForEnemies;
 
 import com.mipt.tp.dungeon_sucker.Skills.NonControllableSkills.NonControllablePhysicallyDamageOneEnemy;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
+import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 
 import java.util.Random;
@@ -17,7 +18,7 @@ public class RatClaws extends Weapon {
     this.generateSkill(new NonControllablePhysicallyDamageOneEnemy(this, this.damage, isHostile));
   }
 
-  public void use(HauntedRoom room) {
+  public void use(Room room) {
     System.out.println("using RatClaws");
     int index = new Random().nextInt(this.skills.length);
     if(index == 0){
