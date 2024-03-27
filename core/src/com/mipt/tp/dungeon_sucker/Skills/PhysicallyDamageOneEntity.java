@@ -4,6 +4,7 @@ import com.mipt.tp.dungeon_sucker.gameplay.*;
 
 import com.mipt.tp.dungeon_sucker.gameplay.entities.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer.Sword;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 
@@ -15,6 +16,8 @@ public class PhysicallyDamageOneEntity extends Skill {
     this.damage = damage;
     this.description = "Deals " + this.damage + " damage to enemy by your choice";
   }
+
+
 
   public void use(Room room) {
     Entity[] entities;
