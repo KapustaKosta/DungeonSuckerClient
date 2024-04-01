@@ -1,7 +1,7 @@
 package com.mipt.tp.dungeon_sucker.gameplay;
 
-import InteractiveObjects.Creature;
-import InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 
 import java.util.LinkedList;
 
@@ -55,5 +55,4 @@ public class DungeonMasster {
       }
     }
   }
-
 }

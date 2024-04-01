@@ -1,6 +1,6 @@
 package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts;
 
-import InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 
 public class RingOfHealth extends Artifact {

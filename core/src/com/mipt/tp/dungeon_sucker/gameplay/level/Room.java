@@ -1,7 +1,7 @@
 package com.mipt.tp.dungeon_sucker.gameplay.level;
 
-import InteractiveObjects.Chest;
-import InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Chest;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

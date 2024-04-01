@@ -1,4 +1,4 @@
-package InteractiveObjects;
+package com.mipt.tp.dungeon_sucker.InteractiveObjects;
 
 public class InteractiveObject {
   protected String description;

@@ -1,11 +1,10 @@
-package InteractiveObjects;
+package com.mipt.tp.dungeon_sucker.InteractiveObjects;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mipt.tp.dungeon_sucker.UI.Drawable;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;

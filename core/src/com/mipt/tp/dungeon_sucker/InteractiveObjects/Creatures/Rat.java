@@ -1,6 +1,6 @@
-package InteractiveObjects.Creatures;
+package com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures;
 
-import InteractiveObjects.Creature;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForEnemies.RatClaws;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 

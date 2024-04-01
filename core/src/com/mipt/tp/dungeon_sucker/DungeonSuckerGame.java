@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mipt.tp.dungeon_sucker.UI.texturePacks.RoomsTexturesPack;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
-import InteractiveObjects.Character;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Character;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.logic.DFSMapGenerator;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Level;

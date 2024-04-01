@@ -1,6 +1,6 @@
 package com.mipt.tp.dungeon_sucker.gameplay;
 
-import InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 
 public class StepOrder {
   long timeOfStep;

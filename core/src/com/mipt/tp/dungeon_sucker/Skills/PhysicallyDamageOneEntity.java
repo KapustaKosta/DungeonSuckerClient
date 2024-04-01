@@ -2,7 +2,7 @@ package com.mipt.tp.dungeon_sucker.Skills;
 
 import com.mipt.tp.dungeon_sucker.gameplay.Skill;
 
-import InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;

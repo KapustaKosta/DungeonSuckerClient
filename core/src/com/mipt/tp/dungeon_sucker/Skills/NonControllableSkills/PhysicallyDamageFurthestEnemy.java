@@ -1,12 +1,11 @@
 package com.mipt.tp.dungeon_sucker.Skills.NonControllableSkills;
 
-import InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.Skill;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 import java.util.Arrays;
-import java.util.Random;
 
 public class PhysicallyDamageFurthestEnemy extends Skill {
   boolean isUsedByHostile;

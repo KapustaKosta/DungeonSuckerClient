@@ -1,4 +1,4 @@
-package InteractiveObjects;
+package com.mipt.tp.dungeon_sucker.InteractiveObjects;
 
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.badlogic.gdx.Gdx;

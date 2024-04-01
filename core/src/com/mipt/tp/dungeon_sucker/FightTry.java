@@ -4,10 +4,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts.IronChestplate;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer.Club;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
-import InteractiveObjects.Character;
-import InteractiveObjects.Creatures.Rat;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Character;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Rat;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
-import InteractiveObjects.Creature;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 public class FightTry {
