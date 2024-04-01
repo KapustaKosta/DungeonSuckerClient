@@ -11,6 +11,7 @@ public class RingOfHealth extends Artifact {
     super.getObtained(entity);
     entity.maxHealth += this.effectiveness;
     entity.health += this.effectiveness;
+    this.name = "Ring of health; weight = " + this.weight;
   }
 
 

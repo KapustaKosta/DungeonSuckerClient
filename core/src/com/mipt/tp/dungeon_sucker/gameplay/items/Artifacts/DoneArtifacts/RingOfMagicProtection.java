@@ -8,6 +8,7 @@ public class RingOfMagicProtection extends Artifact {
   String description = "Increases defence from magic damage by " + this.effectiveness;
   public RingOfMagicProtection(){
     this.weight = 2;
+    this.name = "Ring of MAGIC protection; weight = " + this.weight;
   }
 
   public void getObtained(Entity entity) {

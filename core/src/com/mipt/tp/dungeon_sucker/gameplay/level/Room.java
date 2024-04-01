@@ -1,14 +1,17 @@
 package com.mipt.tp.dungeon_sucker.gameplay.level;
 
+import InteractiveObjects.Chest;
 import InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mipt.tp.dungeon_sucker.UI.Drawable;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
 import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 public class Room implements Drawable {
+  Chest chest;
   DungeonMasster master;
   protected boolean isCleared;
   public Entity[] friendlyEntities = new Entity[8];
@@ -86,5 +89,9 @@ public class Room implements Drawable {
     if (battleMustEnd) {
       System.out.println("Room was taken by evil");
     }
+  }
+
+  public void addItemToChest(Item item) {
+    this.chest.add(item);
   }
 }

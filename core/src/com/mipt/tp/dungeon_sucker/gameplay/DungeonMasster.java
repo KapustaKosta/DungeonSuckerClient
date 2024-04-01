@@ -36,23 +36,24 @@ public class DungeonMasster {
   }
 
   public void move() {
-    System.out.println(this.orderOfSteps.size());
-    if (this.orderOfSteps.getFirst().entity.isAlive) {
-      this.time = this.orderOfSteps.getFirst().timeOfStep;
-      this.orderOfSteps.getFirst().entity.makeMove();
-      Class<Creature> creatureClass = Creature.class;
-      if (this.orderOfSteps.getFirst().entity.getClass() == creatureClass) {
-        this.add((this.orderOfSteps.getFirst().entity).weight
-            + this.orderOfSteps.getFirst().timeOfStep, this.orderOfSteps.getFirst().entity);
+    while (true) {
+      System.out.println(this.orderOfSteps.size());
+      if (this.orderOfSteps.getFirst().entity.isAlive) {
+        this.time = this.orderOfSteps.getFirst().timeOfStep;
+        this.orderOfSteps.getFirst().entity.makeMove();
+        Class<Creature> creatureClass = Creature.class;
+        if (this.orderOfSteps.getFirst().entity.getClass() == creatureClass) {
+          this.add((this.orderOfSteps.getFirst().entity).weight
+              + this.orderOfSteps.getFirst().timeOfStep, this.orderOfSteps.getFirst().entity);
+        } else {
+          this.add((this.orderOfSteps.getFirst().entity).weight
+              + this.orderOfSteps.getFirst().timeOfStep, this.orderOfSteps.getFirst().entity);
+        }
+        this.orderOfSteps.removeFirst();
       } else {
-        this.add((this.orderOfSteps.getFirst().entity).weight
-            + this.orderOfSteps.getFirst().timeOfStep, this.orderOfSteps.getFirst().entity);
+        this.orderOfSteps.removeFirst();
       }
-      this.orderOfSteps.removeFirst();
-    } else {
-      this.orderOfSteps.removeFirst();
     }
-    this.move();
   }
 
 }

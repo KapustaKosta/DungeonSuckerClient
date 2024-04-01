@@ -10,7 +10,6 @@ public class Weapon extends Item{
   int level;
   String element;
   int weight;
-  protected String name;
   protected Skill[] skills;
   protected int amount = 0;
   public Weapon(int numberOfSkills){

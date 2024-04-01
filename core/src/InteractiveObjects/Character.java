@@ -4,8 +4,7 @@ import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Spell;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
@@ -15,14 +14,8 @@ import com.mipt.tp.dungeon_sucker.math.IntVector2;
 import java.util.Random;
 import java.util.Scanner;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public class Character extends Entity {
-  Artifact[] artifacts;
   Weapon weapon = null;
-  Spell[] spells;
-  int spellsAmount;
-  int weaponsAmount;
   boolean isFighting;
   String name = "Hero #-1";
   public int weight;
@@ -75,21 +68,45 @@ public class Character extends Entity {
     this.weight = weight;
   }
 
-  public void addWeapon(Weapon weapon) {
-    if (this.weapon == null) {
-      this.weapon = weapon;
-    } else {
-      this.chooseWeaponToGetRidOf();
-      this.addWeapon(weapon);
+  public void addItem(Item item) {
+    this.items.add(item);
+  }
+
+  public void chooseItemToLeave() {
+    int index = 0;
+    System.out.println("Choose item to leave (it'll wait you in a rooms chest)"); // not implemented yet, it'll disappear
+    Scanner in = new Scanner(System.in);
+    int chosen = -1;
+    for (int i = 0; i < this.items.size() - 5; i = index) {
+      for (int j = 0; j < 5; ++j) {
+        System.out.printf((j + 1) + " - " + this.items.get(index).name);
+        ++index;
+        System.out.println();
+      }
+      String input = in.nextLine();
+      try {
+        chosen = Integer.parseInt(input) + i - 1;
+        break;
+      } catch (Exception ignored) {
+        continue;
+      }
     }
-  }
-
-  private void chooseMagicToGetRidOf() {
-    throw new NotImplementedException();
-  }
-
-  private void chooseWeaponToGetRidOf() {
-    throw new NotImplementedException();
+    if (chosen > -1) {
+      for (; index < this.items.size(); ++index) {
+        System.out.printf((index % 5 + 1) + " - " + this.items.get(index).name);
+        System.out.println();
+      }
+      String input = in.nextLine();
+      try {
+        chosen = Integer.parseInt(input) + (this.items.size() - 1) / 5 * 5;
+      } catch (Exception ignored) {
+        System.out.println("You weren't supposed to type that");
+      }
+    }
+    Item item = items.get(chosen);
+    item.holder = null;
+    this.place.addItemToChest(item);
+    this.items.remove(chosen);
   }
 
   public void makeMove() {
@@ -108,7 +125,7 @@ public class Character extends Entity {
 
   private void escape() {
     int effect = new Random().nextInt(2);
-    if(effect == 1){
+    if (effect == 1) {
       this.moveToRoom(new Room(new IntVector2(), new Texture("room.png"), this.master));
     }
   }

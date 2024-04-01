@@ -30,7 +30,6 @@ public class FightTry {
     HauntedRoom room = new HauntedRoom(new IntVector2(), new Texture("room.png"), entities, DM);
     Club club = new Club(10, "club");
     System.out.println(vasya.weight);
-    vasya.addWeapon(club);
     vasya.moveToRoom(room);
     System.out.println(DM.orderOfSteps.size());
     System.out.println(vasya.isAlive);
