@@ -1,9 +1,8 @@
 package com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForEnemies;
 
-import com.mipt.tp.dungeon_sucker.Skills.NonControllableSkills.NonControllablePhysicallyDamageOneEnemy;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
-import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
+import com.mipt.tp.dungeon_sucker.Skills.NonControllableSkills.NonControllablePhysicallyDamageOneEnemy;
 
 import java.util.Random;
 

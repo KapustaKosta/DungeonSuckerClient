@@ -1,6 +1,6 @@
-package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts;
+package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts;
 
-import com.mipt.tp.dungeon_sucker.gameplay.entities.Entity;
+import InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 
 public class RingOfHealth extends Artifact {
@@ -9,12 +9,13 @@ public class RingOfHealth extends Artifact {
 
   public void getObtained(Entity entity) {
     super.getObtained(entity);
+    entity.maxHealth += this.effectiveness;
     entity.health += this.effectiveness;
   }
 
 
   public void getLost() {
-    this.holder.health -= this.effectiveness;
+    this.holder.getPermanentlyDamaged(this.effectiveness);
     super.getLost();
   }
 }

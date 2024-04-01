@@ -1,8 +1,11 @@
 package com.mipt.tp.dungeon_sucker.gameplay.level.logic;
 
+import com.mipt.tp.dungeon_sucker.gameplay.level.Map;
+import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
+import InteractiveObjects.entities.gameplay.level.roomTypes.*;
+import InteractiveObjects.gameplay.level.roomTypes.*;
 import com.mipt.tp.dungeon_sucker.UI.texturePacks.RoomsTexturesPack;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.*;
-import com.mipt.tp.dungeon_sucker.gameplay.level.*;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 import com.mipt.tp.dungeon_sucker.math.RandomNumGenerator;
 

@@ -1,4 +1,4 @@
-package com.mipt.tp.dungeon_sucker.gameplay.entities;
+package InteractiveObjects;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,12 +13,12 @@ import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 import java.util.Objects;
 
-public class Entity implements Drawable {
+public class Entity extends InteractiveObject implements Drawable {
   public DungeonMasster master;
   public int health;
-  int maxHealth;
+  public int maxHealth;
   public int physicalArmor;
-  protected int magicalArmor;
+  public int magicalArmor;
   public boolean isAlive = true;
   protected IntVector2 levelPosition;
   protected Vector2 position;
@@ -74,7 +74,7 @@ public class Entity implements Drawable {
   public void getDamaged(int damage, String MagicOrPhysical, String typeOfDamage) {
     if (Objects.equals(MagicOrPhysical, "Magic")) {
       damage = Math.max(0, damage - magicalArmor);
-    } else {
+    } else if(Objects.equals(MagicOrPhysical, "Physical")){
       damage = Math.max(0, damage - physicalArmor);
     }
     this.health -= damage;
@@ -94,6 +94,19 @@ public class Entity implements Drawable {
     }
     else{
       this.place.checkFriendlyAlive();
+    }
+  }
+
+  public void getPermanentlyDamaged(int damage) {
+    if(this.maxHealth <= damage){
+      this.die();
+    }else if(this.health <= damage){
+      this.health = 1;
+      this.maxHealth -= damage;
+    }else{
+      this.maxHealth -= damage;
+      this.health -= damage;
+      // Добавить метод отрисовки здоровья после каждого хода/действия
     }
   }
 }

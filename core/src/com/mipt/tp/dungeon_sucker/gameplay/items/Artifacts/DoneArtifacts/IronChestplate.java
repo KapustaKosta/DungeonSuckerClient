@@ -1,6 +1,6 @@
-package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts;
+package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts;
 
-import com.mipt.tp.dungeon_sucker.gameplay.entities.Entity;
+import InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 
 public class IronChestplate extends Artifact {

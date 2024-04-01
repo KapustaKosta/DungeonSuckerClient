@@ -1,8 +1,8 @@
 package com.mipt.tp.dungeon_sucker.gameplay.items;
 
-import com.mipt.tp.dungeon_sucker.gameplay.entities.Entity;
+import InteractiveObjects.Entity;
 
-public class Artifact {
+public class Artifact extends Item{
   protected Entity holder;
   protected String description;
   protected int effectiveness;

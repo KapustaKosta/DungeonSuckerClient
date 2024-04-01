@@ -1,4 +1,4 @@
-package com.mipt.tp.dungeon_sucker.gameplay.entities;
+package InteractiveObjects;
 
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;

@@ -1,10 +1,10 @@
 package com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer;
 
+import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
+import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.Skills.PhysicallyDamageOneEntity;
 import com.mipt.tp.dungeon_sucker.Skills.PhysicallyDamageThreeEntities;
 
-import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
-import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import java.util.Scanner;
 
 public class Club extends Weapon {

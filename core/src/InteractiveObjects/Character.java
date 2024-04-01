@@ -1,9 +1,9 @@
-package com.mipt.tp.dungeon_sucker.gameplay.entities;
+package InteractiveObjects;
 
+import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
-import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Spell;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
@@ -12,7 +12,6 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
-import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 

@@ -1,10 +1,10 @@
 package com.mipt.tp.dungeon_sucker.gameplay.level;
 
+import InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mipt.tp.dungeon_sucker.UI.Drawable;
-import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
-import com.mipt.tp.dungeon_sucker.gameplay.entities.Entity;
 import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
@@ -21,6 +21,7 @@ public class Room implements Drawable {
   public int amountOfHostileEntities = 0;
 
   protected boolean isLocked = false;
+  public int level;
 
   public Room(IntVector2 levelPosition, Texture texture) {
     this.levelPosition = levelPosition;

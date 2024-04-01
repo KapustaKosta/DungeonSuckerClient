@@ -1,11 +1,10 @@
 package com.mipt.tp.dungeon_sucker.gameplay.generators;
 
+import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.weaponGenerators.ClubGenerator;
-import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
-import com.mipt.tp.dungeon_sucker.gameplay.generators.weaponGenerators.SwordGenerator;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer.Sword;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.weaponGenerators.SwordGenerator;
 
 import java.util.Random;
 

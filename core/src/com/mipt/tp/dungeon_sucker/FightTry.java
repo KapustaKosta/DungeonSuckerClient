@@ -1,13 +1,13 @@
 package com.mipt.tp.dungeon_sucker;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.IronChestplate;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts.IronChestplate;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer.Club;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
-import com.mipt.tp.dungeon_sucker.gameplay.entities.Character;
-import com.mipt.tp.dungeon_sucker.gameplay.entities.Creatures.Rat;
+import InteractiveObjects.Character;
+import InteractiveObjects.Creatures.Rat;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
-import com.mipt.tp.dungeon_sucker.gameplay.entities.Creature;
+import InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 public class FightTry {

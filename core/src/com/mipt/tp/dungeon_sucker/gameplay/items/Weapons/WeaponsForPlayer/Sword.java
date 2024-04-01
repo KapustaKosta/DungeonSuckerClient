@@ -1,8 +1,8 @@
 package com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer;
 
+import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.Skills.PhysicallyDamageOneEntity;
 import com.mipt.tp.dungeon_sucker.Skills.PhysicallyDamageOneEntityWithCrit;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 
 public class Sword extends Weapon {
   int damage;

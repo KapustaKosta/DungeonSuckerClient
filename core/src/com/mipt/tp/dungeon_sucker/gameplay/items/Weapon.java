@@ -5,7 +5,7 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public class Weapon {
+public class Weapon extends Item{
   String rarity;
   int level;
   String element;
