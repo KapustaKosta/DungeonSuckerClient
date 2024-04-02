@@ -1,19 +1,20 @@
-package com.mipt.tp.dungeon_sucker.Skills.NonControllableSkills;
+package com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.Skills.DamagingSkill;
 import com.mipt.tp.dungeon_sucker.gameplay.Skill;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 import java.util.Arrays;
 
-public class PhysicallyDamageFurthestEnemy extends Skill {
+public class DamageClosestEnemy extends DamagingSkill {
   boolean isUsedByHostile;
-  public PhysicallyDamageFurthestEnemy(Weapon weapon, int damage, boolean isUsedByHostile) {
+  public DamageClosestEnemy(Weapon weapon, int damage, boolean isUsedByHostile) {
     this.weapon = weapon;
     this.damage = damage;
     this.isUsedByHostile = isUsedByHostile;
-    this.description = "Deal " + this.damage + " to the furthest enemy";
+    this.description = "Deal " + this.damage + " to the closest enemy";
   }
 
   public void use(Room room) {
@@ -21,22 +22,22 @@ public class PhysicallyDamageFurthestEnemy extends Skill {
     int index;
     if (this.isUsedByHostile) {
       enemies = room.friendlyEntities;
-      index = 0;
+      index = room.amountOfFriendlyEntities - 1;
     } else {
       enemies = room.hostileEntities;
-      index = room.amountOfHostileEntities - 1;
+      index = 0;
     }
     System.out.println(Arrays.toString(enemies));
     Entity enemy = enemies[index];
     while (!enemy.isAlive) {
-      if(isUsedByHostile && index < room.amountOfFriendlyEntities-1){
-        ++index;
-      }else if(!this.isUsedByHostile && index > 0){
+      if(isUsedByHostile && index > 0){
         --index;
+      }else if(!this.isUsedByHostile && index < room.amountOfHostileEntities - 1){
+        ++index;
       }
       enemy = enemies[index];
     }
     System.out.println("punching " + enemy.name);
-    enemy.getDamaged(this.damage, "Physical");
+    enemy.getDamaged(this.damage, this.type);
   }
 }

@@ -1,16 +1,18 @@
-package com.mipt.tp.dungeon_sucker.Skills.NonControllableSkills;
+package com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.Skills.DamagingSkill;
 import com.mipt.tp.dungeon_sucker.gameplay.Skill;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import java.util.Random;
 
-public class PhysicallyDamageRandomEntity extends Skill {
-  public PhysicallyDamageRandomEntity(Weapon weapon, int damage, boolean isUsedByHostile) {
+public class DamageRandomEntity extends DamagingSkill {
+  public DamageRandomEntity(Weapon weapon, int damage, boolean isUsedByHostile, String type) {
     this.weapon = weapon;
     this.damage = damage;
     this.description = "Deal " + this.damage + " to the random entity";
+    this.type = type;
   }
 
   public void use(Room room) {
@@ -30,6 +32,6 @@ public class PhysicallyDamageRandomEntity extends Skill {
       enemy = enemies[index];
     }
     System.out.println("punching " + enemy.name);
-    enemy.getDamaged(this.damage, "Physical");
+    enemy.getDamaged(this.damage, this.type);
   }
 }

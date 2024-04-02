@@ -1,4 +1,4 @@
-package com.mipt.tp.dungeon_sucker.Skills;
+package com.mipt.tp.dungeon_sucker.Skills.DamagingSkills;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
@@ -8,21 +8,23 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 import java.util.Random;
 import java.util.Scanner;
 
-public class PhysicallyDamageOneEntityWithCrit extends PhysicallyDamageOneEntity {
+public class DamageOneEntityWithCrit extends DamageOneEntity {
   private final int divider;
   int numerator;
   int criticalDamage;
-  public PhysicallyDamageOneEntityWithCrit(Weapon weapon, int damage, int numerator, int divider, double multiplier) {
-    super(weapon, damage);
+
+  public DamageOneEntityWithCrit(Weapon weapon, int damage, int numerator, int divider, double multiplier, String type) {
+    super(weapon, damage, type);
     this.criticalDamage = (int) (this.damage * multiplier);
     this.divider = divider;
     this.numerator = numerator;
     this.description = "Deals " + this.damage + " damage to enemy by your choice, has " + numerator + "/" + divider + "chance to deal" + (this.damage * multiplier) + " damage instead";
   }
+
   public void use(Room room) {
     int a = new Random().nextInt(this.divider);
     int damage = this.damage;
-    if(a < numerator){
+    if (a < numerator) {
       damage = this.criticalDamage;
     }
     Entity[] entities;
@@ -41,12 +43,12 @@ public class PhysicallyDamageOneEntityWithCrit extends PhysicallyDamageOneEntity
       }
     }
     int index = in.nextInt();
-    while (!entities[Math.min(Math.max(index - 1, 0), entities.length-1)].isAlive) {
+    while (!entities[Math.min(Math.max(index - 1, 0), entities.length - 1)].isAlive) {
       System.out.println("do not play with dead!");
       System.out.println("choose another one");
       index = in.nextInt();
     }
-    index = Math.min(Math.max(index - 1, 0), entities.length-1);
-    entities[index].getDamaged(damage, "Physical");
+    index = Math.min(Math.max(index - 1, 0), entities.length - 1);
+    entities[index].getDamaged(damage, this.type);
   }
 }

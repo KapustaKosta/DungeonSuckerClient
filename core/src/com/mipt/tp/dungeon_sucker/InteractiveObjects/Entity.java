@@ -73,19 +73,7 @@ public class Entity extends InteractiveObject implements Drawable {
       this.die();
     }
   }
-    // НАПИСАТЬ ЗАВИСИМОСТЬ ОТ ТИПА УРОНА!!!
-  public void getDamaged(int damage, String MagicOrPhysical, String typeOfDamage) {
-    if (Objects.equals(MagicOrPhysical, "Magic")) {
-      damage = Math.max(0, damage - magicalArmor);
-    } else if(Objects.equals(MagicOrPhysical, "Physical")){
-      damage = Math.max(0, damage - physicalArmor);
-    }
-    this.health -= damage;
-    System.out.println(this.name + " got damaged. Current health: " + this.health);
-    if (this.health <= 0) {
-      this.die();
-    }
-  }
+    // НАПИСАТЬ ЗАВИСИМОСТЬ ОТ ТИПА УРОНА!!!!!!!!!
 
   public void makeMove() {
   }

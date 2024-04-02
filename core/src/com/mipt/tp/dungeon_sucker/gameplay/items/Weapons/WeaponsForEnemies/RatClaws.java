@@ -1,8 +1,8 @@
 package com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForEnemies;
 
+import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills.NonControllableDamageOneEnemy;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
-import com.mipt.tp.dungeon_sucker.Skills.NonControllableSkills.NonControllablePhysicallyDamageOneEnemy;
 
 import java.util.Random;
 
@@ -14,7 +14,7 @@ public class RatClaws extends Weapon {
     super(1);
     this.damage = damage;
     this.name = "Claws of a rat";
-    this.generateSkill(new NonControllablePhysicallyDamageOneEnemy(this, this.damage, isHostile));
+    this.generateSkill(new NonControllableDamageOneEnemy(this, this.damage, isHostile, "Point"));
   }
 
   public void use(Room room) {
