@@ -13,7 +13,7 @@ import com.mipt.tp.dungeon_sucker.math.IntVector2;
 public class FightTry {
   public static void aboba() {
     DungeonMasster DM = new DungeonMasster();
-    Character vasya = new Character(15, 1, "Vasya", DM);
+    Character vasya = new Character(15, 9999, "Vasya", DM);
     IronChestplate chestplate = new IronChestplate();
     chestplate.getObtained(vasya);
     DM.add(vasya.weight, vasya);
@@ -29,6 +29,7 @@ public class FightTry {
     System.out.println("Passed String 23");
     HauntedRoom room = new HauntedRoom(new IntVector2(), new Texture("room.png"), entities, DM);
     Club club = new Club(10, "club");
+    vasya.setActiveWeapon(club);
     System.out.println(vasya.weight);
     vasya.moveToRoom(room);
     System.out.println(DM.orderOfSteps.size());

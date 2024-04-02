@@ -6,6 +6,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.mipt.tp.dungeon_sucker.UI.Drawable;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer.Club;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Entity extends InteractiveObject implements Drawable {
+  protected Weapon weapon;
   public DungeonMasster master;
   public int health;
   public int maxHealth;
@@ -99,5 +102,9 @@ public class Entity extends InteractiveObject implements Drawable {
       this.health -= damage;
       // Добавить метод отрисовки здоровья после каждого хода/действия
     }
+  }
+
+  public void setActiveWeapon(Weapon weapon) {
+    this.weapon = weapon;
   }
 }

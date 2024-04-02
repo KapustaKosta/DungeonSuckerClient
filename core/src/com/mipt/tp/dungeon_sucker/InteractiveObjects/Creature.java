@@ -6,7 +6,6 @@ import java.util.Random;
 
 public class Creature extends Entity {
   protected int power;
-  protected Weapon weapon;
 
   public Creature(int health, int power, int weight, boolean isHostile, HauntedRoom place, String name) {
     super(health, weight, place, name);

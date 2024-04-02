@@ -15,7 +15,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Character extends Entity {
-  Weapon weapon = null;
   boolean isFighting;
   String name = "Hero #-1";
   public int weight;
