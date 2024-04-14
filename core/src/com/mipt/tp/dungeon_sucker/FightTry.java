@@ -26,14 +26,10 @@ public class FightTry {
           new HauntedRoom(new IntVector2(), new Texture("room.png"), new Creature[0], DM),
           "rat" + i);
     }
-    System.out.println("Passed String 23");
     HauntedRoom room = new HauntedRoom(new IntVector2(), new Texture("room.png"), entities, DM);
     Club club = new Club(10, "club");
     vasya.setActiveWeapon(club);
-    System.out.println(vasya.weight);
     vasya.moveToRoom(room);
-    System.out.println(DM.orderOfSteps.size());
-    System.out.println(vasya.isAlive);
     DM.move();
   }
 }

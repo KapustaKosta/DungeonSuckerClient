@@ -49,6 +49,12 @@ public class Room implements Drawable {
     batch.end();
   }
 
+  public void drawWithAnchor(IntVector2 anchor) {
+    batch.begin();
+    batch.draw(texture, (levelPosition.x + anchor.x) * Constants.cellSize, (levelPosition.y + anchor.y) * Constants.cellSize);
+    batch.end();
+  }
+
   public IntVector2 getPosition() {
     return levelPosition;
   }

@@ -4,9 +4,13 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mipt.tp.dungeon_sucker.UI.Interface;
+import com.mipt.tp.dungeon_sucker.UI.InventoryWindow;
+import com.mipt.tp.dungeon_sucker.UI.MapWindow;
 import com.mipt.tp.dungeon_sucker.UI.texturePacks.RoomsTexturesPack;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Character;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.logic.DFSMapGenerator;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
@@ -16,12 +20,13 @@ import com.mipt.tp.dungeon_sucker.math.IntVector2;
 public class DungeonSuckerGame extends ApplicationAdapter {
 
   private static final Color BACKGROUND = Color.valueOf("#222222");
-  private Level level;
   private Character character;
   private Room room;
 
+  private Interface anInterface;
+
   private void update() {
-    character.getInput();
+    //character.getInput();
   }
 
   @Override
@@ -37,20 +42,30 @@ public class DungeonSuckerGame extends ApplicationAdapter {
     texturesPack.shopTexture = new Texture("room.png");
     MapGenerator mapGenerator = new DFSMapGenerator(texturesPack);
 
-    this.level = new Level(mapGenerator);
-    IntVector2 characterPosition = new IntVector2(level.getMap().spawn.getPosition().x, level.getMap().spawn.getPosition().y);
-    this.character = new Character(characterPosition, new Texture("character.png"), level, 1, 1);
+    Level level = new Level(mapGenerator, 10, 10);
+    MapWindow mapWindow = new MapWindow(new IntVector2(0, 25), new IntVector2(10, 15), level);
 
-    Texture texture = new Texture("room.png");
+    InventoryWindow inventoryWindow = new InventoryWindow(new IntVector2(0, 15), new IntVector2(10, 0), 4, 5);
+    Item exampleItem = new Item();
+    exampleItem.name = "knife";
+    exampleItem.texture = new Texture("knife.png");
+    inventoryWindow.addItem(exampleItem);
+
+    anInterface = new Interface(mapWindow, inventoryWindow, null);
+
+    //IntVector2 characterPosition = new IntVector2(level.getMap().spawn.getPosition().x, level.getMap().spawn.getPosition().y);
+    //this.character = new Character(characterPosition, new Texture("character.png"), level, 1, 1);
+
+/*    Texture texture = new Texture("room.png");
     room = new Room(new IntVector2(10, 10), texture, new DungeonMasster());
-    FightTry.aboba();
+    FightTry.aboba();*/
   }
 
   @Override
   public void render() {
     this.update();
     ScreenUtils.clear(BACKGROUND);
-    level.draw();
-    character.draw();
+    anInterface.draw();
+    //character.draw();
   }
 }

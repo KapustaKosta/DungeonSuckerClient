@@ -11,4 +11,25 @@ public class IntVector2 {
     this.x = x;
     this.y = y;
   }
+
+  public IntVector2(IntVector2 point) {
+    this.x = point.x;
+    this.y = point.y;
+  }
+
+  public void moveX(int deltaX)
+  {
+    x += deltaX;
+  }
+
+  public void moveY(int deltaY)
+  {
+    y += deltaY;
+  }
+
+  @Override
+  public String toString()
+  {
+    return "x: " + this.x + ", y: " + this.y;
+  }
 }
