@@ -33,6 +33,7 @@ public class DamageRandomEntity extends DamagingSkill {
       enemy = enemies[index];
     }
     System.out.println("punching " + enemy.name);
-    enemy.getDamaged(this.damage);
+    enemy.getDamaged(new Damage(this.damage, this.lastPower, this.power));
+    super.use(room);
   }
 }

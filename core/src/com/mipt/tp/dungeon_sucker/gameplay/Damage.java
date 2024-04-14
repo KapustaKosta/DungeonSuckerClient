@@ -11,15 +11,28 @@ public class Damage {
   public int defaultDamage; // значение нестихийного урона
   public int elementDamage; // значение стихийного урона
   public int totalDamage;
-  public Damage(Entity dealer, String type, String element, boolean isMelee, double percentOfElementDamage, int totalDamage){
+
+  public Damage(Entity dealer, String type, String element, boolean isMelee, double percentOfElementDamage, int totalDamage) {
     this.dealer = dealer;
     this.type = type;
     this.element = element;
     this.isMelee = isMelee;
     this.percentOfElementDamage = percentOfElementDamage;
-    this.elementDamage = (int)(totalDamage * this.percentOfElementDamage);
+    this.elementDamage = (int) (totalDamage * this.percentOfElementDamage);
     this.defaultDamage = totalDamage - this.elementDamage;
     this.totalDamage = totalDamage;
+  }
+
+
+
+  public Damage(Damage damage, int lastPower, int power) {this.dealer = damage.dealer;
+    this.type = damage.type;
+    this.element = damage.element;
+    this.isMelee = damage.isMelee;
+    this.percentOfElementDamage = damage.percentOfElementDamage;
+    this.totalDamage = damage.totalDamage * power / lastPower;
+    this.elementDamage = (int) (this.totalDamage * this.percentOfElementDamage);
+    this.defaultDamage = this.totalDamage - this.elementDamage;
   }
 
   public Damage copy() {

@@ -10,6 +10,7 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -17,8 +18,6 @@ import java.util.Scanner;
 public class Character extends Entity {
   boolean isFighting;
   String name = "Hero #-1";
-  public int weight;
-  public int health;
 
   public void getInput() {
     if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
@@ -137,7 +136,10 @@ public class Character extends Entity {
       room.insert(this, false);
     }
   }
-
+  public void levelUp(){
+    this.weapon.recount();
+    throw new NotImplementedException();
+  }
   public void attack() {
     System.out.println(this.place.getClass());
     this.weapon.use(this.place);

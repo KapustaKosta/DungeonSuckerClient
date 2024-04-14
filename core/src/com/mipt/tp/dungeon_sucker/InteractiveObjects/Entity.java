@@ -21,6 +21,13 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Entity extends InteractiveObject implements Drawable {
+  public int vigor; // +hp
+  public int power; // -time per move
+  public int strength; // +dmg of some weapons
+  public int dexterity; // +dmg of some other weapons
+  public int intellect; // +dmg of other weapons
+  public int faith; // you guessed it, +dmg of other weapons
+  // +dmg can intersect
   protected Weapon weapon;
   public DungeonMasster master;
   public int health;

@@ -5,9 +5,16 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 
 public class Skill {
+  public int lastPower;
+  public int power;
   protected String description;
-  public void use(Room room){
+
+  public void use(Room room) {
+    this.lastPower = this.power;
   }
-  public void use(HauntedRoom room){
-    System.out.println("FUCK");}
+
+  public void setPower(int power) {
+    this.lastPower = this.power;
+    this.power = power;
+  }
 }

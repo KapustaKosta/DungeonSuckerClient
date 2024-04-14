@@ -53,6 +53,7 @@ public class DamageOneEntityWithCrit extends DamageOneEntity {
       index = in.nextInt();
     }
     index = Math.min(Math.max(index - 1, 0), entities.length - 1);
-    entities[index].getDamaged(damage);
+    entities[index].getDamaged(new Damage(damage, this.lastPower, this.power));
+    super.use(room);
   }
 }

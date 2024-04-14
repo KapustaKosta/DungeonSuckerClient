@@ -64,20 +64,21 @@ public class DamageThreeEntities extends DamagingSkill {
       index = in.nextInt();
     }
     if (index <= 0) {
-      entities[0].getDamaged(this.secondDamage);
+      entities[0].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
       if (entities.length > 1) {
-        entities[1].getDamaged(this.thirdDamage);
+        entities[1].getDamaged(new Damage(this.thirdDamage, this.lastPower, this.power));
       }
     } else if (index < entities.length - 1) {
-      entities[index - 1].getDamaged(this.firstDamage);
-      entities[index].getDamaged(this.secondDamage);
-      entities[index + 1].getDamaged(this.thirdDamage);
+      entities[index - 1].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+      entities[index].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
+      entities[index + 1].getDamaged(new Damage(this.thirdDamage, this.lastPower, this.power));
     } else if (index == entities.length - 1) {
-      entities[index - 1].getDamaged(this.firstDamage);
-      entities[index].getDamaged(this.secondDamage);
+      entities[index - 1].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+      entities[index].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
     } else if (index > entities.length - 1) {
-      entities[index].getDamaged(this.firstDamage);
+      entities[index].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
     }
+    super.use(room);
   }
 
   public String toString() {

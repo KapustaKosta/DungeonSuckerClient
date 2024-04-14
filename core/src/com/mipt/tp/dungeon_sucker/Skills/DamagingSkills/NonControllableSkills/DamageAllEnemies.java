@@ -12,6 +12,7 @@ public class DamageAllEnemies extends DamagingSkill {
 
   public DamageAllEnemies(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, boolean isUsedByHostile) {
     this.weapon = weapon;
+    this.power = damage;
     this.damage = new Damage(this.weapon.holder, type, element, isMelee, percentOfElementDamage, damage);
     this.isUsedByHostile = isUsedByHostile;
     this.description = "Deal " + this.damage + " to all enemies in room";
@@ -26,7 +27,8 @@ public class DamageAllEnemies extends DamagingSkill {
       enemies = room.hostileEntities;
     }
     for(int i = 0; i < enemies.length; ++i){
-      new DamageNthEnemy(this.weapon, this.damage, this.isUsedByHostile, i).use(room);
+      new DamageNthEnemy(this.weapon, new Damage(this.damage, this.lastPower, this.power), this.isUsedByHostile, i).use(room);
     }
+    super.use(room);
   }
 }

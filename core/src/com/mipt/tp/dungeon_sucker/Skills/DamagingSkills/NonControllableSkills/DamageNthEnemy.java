@@ -35,8 +35,10 @@ public class DamageNthEnemy extends DamagingSkill {
     Entity enemy = enemies[this.number - 1];
     if (enemy != null && enemy.isAlive) {
       System.out.println("punching " + enemy.name);
-      enemy.getDamaged(this.damage);
+      enemy.getDamaged(new Damage(this.damage, this.lastPower, this.power));
+      super.use(room);
     } else {
+      super.use(room);
       return;
     }
   }
