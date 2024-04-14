@@ -3,12 +3,11 @@ package com.mipt.tp.dungeon_sucker.gameplay;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 
 public class Damage {
-  public double percantOfElementDamage;
-  Entity dealer; // Чтобы иметь информацию, кто бьет
+  public Entity dealer; // Чтобы иметь информацию, кто бьет
   public String type; // Тип урона (колющий, режущий, дробящий, default для заклинаний
   public String element; // Стихия урона (огонь, свет, яд, лед)
   public boolean isMelee; // Буквально является ли атака милишной. Если да, то будут срабатывать какие-нибудь шипы, например
-  double percentOfElementDamage; // Какая доля урона наносится
+  public double percentOfElementDamage; // Какая доля урона наносится
   public int defaultDamage; // значение нестихийного урона
   public int elementDamage; // значение стихийного урона
   public int totalDamage;

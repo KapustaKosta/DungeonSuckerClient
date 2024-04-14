@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mipt.tp.dungeon_sucker.UI.Drawable;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer.Club;
@@ -35,7 +36,8 @@ public class Entity extends InteractiveObject implements Drawable {
   public int weight;
   public Room place;
   public String name;
-  ArrayList<Item> items;
+  public ArrayList<Item> items;
+  public ArrayList<Artifact> artifacts;
   public boolean isHostile;
   // Базовые статы из РПГ. Ловкость для каких-нибудь рапир, сила для булав, мудрость для магии
 
@@ -67,6 +69,13 @@ public class Entity extends InteractiveObject implements Drawable {
   }
 
   public void getDamaged(Damage damage) {
+    damage = damage.copy();
+    for (int i = 0; i < this.artifacts.size(); ++i) {
+      if (this.artifacts.get(i).triggerableByBeingDamaged) {
+        this.artifacts.get(i).triggerByBeingDamaged(damage);
+        // Удаление артефактов после получения урона - кринж. Так делать не надо.
+      }
+    }
     // Переписать это говно, когда все обсудим
     String type = damage.type;
     int dmgDealt = damage.totalDamage;
@@ -80,29 +89,48 @@ public class Entity extends InteractiveObject implements Drawable {
     if (this.health <= 0) {
       this.die();
     }
+    int amountOfArtifactsToRemove = 0;
+    for (int i = 0; i - amountOfArtifactsToRemove < this.artifacts.size(); ++i) {
+      if (this.artifacts.get(i - amountOfArtifactsToRemove).mustBeRemoved) {
+        this.artifacts.get(i - amountOfArtifactsToRemove).getLost();
+        ++amountOfArtifactsToRemove;
+      }
+    }
   }
-    // НАПИСАТЬ ЗАВИСИМОСТЬ ОТ ТИПА УРОНА!!!!!!!!!
+  // НАПИСАТЬ ЗАВИСИМОСТЬ ОТ ТИПА УРОНА!!!!!!!!!
 
   public void makeMove() {
   }
 
   public void die() {
     this.isAlive = false;
-    if(this.isHostile){
-      this.place.checkHostileAlive();
+    for (int i = 0; i < this.artifacts.size(); ++i) {
+      if (this.artifacts.get(i).triggerableByDeath) {
+        this.artifacts.get(i).triggerByDeath();
+        // Удаление артефактов после получения урона - кринж. Так делать не надо.
+      }
     }
-    else{
+    int amountOfArtifactsToRemove = 0;
+    for (int i = 0; i - amountOfArtifactsToRemove < this.artifacts.size(); ++i) {
+      if (this.artifacts.get(i - amountOfArtifactsToRemove).mustBeRemoved) {
+        this.artifacts.get(i - amountOfArtifactsToRemove).getLost();
+        ++amountOfArtifactsToRemove;
+      }
+    }
+    if (this.isHostile) {
+      this.place.checkHostileAlive();
+    } else {
       this.place.checkFriendlyAlive();
     }
   }
 
   public void getPermanentlyDamaged(int damage) {
-    if(this.maxHealth <= damage){
+    if (this.maxHealth <= damage) {
       this.die();
-    }else if(this.health <= damage){
+    } else if (this.health <= damage) {
       this.health = 1;
       this.maxHealth -= damage;
-    }else{
+    } else {
       this.maxHealth -= damage;
       this.health -= damage;
       // Добавить метод отрисовки здоровья после каждого хода/действия

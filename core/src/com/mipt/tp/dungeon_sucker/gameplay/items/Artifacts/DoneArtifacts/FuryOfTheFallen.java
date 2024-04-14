@@ -6,6 +6,7 @@ public class FuryOfTheFallen extends Artifact {
 
   public FuryOfTheFallen() {
     super();
+    this.triggerableByDeath = true;
     this.weight = 2;
     this.description = "Makes you respawn after you die, but only once";
     this.name = "Fury Of The Fallen; weight = " + this.weight;
@@ -16,7 +17,7 @@ public class FuryOfTheFallen extends Artifact {
     if (!this.holder.isAlive) {
       this.holder.isAlive = true;
       this.holder.health = 50;
-      this.getLost();
+      this.mustBeRemoved = true;
     }
     // Можно изменить метод использования, но уже и так норм
   }

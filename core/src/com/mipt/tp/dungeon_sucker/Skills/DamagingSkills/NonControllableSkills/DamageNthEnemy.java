@@ -21,7 +21,7 @@ public class DamageNthEnemy extends DamagingSkill {
   }
 
   public DamageNthEnemy(Weapon weapon, Damage damage, boolean isUsedByHostile, int i) {
-    new DamageNthEnemy(this.weapon, damage.totalDamage, damage.type, damage.element, damage.isMelee, damage.percantOfElementDamage, isUsedByHostile, i);
+    new DamageNthEnemy(this.weapon, damage.totalDamage, damage.type, damage.element, damage.isMelee, damage.percentOfElementDamage, isUsedByHostile, i);
   }
 
   public void use(Room room) {
