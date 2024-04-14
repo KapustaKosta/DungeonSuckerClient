@@ -1,20 +1,20 @@
 package com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills;
 
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkill;
-import com.mipt.tp.dungeon_sucker.gameplay.Skill;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 import java.util.Arrays;
 import java.util.Random;
 
-public class NonControllableDamageOneEnemy extends DamagingSkill {
+public class DamageRandomEnemy extends DamagingSkill {
   boolean isUsedByHostile;
 
-  public NonControllableDamageOneEnemy(Weapon weapon, int damage, boolean isUsedByHostile, String type) {
+  public DamageRandomEnemy(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, boolean isUsedByHostile) {
     this.weapon = weapon;
-    this.damage = damage;
+    this.damage = new Damage(this.weapon.holder, type, element, isMelee, percentOfElementDamage, damage);
     this.isUsedByHostile = isUsedByHostile;
     this.description = "Deal " + this.damage + " to a random enemy";
     this.type = type;
@@ -40,6 +40,6 @@ public class NonControllableDamageOneEnemy extends DamagingSkill {
       enemy = enemies[index];
     }
     System.out.println("punching " + enemy.name);
-    enemy.getDamaged(this.damage, this.type);
+    enemy.getDamaged(this.damage);
   }
 }

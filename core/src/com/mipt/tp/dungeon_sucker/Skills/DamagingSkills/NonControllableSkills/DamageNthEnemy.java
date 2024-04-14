@@ -2,7 +2,7 @@ package com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkill;
-import com.mipt.tp.dungeon_sucker.gameplay.Skill;
+import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
@@ -12,12 +12,16 @@ public class DamageNthEnemy extends DamagingSkill {
   int number;
   boolean isUsedByHostile;
 
-  public DamageNthEnemy(Weapon weapon, int damage, boolean isUsedByHostile, int number, String type) {
+  public DamageNthEnemy(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage,boolean isUsedByHostile, int number) {
     this.weapon = weapon;
-    this.damage = damage;
+    this.damage = new Damage(this.weapon.holder, type, element, isMelee, percentOfElementDamage, damage);
     this.isUsedByHostile = isUsedByHostile;
     this.number = number;
-    this.description = "Deal " + this.damage + " to enemy on place " + this.number + " if impossible, does nothing";
+    this.description = "Deal " + this.damage.totalDamage + " to enemy on place " + this.number + " if impossible, does nothing";
+  }
+
+  public DamageNthEnemy(Weapon weapon, Damage damage, boolean isUsedByHostile, int i) {
+    new DamageNthEnemy(this.weapon, damage.totalDamage, damage.type, damage.element, damage.isMelee, damage.percantOfElementDamage, isUsedByHostile, i);
   }
 
   public void use(Room room) {
@@ -31,7 +35,7 @@ public class DamageNthEnemy extends DamagingSkill {
     Entity enemy = enemies[this.number - 1];
     if (enemy != null && enemy.isAlive) {
       System.out.println("punching " + enemy.name);
-      enemy.getDamaged(this.damage, this.type);
+      enemy.getDamaged(this.damage);
     } else {
       return;
     }

@@ -1,13 +1,14 @@
 package com.mipt.tp.dungeon_sucker.gameplay.items;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 
 public class Artifact extends Item{
   protected String description;
   protected int effectiveness;
   protected int weight;
 
-  protected void triggerByBeingDamaged() {
+  protected void triggerByBeingDamaged(Damage damage) {
   }
   protected void triggerByDeath(){}
 

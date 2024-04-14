@@ -14,9 +14,11 @@ public class Club extends Weapon {
     super(3);
     this.damage = damage;
     this.name = name;
-    this.generateSkill(new DamageOneEntity(this, this.damage, "Smash"));
-    this.generateSkill(new DamageThreeEntities(this,this.damage, 0.5, 1, 0.5, "Smash"));
-    this.generateSkill(new DamageThreeEntities(this,this.damage, 0.75, 0.5, 0.75, "Smash"));
+    // public DamageOneEntity(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage)
+    //public DamageThreeEntities(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, double firstCoefficient, double secondCoefficient, double thirdCoefficient) {
+    this.generateSkill(new DamageOneEntity(this, this.damage, "Smash", this.element, true, 0.3));
+    this.generateSkill(new DamageThreeEntities(this, this.damage, "Smash", this.element, true, 0.3, 0.5, 1, 0.5));
+    this.generateSkill(new DamageThreeEntities(this, this.damage, "Smash", this.element, true, 0.3, 0.75, 0.5, 0.75));
   }
 
   public void use(Room room) {

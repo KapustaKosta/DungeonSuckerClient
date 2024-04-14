@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mipt.tp.dungeon_sucker.UI.Drawable;
+import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
@@ -13,6 +14,7 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -34,7 +36,7 @@ public class Entity extends InteractiveObject implements Drawable {
   public Room place;
   public String name;
   ArrayList<Item> items;
-  protected boolean isHostile;
+  public boolean isHostile;
   // Базовые статы из РПГ. Ловкость для каких-нибудь рапир, сила для булав, мудрость для магии
 
   public Entity(int health, int weight, HauntedRoom place, String name) {
@@ -64,13 +66,16 @@ public class Entity extends InteractiveObject implements Drawable {
     this.position = new Vector2(levelPosition.x * Constants.cellSize, levelPosition.y * Constants.cellSize);
   }
 
-  public void getDamaged(int damage, String type) {
+  public void getDamaged(Damage damage) {
+    // Переписать это говно, когда все обсудим
+    String type = damage.type;
+    int dmgDealt = damage.totalDamage;
     if (Objects.equals(type, "Magic")) {
-      damage = Math.max(0, damage - magicalArmor);
+      dmgDealt = Math.max(0, dmgDealt - magicalArmor);
     } else {
-      damage = Math.max(0, damage - physicalArmor);
+      dmgDealt = Math.max(0, dmgDealt - physicalArmor);
     }
-    this.health -= damage;
+    this.health -= dmgDealt;
     System.out.println(this.name + " got damaged. Current health: " + this.health);
     if (this.health <= 0) {
       this.die();

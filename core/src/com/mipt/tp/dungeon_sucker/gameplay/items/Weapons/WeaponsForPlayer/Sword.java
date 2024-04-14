@@ -11,10 +11,11 @@ public class Sword extends Weapon {
     super(3);
     this.damage = damage;
     this.name = name;
-    this.generateSkill(new DamageOneEntity(this, this.damage, "Slash"));
-    this.generateSkill(new DamageOneEntityWithCrit(this, this.damage * 3 / 4, 1, 3, 2, "Slash"));
-    this.generateSkill(new DamageOneEntity(this, this.damage, "Point"));
+    // public DamageOneEntity(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage)
+    // public DamageOneEntityWithCrit(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, int numerator, int divider, double multiplier) {
+    this.generateSkill(new DamageOneEntity(this, this.damage, "Slash", this.element, true, 0.25));
+    this.generateSkill(new DamageOneEntityWithCrit(this, this.damage * 3 / 4, "Slash", this.element, true, 0.25, 1, 3, 2));
+    this.generateSkill(new DamageOneEntity(this, this.damage, "Point", this.element, true, 0.5));
     // Первый скилл - рубящий, второй - колющий. Добавлю, когда обсудим, какие типы урона что делают
-    // Когда это обсудим, у всех скиллов надо будет добавить тип урона и вид урона (тип - колющий, вид - огненный)
   }
 }

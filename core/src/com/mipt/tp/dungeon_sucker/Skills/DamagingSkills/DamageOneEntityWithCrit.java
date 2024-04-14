@@ -1,6 +1,7 @@
 package com.mipt.tp.dungeon_sucker.Skills.DamagingSkills;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
@@ -11,25 +12,28 @@ import java.util.Scanner;
 public class DamageOneEntityWithCrit extends DamageOneEntity {
   private final int divider;
   int numerator;
-  int criticalDamage;
+  Damage criticalDamage;
 
-  public DamageOneEntityWithCrit(Weapon weapon, int damage, int numerator, int divider, double multiplier, String type) {
-    super(weapon, damage, type);
-    this.criticalDamage = (int) (this.damage * multiplier);
+  public DamageOneEntityWithCrit(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, int numerator, int divider, double multiplier) {
+    super(weapon, damage, type, element, isMelee, percentOfElementDamage);
+    this.criticalDamage = this.damage.copy();
+    this.criticalDamage.elementDamage *= (int) multiplier;
+    this.criticalDamage.defaultDamage *= (int) multiplier;
+    this.criticalDamage.totalDamage *= (int) multiplier;
     this.divider = divider;
     this.numerator = numerator;
-    this.description = "Deals " + this.damage + " damage to enemy by your choice, has " + numerator + "/" + divider + "chance to deal" + (this.damage * multiplier) + " damage instead";
+    this.description = "Deals " + this.damage.totalDamage + " damage to enemy by your choice, has " + numerator + "/" + divider + "chance to deal" + this.criticalDamage.totalDamage + " damage instead";
   }
 
   public void use(Room room) {
     int a = new Random().nextInt(this.divider);
-    int damage = this.damage;
+    Damage damage = this.damage;
     if (a < numerator) {
       damage = this.criticalDamage;
     }
     Entity[] entities;
     if (room.isHaunted) {
-      entities = ((HauntedRoom) room).hostileEntities;
+      entities = room.hostileEntities;
     } else {
       return;
     }
@@ -49,6 +53,6 @@ public class DamageOneEntityWithCrit extends DamageOneEntity {
       index = in.nextInt();
     }
     index = Math.min(Math.max(index - 1, 0), entities.length - 1);
-    entities[index].getDamaged(damage, this.type);
+    entities[index].getDamaged(damage);
   }
 }

@@ -8,7 +8,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 public class Weapon extends Item{
   String rarity;
   int level;
-  String element;
+  protected String element;
   int weight;
   protected Skill[] skills;
   protected int amount = 0;

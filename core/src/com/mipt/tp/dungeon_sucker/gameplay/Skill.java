@@ -5,8 +5,6 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 
 public class Skill {
-  protected int damage;
-  protected Weapon weapon;
   protected String description;
   public void use(Room room){
   }
