@@ -16,7 +16,7 @@ public class RingOfHealth extends Artifact {
 
 
   public void getLost() {
-    this.holder.getPermanentlyDamaged(this.effectiveness);
+    this.holder.decreaseMaxHP(this.effectiveness);
     super.getLost();
   }
 }

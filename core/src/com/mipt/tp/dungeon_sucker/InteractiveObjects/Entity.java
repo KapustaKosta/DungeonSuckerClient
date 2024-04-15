@@ -9,13 +9,11 @@ import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer.Club;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -131,15 +129,15 @@ public class Entity extends InteractiveObject implements Drawable {
     }
   }
 
-  public void getPermanentlyDamaged(int damage) {
-    if (this.maxHealth <= damage) {
+  public void decreaseMaxHP(int value) {
+    if (this.maxHealth <= value) {
       this.die();
-    } else if (this.health <= damage) {
+    } else if (this.health <= value) {
       this.health = 1;
-      this.maxHealth -= damage;
+      this.maxHealth -= value;
     } else {
-      this.maxHealth -= damage;
-      this.health -= damage;
+      this.maxHealth -= value;
+      this.health -= value;
       // Добавить метод отрисовки здоровья после каждого хода/действия
     }
   }

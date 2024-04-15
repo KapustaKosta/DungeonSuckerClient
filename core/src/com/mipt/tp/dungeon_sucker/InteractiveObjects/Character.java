@@ -72,7 +72,7 @@ public class Character extends Entity {
 
   public void chooseItemToLeave() {
     int index = 0;
-    System.out.println("Choose item to leave (it'll wait you in a rooms chest)"); // not implemented yet, it'll disappear
+    System.out.println("Choose item to leave (it'll wait you in a rooms chest)");
     Scanner in = new Scanner(System.in);
     int chosen = -1;
     for (int i = 0; i < this.items.size() - 5; i = index) {
@@ -136,10 +136,12 @@ public class Character extends Entity {
       room.insert(this, false);
     }
   }
-  public void levelUp(){
+
+  public void levelUp() {
     this.weapon.recount();
     throw new NotImplementedException();
   }
+
   public void attack() {
     System.out.println(this.place.getClass());
     this.weapon.use(this.place);
