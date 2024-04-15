@@ -15,14 +15,13 @@ public class FragileBody extends Artifact {
     this.name = "Fragile Body";
   }
 
+  @Override
   public void triggerByBeingDamaged(Damage damage) {
-    //public Damage(Entity dealer, String type, String element, boolean isMelee, double percentOfElementDamage, int totalDamage)
     System.out.println("stinging " + damage.dealer.name);
     if (Objects.equals(damage.type, "Smash")) {
       damage.totalDamage *= 2;
       damage.defaultDamage *= 2;
       damage.elementDamage *= 2;
     }
-    // Если будет скилл, активирующийся от получения дистанционного урона, то надо будет слегка переделать. ПОЭТОМУ ТАК НЕ ДЕЛАЕМ
   }
 }

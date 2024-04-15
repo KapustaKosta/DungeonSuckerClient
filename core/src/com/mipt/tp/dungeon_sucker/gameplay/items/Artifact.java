@@ -3,16 +3,16 @@ package com.mipt.tp.dungeon_sucker.gameplay.items;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 
-public class Artifact extends Item {
+public abstract class Artifact extends Item {
   public boolean triggerableByBeingDamaged;
   protected String description;
   protected int effectiveness;
   public boolean mustBeRemoved = false;
   public boolean triggerableByDeath = false;
 
-  public void triggerByBeingDamaged(Damage damage) {
-  }
+  public abstract void triggerByBeingDamaged(Damage damage);
 
+  // Todo: за-override-ить всё нахуй
   public void triggerByDeath() {
   }
 

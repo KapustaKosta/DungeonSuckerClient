@@ -20,11 +20,11 @@ import java.util.Objects;
 
 public class Entity extends InteractiveObject implements Drawable {
   public int vigor; // +hp
-  public int power; // -time per move
-  public int strength; // +dmg of some weapons
-  public int dexterity; // +dmg of some other weapons
-  public int intellect; // +dmg of other weapons
-  public int faith; // you guessed it, +dmg of other weapons
+  public int speed = 0; // -time per move
+  public int strength = 0; // +dmg of some weapons
+  public int dexterity = 0; // +dmg of some other weapons
+  public int intellect = 0; // +dmg of other weapons
+  public int faith = 0; // you guessed it, +dmg of other weapons
   // +dmg can intersect
   protected Weapon weapon;
   public DungeonMasster master;
@@ -74,6 +74,7 @@ public class Entity extends InteractiveObject implements Drawable {
   }
 
   public void getDamaged(Damage damage) {
+    // триггерятся  артефакты
     damage = damage.copy();
     for (int i = 0; i < this.artifacts.size(); ++i) {
       if (this.artifacts.get(i).triggerableByBeingDamaged) {
@@ -89,11 +90,14 @@ public class Entity extends InteractiveObject implements Drawable {
     } else {
       dmgDealt = Math.max(0, dmgDealt - physicalArmor);
     }
+
     this.health -= dmgDealt;
     System.out.println(this.name + " got damaged. Current health: " + this.health);
     if (this.health <= 0) {
       this.die();
     }
+
+    // Убирает k-разовые артефакты (|N э k)
     int amountOfArtifactsToRemove = 0;
     for (int i = 0; i - amountOfArtifactsToRemove < this.artifacts.size(); ++i) {
       if (this.artifacts.get(i - amountOfArtifactsToRemove).mustBeRemoved) {
@@ -110,12 +114,14 @@ public class Entity extends InteractiveObject implements Drawable {
 
   public void die() {
     this.isAlive = false;
+
     for (int i = 0; i < this.artifacts.size(); ++i) {
       if (this.artifacts.get(i).triggerableByDeath) {
         this.artifacts.get(i).triggerByDeath();
         // Удаление артефактов после получения урона - кринж. Так делать не надо.
       }
     }
+
     int amountOfArtifactsToRemove = 0;
     for (int i = 0; i - amountOfArtifactsToRemove < this.artifacts.size(); ++i) {
       if (this.artifacts.get(i - amountOfArtifactsToRemove).mustBeRemoved) {
