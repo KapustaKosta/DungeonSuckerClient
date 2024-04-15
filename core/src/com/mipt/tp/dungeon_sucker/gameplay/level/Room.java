@@ -41,6 +41,9 @@ public class Room implements Drawable {
     this.isCleared = true;
   }
 
+  public Room() {
+  }
+
 
   @Override
   public void draw() {

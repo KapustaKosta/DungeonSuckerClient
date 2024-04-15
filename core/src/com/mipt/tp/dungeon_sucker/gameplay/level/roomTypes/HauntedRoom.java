@@ -22,4 +22,8 @@ public class HauntedRoom extends Room {
                      Texture texture) {
     super(levelPosition, texture);
   }
+
+  public HauntedRoom() {
+    super();
+  }
 }

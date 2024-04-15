@@ -7,17 +7,25 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Random;
 
-public class Creature extends Entity {
-  protected int power;
+public class Creature extends Entity{
+  protected boolean isSummoned = false;
 
   public Creature(int health, int power, int weight, boolean isHostile, HauntedRoom place, String name) {
     super(health, weight, place, name);
-    this.power = power;
+    this.strength = power;
     this.isHostile = isHostile;
   }
 
   public void makeMove() {
-    super.makeMove();
+    if (this.isSummoned) {
+      super.makeMove();
+    } else {
+      this.summon();
+    }
+  }
+
+  private void summon() {
+    throw new NotImplementedException();
   }
 
   public void setPlace(HauntedRoom room) {

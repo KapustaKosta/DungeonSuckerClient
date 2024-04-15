@@ -19,9 +19,7 @@ public class FightTry {
     DM.add(vasya.weight, vasya);
     Creature[] entities = new Creature[4];
     for (int i = 0; i < 4; ++i) {
-      entities[i] = new Rat(10,
-          10,
-          10,
+      entities[i] = new Rat(
           true,
           new HauntedRoom(new IntVector2(), new Texture("room.png"), new Creature[0], DM),
           "rat" + i);
