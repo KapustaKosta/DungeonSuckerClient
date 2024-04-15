@@ -3,8 +3,10 @@ package com.mipt.tp.dungeon_sucker;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mipt.tp.dungeon_sucker.UI.texturePacks.RoomsTexturesPack;
+import com.mipt.tp.dungeon_sucker.fighting_area.FightingArea;
 import com.mipt.tp.dungeon_sucker.gameplay.entities.Character;
 import com.mipt.tp.dungeon_sucker.gameplay.level.logic.DFSMapGenerator;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
@@ -12,11 +14,15 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.logic.MapGenerator;
 import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
+import static com.mipt.tp.dungeon_sucker.helper.Constants.battleAreaPos;
+import static com.mipt.tp.dungeon_sucker.helper.Constants.battleAreaSize;
+
 public class DungeonSuckerGame extends ApplicationAdapter {
 
   private static final Color BACKGROUND = Color.valueOf("#222222");
   private Level level;
   private Character character;
+  private FightingArea fightingArea; // test
 
   private void update() {
     character.getInput();
@@ -38,6 +44,8 @@ public class DungeonSuckerGame extends ApplicationAdapter {
     this.level = new Level(mapGenerator);
     IntVector2 characterPosition = new IntVector2(level.getMap().spawn.getPosition().x, level.getMap().spawn.getPosition().y);
     this.character = new Character(characterPosition, new Texture("character.png"), level);
+    this.fightingArea = new FightingArea(battleAreaPos,
+            battleAreaSize, new Texture("battleArea.png"));
   }
 
   @Override
@@ -46,5 +54,6 @@ public class DungeonSuckerGame extends ApplicationAdapter {
     ScreenUtils.clear(BACKGROUND);
     level.draw();
     character.draw();
+    fightingArea.draw();
   }
 }
