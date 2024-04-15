@@ -101,6 +101,7 @@ public class Entity extends InteractiveObject implements Drawable {
         ++amountOfArtifactsToRemove;
       }
     }
+    this.weapon.recount();
   }
   // НАПИСАТЬ ЗАВИСИМОСТЬ ОТ ТИПА УРОНА!!!!!!!!!
 
