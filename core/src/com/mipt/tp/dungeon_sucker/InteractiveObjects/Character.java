@@ -102,9 +102,9 @@ public class Character extends Entity {
       }
     }
     Item item = items.get(chosen);
-    item.holder = null;
     this.place.addItemToChest(item);
-    this.items.remove(chosen);
+    item.getLost();
+    this.weapon.recount();
   }
 
   public void makeMove() {
@@ -119,6 +119,7 @@ public class Character extends Entity {
         this.attack();
       }
     }
+    super.makeMove();
   }
 
   private void escape() {
@@ -126,6 +127,7 @@ public class Character extends Entity {
     if (effect == 1) {
       this.moveToRoom(new Room(new IntVector2(), new Texture("room.png"), this.master));
     }
+    this.weapon.recount();
   }
 
   public void moveToRoom(Room room) {
@@ -135,6 +137,7 @@ public class Character extends Entity {
     } else {
       room.insert(this, false);
     }
+    this.weapon.recount();
   }
 
   public void levelUp() {
@@ -145,6 +148,7 @@ public class Character extends Entity {
   public void attack() {
     System.out.println(this.place.getClass());
     this.weapon.use(this.place);
+    this.weapon.recount();
   }
 
   public void die() {

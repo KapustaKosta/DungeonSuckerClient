@@ -23,6 +23,13 @@ public class Artifact extends Item {
 
   public void getLost() {
     this.holder.weight -= this.weight;
+    for(int i = 0; i < this.holder.artifacts.size(); ++i){
+      if(this == this.holder.artifacts.get(i)){
+        this.holder.artifacts.remove(i);
+        break;
+      }
+    }
+    super.getLost();
     this.holder = null;
   }
 

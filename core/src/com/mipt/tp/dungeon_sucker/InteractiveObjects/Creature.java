@@ -17,7 +17,7 @@ public class Creature extends Entity {
   }
 
   public void makeMove() {
-    throw new NotImplementedException();
+    super.makeMove();
   }
 
   public void setPlace(HauntedRoom room) {

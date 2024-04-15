@@ -105,6 +105,7 @@ public class Entity extends InteractiveObject implements Drawable {
   // НАПИСАТЬ ЗАВИСИМОСТЬ ОТ ТИПА УРОНА!!!!!!!!!
 
   public void makeMove() {
+    this.weapon.recount();
   }
 
   public void die() {

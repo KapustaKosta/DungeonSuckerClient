@@ -21,5 +21,6 @@ public class Rat extends Creature {
   public void makeMove() {
     System.out.println("RAT IS MOVING");
     this.weapon.use(this.place);
+    super.makeMove();
   }
 }
