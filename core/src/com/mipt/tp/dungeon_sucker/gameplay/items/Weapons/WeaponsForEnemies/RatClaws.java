@@ -12,6 +12,8 @@ public class RatClaws extends Weapon {
 
   public RatClaws(int damage, boolean isHostile) {
     super(1);
+    this.dexterityScale = 0.3;
+    this.strengthScale = 0.2;
     this.damage = damage;
     this.name = "Claws of a rat";
     // public DamageRandomEnemy(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, boolean isUsedByHostile)

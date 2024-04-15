@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Entity extends InteractiveObject implements Drawable {
+  // Базовые статы из РПГ. Ловкость для каких-нибудь рапир, сила для булав, мудрость для магии
   public int vigor; // +hp
   public int power; // -time per move
   public int strength; // +dmg of some weapons
@@ -44,7 +45,6 @@ public class Entity extends InteractiveObject implements Drawable {
   public ArrayList<Item> items;
   public ArrayList<Artifact> artifacts;
   public boolean isHostile;
-  // Базовые статы из РПГ. Ловкость для каких-нибудь рапир, сила для булав, мудрость для магии
 
   public Entity(int health, int weight, HauntedRoom place, String name) {
     this.maxHealth = health;

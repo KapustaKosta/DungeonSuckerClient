@@ -16,6 +16,7 @@ public class Weapon extends Item {
   protected double dexterityScale;
   protected double faithScale;
   protected double intellectScale;
+  private int effectiveness;
   private int power;
 
   public Weapon(int numberOfSkills) {
@@ -38,12 +39,12 @@ public class Weapon extends Item {
   }
 
   public void recount() {
-    this.power = (int) (this.power * (this.holder.strength * this.strengthScale
+    this.effectiveness = (int) (this.power * (this.holder.strength * this.strengthScale
         + this.holder.dexterity * this.dexterityScale
         + this.holder.faith * this.faithScale
-        + this.holder.intellect * this.intellectScale));
+        + this.holder.intellect * this.intellectScale + 1));
     for (int i = 0; i < this.amountOfSkills; ++i) {
-      this.skills[i].setPower(this.power);
+      this.skills[i].setPower(this.effectiveness);
     }
   }
 }
