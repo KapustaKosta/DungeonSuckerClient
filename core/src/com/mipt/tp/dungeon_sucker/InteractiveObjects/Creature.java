@@ -9,6 +9,7 @@ import java.util.Random;
 
 public class Creature extends Entity {
   protected int power;
+  protected boolean isSummoned = false;
 
   public Creature(int health, int power, int weight, boolean isHostile, HauntedRoom place, String name) {
     super(health, weight, place, name);
@@ -17,7 +18,15 @@ public class Creature extends Entity {
   }
 
   public void makeMove() {
-    super.makeMove();
+    if (this.isSummoned) {
+      super.makeMove();
+    } else {
+      this.summon();
+    }
+  }
+
+  private void summon() {
+    throw new NotImplementedException();
   }
 
   public void setPlace(HauntedRoom room) {
