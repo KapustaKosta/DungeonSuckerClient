@@ -11,18 +11,20 @@ public class Rat extends Creature {
   final int DEX_PER_LVL = 2;
   final int STR_PER_LVL = 1;
   final int VIG_PER_LVL = 1;
+
+  // пофикси
   public Rat(boolean isHostile, HauntedRoom place, String name) {
     super(3, 1, 3, isHostile, place, name);
-    this.weapon = new RatClaws(this.power, this.isHostile);
+    this.weapon = new RatClaws(this.speed, this.isHostile);
     this.name = name;
-    this.description = this.name + ", a rat, that crawls everywhere, may bite you, dealing " + this.power + "of physical damage";
+    this.description = this.name + ", a rat, that crawls everywhere, may bite you, dealing " + this.speed + "of physical damage";
   }
 
   public Rat(int health, int power, int weight, boolean isHostile, HauntedRoom place) {
     super(health, power, weight, isHostile, place, "Rat");
-    this.weapon = new RatClaws(this.power, this.isHostile);
+    this.weapon = new RatClaws(this.speed, this.isHostile);
     this.name = "Rat";
-    this.description = this.name + ", that crawls everywhere, may bite you, dealing " + this.power + "of physical damage";
+    this.description = this.name + ", that crawls everywhere, may bite you, dealing " + this.speed + "of physical damage";
   }
   public void summon(){
     this.strength = this.STR_PER_LVL * this.master.level;

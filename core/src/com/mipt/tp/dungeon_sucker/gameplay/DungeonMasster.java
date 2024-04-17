@@ -38,9 +38,9 @@ public class DungeonMasster {
     }
   }
 
+  // вынести в update
   public void move() {
     while (true) {
-      //System.out.println(this.orderOfSteps.size());
       if (this.orderOfSteps.getFirst().entity.isAlive) {
         this.time = this.orderOfSteps.getFirst().timeOfStep;
         this.orderOfSteps.getFirst().entity.makeMove();

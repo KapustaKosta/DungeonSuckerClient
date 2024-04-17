@@ -41,8 +41,7 @@ public class Room implements Drawable {
     this.isCleared = true;
   }
 
-  public Room() {
-  }
+  public Room() {levelPosition = null;}
 
 
   @Override

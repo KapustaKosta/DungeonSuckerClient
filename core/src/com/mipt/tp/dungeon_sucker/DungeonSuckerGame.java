@@ -45,7 +45,7 @@ public class DungeonSuckerGame extends ApplicationAdapter {
     Level level = new Level(mapGenerator, 10, 10);
     MapWindow mapWindow = new MapWindow(new IntVector2(0, 25), new IntVector2(10, 15), level);
 
-    InventoryWindow inventoryWindow = new InventoryWindow(new IntVector2(0, 15), new IntVector2(10, 0), 4, 5);
+    InventoryWindow inventoryWindow = new InventoryWindow(new IntVector2(0, 15), new IntVector2(10, 0), 4, 4);
     Item exampleItem = new Item();
     exampleItem.name = "knife";
     exampleItem.texture = new Texture("knife.png");
