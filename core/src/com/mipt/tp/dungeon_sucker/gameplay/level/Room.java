@@ -42,6 +42,7 @@ public class Room implements Drawable {
   }
 
   public Room() {
+    this.levelPosition = null;
   }
 
 

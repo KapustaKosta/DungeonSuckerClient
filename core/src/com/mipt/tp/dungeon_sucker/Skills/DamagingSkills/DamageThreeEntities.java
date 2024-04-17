@@ -4,6 +4,8 @@ import com.mipt.tp.dungeon_sucker.Skills.DamagingSkill;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
@@ -18,7 +20,7 @@ public class DamageThreeEntities extends DamagingSkill {
   Damage secondDamage;
   Damage thirdDamage;
 
-  public DamageThreeEntities(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, double firstCoefficient, double secondCoefficient, double thirdCoefficient) {
+  public DamageThreeEntities(Weapon weapon, int damage, DamageTypeSet type, ElementSet element, boolean isMelee, double percentOfElementDamage, double firstCoefficient, double secondCoefficient, double thirdCoefficient) {
     this.weapon = weapon;
     this.firstCoefficient = firstCoefficient;
     this.secondCoefficient = secondCoefficient;

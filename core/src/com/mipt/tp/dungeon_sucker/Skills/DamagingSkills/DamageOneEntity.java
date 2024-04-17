@@ -4,6 +4,8 @@ import com.mipt.tp.dungeon_sucker.Skills.DamagingSkill;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
@@ -11,7 +13,7 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 import java.util.Scanner;
 
 public class DamageOneEntity extends DamagingSkill {
-  public DamageOneEntity(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage) {
+  public DamageOneEntity(Weapon weapon, int damage, DamageTypeSet type, ElementSet element, boolean isMelee, double percentOfElementDamage) {
     this.weapon = weapon;
     this.damage = new Damage(this.weapon.holder, type, element, isMelee, percentOfElementDamage, damage);
     this.description = "Deals " + this.damage.totalDamage + " damage to enemy by your choice";

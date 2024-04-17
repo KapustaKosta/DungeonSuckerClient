@@ -1,6 +1,7 @@
 package com.mipt.tp.dungeon_sucker;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts.IronChestplate;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer.Club;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
@@ -25,7 +26,7 @@ public class FightTry {
           "rat" + i);
     }
     HauntedRoom room = new HauntedRoom(new IntVector2(), new Texture("room.png"), entities, DM);
-    Club club = new Club(10, "club");
+    Club club = new Club(10, "club", RaritySet.Common);
     vasya.setActiveWeapon(club);
     vasya.moveToRoom(room);
     DM.move();

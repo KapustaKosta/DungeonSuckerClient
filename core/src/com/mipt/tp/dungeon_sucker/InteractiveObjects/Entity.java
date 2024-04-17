@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mipt.tp.dungeon_sucker.UI.Drawable;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
@@ -75,35 +76,16 @@ public class Entity extends InteractiveObject implements Drawable {
 
   public void getDamaged(Damage damage) {
     damage = damage.copy();
-    for (int i = 0; i < this.artifacts.size(); ++i) {
-      if (this.artifacts.get(i).triggerableByBeingDamaged) {
-        this.artifacts.get(i).triggerByBeingDamaged(damage);
-        // Удаление артефактов после получения урона - кринж. Так делать не надо.
-      }
-    }
-    // Переписать это говно, когда все обсудим
-    String type = damage.type;
+    this.triggerArtifactsByDamage(damage);
     int dmgDealt = damage.totalDamage;
-    if (Objects.equals(type, "Magic")) {
-      dmgDealt = Math.max(0, dmgDealt - magicalArmor);
-    } else {
-      dmgDealt = Math.max(0, dmgDealt - physicalArmor);
-    }
     this.health -= dmgDealt;
     System.out.println(this.name + " got damaged. Current health: " + this.health);
     if (this.health <= 0) {
       this.die();
     }
-    int amountOfArtifactsToRemove = 0;
-    for (int i = 0; i - amountOfArtifactsToRemove < this.artifacts.size(); ++i) {
-      if (this.artifacts.get(i - amountOfArtifactsToRemove).mustBeRemoved) {
-        this.artifacts.get(i - amountOfArtifactsToRemove).getLost();
-        ++amountOfArtifactsToRemove;
-      }
-    }
+    this.removeExtraArtifacts();
     this.weapon.recount();
   }
-  // НАПИСАТЬ ЗАВИСИМОСТЬ ОТ ТИПА УРОНА!!!!!!!!!
 
   public void makeMove() {
     this.weapon.recount();
@@ -111,12 +93,24 @@ public class Entity extends InteractiveObject implements Drawable {
 
   public void die() {
     this.isAlive = false;
+    this.triggerArtifactsByDeath();
+    this.removeExtraArtifacts();
+    if (this.isHostile) {
+      this.place.checkHostileAlive();
+    } else {
+      this.place.checkFriendlyAlive();
+    }
+  }
+
+  private void triggerArtifactsByDeath() {
     for (int i = 0; i < this.artifacts.size(); ++i) {
       if (this.artifacts.get(i).triggerableByDeath) {
         this.artifacts.get(i).triggerByDeath();
-        // Удаление артефактов после получения урона - кринж. Так делать не надо.
       }
     }
+  }
+
+  private void removeExtraArtifacts() {
     int amountOfArtifactsToRemove = 0;
     for (int i = 0; i - amountOfArtifactsToRemove < this.artifacts.size(); ++i) {
       if (this.artifacts.get(i - amountOfArtifactsToRemove).mustBeRemoved) {
@@ -124,10 +118,13 @@ public class Entity extends InteractiveObject implements Drawable {
         ++amountOfArtifactsToRemove;
       }
     }
-    if (this.isHostile) {
-      this.place.checkHostileAlive();
-    } else {
-      this.place.checkFriendlyAlive();
+  }
+
+  private void triggerArtifactsByDamage(Damage damage) {
+    for (int i = 0; i < this.artifacts.size(); ++i) {
+      if (this.artifacts.get(i).triggerableByBeingDamaged) {
+        this.artifacts.get(i).triggerByBeingDamaged(damage);
+      }
     }
   }
 

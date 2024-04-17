@@ -1,6 +1,8 @@
 package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts;
 
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 
 public class ThornsOfRevenge extends Artifact {
@@ -17,7 +19,7 @@ public class ThornsOfRevenge extends Artifact {
     //public Damage(Entity dealer, String type, String element, boolean isMelee, double percentOfElementDamage, int totalDamage)
     System.out.println("stinging " + damage.dealer.name);
     if (damage.isMelee){
-      damage.dealer.getDamaged(new Damage(this.holder, "Point", " ", false, 0, this.effectiveness));
+      damage.dealer.getDamaged(new Damage(this.holder, DamageTypeSet.Point, ElementSet.None, false, 0, this.effectiveness));
     }
     // Если будет скилл, активирующийся от получения дистанционного урона, то надо будет слегка переделать. ПОЭТОМУ ТАК НЕ ДЕЛАЕМ
   }
