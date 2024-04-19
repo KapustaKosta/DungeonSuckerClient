@@ -17,7 +17,7 @@ public class PriestessRing extends Artifact {
     super.getObtained(entity);
     entity.faith += this.effectiveness;
     this.holder = entity;
-    this.name = "Knight's ring; weight = " + this.weight;
+    this.holder.recountWeapon();
   }
 
 

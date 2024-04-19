@@ -17,7 +17,7 @@ public class ScholarsRing extends Artifact {
     super.getObtained(entity);
     entity.intellect += this.effectiveness;
     this.holder = entity;
-    this.name = "Scholar's ring; weight = " + this.weight;
+    this.holder.recountWeapon();
   }
 
 

@@ -17,7 +17,7 @@ public class KnightsRing extends Artifact {
     super.getObtained(entity);
     entity.strength += this.effectiveness;
     this.holder = entity;
-    this.name = "Knight's ring; weight = " + this.weight;
+    this.holder.recountWeapon();
   }
 
 

@@ -17,6 +17,7 @@ public class HuntersRing extends Artifact {
     super.getObtained(entity);
     entity.dexterity += this.effectiveness;
     this.holder = entity;
+    this.holder.recountWeapon();
   }
 
 

@@ -11,7 +11,7 @@ public class IronChestplate extends Artifact {
     description = "That is just an Iron chestplate. Somehow it can be worn with more armor. " +
         "Increases your Physical Defence by " + this.effectiveness;
     this.weight = 5;
-    this.name = "Iron Chestplate; weight = " + this.weight;
+    this.name = "Iron Chestplate; weight = " + this.weight;this.holder.recountWeapon();
   }
 
   public void getObtained(Entity entity) {
