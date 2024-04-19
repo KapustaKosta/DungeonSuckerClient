@@ -6,18 +6,15 @@ import com.badlogic.gdx.math.Vector2;
 import com.mipt.tp.dungeon_sucker.UI.Drawable;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
-import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
-import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Entity extends InteractiveObject implements Drawable {
   // Базовые статы из РПГ. Ловкость для каких-нибудь рапир, сила для булав, мудрость для магии
@@ -47,7 +44,7 @@ public class Entity extends InteractiveObject implements Drawable {
   public ArrayList<Artifact> artifacts;
   public boolean isHostile;
 
-  public Entity(int health, int weight, HauntedRoom place, String name) {
+  public Entity(int health, int weight, Room place, String name) {
     this.maxHealth = health;
     this.health = health;
     this.weight = weight;
@@ -143,5 +140,9 @@ public class Entity extends InteractiveObject implements Drawable {
 
   public void setActiveWeapon(Weapon weapon) {
     this.weapon = weapon;
+  }
+
+  public void recountWeapon() {
+    this.weapon.recount();
   }
 }

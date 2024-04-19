@@ -1,15 +1,17 @@
 package com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer;
 
+import com.mipt.tp.dungeon_sucker.Skills.ChargeWeapon;
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.DamageOneEntity;
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.DamageThreeEntities;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.ChargableWeapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 import java.util.Scanner;
 
-public class Bow extends Weapon {
+public class Bow extends ChargableWeapon {
 
   public Bow(int damage, String name, RaritySet rarity) {
     super(3);
@@ -21,9 +23,11 @@ public class Bow extends Weapon {
     this.weight = 5;
     // public DamageOneEntity(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage)
     //public DamageThreeEntities(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, double firstCoefficient, double secondCoefficient, double thirdCoefficient) {
-    this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Point, this.element, true, 0.3));
-    this.generateSkill(new DamageThreeEntities(this, this.power, DamageTypeSet.Point, this.element, true, 0.3, 0.5, 1, 0.5));
-    this.generateSkill(new DamageThreeEntities(this, this.power, DamageTypeSet.Smash, this.element, true, 0.3, 0.75, 0.5, 0.75));
+    this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Point, this.element, false, 0.3));
+    this.generateSkill(new DamageThreeEntities(this, this.power, DamageTypeSet.Point, this.element, false, 0.3, 0.5, 1, 0.5));
+    this.generateSkill(new ChargeWeapon(this, 1));
+    this.chargesForSkill[0] = 1;
+    this.chargesForSkill[1] = 1;
   }
 
   private void recountScales() {
@@ -44,19 +48,17 @@ public class Bow extends Weapon {
       this.dexterityScale = 1;
       this.power = this.power * 3 / 2;
       this.weight = this.weight * 3 / 2;
+      this.skills[2] = new ChargeWeapon(this, 2);
     }
   }
 
   public void use(Room room) {
     this.recount();
-    if (room.isHaunted) {
-      System.out.println("Choose your skill");
-      for (int i = 0; i < this.skills.length; ++i) {
-        System.out.println(i + 1 + ": " + skills[i].toString());
-      }
+    int index = getSkillIndex();
+    System.out.println("Choose your skill");
+    while (this.chargesForSkill[index] > this.charges) {
+      index = getSkillIndex();
     }
-    Scanner in = new Scanner(System.in);
-    int index = in.nextInt() - 1;
     System.out.println(this.skills[index].getClass());
     this.skills[index].use(room);
   }

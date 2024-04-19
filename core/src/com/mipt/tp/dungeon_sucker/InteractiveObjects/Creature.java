@@ -1,16 +1,13 @@
 package com.mipt.tp.dungeon_sucker.InteractiveObjects;
 
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
-import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
+import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-import java.util.Random;
 
 public class Creature extends Entity{
   protected boolean isSummoned = false;
 
-  public Creature(int health, int power, int weight, boolean isHostile, HauntedRoom place, String name) {
+  public Creature(int health, int power, int weight, boolean isHostile, Room place, String name) {
     super(health, weight, place, name);
     this.strength = power;
     this.isHostile = isHostile;
@@ -28,7 +25,7 @@ public class Creature extends Entity{
     throw new NotImplementedException();
   }
 
-  public void setPlace(HauntedRoom room) {
+  public void setPlace(Room room) {
     this.place = room;
   }
 

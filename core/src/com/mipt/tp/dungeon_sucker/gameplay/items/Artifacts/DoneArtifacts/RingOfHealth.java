@@ -4,13 +4,19 @@ import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 
 public class RingOfHealth extends Artifact {
-  Entity holder;
   int effectiveness = 10;
+
+  public RingOfHealth() {
+    super();
+    this.description = "Makes its holder more survivable";
+    this.weight = 1;
+    this.name = "Ring of Health; weight = " + this.weight;
+  }
 
   public void getObtained(Entity entity) {
     super.getObtained(entity);
-    entity.maxHealth += this.effectiveness;
-    entity.health += this.effectiveness;
+    this.holder.maxHealth += this.effectiveness;
+    this.holder.health += this.effectiveness;
     this.name = "Ring of health; weight = " + this.weight;
   }
 

@@ -30,6 +30,7 @@ public class Artifact extends Item {
       }
     }
     super.getLost();
+    this.holder.recountWeapon();
     this.holder = null;
   }
 

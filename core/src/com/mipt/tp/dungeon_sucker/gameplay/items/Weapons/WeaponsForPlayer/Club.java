@@ -49,14 +49,9 @@ public class Club extends Weapon {
 
   public void use(Room room) {
     this.recount();
-    if (room.isHaunted) {
-      System.out.println("Choose your skill");
-      for (int i = 0; i < this.skills.length; ++i) {
-        System.out.println(i + 1 + ": " + skills[i].toString());
-      }
-    }
-    Scanner in = new Scanner(System.in);
-    int index = in.nextInt() - 1;
+    this.recount();
+    int index = getSkillIndex();
+    System.out.println("Choose your skill");
     System.out.println(this.skills[index].getClass());
     this.skills[index].use(room);
   }

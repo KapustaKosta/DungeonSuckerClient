@@ -7,8 +7,8 @@ import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer.Club;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Character;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Rat;
-import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
+import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 public class FightTry {
@@ -22,10 +22,10 @@ public class FightTry {
     for (int i = 0; i < 4; ++i) {
       entities[i] = new Rat(
           true,
-          new HauntedRoom(new IntVector2(), new Texture("room.png"), new Creature[0], DM),
+          new Room(new IntVector2(), new Texture("room.png"), new Creature[0], DM),
           "rat" + i);
     }
-    HauntedRoom room = new HauntedRoom(new IntVector2(), new Texture("room.png"), entities, DM);
+    Room room = new Room(new IntVector2(), new Texture("room.png"), entities, DM);
     Club club = new Club(10, "club", RaritySet.Common);
     vasya.setActiveWeapon(club);
     vasya.moveToRoom(room);

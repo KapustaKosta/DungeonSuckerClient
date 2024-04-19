@@ -5,10 +5,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
-import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -54,7 +52,7 @@ public class Character extends Entity {
   }
 
   public Character(int weight, int health, String name, DungeonMasster DM) {
-    super(health, weight, new HauntedRoom(new IntVector2(), new Texture("room.png"), new Creature[0], DM), name);
+    super(health, weight, new Room(new IntVector2(), new Texture("room.png"), new Creature[0], DM), name);
     this.weight = weight;
     this.health = health;
     this.name = name;

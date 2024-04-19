@@ -6,7 +6,6 @@ import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
-import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -16,8 +15,8 @@ public class DamageOneEntityWithCrit extends DamageOneEntity {
   int numerator;
   Damage criticalDamage;
 
-  public DamageOneEntityWithCrit(Weapon weapon, int damage, DamageTypeSet type, ElementSet element, boolean isMelee, double percentOfElementDamage, int numerator, int divider, double multiplier) {
-    super(weapon, damage, type, element, isMelee, percentOfElementDamage);
+  public DamageOneEntityWithCrit(Weapon weapon, int damage, double coefficient, DamageTypeSet type, ElementSet element, boolean isMelee, double percentOfElementDamage, int numerator, int divider, double multiplier) {
+    super(weapon, (int) (damage * coefficient), type, element, isMelee, percentOfElementDamage);
     this.criticalDamage = this.damage.copy();
     this.criticalDamage.elementDamage *= (int) multiplier;
     this.criticalDamage.defaultDamage *= (int) multiplier;

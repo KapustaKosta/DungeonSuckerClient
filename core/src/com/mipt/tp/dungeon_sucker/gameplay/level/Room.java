@@ -1,6 +1,7 @@
 package com.mipt.tp.dungeon_sucker.gameplay.level;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Chest;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.badlogic.gdx.graphics.Texture;
@@ -16,7 +17,7 @@ public class Room implements Drawable {
   protected boolean isCleared;
   public Entity[] friendlyEntities = new Entity[8];
   public Entity[] hostileEntities = new Entity[1];
-  private final IntVector2 levelPosition;
+  private IntVector2 levelPosition;
   private Texture texture;
   private SpriteBatch batch;
   public int amountOfFriendlyEntities = 0;
@@ -45,6 +46,12 @@ public class Room implements Drawable {
     this.levelPosition = null;
   }
 
+  public Room(IntVector2 intVector2, Texture texture, Creature[] creatures, DungeonMasster dm) {
+    this(intVector2, texture, dm);
+    this.hostileEntities = creatures;
+    this.isCleared = false;
+    this.isHaunted = true;
+  }
 
   @Override
   public void draw() {

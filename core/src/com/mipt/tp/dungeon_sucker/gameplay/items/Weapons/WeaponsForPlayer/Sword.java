@@ -22,7 +22,7 @@ public class Sword extends Weapon {
     // public DamageOneEntity(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage)
     // public DamageOneEntityWithCrit(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, int numerator, int divider, double multiplier) {
     this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Slash, this.element, true, 0.25));
-    this.generateSkill(new DamageOneEntityWithCrit(this, this.power * 3 / 4, DamageTypeSet.Slash, this.element, true, 0.25, 1, 3, 2));
+    this.generateSkill(new DamageOneEntityWithCrit(this, this.power, 0.75, DamageTypeSet.Slash, this.element, true, 0.25, 1, 3, 2));
     this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Point, this.element, true, 0.5));
     // Первый скилл - рубящий, второй - колющий. Добавлю, когда обсудим, какие типы урона что делают
   }
@@ -54,14 +54,9 @@ public class Sword extends Weapon {
 
   public void use(Room room) {
     this.recount();
-    if (room.isHaunted) {
-      System.out.println("Choose your skill");
-      for (int i = 0; i < this.skills.length; ++i) {
-        System.out.println(i + 1 + ": " + skills[i].toString());
-      }
-    }
-    Scanner in = new Scanner(System.in);
-    int index = in.nextInt() - 1;
+    this.recount();
+    int index = getSkillIndex();
+    System.out.println("Choose your skill");
     System.out.println(this.skills[index].getClass());
     this.skills[index].use(room);
   }
