@@ -6,7 +6,6 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class Creature extends Entity{
   protected boolean isSummoned = false;
-
   public Creature(int health, int power, int weight, boolean isHostile, Room place, String name) {
     super(health, weight, place, name);
     this.strength = power;

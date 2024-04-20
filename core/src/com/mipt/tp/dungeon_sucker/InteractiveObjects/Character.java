@@ -8,7 +8,6 @@ import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -16,6 +15,7 @@ import java.util.Scanner;
 public class Character extends Entity {
   boolean isFighting;
   String name = "Hero #-1";
+  private int baseHealth;
 
   public void getInput() {
     if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
@@ -55,6 +55,8 @@ public class Character extends Entity {
     super(health, weight, new Room(new IntVector2(), new Texture("room.png"), new Creature[0], DM), name);
     this.weight = weight;
     this.health = health;
+    this.maxHealth = health;
+    this.baseHealth = health;
     this.name = name;
   }
 
@@ -139,8 +141,49 @@ public class Character extends Entity {
   }
 
   public void levelUp() {
+    int a = new Random().nextInt(6);
+    switch (a) {
+      case 0:
+        this.obtainVigor(1);
+      case 1:
+        this.obtainPower(1);
+      case 2:
+        this.obtainStrength(1);
+      case 3:
+        this.obtainDexterity(1);
+      case 4:
+        this.obtainIntellect(1);
+      case 5:
+        this.obtainFaith(1);
+    }
     this.weapon.recount();
-    throw new NotImplementedException();
+  }
+
+  private void obtainFaith(int i) {
+    this.faith += i;
+  }
+
+  private void obtainIntellect(int i) {
+    this.intellect += i;
+  }
+
+  private void obtainDexterity(int i) {
+    this.dexterity += 1;
+  }
+
+  private void obtainStrength(int i) {
+    this.strength += 1;
+  }
+
+  private void obtainPower(int i) {
+    this.power += 1;
+  }
+
+  private void obtainVigor(int i) {
+    this.vigor += 1;
+    int prevHealth = this.maxHealth;
+    this.maxHealth = this.baseHealth * this.vigor;
+    this.health = this.health * this.maxHealth / prevHealth;
   }
 
   public void attack() {
@@ -152,5 +195,14 @@ public class Character extends Entity {
   public void die() {
     System.out.println("Oh no! I, " + this.name + " failed!");
     super.die();
+  }
+
+  public void obtainExp(int experience) {
+    this.experience += experience;
+    while (this.experience >= this.experienceToNextLevel) {
+      this.experience -= this.experienceToNextLevel;
+      this.experienceToNextLevel *= 2;
+      this.levelUp();
+    }
   }
 }

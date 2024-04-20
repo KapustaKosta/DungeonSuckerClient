@@ -15,6 +15,7 @@ public class Rat extends Creature {
     super(3, 1, 3, isHostile, place, name);
     this.weapon = new RatClaws(this.power, this.isHostile);
     this.name = name;
+    this.experiencePerKill = 3;
     this.description = this.name + ", a rat, that crawls everywhere, may bite you, dealing " + this.power + "of physical damage";
   }
 
@@ -22,12 +23,15 @@ public class Rat extends Creature {
     super(health, power, weight, isHostile, place, "Rat");
     this.weapon = new RatClaws(this.power, this.isHostile);
     this.name = "Rat";
+    this.experiencePerKill = 3;
     this.description = this.name + ", that crawls everywhere, may bite you, dealing " + this.power + "of physical damage";
   }
   public void summon(){
     this.strength = this.STR_PER_LVL * this.master.level;
     this.dexterity = this.DEX_PER_LVL * this.master.level;
     this.health = this.BASE_HEALTH + this.VIG_PER_LVL * this.master.level;
+    this.maxHealth = this.health;
+    this.experiencePerKill = (int)(Math.sqrt(this.master.level) * this.experiencePerKill);
     this.weapon.recount();
   }
 

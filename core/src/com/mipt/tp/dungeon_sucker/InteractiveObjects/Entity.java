@@ -17,6 +17,9 @@ import com.mipt.tp.dungeon_sucker.math.IntVector2;
 import java.util.ArrayList;
 
 public class Entity extends InteractiveObject implements Drawable {
+  public int experience = 0;
+  public int experienceToNextLevel = 10;
+  public int experiencePerKill;
   // Базовые статы из РПГ. Ловкость для каких-нибудь рапир, сила для булав, мудрость для магии
   public int vigor; // +hp
   public int power; // -time per move
@@ -94,9 +97,15 @@ public class Entity extends InteractiveObject implements Drawable {
     this.removeExtraArtifacts();
     if (this.isHostile) {
       this.place.checkHostileAlive();
+      for(int i = 0; i < this.place.amountOfFriendlyEntities; ++i){
+        this.place.friendlyEntities[i].obtainExp(this.experiencePerKill);
+      }
     } else {
       this.place.checkFriendlyAlive();
     }
+  }
+
+  public void obtainExp(int experiencePerKill) {return;
   }
 
   private void triggerArtifactsByDeath() {
