@@ -9,14 +9,15 @@ import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 public class Rapier extends Weapon {
-  public Rapier(int damage, String name, RaritySet rarity) {
+  public Rapier(int level, int damage, String name, RaritySet rarity) {
     super(3);
-    this.power = damage;
+    this.power = damage * level;
+    this.level = level;
     this.name = name;
     this.dexterityScale = 0.5;
     this.rarity = rarity;
-    this.recountScales();
     this.weight = 5;
+    this.recountScales();
     // public DamageOneEntity(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage)
     //public DamageThreeEntities(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, double firstCoefficient, double secondCoefficient, double thirdCoefficient) {
     this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Point, this.element, true, 0.5));

@@ -11,13 +11,15 @@ import java.util.Scanner;
 
 public class Sword extends Weapon {
 
-  public Sword(int damage, String name, RaritySet rarity) {
+  public Sword(int level, int damage, String name, RaritySet rarity) {
     super(3);
-    this.power = damage;
+    this.power = damage * level;
+    this.level = level;
     this.name = name;
     this.rarity = rarity;
     this.strengthScale = 0.5;
     this.dexterityScale = 0.3;
+    this.weight = 5;
     this.recountScales();
     // public DamageOneEntity(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage)
     // public DamageOneEntityWithCrit(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, int numerator, int divider, double multiplier) {

@@ -13,14 +13,16 @@ import java.util.Scanner;
 
 public class Bow extends ChargableWeapon {
 
-  public Bow(int damage, String name, RaritySet rarity) {
+  public Bow(int level, int damage, String name, RaritySet rarity) {
     super(3);
-    this.power = damage;
+    this.chargesForSkill = new int[3];
+    this.power = damage * level;
+    this.level = level;
     this.name = name;
     this.dexterityScale = 0.5;
     this.rarity = rarity;
-    this.recountScales();
     this.weight = 5;
+    this.recountScales();
     // public DamageOneEntity(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage)
     //public DamageThreeEntities(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, double firstCoefficient, double secondCoefficient, double thirdCoefficient) {
     this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Point, this.element, false, 0.3));

@@ -103,7 +103,7 @@ public class DFSMapGenerator extends MapGenerator {
       rooms[coordinates.y][coordinates.x] = new Oasis(roomPosition, roomsTexturesPack.oasisTexture);
     }
     if (roomType > 0 && roomType < 6) {
-      rooms[coordinates.y][coordinates.x] = new HauntedRoom(roomPosition,
+      rooms[coordinates.y][coordinates.x] = new Room(roomPosition,
           roomsTexturesPack.hauntedRoomTexture);
     }
     if (roomType >= 6 && roomType < 9) {

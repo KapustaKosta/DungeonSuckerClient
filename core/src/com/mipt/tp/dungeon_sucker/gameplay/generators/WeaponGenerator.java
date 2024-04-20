@@ -2,16 +2,13 @@ package com.mipt.tp.dungeon_sucker.gameplay.generators;
 
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
-import com.mipt.tp.dungeon_sucker.gameplay.generators.weaponGenerators.BowGenerator;
-import com.mipt.tp.dungeon_sucker.gameplay.generators.weaponGenerators.ClubGenerator;
-import com.mipt.tp.dungeon_sucker.gameplay.generators.weaponGenerators.DaggerGenerator;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.weaponGenerators.*;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
-import com.mipt.tp.dungeon_sucker.gameplay.generators.weaponGenerators.SwordGenerator;
 
 import java.util.Random;
 
 public class WeaponGenerator {
-  final int AmountOfWeaponTypesInGame = 4;
+  final int AmountOfWeaponTypesInGame = 7;
   // ШАНСЫ ВЫПАДЕНИЯ РЕДКОСТЕЙ:
   // Poor - 20%
   // Common - 45%
@@ -30,6 +27,9 @@ public class WeaponGenerator {
       case 1: return new SwordGenerator().generateSword(rarity, element, level);
       case 2: return new BowGenerator().generateBow(rarity, element, level);
       case 3: return new DaggerGenerator().generateDagger(rarity, element, level);
+      case 4: return new GreatSwordGenerator().generateGreatSword(rarity, element, level);
+      case 5: return new RapierGenerator().generateRapier(rarity, element, level);
+      case 6: return new SpearGenerator().generateSpear(rarity, element, level);
     }
     throw new IndexOutOfBoundsException();
   }

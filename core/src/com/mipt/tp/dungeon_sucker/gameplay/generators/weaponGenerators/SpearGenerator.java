@@ -4,18 +4,18 @@ import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.WeaponTraitsAdder;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer.Dagger;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer.Sword;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer.Spear;
 
-public class DaggerGenerator {
+public class SpearGenerator {
   int DEFAULT_DAMAGE = 3;
 
-  public Dagger generateDagger(RaritySet rarity, ElementSet element, int level) {
+  public Spear generateSpear(RaritySet rarity, ElementSet element, int level) {
     String name = element.name();
-    if(element.name().equals("None")){
+    if (element.name().equals("None")) {
       name = "";
     }
-    Dagger dagger = new Dagger(level, DEFAULT_DAMAGE, rarity.name() + " " +  name + " dagger", rarity);
-    WeaponTraitsAdder.addTrait(dagger);
-    return dagger;
+    Spear spear = new Spear(level, DEFAULT_DAMAGE, rarity.name() + " " + name + " dagger", rarity);
+    WeaponTraitsAdder.addTrait(spear);
+    return spear;
   }
 }

@@ -10,17 +10,17 @@ import java.util.Scanner;
 
 public class Weapon extends Item {
   protected RaritySet rarity;
-  int level;
+  public int level;
   protected ElementSet element;
-  protected int weight;
+  public int weight;
   public Skill[] skills;
   protected int amountOfSkills = 0;
-  protected double strengthScale = 0;
-  protected double dexterityScale = 0;
-  protected double faithScale = 0;
-  protected double intellectScale = 0;
+  public double strengthScale = 0;
+  public double dexterityScale = 0;
+  public double faithScale = 0;
+  public double intellectScale = 0;
   protected double vigorScale = 0;
-  protected int power;
+  public int power;
 
   public Weapon(int numberOfSkills) {
     this.skills = new Skill[numberOfSkills];
@@ -60,5 +60,9 @@ public class Weapon extends Item {
     Scanner in = new Scanner(System.in);
     int index = in.nextInt() - 1;
     return index;
+  }
+
+  public void setName(String s) {
+    this.name = s;
   }
 }

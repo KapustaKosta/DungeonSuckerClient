@@ -8,14 +8,15 @@ import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 public class GreatSword extends Weapon {
-  public GreatSword(int damage, String name, RaritySet rarity) {
+  public GreatSword(int level, int damage, String name, RaritySet rarity) {
     super(3);
-    this.power = damage;
+    this.power = damage * level;
+    this.level = level;
     this.name = name;
     this.strengthScale = 0.8;
     this.rarity = rarity;
-    this.recountScales();
     this.weight = 5;
+    this.recountScales();
     // public DamageOneEntity(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage)
     //public DamageThreeEntities(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, double firstCoefficient, double secondCoefficient, double thirdCoefficient) {
     this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Slash, this.element, true, 0.3));

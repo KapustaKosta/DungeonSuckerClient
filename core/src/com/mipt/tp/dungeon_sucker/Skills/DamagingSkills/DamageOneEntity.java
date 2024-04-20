@@ -28,12 +28,11 @@ public class DamageOneEntity extends DamagingSkill {
       return;
     }
     Scanner in = new Scanner(System.in);
-    HauntedRoom hauntedRoom = (HauntedRoom) room;
     System.out.println("choose enemy to punch");
-    for (int i = 0; i < (hauntedRoom).hostileEntities.length; ++i) {
-      if (hauntedRoom.hostileEntities[i].isAlive) {
-        System.out.println(i + 1 + ": " + ((hauntedRoom.hostileEntities[i])).name + ": "
-            + ((hauntedRoom).hostileEntities[i]).health + " hp");
+    for (int i = 0; i < (room).hostileEntities.length; ++i) {
+      if (room.hostileEntities[i].isAlive) {
+        System.out.println(i + 1 + ": " + ((room.hostileEntities[i])).name + ": "
+            + ((room).hostileEntities[i]).health + " hp");
       }
     }
     int index = in.nextInt();
