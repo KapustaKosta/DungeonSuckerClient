@@ -11,7 +11,9 @@ public class Item {
   public void getObtained(Entity entity){
     this.holder = entity;
     this.holder.items.add(this);
-    this.holder.weight += this.weight;
+    this.holder.baseWeight += this.weight;
+    this.holder.recountWeight();
+    this.holder.makeFictionalMove();
   }
   public void getLost(){
     for(int i = 0; i < this.holder.items.size(); ++i){

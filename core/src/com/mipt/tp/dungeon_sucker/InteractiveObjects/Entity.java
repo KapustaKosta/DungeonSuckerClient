@@ -18,11 +18,13 @@ import java.util.ArrayList;
 
 public class Entity extends InteractiveObject implements Drawable {
   public int experience = 0;
+  public int power;
+  public int baseWeight;
   public int experienceToNextLevel = 10;
   public int experiencePerKill;
   // Базовые статы из РПГ. Ловкость для каких-нибудь рапир, сила для булав, мудрость для магии
   public int vigor; // +hp
-  public int power; // -time per move
+  public int carrying; // -time per move
   public int strength; // +dmg of some weapons
   public int dexterity; // +dmg of some other weapons
   public int intellect; // +dmg of other weapons
@@ -46,11 +48,13 @@ public class Entity extends InteractiveObject implements Drawable {
   public ArrayList<Item> items;
   public ArrayList<Artifact> artifacts;
   public boolean isHostile;
+  private long lastTimeOfStep;
 
   public Entity(int health, int weight, Room place, String name) {
     this.maxHealth = health;
     this.health = health;
     this.weight = weight;
+    this.baseWeight = weight - this.carrying;
     this.place = place;
     this.name = name;
   }
@@ -88,7 +92,13 @@ public class Entity extends InteractiveObject implements Drawable {
   }
 
   public void makeMove() {
+    this.lastTimeOfStep = this.master.orderOfSteps.getFirst().timeOfStep;
+    this.recountWeight();
     this.weapon.recount();
+  }
+
+  public void recountWeight() {
+    this.weight = Math.max(1, this.baseWeight - this.carrying);
   }
 
   public void die() {
@@ -97,7 +107,7 @@ public class Entity extends InteractiveObject implements Drawable {
     this.removeExtraArtifacts();
     if (this.isHostile) {
       this.place.checkHostileAlive();
-      for(int i = 0; i < this.place.amountOfFriendlyEntities; ++i){
+      for (int i = 0; i < this.place.amountOfFriendlyEntities; ++i) {
         this.place.friendlyEntities[i].obtainExp(this.experiencePerKill);
       }
     } else {
@@ -105,7 +115,8 @@ public class Entity extends InteractiveObject implements Drawable {
     }
   }
 
-  public void obtainExp(int experiencePerKill) {return;
+  public void obtainExp(int experiencePerKill) {
+    return;
   }
 
   private void triggerArtifactsByDeath() {
@@ -153,5 +164,15 @@ public class Entity extends InteractiveObject implements Drawable {
 
   public void recountWeapon() {
     this.weapon.recount();
+  }
+
+  public void makeFictionalMove() {
+    for(int i = 0; i < this.master.orderOfSteps.size(); ++i){
+      if(this == this.master.orderOfSteps.get(i).entity){
+        this.master.orderOfSteps.remove(i);
+        break;
+      }
+    }
+    this.master.add(this.lastTimeOfStep, this);
   }
 }

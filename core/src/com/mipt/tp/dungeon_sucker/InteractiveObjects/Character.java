@@ -108,6 +108,7 @@ public class Character extends Entity {
   }
 
   public void makeMove() {
+    super.makeMove();
     if (this.isFighting) {
       Scanner in = new Scanner(System.in);
       System.out.println("wanna try to escape?");
@@ -146,7 +147,7 @@ public class Character extends Entity {
       case 0:
         this.obtainVigor(1);
       case 1:
-        this.obtainPower(1);
+        this.obtainCarrying(1);
       case 2:
         this.obtainStrength(1);
       case 3:
@@ -175,8 +176,8 @@ public class Character extends Entity {
     this.strength += 1;
   }
 
-  private void obtainPower(int i) {
-    this.power += 1;
+  private void obtainCarrying(int i) {
+    this.carrying += 1;
   }
 
   private void obtainVigor(int i) {

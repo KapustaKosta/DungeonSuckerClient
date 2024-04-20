@@ -22,7 +22,9 @@ public class Artifact extends Item {
   }
 
   public void getLost() {
-    this.holder.weight -= this.weight;
+    this.holder.baseWeight -= this.weight;
+    this.holder.recountWeight();
+    this.holder.makeFictionalMove();
     for(int i = 0; i < this.holder.artifacts.size(); ++i){
       if(this == this.holder.artifacts.get(i)){
         this.holder.artifacts.remove(i);
