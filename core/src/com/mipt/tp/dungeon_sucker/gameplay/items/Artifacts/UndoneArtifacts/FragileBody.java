@@ -17,7 +17,6 @@ public class FragileBody extends Artifact {
   }
 
   public void triggerByBeingDamaged(Damage damage) {
-    System.out.println("stinging " + damage.dealer.name);
     if (damage.type == DamageTypeSet.Smash) {
       damage.totalDamage *= 2;
       damage.defaultDamage *= 2;
