@@ -3,10 +3,7 @@ package com.mipt.tp.dungeon_sucker.gameplay.generators.weaponGenerators;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.WeaponTraitsAdder;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer.Club;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer.Sword;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForBoth.Sword;
 
 public class SwordGenerator {
   int DEFAULT_DAMAGE = 3;

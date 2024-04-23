@@ -6,14 +6,16 @@ import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.util.Random;
 import java.util.Scanner;
 
-public class Weapon extends Item {
+public abstract class Weapon extends Item {
   protected RaritySet rarity;
   public int level;
   protected ElementSet element;
   public int weight;
   public Skill[] skills;
+  public Skill[] CreatureSkills;
   protected int amountOfSkills = 0;
   public double strengthScale = 0;
   public double dexterityScale = 0;
@@ -21,9 +23,11 @@ public class Weapon extends Item {
   public double intellectScale = 0;
   protected double vigorScale = 0;
   public int power;
+  private int amountOfCreatureSkills = 0;
 
   public Weapon(int numberOfSkills) {
     this.skills = new Skill[numberOfSkills];
+    this.CreatureSkills = new Skill[numberOfSkills];
   }
 
   public void useSkill(int index, Room room) {
@@ -33,9 +37,20 @@ public class Weapon extends Item {
   public void generateSkill(Skill skill) {
     this.skills[this.amountOfSkills++] = skill;
   }
+  public void generateSkillForCreature(Skill skill){
+    this.CreatureSkills[this.amountOfCreatureSkills++] = skill;
+  }
 
   public void use(Room place) {
-    throw new NotImplementedException();
+  }
+
+  public void useByCreature(Room room) {
+    this.recount();
+    System.out.println("using " + this.name);
+    int index = new Random().nextInt(this.CreatureSkills.length);
+    if (index == 0) {
+      (CreatureSkills[index]).use(room);
+    }
   }
 
   public void recount() {

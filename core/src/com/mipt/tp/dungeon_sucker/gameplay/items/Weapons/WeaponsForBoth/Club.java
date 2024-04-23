@@ -1,5 +1,8 @@
-package com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer;
+package com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForBoth;
 
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills.DamageRandomEnemy;
+import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills.DamageRandomEnemyAndTwoClosest;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
@@ -20,11 +23,22 @@ public class Club extends Weapon {
     this.rarity = rarity;
     this.weight = 5;
     this.recountScales();
-    // public DamageOneEntity(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage)
-    //public DamageThreeEntities(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, double firstCoefficient, double secondCoefficient, double thirdCoefficient) {
     this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Smash, this.element, true, 0.3));
     this.generateSkill(new DamageThreeEntities(this, this.power, DamageTypeSet.Smash, this.element, true, 0.3, 0.5, 1, 0.5));
     this.generateSkill(new DamageThreeEntities(this, this.power, DamageTypeSet.Smash, this.element, true, 0.3, 0.75, 0.5, 0.75));
+  }
+
+  public void getObtained(Entity holder) {
+    super.getObtained(holder);
+    this.generateSkillForCreature(new DamageRandomEnemy(
+        this, this.power, DamageTypeSet.Smash, this.element, true,
+        0.3, this.holder.isHostile));
+    this.generateSkillForCreature(new DamageRandomEnemyAndTwoClosest(
+        this, this.power, DamageTypeSet.Smash, this.element, true,
+        0.3, 0.5, 1, 0.5, this.holder.isHostile));
+    this.generateSkillForCreature(new DamageRandomEnemyAndTwoClosest(
+        this, this.power, DamageTypeSet.Smash, this.element, true,
+        0.3, 0.75, 0.5, 0.75, this.holder.isHostile));
   }
 
   private void recountScales() {

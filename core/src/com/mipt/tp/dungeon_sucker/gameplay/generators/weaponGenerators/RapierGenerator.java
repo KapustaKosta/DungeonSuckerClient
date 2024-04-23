@@ -3,8 +3,7 @@ package com.mipt.tp.dungeon_sucker.gameplay.generators.weaponGenerators;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.WeaponTraitsAdder;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer.Dagger;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer.Rapier;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForBoth.Rapier;
 
 public class RapierGenerator {
   int DEFAULT_DAMAGE = 3;

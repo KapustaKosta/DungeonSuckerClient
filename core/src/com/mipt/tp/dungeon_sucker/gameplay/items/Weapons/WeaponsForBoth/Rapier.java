@@ -1,8 +1,11 @@
-package com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer;
+package com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForBoth;
 
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.DamageOneEntity;
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.DamageOneEntityWithCrit;
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.DamageThreeEntities;
+import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills.DamageOneRandomEnemyWithCrit;
+import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills.DamageRandomEnemy;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
@@ -24,7 +27,16 @@ public class Rapier extends Weapon {
     this.generateSkill(new DamageOneEntityWithCrit(this, this.power, 0.75, DamageTypeSet.Point, this.element, true, 0.5, 1, 3, 2));
     this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Slash, this.element, true, 0.5));
   }
-
+  public void getObtained(Entity holder) {
+    super.getObtained(holder);
+    this.generateSkillForCreature(new DamageRandomEnemy(
+        this, this.power, DamageTypeSet.Point, this.element, true, 0.5, this.holder.isHostile));
+    this.generateSkillForCreature(new DamageOneRandomEnemyWithCrit(
+        this, this.power, 0.75, DamageTypeSet.Point, this.element, true,
+        0.5, 1, 3, 2, this.holder.isHostile));
+    this.generateSkillForCreature(new DamageRandomEnemy(
+        this, this.power, DamageTypeSet.Slash, this.element, true, 0.5, this.holder.isHostile));
+  }
   private void recountScales() {
     if (this.rarity == RaritySet.Poor) {
       this.dexterityScale /= 1.25;

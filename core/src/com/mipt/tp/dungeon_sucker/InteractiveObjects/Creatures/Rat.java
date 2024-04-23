@@ -14,6 +14,7 @@ public class Rat extends Creature {
   public Rat(boolean isHostile, Room place, String name) {
     super(3, 1, 3, isHostile, place, name);
     this.weapon = new RatClaws(this.power, this.isHostile);
+    this.weapon.getObtained(this);
     this.name = name;
     this.experiencePerKill = 3;
     this.description = this.name + ", a rat, that crawls everywhere, may bite you, dealing " + this.power + "of physical damage";
@@ -38,7 +39,7 @@ public class Rat extends Creature {
   public void makeMove() {
     if (this.isSummoned) {
       System.out.println("RAT IS MOVING");
-      this.weapon.use(this.place);
+      this.weapon.useByCreature(this.place);
     }
     super.makeMove();
   }

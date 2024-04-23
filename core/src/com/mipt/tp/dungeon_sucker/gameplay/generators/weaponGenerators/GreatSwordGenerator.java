@@ -3,8 +3,7 @@ package com.mipt.tp.dungeon_sucker.gameplay.generators.weaponGenerators;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.WeaponTraitsAdder;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer.Dagger;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer.GreatSword;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForBoth.GreatSword;
 
 public class GreatSwordGenerator {
   int DEFAULT_DAMAGE = 5;
