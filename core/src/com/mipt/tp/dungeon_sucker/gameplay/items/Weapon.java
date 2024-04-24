@@ -1,50 +1,83 @@
 package com.mipt.tp.dungeon_sucker.gameplay.items;
 
 import com.mipt.tp.dungeon_sucker.gameplay.Skill;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
-import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public class Weapon extends Item {
-  String rarity;
-  int level;
-  protected String element;
-  int weight;
-  protected Skill[] skills;
+import java.util.Random;
+import java.util.Scanner;
+
+public abstract class Weapon extends Item {
+  protected RaritySet rarity;
+  public int level;
+  protected ElementSet element;
+  public int weight;
+  public Skill[] skills;
+  public Skill[] CreatureSkills;
   protected int amountOfSkills = 0;
-  protected double strengthScale;
-  protected double dexterityScale;
-  protected double faithScale;
-  protected double intellectScale;
-  private int effectiveness;
-  private int power;
+  public double strengthScale = 0;
+  public double dexterityScale = 0;
+  public double faithScale = 0;
+  public double intellectScale = 0;
+  protected double vigorScale = 0;
+  public int power;
+  private int amountOfCreatureSkills = 0;
 
   public Weapon(int numberOfSkills) {
     this.skills = new Skill[numberOfSkills];
+    this.CreatureSkills = new Skill[numberOfSkills];
   }
 
   public void useSkill(int index, Room room) {
     this.skills[index].use(room);
   }
 
-  protected void generateSkill(Skill skill) {
+  public void generateSkill(Skill skill) {
     this.skills[this.amountOfSkills++] = skill;
+  }
+  public void generateSkillForCreature(Skill skill){
+    this.CreatureSkills[this.amountOfCreatureSkills++] = skill;
   }
 
   public void use(Room place) {
-    throw new NotImplementedException();
   }
 
-  public void use(HauntedRoom room) {
+  public void useByCreature(Room room) {
+    this.recount();
+    System.out.println("using " + this.name);
+    int index = new Random().nextInt(this.CreatureSkills.length);
+    if (index == 0) {
+      (CreatureSkills[index]).use(room);
+    }
   }
 
   public void recount() {
-    this.effectiveness = (int) (this.power * (this.holder.strength * this.strengthScale
-        + this.holder.dexterity * this.dexterityScale
-        + this.holder.faith * this.faithScale
-        + this.holder.intellect * this.intellectScale + 1));
+    int effectiveness = (int) (this.power * (
+        this.holder.strength * this.strengthScale
+            + this.holder.dexterity * this.dexterityScale
+            + this.holder.faith * this.faithScale
+            + this.holder.intellect * this.intellectScale
+            + this.holder.vigor * this.vigorScale
+            + 1));
     for (int i = 0; i < this.amountOfSkills; ++i) {
-      this.skills[i].setPower(this.effectiveness);
+      this.skills[i].setPower(effectiveness);
     }
+  }
+
+  public int getSkillIndex() {
+    // переписать выбор, когда подкрутите доступ из экрана
+    System.out.println("Choose your skill");
+    for (int i = 0; i < this.skills.length; ++i) {
+      System.out.println(i + 1 + ": " + skills[i].toString());
+    }
+    Scanner in = new Scanner(System.in);
+    int index = in.nextInt() - 1;
+    return index;
+  }
+
+  public void setName(String s) {
+    this.name = s;
   }
 }

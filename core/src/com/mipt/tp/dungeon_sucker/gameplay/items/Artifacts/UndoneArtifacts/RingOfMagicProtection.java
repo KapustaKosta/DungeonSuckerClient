@@ -1,4 +1,4 @@
-package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts;
+package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.UndoneArtifacts;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;

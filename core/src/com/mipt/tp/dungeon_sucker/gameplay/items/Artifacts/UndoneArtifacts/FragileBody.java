@@ -1,6 +1,7 @@
 package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.UndoneArtifacts;
 
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 
 import java.util.Objects;
@@ -15,10 +16,8 @@ public class FragileBody extends Artifact {
     this.name = "Fragile Body";
   }
 
-  @Override
   public void triggerByBeingDamaged(Damage damage) {
-    System.out.println("stinging " + damage.dealer.name);
-    if (Objects.equals(damage.type, "Smash")) {
+    if (damage.type == DamageTypeSet.Smash) {
       damage.totalDamage *= 2;
       damage.defaultDamage *= 2;
       damage.elementDamage *= 2;

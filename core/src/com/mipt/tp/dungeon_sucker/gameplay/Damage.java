@@ -1,18 +1,20 @@
 package com.mipt.tp.dungeon_sucker.gameplay;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 
 public class Damage {
   public Entity dealer; // Чтобы иметь информацию, кто бьет
-  public String type; // Тип урона (колющий, режущий, дробящий, default для заклинаний
-  public String element; // Стихия урона (огонь, свет, яд, лед)
+  public DamageTypeSet type; // Тип урона (колющий, режущий, дробящий, default для заклинаний
+  public ElementSet element; // Стихия урона (огонь, свет, яд, лед)
   public boolean isMelee; // Буквально является ли атака милишной. Если да, то будут срабатывать какие-нибудь шипы, например
   public double percentOfElementDamage; // Какая доля урона наносится
   public int defaultDamage; // значение нестихийного урона
   public int elementDamage; // значение стихийного урона
   public int totalDamage;
 
-  public Damage(Entity dealer, String type, String element, boolean isMelee, double percentOfElementDamage, int totalDamage) {
+  public Damage(Entity dealer, DamageTypeSet type, ElementSet element, boolean isMelee, double percentOfElementDamage, int totalDamage) {
     this.dealer = dealer;
     this.type = type;
     this.element = element;

@@ -4,9 +4,10 @@ import com.mipt.tp.dungeon_sucker.Skills.DamagingSkill;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
-import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 
 import java.util.Scanner;
 
@@ -18,7 +19,7 @@ public class DamageThreeEntities extends DamagingSkill {
   Damage secondDamage;
   Damage thirdDamage;
 
-  public DamageThreeEntities(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, double firstCoefficient, double secondCoefficient, double thirdCoefficient) {
+  public DamageThreeEntities(Weapon weapon, int damage, DamageTypeSet type, ElementSet element, boolean isMelee, double percentOfElementDamage, double firstCoefficient, double secondCoefficient, double thirdCoefficient) {
     this.weapon = weapon;
     this.firstCoefficient = firstCoefficient;
     this.secondCoefficient = secondCoefficient;
@@ -50,11 +51,10 @@ public class DamageThreeEntities extends DamagingSkill {
     Entity[] entities = room.hostileEntities;
     Scanner in = new Scanner(System.in);
     System.out.println("choose enemy to punch");
-    HauntedRoom hauntedRoom = (HauntedRoom) room;
-    for (int i = 0; i < (hauntedRoom).hostileEntities.length; ++i) {
-      if ((hauntedRoom).hostileEntities[i].isAlive) {
-        System.out.println(i + 1 + ": " + ((hauntedRoom).hostileEntities[i]).name + ": "
-            + ((hauntedRoom).hostileEntities[i]).health + " hp");
+    for (int i = 0; i < (room).hostileEntities.length; ++i) {
+      if ((room).hostileEntities[i].isAlive) {
+        System.out.println(i + 1 + ": " + ((room).hostileEntities[i]).name + ": "
+            + ((room).hostileEntities[i]).health + " hp");
       }
     }
     int index = in.nextInt();

@@ -2,7 +2,7 @@ package com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForEnemies.RatClaws;
-import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
+import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 public class Rat extends Creature {
   final int BASE_HEALTH = 3;
@@ -11,32 +11,35 @@ public class Rat extends Creature {
   final int DEX_PER_LVL = 2;
   final int STR_PER_LVL = 1;
   final int VIG_PER_LVL = 1;
-
-  // пофикси
-  public Rat(boolean isHostile, HauntedRoom place, String name) {
+  public Rat(boolean isHostile, Room place, String name) {
     super(3, 1, 3, isHostile, place, name);
-    this.weapon = new RatClaws(this.speed, this.isHostile);
+    this.weapon = new RatClaws(this.power, this.isHostile);
+    this.weapon.getObtained(this);
     this.name = name;
-    this.description = this.name + ", a rat, that crawls everywhere, may bite you, dealing " + this.speed + "of physical damage";
+    this.experiencePerKill = 3;
+    this.description = this.name + ", a rat, that crawls everywhere, may bite you, dealing " + this.power + "of physical damage";
   }
 
-  public Rat(int health, int power, int weight, boolean isHostile, HauntedRoom place) {
+  public Rat(int health, int power, int weight, boolean isHostile, Room place) {
     super(health, power, weight, isHostile, place, "Rat");
-    this.weapon = new RatClaws(this.speed, this.isHostile);
+    this.weapon = new RatClaws(this.power, this.isHostile);
     this.name = "Rat";
-    this.description = this.name + ", that crawls everywhere, may bite you, dealing " + this.speed + "of physical damage";
+    this.experiencePerKill = 3;
+    this.description = this.name + ", that crawls everywhere, may bite you, dealing " + this.power + "of physical damage";
   }
   public void summon(){
     this.strength = this.STR_PER_LVL * this.master.level;
     this.dexterity = this.DEX_PER_LVL * this.master.level;
     this.health = this.BASE_HEALTH + this.VIG_PER_LVL * this.master.level;
+    this.maxHealth = this.health;
+    this.experiencePerKill = (int)(Math.sqrt(this.master.level) * this.experiencePerKill);
     this.weapon.recount();
   }
 
   public void makeMove() {
     if (this.isSummoned) {
       System.out.println("RAT IS MOVING");
-      this.weapon.use(this.place);
+      this.weapon.useByCreature(this.place);
     }
     super.makeMove();
   }

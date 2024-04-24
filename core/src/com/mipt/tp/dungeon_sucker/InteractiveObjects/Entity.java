@@ -11,21 +11,24 @@ import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
-import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Entity extends InteractiveObject implements Drawable {
+  public int experience = 0;
+  public int power;
+  public int baseWeight;
+  public int experienceToNextLevel = 10;
+  public int experiencePerKill;
   // Базовые статы из РПГ. Ловкость для каких-нибудь рапир, сила для булав, мудрость для магии
   public int vigor; // +hp
-  public int speed = 0; // -time per move
-  public int strength = 0; // +dmg of some weapons
-  public int dexterity = 0; // +dmg of some other weapons
-  public int intellect = 0; // +dmg of other weapons
-  public int faith = 0; // you guessed it, +dmg of other weapons
+  public int carrying; // -time per move
+  public int strength; // +dmg of some weapons
+  public int dexterity; // +dmg of some other weapons
+  public int intellect; // +dmg of other weapons
+  public int faith; // you guessed it, +dmg of other weapons
   // +dmg can intersect
   protected Weapon weapon;
   public DungeonMasster master;
@@ -45,11 +48,13 @@ public class Entity extends InteractiveObject implements Drawable {
   public ArrayList<Item> items;
   public ArrayList<Artifact> artifacts;
   public boolean isHostile;
+  private long lastTimeOfStep;
 
-  public Entity(int health, int weight, HauntedRoom place, String name) {
+  public Entity(int health, int weight, Room place, String name) {
     this.maxHealth = health;
     this.health = health;
     this.weight = weight;
+    this.baseWeight = weight - this.carrying;
     this.place = place;
     this.name = name;
   }
@@ -74,55 +79,55 @@ public class Entity extends InteractiveObject implements Drawable {
   }
 
   public void getDamaged(Damage damage) {
-    // триггерятся  артефакты
     damage = damage.copy();
-    for (int i = 0; i < this.artifacts.size(); ++i) {
-      if (this.artifacts.get(i).triggerableByBeingDamaged) {
-        this.artifacts.get(i).triggerByBeingDamaged(damage);
-        // Удаление артефактов после получения урона - кринж. Так делать не надо.
-      }
-    }
-    // Переписать это говно, когда все обсудим
-    String type = damage.type;
+    this.triggerArtifactsByDamage(damage);
     int dmgDealt = damage.totalDamage;
-    if (Objects.equals(type, "Magic")) {
-      dmgDealt = Math.max(0, dmgDealt - magicalArmor);
-    } else {
-      dmgDealt = Math.max(0, dmgDealt - physicalArmor);
-    }
-
     this.health -= dmgDealt;
     System.out.println(this.name + " got damaged. Current health: " + this.health);
     if (this.health <= 0) {
       this.die();
     }
-
-    // Убирает k-разовые артефакты (|N э k)
-    int amountOfArtifactsToRemove = 0;
-    for (int i = 0; i - amountOfArtifactsToRemove < this.artifacts.size(); ++i) {
-      if (this.artifacts.get(i - amountOfArtifactsToRemove).mustBeRemoved) {
-        this.artifacts.get(i - amountOfArtifactsToRemove).getLost();
-        ++amountOfArtifactsToRemove;
-      }
-    }
+    this.removeExtraArtifacts();
     this.weapon.recount();
   }
-  // НАПИСАТЬ ЗАВИСИМОСТЬ ОТ ТИПА УРОНА!!!!!!!!!
 
   public void makeMove() {
+    this.lastTimeOfStep = this.master.orderOfSteps.getFirst().timeOfStep;
+    this.recountWeight();
     this.weapon.recount();
+  }
+
+  public void recountWeight() {
+    this.weight = Math.max(1, this.baseWeight - this.carrying);
   }
 
   public void die() {
     this.isAlive = false;
+    this.triggerArtifactsByDeath();
+    this.removeExtraArtifacts();
+    if (this.isHostile) {
+      this.place.checkHostileAlive();
+      for (int i = 0; i < this.place.amountOfFriendlyEntities; ++i) {
+        this.place.friendlyEntities[i].obtainExp(this.experiencePerKill);
+      }
+    } else {
+      this.place.checkFriendlyAlive();
+    }
+  }
 
+  public void obtainExp(int experiencePerKill) {
+    return;
+  }
+
+  private void triggerArtifactsByDeath() {
     for (int i = 0; i < this.artifacts.size(); ++i) {
       if (this.artifacts.get(i).triggerableByDeath) {
         this.artifacts.get(i).triggerByDeath();
-        // Удаление артефактов после получения урона - кринж. Так делать не надо.
       }
     }
+  }
 
+  private void removeExtraArtifacts() {
     int amountOfArtifactsToRemove = 0;
     for (int i = 0; i - amountOfArtifactsToRemove < this.artifacts.size(); ++i) {
       if (this.artifacts.get(i - amountOfArtifactsToRemove).mustBeRemoved) {
@@ -130,10 +135,13 @@ public class Entity extends InteractiveObject implements Drawable {
         ++amountOfArtifactsToRemove;
       }
     }
-    if (this.isHostile) {
-      this.place.checkHostileAlive();
-    } else {
-      this.place.checkFriendlyAlive();
+  }
+
+  private void triggerArtifactsByDamage(Damage damage) {
+    for (int i = 0; i < this.artifacts.size(); ++i) {
+      if (this.artifacts.get(i).triggerableByBeingDamaged) {
+        this.artifacts.get(i).triggerByBeingDamaged(damage);
+      }
     }
   }
 
@@ -152,5 +160,19 @@ public class Entity extends InteractiveObject implements Drawable {
 
   public void setActiveWeapon(Weapon weapon) {
     this.weapon = weapon;
+  }
+
+  public void recountWeapon() {
+    this.weapon.recount();
+  }
+
+  public void makeFictionalMove() {
+    for(int i = 0; i < this.master.orderOfSteps.size(); ++i){
+      if(this == this.master.orderOfSteps.get(i).entity){
+        this.master.orderOfSteps.remove(i);
+        break;
+      }
+    }
+    this.master.add(this.lastTimeOfStep, this);
   }
 }

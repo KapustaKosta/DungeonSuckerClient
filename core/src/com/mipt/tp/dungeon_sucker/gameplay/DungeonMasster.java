@@ -3,7 +3,7 @@ package com.mipt.tp.dungeon_sucker.gameplay;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Upgrader;
-import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
+import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 import java.util.LinkedList;
 
@@ -14,7 +14,7 @@ public class DungeonMasster {
   public int level = 0;
   public DungeonMasster() {
     this.orderOfSteps = new LinkedList<>();
-    this.add(100, new Upgrader(1, 100, new HauntedRoom(), "GodObject"));
+    this.add(100, new Upgrader(1, 100, new Room(), "GodObject"));
   }
 
   public void add(long timeOfStep, Entity entity) {

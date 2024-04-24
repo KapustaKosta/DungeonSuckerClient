@@ -1,8 +1,6 @@
 package com.mipt.tp.dungeon_sucker.gameplay;
 
-import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
-import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.HauntedRoom;
 
 public class Skill {
   public int lastPower;
