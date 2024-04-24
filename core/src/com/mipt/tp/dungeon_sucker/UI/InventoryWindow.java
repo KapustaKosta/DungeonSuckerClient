@@ -7,12 +7,10 @@ import java.util.ArrayList;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class InventoryWindow extends Window {
-
   private ArrayList<Item> items;
   private int cellsWidth;
   private int cellsHeight;
   private Cell[][] cells;
-
   public InventoryWindow(IntVector2 topLeftPoint,
       IntVector2 bottomRightPoint, int cellsWidth, int cellsHeight) {
     super(topLeftPoint, bottomRightPoint);
