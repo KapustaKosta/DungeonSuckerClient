@@ -3,7 +3,7 @@ package com.mipt.tp.dungeon_sucker.gameplay.generators.weaponGenerators;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.WeaponTraitsAdder;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForPlayer.Bow;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForBoth.Bow;
 
 public class BowGenerator {
   int DEFAULT_DAMAGE = 3;
@@ -13,7 +13,7 @@ public class BowGenerator {
     if (element.name().equals("None")) {
       name = "";
     }
-    Bow bow = new Bow(level, DEFAULT_DAMAGE, rarity.name() + " " + name + " sword", rarity);
+    Bow bow = new Bow(level, DEFAULT_DAMAGE, rarity.name() + " " + name + " bow", rarity);
     WeaponTraitsAdder.addTrait(bow);
     return bow;
   }

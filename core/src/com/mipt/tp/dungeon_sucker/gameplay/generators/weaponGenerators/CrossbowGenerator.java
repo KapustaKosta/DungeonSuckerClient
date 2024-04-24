@@ -3,18 +3,18 @@ package com.mipt.tp.dungeon_sucker.gameplay.generators.weaponGenerators;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.WeaponTraitsAdder;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForBoth.Rapier;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForBoth.Crossbow;
 
-public class RapierGenerator {
+public class CrossbowGenerator {
   int DEFAULT_DAMAGE = 3;
 
-  public Rapier generateRapier(RaritySet rarity, ElementSet element, int level) {
+  public Crossbow generateCrossbow(RaritySet rarity, ElementSet element, int level) {
     String name = element.name();
     if (element.name().equals("None")) {
       name = "";
     }
-    Rapier rapier = new Rapier(level, DEFAULT_DAMAGE, rarity.name() + " " + name + " rapier", rarity);
-    WeaponTraitsAdder.addTrait(rapier);
-    return rapier;
+    Crossbow crossbow = new Crossbow(level, DEFAULT_DAMAGE, rarity.name() + " " + name + " sword", rarity);
+    WeaponTraitsAdder.addTrait(crossbow);
+    return crossbow;
   }
 }

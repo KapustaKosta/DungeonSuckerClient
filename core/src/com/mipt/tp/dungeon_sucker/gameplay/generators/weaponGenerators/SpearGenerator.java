@@ -13,7 +13,7 @@ public class SpearGenerator {
     if (element.name().equals("None")) {
       name = "";
     }
-    Spear spear = new Spear(level, DEFAULT_DAMAGE, rarity.name() + " " + name + " dagger", rarity);
+    Spear spear = new Spear(level, DEFAULT_DAMAGE, rarity.name() + " " + name + " spear", rarity);
     WeaponTraitsAdder.addTrait(spear);
     return spear;
   }

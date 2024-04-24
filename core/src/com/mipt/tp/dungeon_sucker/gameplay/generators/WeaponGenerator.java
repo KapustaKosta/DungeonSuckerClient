@@ -30,6 +30,7 @@ public class WeaponGenerator {
       case 4: return new GreatSwordGenerator().generateGreatSword(rarity, element, level);
       case 5: return new RapierGenerator().generateRapier(rarity, element, level);
       case 6: return new SpearGenerator().generateSpear(rarity, element, level);
+      case 7: return new CrossbowGenerator().generateCrossbow(rarity, element, level);
     }
     throw new IndexOutOfBoundsException();
   }

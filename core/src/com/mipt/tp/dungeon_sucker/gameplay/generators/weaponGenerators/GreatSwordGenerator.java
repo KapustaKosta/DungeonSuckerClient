@@ -13,7 +13,7 @@ public class GreatSwordGenerator {
     if (element.name().equals("None")) {
       name = "";
     }
-    GreatSword greatSword = new GreatSword(level, DEFAULT_DAMAGE, rarity.name() + " " + name + " dagger", rarity);
+    GreatSword greatSword = new GreatSword(level, DEFAULT_DAMAGE, rarity.name() + " " + name + " greatsword", rarity);
     WeaponTraitsAdder.addTrait(greatSword);
     return greatSword;
   }
