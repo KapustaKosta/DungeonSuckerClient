@@ -2,15 +2,20 @@ package com.mipt.tp.dungeon_sucker.gameplay.items;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
+import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 public class Artifact extends Item {
-  public boolean triggerableByBeingDamaged;
+  public boolean triggerableByBeingDamaged = false;
   protected String description;
   protected int effectiveness;
   public boolean mustBeRemoved = false;
   public boolean triggerableByDeath = false;
+  protected boolean triggerableByEnteringRoom = false;
 
   public void triggerByBeingDamaged(Damage damage) {
+  }
+
+  public void triggerByEnteringRoom(Room room) {
   }
 
   public void triggerByDeath() {
@@ -25,8 +30,8 @@ public class Artifact extends Item {
     this.holder.baseWeight -= this.weight;
     this.holder.recountWeight();
     this.holder.makeFictionalMove();
-    for(int i = 0; i < this.holder.artifacts.size(); ++i){
-      if(this == this.holder.artifacts.get(i)){
+    for (int i = 0; i < this.holder.artifacts.size(); ++i) {
+      if (this == this.holder.artifacts.get(i)) {
         this.holder.artifacts.remove(i);
         break;
       }
