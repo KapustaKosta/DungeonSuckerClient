@@ -1,21 +1,21 @@
-package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.UndoneArtifacts;
+package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts;
 
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 
-public class PoisonVulnerability extends Artifact {
-  public PoisonVulnerability() {
+public class LightResistance extends Artifact {
+  public LightResistance() {
     super();
     this.triggerableByBeingDamaged = true;
     this.weight = 0;
     this.effectiveness = 3;
-    this.description = "Poison damage is twice more effective";
-    this.name = "Poison Vulnerability";
+    this.description = "Light damage is twice less effective";
+    this.name = "Light Resistance";
   }
 
   public void triggerByBeingDamaged(Damage damage) {
-    if (damage.element == ElementSet.Poison) {
+    if (damage.element == ElementSet.Light) {
       damage.elementDamage /= 2;
       damage.totalDamage = damage.defaultDamage + damage.elementDamage;
     }

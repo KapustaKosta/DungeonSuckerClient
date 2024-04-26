@@ -17,7 +17,7 @@ public class DamageClosestEnemy extends DamagingSkill {
     this.weapon = weapon;
     this.damage = new Damage(this.weapon.holder, type, element, isMelee, percentOfElementDamage, damage);
     this.isUsedByHostile = isUsedByHostile;
-    this.description = "Deal " + this.damage + " to the closest enemy";
+    this.description = "Deal " + this.damage.totalDamage + " to the closest enemy";
   }
 
   public void use(Room room) {

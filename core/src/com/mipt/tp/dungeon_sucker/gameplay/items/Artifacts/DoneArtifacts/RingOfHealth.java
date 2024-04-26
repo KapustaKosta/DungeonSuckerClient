@@ -16,8 +16,10 @@ public class RingOfHealth extends Artifact {
   public void getObtained(Entity entity) {
     super.getObtained(entity);
     this.holder.maxHealth += this.effectiveness;
-    this.holder.health += this.effectiveness;
-    this.holder.recountWeapon();
+    this.holder.health += this.effectiveness;try {
+      this.holder.recountWeapon();
+    } catch (Exception ignored) {
+    }
   }
 
 

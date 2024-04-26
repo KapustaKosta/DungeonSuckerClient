@@ -18,7 +18,7 @@ public class DamageRandomEnemy extends DamagingSkill {
     this.weapon = weapon;
     this.damage = new Damage(this.weapon.holder, type, element, isMelee, percentOfElementDamage, damage);
     this.isUsedByHostile = isUsedByHostile;
-    this.description = "Deal " + this.damage + " to a random enemy";
+    this.description = "Deal " + this.damage.totalDamage + " to a random enemy";
     this.type = type;
   }
 

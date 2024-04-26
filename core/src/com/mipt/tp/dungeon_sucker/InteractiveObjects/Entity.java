@@ -44,9 +44,9 @@ public class Entity extends InteractiveObject implements Drawable {
   private SpriteBatch batch;
   public int weight;
   public Room place;
-  public String name;
-  public ArrayList<Item> items;
-  public ArrayList<Artifact> artifacts;
+  public String name = " ";
+  public ArrayList<Item> items = new ArrayList<>();
+  public ArrayList<Artifact> artifacts = new ArrayList<>();
   public boolean isHostile;
   private long lastTimeOfStep;
 
@@ -167,12 +167,15 @@ public class Entity extends InteractiveObject implements Drawable {
   }
 
   public void makeFictionalMove() {
-    for(int i = 0; i < this.master.orderOfSteps.size(); ++i){
-      if(this == this.master.orderOfSteps.get(i).entity){
-        this.master.orderOfSteps.remove(i);
-        break;
+    try {
+      for (int i = 0; i < this.master.orderOfSteps.size(); ++i) {
+        if (this == this.master.orderOfSteps.get(i).entity) {
+          this.master.orderOfSteps.remove(i);
+          break;
+        }
       }
+      this.master.add(this.lastTimeOfStep, this);
+    } catch (Exception ignored) {
     }
-    this.master.add(this.lastTimeOfStep, this);
   }
 }

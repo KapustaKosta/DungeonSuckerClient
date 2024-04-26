@@ -1,6 +1,7 @@
 package com.mipt.tp.dungeon_sucker;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Skeleton;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.WeaponGenerator;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts.IronChestplate;
@@ -24,13 +25,14 @@ public class FightTry {
     DM.add(vasya.weight, vasya);
     Creature[] entities = new Creature[4];
     for (int i = 0; i < 4; ++i) {
-      entities[i] = new Rat(
+      entities[i] = new Skeleton(
           true,
           new Room(new IntVector2(), new Texture("room.png"), new Creature[0], DM),
-          "rat" + i);
+          "skeleton" + i);
     }
     Room room = new Room(new IntVector2(), new Texture("room.png"), entities, DM);
     Club club = new Club(1, 10, "club", RaritySet.Common);
+    club.getObtained(vasya);
     vasya.setActiveWeapon(club);
     vasya.moveToRoom(room);
     DM.move();

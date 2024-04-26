@@ -17,7 +17,7 @@ public class DamageFurthestEnemy extends DamagingSkill {
     this.weapon = weapon;
     this.damage = new Damage(this.weapon.holder, type, element, isMelee, percentOfElementDamage, damage);
     this.isUsedByHostile = isUsedByHostile;
-    this.description = "Deal " + this.damage + " to the furthest enemy";
+    this.description = "Deal " + this.damage.totalDamage + " to the furthest enemy";
     this.type = type;
   }
 
