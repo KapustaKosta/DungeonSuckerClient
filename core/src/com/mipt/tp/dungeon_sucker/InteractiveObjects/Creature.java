@@ -11,6 +11,7 @@ public class Creature extends Entity {
     super(health, weight, place, name);
     this.power = power;
     this.isHostile = isHostile;
+    this.isSummoned = false;
   }
 
   public void makeMove() {
@@ -22,7 +23,7 @@ public class Creature extends Entity {
   }
 
   private void summon() {
-    throw new NotImplementedException();
+    this.isSummoned = true;
   }
 
   public void setPlace(Room room) {

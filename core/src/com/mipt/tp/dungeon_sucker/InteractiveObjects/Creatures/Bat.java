@@ -4,29 +4,29 @@ import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForEnemies.BatClaws;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
-public class Rat extends Creature {
+public class Bat extends Creature {
   final int BASE_HEALTH = 3;
   final int BASE_POWER = 1;
   final int BASE_WEIGHT = 3;
   final int DEX_PER_LVL = 2;
   final int STR_PER_LVL = 1;
   final int VIG_PER_LVL = 1;
-  public Rat(boolean isHostile, Room place, String name) {
+  public Bat(boolean isHostile, Room place, String name) {
     super(3, 1, 3, isHostile, place, name);
     this.name = name;
     this.experiencePerKill = 3;
     this.weapon = new BatClaws(this.power);
     this.weapon.getObtained(this);
-    this.description = this.name + ", a rat that crawls everywhere, may bite you, dealing " + this.power + "of physical damage";
+    this.description = this.name + ", basically a winged rat, may also bite you, dealing " + this.power + "of physical damage";
   }
 
-  public Rat(int health, int power, int weight, boolean isHostile, Room place) {
+  public Bat(int health, int power, int weight, boolean isHostile, Room place) {
     super(health, power, weight, isHostile, place, "Rat");
-    this.name = "Rat";
+    this.name = "Bat";
     this.experiencePerKill = 3;
     this.weapon = new BatClaws(this.power);
     this.weapon.getObtained(this);
-    this.description = this.name + ", a rat that crawls everywhere, may bite you, dealing  " + this.power + "of physical damage";
+    this.description = this.name + ", basically a winged rat, may also bite you, dealing " + this.power + "of physical damage";
   }
   public void summon(){
     this.strength = this.STR_PER_LVL * this.master.level;
@@ -41,7 +41,7 @@ public class Rat extends Creature {
 
   public void makeMove() {
     if (this.isSummoned) {
-      System.out.println("RAT IS MOVING");
+      System.out.println("BAT IS MOVING");
       this.weapon.useByCreature(this.place);
     }
     super.makeMove();

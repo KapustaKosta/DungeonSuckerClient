@@ -3,8 +3,8 @@ package com.mipt.tp.dungeon_sucker.gameplay;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 public class Skill {
-  public int lastPower;
-  public int power;
+  public int lastPower = 1;
+  public int power = 1;
   protected String description;
 
   public void use(Room room) {

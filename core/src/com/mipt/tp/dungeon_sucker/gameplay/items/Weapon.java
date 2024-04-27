@@ -13,7 +13,6 @@ public abstract class Weapon extends Item {
   protected RaritySet rarity;
   public int level;
   protected ElementSet element;
-  public int weight;
   public Skill[] skills;
   public Skill[] CreatureSkills;
   protected int amountOfSkills = 0;
@@ -48,7 +47,7 @@ public abstract class Weapon extends Item {
     this.recount();
     System.out.println("using " + this.name);
     int index = new Random().nextInt(this.CreatureSkills.length);
-    if (index == 0) {
+    if (index < this.amountOfCreatureSkills) {
       (CreatureSkills[index]).use(room);
     }
   }

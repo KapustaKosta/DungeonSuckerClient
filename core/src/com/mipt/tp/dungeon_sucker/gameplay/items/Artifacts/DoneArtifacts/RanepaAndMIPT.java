@@ -1,5 +1,6 @@
 package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts;
 
+import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
@@ -11,6 +12,11 @@ public class RanepaAndMIPT extends Artifact {
     this.effectiveness = 3;
     this.description = "Kills you upon entering room with more that two enemies";
     this.name = "Ranepa & MIPT";
+  }
+
+  @Override
+  public void triggerByBeingDamaged(Damage damage) {
+
   }
 
   public void triggerByEnteringRoom(Room room) {

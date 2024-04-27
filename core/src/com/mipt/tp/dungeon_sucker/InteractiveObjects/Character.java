@@ -13,7 +13,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Character extends Entity {
-  boolean isFighting;
   String name = "Hero #-1";
   private int baseHealth;
 
@@ -58,11 +57,13 @@ public class Character extends Entity {
     this.maxHealth = health;
     this.baseHealth = health;
     this.name = name;
+    this.isFighting = false;
   }
 
   public Character(IntVector2 position, Texture texture, Level level, int health, int weight) {
     super(position, texture, level);
     this.health = health;
+    this.isFighting = false;
     this.weight = weight;
   }
 
@@ -115,20 +116,25 @@ public class Character extends Entity {
       System.out.println("1 - YES; 0 - NO");
       int i = in.nextInt();
       if (i == 1) {
-        this.escape();
+        this.tryToEscape();
       } else {
         this.attack();
       }
+    }else{
+      this.askToChangeRoom();
     }
     super.makeMove();
   }
 
-  private void escape() {
+  private void tryToEscape() {
     int effect = new Random().nextInt(2);
     if (effect == 1) {
-      this.moveToRoom(new Room(new IntVector2(), new Texture("room.png"), this.master));
+      this.askToChangeRoom();
     }
     this.weapon.recount();
+  }
+
+  private void askToChangeRoom() {
   }
 
   public void moveToRoom(Room room) {

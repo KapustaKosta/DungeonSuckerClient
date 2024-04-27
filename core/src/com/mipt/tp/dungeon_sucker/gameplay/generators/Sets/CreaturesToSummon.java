@@ -1,5 +1,5 @@
 package com.mipt.tp.dungeon_sucker.gameplay.generators.Sets;
 
-public enum Creatures {
-  Rat,
+public enum CreaturesToSummon {
+  Rat, Bat
 }

@@ -29,6 +29,7 @@ public class Entity extends InteractiveObject implements Drawable {
   public int dexterity; // +dmg of some other weapons
   public int intellect; // +dmg of other weapons
   public int faith; // you guessed it, +dmg of other weapons
+  public boolean isFighting = true;
   // +dmg can intersect
   protected Weapon weapon;
   public DungeonMasster master;
@@ -57,6 +58,8 @@ public class Entity extends InteractiveObject implements Drawable {
     this.baseWeight = weight - this.carrying;
     this.place = place;
     this.name = name;
+    this.master = place.master;
+    this.master.add(0, this);
   }
 
   public Entity(IntVector2 position, Texture texture, Level level) {
@@ -167,9 +170,11 @@ public class Entity extends InteractiveObject implements Drawable {
   }
 
   public void makeFictionalMove() {
+    System.out.println("I wanna break");
     try {
       for (int i = 0; i < this.master.orderOfSteps.size(); ++i) {
         if (this == this.master.orderOfSteps.get(i).entity) {
+          System.out.println("Found ya, " + this.name);
           this.master.orderOfSteps.remove(i);
           break;
         }

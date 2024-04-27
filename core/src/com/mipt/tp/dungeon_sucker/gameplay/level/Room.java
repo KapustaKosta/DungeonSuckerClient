@@ -13,10 +13,10 @@ import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 public class Room implements Drawable {
   Chest chest;
-  DungeonMasster master;
+  public DungeonMasster master;
   protected boolean isCleared;
   public Entity[] friendlyEntities = new Entity[8];
-  public Entity[] hostileEntities = new Entity[1];
+  public Entity[] hostileEntities = new Entity[90];
   private IntVector2 levelPosition;
   private Texture texture;
   private SpriteBatch batch;
@@ -48,9 +48,15 @@ public class Room implements Drawable {
 
   public Room(IntVector2 intVector2, Texture texture, Creature[] creatures, DungeonMasster dm) {
     this(intVector2, texture, dm);
-    this.hostileEntities = creatures;
+    for (Creature creature : creatures) {
+      this.insert(creature, creature.isHostile);
+    }
     this.isCleared = false;
     this.isHaunted = true;
+  }
+
+  public Room(DungeonMasster dungeonMasster) {
+    this.master = dungeonMasster;
   }
 
   @Override
@@ -76,11 +82,31 @@ public class Room implements Drawable {
 
   public void insert(Entity entity, boolean isHostile) {
     if (isHostile) {
+      for (int i = 0; i < this.amountOfHostileEntities; ++i) {
+        if (!this.hostileEntities[i].isAlive) {
+          this.hostileEntities[i] = entity;
+          entity.place = this;
+          this.master.add(0, entity);
+          return;
+        }
+      }
       this.hostileEntities[this.amountOfHostileEntities++] = entity;
+      entity.place = this;
+      this.master.add(0, entity);
       return;
     }
     entity.place = this;
+    for (int i = 0; i < this.amountOfFriendlyEntities; ++i) {
+      if (!this.friendlyEntities[i].isAlive) {
+        this.friendlyEntities[i] = entity;
+        this.master.add(0, entity);
+        return;
+      }
+    }
     this.friendlyEntities[this.amountOfFriendlyEntities++] = entity;
+    this.master.add(0, entity);
+
+    return;
   }
 
   public void checkHostileAlive() {
@@ -93,6 +119,10 @@ public class Room implements Drawable {
     if (battleMustEnd) {
       System.out.println("No enemies in room");
       this.isCleared = true;
+      this.isHaunted = false;
+      for (int i = 0; i < this.amountOfFriendlyEntities; ++i) {
+        this.friendlyEntities[i].isFighting = false;
+      }
     }
   }
 
