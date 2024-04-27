@@ -3,14 +3,15 @@ package com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.WeaponGenerator;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts.FragileBody;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts.PointResistance;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 public class Skeleton extends Creature {
   final int BASE_HEALTH = 3;
   final int BASE_POWER = 1;
   final int BASE_WEIGHT = 3;
-  final int DEX_PER_LVL = 2;
-  final int STR_PER_LVL = 1;
+  final int DEX_PER_LVL = 1;
+  final int STR_PER_LVL = 2;
   final int VIG_PER_LVL = 1;
 
   public Skeleton(boolean isHostile, Room place, String name) {
@@ -18,9 +19,10 @@ public class Skeleton extends Creature {
     this.weapon = new WeaponGenerator().generateWeapon(this.power);
     this.weapon.getObtained(this);
     new FragileBody().getObtained(this);
+    new PointResistance().getObtained(this);
     this.name = name;
     this.experiencePerKill = 3;
-    this.description = this.name + ", a rat, that crawls everywhere, may bite you, dealing " + this.power + "of physical damage";
+    this.description = this.name + ", a skeleton, may hit you with its weapon, " + this.weapon.name;
   }
 
   public Skeleton(int health, int power, int weight, boolean isHostile, Room place) {
@@ -28,9 +30,10 @@ public class Skeleton extends Creature {
     this.weapon = new WeaponGenerator().generateWeapon(this.power);
     this.weapon.getObtained(this);
     new FragileBody().getObtained(this);
+    new PointResistance().getObtained(this);
     this.name = "Skeleton";
     this.experiencePerKill = 3;
-    this.description = this.name + ", that crawls everywhere, may bite you, dealing " + this.power + "of physical damage";
+    this.description = this.name + ", a skeleton, may hit you with its weapon, " + this.weapon.name;
   }
 
   public void summon() {
@@ -44,7 +47,7 @@ public class Skeleton extends Creature {
 
   public void makeMove() {
     if (this.isSummoned) {
-      System.out.println("RAT IS MOVING");
+      System.out.println("Skeleton attacks");
       this.weapon.useByCreature(this.place);
     }
     super.makeMove();

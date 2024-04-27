@@ -19,27 +19,27 @@ public class Character extends Entity {
 
   public void getInput() {
     if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
-      if (level.canIGoTo(levelPosition.y + 1, levelPosition.x)) {
+      if (location.canIGoTo(levelPosition.y + 1, levelPosition.x)) {
         levelPosition.y += 1;
         updateRealPosition();
       }
 
     }
     if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
-      if (level.canIGoTo(levelPosition.y, levelPosition.x + 1)) {
+      if (location.canIGoTo(levelPosition.y, levelPosition.x + 1)) {
         levelPosition.x += 1;
         updateRealPosition();
       }
     }
     if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
-      if (level.canIGoTo(levelPosition.y, levelPosition.x - 1)) {
+      if (location.canIGoTo(levelPosition.y, levelPosition.x - 1)) {
         levelPosition.x -= 1;
         updateRealPosition();
       }
 
     }
     if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-      if (level.canIGoTo(levelPosition.y - 1, levelPosition.x)) {
+      if (location.canIGoTo(levelPosition.y - 1, levelPosition.x)) {
         levelPosition.y -= 1;
         updateRealPosition();
       }

@@ -39,7 +39,7 @@ public class Entity extends InteractiveObject implements Drawable {
   public boolean isAlive = true;
   protected IntVector2 levelPosition;
   protected Vector2 position;
-  protected Level level;
+  protected Level location;
   private Texture texture;
   private SpriteBatch batch;
   public int weight;
@@ -64,7 +64,7 @@ public class Entity extends InteractiveObject implements Drawable {
     this.position = new Vector2(position.x * Constants.cellSize, position.y * Constants.cellSize);
     this.texture = texture;
     this.batch = new SpriteBatch();
-    this.level = level;
+    this.location = level;
   }
 
   @Override
@@ -177,5 +177,9 @@ public class Entity extends InteractiveObject implements Drawable {
       this.master.add(this.lastTimeOfStep, this);
     } catch (Exception ignored) {
     }
+  }
+
+  public void heal(int power) {
+    this.health = Math.min(this.health + this.power, this.maxHealth);
   }
 }
