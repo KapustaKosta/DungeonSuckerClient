@@ -1,6 +1,7 @@
 package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 
 public class RingOfMagicProtection extends Artifact {
@@ -9,6 +10,11 @@ public class RingOfMagicProtection extends Artifact {
   public RingOfMagicProtection(){
     this.weight = 2;
     this.name = "Ring of MAGIC protection; weight = " + this.weight;
+  }
+
+  @Override
+  public void triggerByBeingDamaged(Damage damage) {
+
   }
 
   public void getObtained(Entity entity) {

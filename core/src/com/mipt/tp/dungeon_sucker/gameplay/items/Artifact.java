@@ -4,16 +4,15 @@ import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
-public class Artifact extends Item {
-  public boolean triggerableByBeingDamaged = false;
+public abstract class Artifact extends Item {
   protected String description;
   protected int effectiveness;
   public boolean mustBeRemoved = false;
   public boolean triggerableByDeath = false;
   protected boolean triggerableByEnteringRoom = false;
+  public boolean triggerableByBeingDamaged = false;
 
-  public void triggerByBeingDamaged(Damage damage) {
-  }
+  public abstract void triggerByBeingDamaged(Damage damage);
 
   public void triggerByEnteringRoom(Room room) {
   }

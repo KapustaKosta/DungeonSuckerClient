@@ -1,6 +1,7 @@
 package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 
 public class IronChestplate extends Artifact {
@@ -16,6 +17,11 @@ public class IronChestplate extends Artifact {
       this.holder.recountWeapon();
     } catch (Exception ignored) {
     }
+  }
+
+  @Override
+  public void triggerByBeingDamaged(Damage damage) {
+
   }
 
   public void getObtained(Entity entity) {
