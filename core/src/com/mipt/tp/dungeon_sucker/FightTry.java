@@ -2,6 +2,7 @@ package com.mipt.tp.dungeon_sucker;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Skeleton;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Slime;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Vampire;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.WeaponGenerator;
@@ -27,18 +28,16 @@ public class FightTry {
     DM.add(vasya.weight, vasya);//  public Vampire(int health, int power, int weight, boolean isHostile, Room place) {
     Creature[] entities = new Creature[1];
     for (int i = 0; i < 1; ++i) {
-      entities[i] = new Vampire(9999, 1, 1,
+      entities[i] = new Slime(6, 1, 1,
           true,
-          new Room(new IntVector2(), new Texture("room.png"), new Creature[0], DM));
+          new Room(new IntVector2(), new Texture("room.png"), new Creature[0], DM), 3);
     }
     Room room = new Room(new IntVector2(), new Texture("room.png"), entities, DM);
-    Club club = new Club(1, 10, "club", RaritySet.Common);
+    Club club = new Club(1, 60, "club", RaritySet.Common);
     club.getObtained(vasya);
     vasya.setActiveWeapon(club);
     vasya.weight = 1000;
     vasya.moveToRoom(room);
-    System.out.println(entities[0].weight + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    System.out.println(room.amountOfFriendlyEntities + " " + room.amountOfHostileEntities);
     DM.move();
   }
 

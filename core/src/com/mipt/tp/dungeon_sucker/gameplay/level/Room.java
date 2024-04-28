@@ -90,9 +90,11 @@ public class Room implements Drawable {
           return;
         }
       }
-      this.hostileEntities[this.amountOfHostileEntities++] = entity;
-      entity.place = this;
-      this.master.add(0, entity);
+      if (this.amountOfHostileEntities < this.hostileEntities.length) {
+        this.hostileEntities[this.amountOfHostileEntities++] = entity;
+        entity.place = this;
+        this.master.add(0, entity);
+      }
       return;
     }
     entity.place = this;
@@ -103,10 +105,10 @@ public class Room implements Drawable {
         return;
       }
     }
-    this.friendlyEntities[this.amountOfFriendlyEntities++] = entity;
-    this.master.add(0, entity);
-
-    return;
+    if (this.amountOfFriendlyEntities < this.friendlyEntities.length) {
+      this.friendlyEntities[this.amountOfFriendlyEntities++] = entity;
+      this.master.add(0, entity);
+    } 
   }
 
   public void checkHostileAlive() {
