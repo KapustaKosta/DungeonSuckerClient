@@ -28,9 +28,9 @@ public class FightTry {
     DM.add(vasya.weight, vasya);//  public Vampire(int health, int power, int weight, boolean isHostile, Room place) {
     Creature[] entities = new Creature[1];
     for (int i = 0; i < 1; ++i) {
-      entities[i] = new Rat(6, 1, 1,
+      entities[i] = new Slime(6, 1, 1,
           true,
-          new Room(new IntVector2(), new Texture("room.png"), new Creature[0], DM));
+          new Room(new IntVector2(), new Texture("room.png"), new Creature[0], DM), 3);
     }
     Room room = new Room(new IntVector2(), new Texture("room.png"), entities, DM);
     room.threatLevel = 3;

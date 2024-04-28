@@ -26,13 +26,13 @@ public class DamageTwoEntities extends DamagingSkill {
         this.damage.totalDamage * this.secondCoefficient + " damage to enemy right after him";
     this.type = type;
     this.firstDamage = this.damage.copy();
-    this.firstDamage.totalDamage = (int)(this.firstCoefficient * this.firstDamage.totalDamage);
-    this.firstDamage.defaultDamage = (int)(this.firstCoefficient * this.firstDamage.defaultDamage);
-    this.firstDamage.elementDamage = (int)(this.firstCoefficient * this.firstDamage.elementDamage);
+    this.firstDamage.totalDamage = (int) (this.firstCoefficient * this.firstDamage.totalDamage);
+    this.firstDamage.defaultDamage = (int) (this.firstCoefficient * this.firstDamage.defaultDamage);
+    this.firstDamage.elementDamage = (int) (this.firstCoefficient * this.firstDamage.elementDamage);
     this.secondDamage = this.damage.copy();
-    this.secondDamage.totalDamage = (int)(this.secondCoefficient * this.secondDamage.totalDamage);
-    this.secondDamage.defaultDamage = (int)(this.secondCoefficient * this.secondDamage.defaultDamage);
-    this.secondDamage.elementDamage = (int)(this.secondCoefficient * this.secondDamage.elementDamage);
+    this.secondDamage.totalDamage = (int) (this.secondCoefficient * this.secondDamage.totalDamage);
+    this.secondDamage.defaultDamage = (int) (this.secondCoefficient * this.secondDamage.defaultDamage);
+    this.secondDamage.elementDamage = (int) (this.secondCoefficient * this.secondDamage.elementDamage);
   }
 
   public void use(Room room) {
@@ -59,16 +59,28 @@ public class DamageTwoEntities extends DamagingSkill {
     if (index <= 0) {
       entities[0].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
       if (entities.length > 1) {
-        entities[1].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
+        if (entities[1] != null) {
+          entities[1].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
+        }
       }
     } else if (index < entities.length - 1) {
-      entities[index - 1].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
-      entities[index].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
+      if (entities[index - 1] != null) {
+        entities[index - 1].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+      }
+      if (entities[index] != null) {
+        entities[index].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
+      }
     } else if (index == entities.length - 1) {
-      entities[index - 1].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
-      entities[index].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
+      if (entities[index - 1] != null) {
+        entities[index - 1].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+      }
+      if (entities[index] != null) {
+        entities[index].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
+      }
     } else if (index > entities.length - 1) {
-      entities[index].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+      if (entities[index] != null) {
+        entities[index].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+      }
     }
     super.use(room);
   }

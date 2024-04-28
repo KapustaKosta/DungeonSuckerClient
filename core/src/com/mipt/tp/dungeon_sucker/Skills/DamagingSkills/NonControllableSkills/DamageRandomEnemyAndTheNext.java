@@ -38,7 +38,8 @@ public class DamageRandomEnemyAndTheNext extends DamagingSkill {
     this.secondDamage.elementDamage = (int) (this.secondCoefficient * this.secondDamage.elementDamage);
   }
 
-  public void use(Room room) {System.out.println("choosing guy to punch");
+  public void use(Room room) {
+    System.out.println("choosing guy to punch");
     Entity[] enemies;
     int maxIndex;
     if (this.isUsedByHostile) {
@@ -56,9 +57,11 @@ public class DamageRandomEnemyAndTheNext extends DamagingSkill {
       index = new Random().nextInt(maxIndex);
       enemy = enemies[index];
     }
-    if(index > 0){
-      Entity enemyBefore = enemies[index-1];
-      enemyBefore.getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+    if (index > 0) {
+      Entity enemyBefore = enemies[index - 1];
+      if (enemyBefore != null) {
+        enemyBefore.getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+      }
     }
     System.out.println("punching " + enemy.name);
     enemy.getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));

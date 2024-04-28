@@ -30,17 +30,17 @@ public class DamageThreeEntities extends DamagingSkill {
         this.damage.totalDamage * this.secondCoefficient + " damage to enemy right after him";
     this.type = type;
     this.firstDamage = this.damage.copy();
-    this.firstDamage.totalDamage = (int)(this.firstCoefficient * this.firstDamage.totalDamage);
-    this.firstDamage.defaultDamage = (int)(this.firstCoefficient * this.firstDamage.defaultDamage);
-    this.firstDamage.elementDamage = (int)(this.firstCoefficient * this.firstDamage.elementDamage);
+    this.firstDamage.totalDamage = (int) (this.firstCoefficient * this.firstDamage.totalDamage);
+    this.firstDamage.defaultDamage = (int) (this.firstCoefficient * this.firstDamage.defaultDamage);
+    this.firstDamage.elementDamage = (int) (this.firstCoefficient * this.firstDamage.elementDamage);
     this.secondDamage = this.damage.copy();
-    this.secondDamage.totalDamage = (int)(this.secondCoefficient * this.secondDamage.totalDamage);
-    this.secondDamage.defaultDamage = (int)(this.secondCoefficient * this.secondDamage.defaultDamage);
-    this.secondDamage.elementDamage = (int)(this.secondCoefficient * this.secondDamage.elementDamage);
+    this.secondDamage.totalDamage = (int) (this.secondCoefficient * this.secondDamage.totalDamage);
+    this.secondDamage.defaultDamage = (int) (this.secondCoefficient * this.secondDamage.defaultDamage);
+    this.secondDamage.elementDamage = (int) (this.secondCoefficient * this.secondDamage.elementDamage);
     this.thirdDamage = this.damage.copy();
-    this.thirdDamage.totalDamage = (int)(this.thirdCoefficient  * this.thirdDamage.totalDamage);
-    this.thirdDamage.defaultDamage = (int)(this.thirdCoefficient * this.thirdDamage.defaultDamage);
-    this.thirdDamage.elementDamage = (int)(this.thirdCoefficient * this.thirdDamage.elementDamage);
+    this.thirdDamage.totalDamage = (int) (this.thirdCoefficient * this.thirdDamage.totalDamage);
+    this.thirdDamage.defaultDamage = (int) (this.thirdCoefficient * this.thirdDamage.defaultDamage);
+    this.thirdDamage.elementDamage = (int) (this.thirdCoefficient * this.thirdDamage.elementDamage);
 
   }
 
@@ -59,26 +59,40 @@ public class DamageThreeEntities extends DamagingSkill {
         }
       }
     }
-    int index = in.nextInt()-1;
+    int index = in.nextInt() - 1;
     while (!entities[Math.min(Math.max(index, 0), entities.length - 1)].isAlive) {
       System.out.println("do not play with dead!");
       System.out.println("choose another one");
       index = in.nextInt();
     }
     if (index <= 0) {
-      entities[0].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
-      if (entities.length > 1) {
+      if (entities[0] != null) {
+        entities[0].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
+      }
+      if (entities.length > 1 && entities[1] != null) {
         entities[1].getDamaged(new Damage(this.thirdDamage, this.lastPower, this.power));
       }
     } else if (index < entities.length - 1) {
-      entities[index - 1].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
-      entities[index].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
-      entities[index + 1].getDamaged(new Damage(this.thirdDamage, this.lastPower, this.power));
+      if (entities[index - 1] != null) {
+        entities[index - 1].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+      }
+      if (entities[index] != null) {
+        entities[index].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
+      }
+      if (entities[index + 1] != null) {
+        entities[index + 1].getDamaged(new Damage(this.thirdDamage, this.lastPower, this.power));
+      }
     } else if (index == entities.length - 1) {
-      entities[index - 1].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
-      entities[index].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
+      if (entities[index - 1] != null) {
+        entities[index - 1].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+      }
+      if (entities[index] != null) {
+        entities[index].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
+      }
     } else if (index > entities.length - 1) {
-      entities[entities.length - 1].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+      if (entities[index - 1] != null) {
+        entities[entities.length - 1].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+      }
     }
     super.use(room);
   }
