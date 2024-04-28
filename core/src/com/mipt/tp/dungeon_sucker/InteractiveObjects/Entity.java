@@ -50,6 +50,7 @@ public class Entity extends InteractiveObject implements Drawable {
   public ArrayList<Artifact> artifacts = new ArrayList<>();
   public boolean isHostile;
   private long lastTimeOfStep;
+  public boolean isCharacter = false;
 
   public Entity(int health, int weight, Room place, String name) {
     this.maxHealth = health;

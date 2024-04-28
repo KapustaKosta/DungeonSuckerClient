@@ -48,10 +48,12 @@ public class Character extends Entity {
 
   public Character() {
     super(new IntVector2(), null, null);
+    this.isCharacter = true;
   }
 
   public Character(int weight, int health, String name, DungeonMasster DM) {
     super(health, weight, new Room(new IntVector2(), new Texture("room.png"), new Creature[0], DM), name);
+    this.isCharacter = true;
     this.weight = weight;
     this.health = health;
     this.maxHealth = health;
@@ -62,6 +64,7 @@ public class Character extends Entity {
 
   public Character(IntVector2 position, Texture texture, Level level, int health, int weight) {
     super(position, texture, level);
+    this.isCharacter = true;
     this.health = health;
     this.isFighting = false;
     this.weight = weight;
@@ -109,9 +112,9 @@ public class Character extends Entity {
   }
 
   public void makeMove() {
-    super.makeMove();
+    super.makeFictionalMove();
+    Scanner in = new Scanner(System.in);
     if (this.isFighting) {
-      Scanner in = new Scanner(System.in);
       System.out.println("wanna try to escape?");
       System.out.println("1 - YES; 0 - NO");
       int i = in.nextInt();
@@ -120,10 +123,23 @@ public class Character extends Entity {
       } else {
         this.attack();
       }
-    }else{
-      this.askToChangeRoom();
+    } else if (this.place.threatLevel > 0) {
+      System.out.println("what you wanna do?");
+      System.out.println("1 - use some weaponSkill, 2 - open room's chest, 3 - move to another room");
+      int i = in.nextInt();
+      if (i == 1) {
+        this.attack();
+      } else if (i == 2) {
+        this.interractWithChest();
+      } else {
+        this.askToChangeRoom();
+      }
     }
     super.makeMove();
+  }
+
+  private void interractWithChest() {
+    this.place.chest.getInteracted(this);
   }
 
   private void tryToEscape() {

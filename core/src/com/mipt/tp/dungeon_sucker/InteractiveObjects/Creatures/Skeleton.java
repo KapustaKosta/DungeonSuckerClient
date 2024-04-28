@@ -2,8 +2,8 @@ package com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.WeaponGenerator;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts.FragileBody;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts.PointResistance;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.FragileBody;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth.PointResistance;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 public class Skeleton extends Creature {

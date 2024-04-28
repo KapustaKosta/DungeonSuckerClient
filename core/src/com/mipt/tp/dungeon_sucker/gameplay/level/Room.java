@@ -7,12 +7,14 @@ import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mipt.tp.dungeon_sucker.UI.Drawable;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.ArtifactGenerator;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.WeaponGenerator;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
 import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 public class Room implements Drawable {
-  Chest chest;
+  public Chest chest = new Chest(9, this);
   public DungeonMasster master;
   protected boolean isCleared;
   public Entity[] friendlyEntities = new Entity[8];
@@ -26,6 +28,7 @@ public class Room implements Drawable {
 
   protected boolean isLocked = false;
   public int level;
+  public int threatLevel = 0; // 0 - just a room, 1 - fighting encounter, 2 - elite encounter, 3 - Boss encounter
 
   public Room(IntVector2 levelPosition, Texture texture) {
     this.levelPosition = levelPosition;
@@ -108,7 +111,7 @@ public class Room implements Drawable {
     if (this.amountOfFriendlyEntities < this.friendlyEntities.length) {
       this.friendlyEntities[this.amountOfFriendlyEntities++] = entity;
       this.master.add(0, entity);
-    } 
+    }
   }
 
   public void checkHostileAlive() {
@@ -122,6 +125,7 @@ public class Room implements Drawable {
       System.out.println("No enemies in room");
       this.isCleared = true;
       this.isHaunted = false;
+      this.addItemToChest(this.threatLevel);
       for (int i = 0; i < this.amountOfFriendlyEntities; ++i) {
         this.friendlyEntities[i].isFighting = false;
       }
@@ -137,6 +141,31 @@ public class Room implements Drawable {
     }
     if (battleMustEnd) {
       System.out.println("Room was taken by evil");
+    }
+  }
+
+  public void addItemToChest(int threatLevel) {
+    switch (threatLevel) {
+      case 0:
+        return;
+      case 1: {
+        chest.add(new WeaponGenerator().generateWeapon(this.level));
+        return;
+      }
+      case 2: {
+        for (int i = 0; i < 3; ++i) {
+          chest.add(new WeaponGenerator().generateWeapon(this.level));
+        }
+        return;
+      }
+      case 3:{
+        for (int i = 0; i < 4; ++i) {
+          chest.add(new WeaponGenerator().generateWeapon(this.level));
+        }for (int i = 0; i < 4; ++i) {
+          chest.add(new ArtifactGenerator().generateArtifact());
+        }
+        return;
+      }
     }
   }
 

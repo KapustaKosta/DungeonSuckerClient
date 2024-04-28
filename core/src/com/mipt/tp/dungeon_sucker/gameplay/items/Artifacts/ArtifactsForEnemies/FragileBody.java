@@ -1,4 +1,4 @@
-package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts;
+package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies;
 
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
