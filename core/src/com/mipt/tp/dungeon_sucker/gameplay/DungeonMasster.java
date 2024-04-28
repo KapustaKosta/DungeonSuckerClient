@@ -38,9 +38,9 @@ public class DungeonMasster {
     }
     for (int i = 0; i < this.orderOfSteps.size() - 1; ++i) {
       if ((this.orderOfSteps.get(i).timeOfStep <= timeOfStep
-          && this.orderOfSteps.get(i + 1).timeOfStep > timeOfStep)||
+          && this.orderOfSteps.get(i + 1).timeOfStep > timeOfStep) ||
           (this.orderOfSteps.get(i).timeOfStep <= timeOfStep
-          && this.orderOfSteps.get(i + 1).timeOfStep == timeOfStep && entity.isCharacter)) {
+              && this.orderOfSteps.get(i + 1).timeOfStep == timeOfStep && entity.isCharacter)) {
         this.orderOfSteps.add(i + 1, new StepOrder(timeOfStep, entity));
         return;
       }

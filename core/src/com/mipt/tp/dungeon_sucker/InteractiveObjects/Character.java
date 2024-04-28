@@ -134,6 +134,15 @@ public class Character extends Entity {
       } else {
         this.askToChangeRoom();
       }
+    }else{
+      System.out.println("what you wanna do?");
+      System.out.println("1 - use some weaponSkill, 2 - move to another room");
+      int i = in.nextInt();
+      if (i == 1) {
+        this.attack();
+      } else {
+        this.askToChangeRoom();
+      }
     }
     super.makeMove();
   }

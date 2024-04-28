@@ -14,7 +14,7 @@ import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 public class Room implements Drawable {
-  public Chest chest = new Chest(9, this);
+  public Chest chest = new Chest(0, this);
   public DungeonMasster master;
   protected boolean isCleared;
   public Entity[] friendlyEntities = new Entity[8];
@@ -119,6 +119,7 @@ public class Room implements Drawable {
     for (int i = 0; i < this.amountOfHostileEntities; ++i) {
       if (this.hostileEntities[i].isAlive) {
         battleMustEnd = false;
+        System.out.println("Battle shall continue");
       }
     }
     if (battleMustEnd) {

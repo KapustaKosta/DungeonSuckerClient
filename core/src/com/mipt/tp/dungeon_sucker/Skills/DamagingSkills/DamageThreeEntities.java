@@ -59,8 +59,8 @@ public class DamageThreeEntities extends DamagingSkill {
         }
       }
     }
-    int index = in.nextInt();
-    while (!entities[Math.min(Math.max(index - 1, 0), entities.length - 1)].isAlive) {
+    int index = in.nextInt()-1;
+    while (!entities[Math.min(Math.max(index, 0), entities.length - 1)].isAlive) {
       System.out.println("do not play with dead!");
       System.out.println("choose another one");
       index = in.nextInt();
@@ -78,7 +78,7 @@ public class DamageThreeEntities extends DamagingSkill {
       entities[index - 1].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
       entities[index].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
     } else if (index > entities.length - 1) {
-      entities[index].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+      entities[entities.length - 1].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
     }
     super.use(room);
   }

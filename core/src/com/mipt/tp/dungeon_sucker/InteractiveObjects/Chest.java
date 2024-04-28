@@ -15,12 +15,12 @@ public class Chest extends InteractiveObject{
     this.inventory  = new LinkedList<>();
     for(int i = 0; i < numberOfItems; ++i){
       this.inventory.addLast(new ItemGenerator().generateItem(this.room.level));
-    }this.description = "chest, full of precious items (or not)\n Contains: ";
+    }this.description = "chest, full of precious items (or not)\n Contains:\n";
   }
 
   public void add(Item item) {
     this.inventory.addLast(item);
-    this.description = this.description + item.name + " ";
+    this.description = this.description + item.name + " \n";
   }
   public void extractItem(int index){
     this.inventory.remove(index);

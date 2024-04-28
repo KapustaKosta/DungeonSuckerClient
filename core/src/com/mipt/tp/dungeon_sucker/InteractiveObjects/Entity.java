@@ -171,11 +171,9 @@ public class Entity extends InteractiveObject implements Drawable {
   }
 
   public void makeFictionalMove() {
-    System.out.println("I wanna break");
     try {
       for (int i = 0; i < this.master.orderOfSteps.size(); ++i) {
         if (this == this.master.orderOfSteps.get(i).entity) {
-          System.out.println("Found ya, " + this.name);
           this.master.orderOfSteps.remove(i);
           break;
         }
