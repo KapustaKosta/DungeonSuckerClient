@@ -30,7 +30,7 @@ public class DamageRandomEntity extends DamagingSkill {
     }
     int index = new Random().nextInt(maxIndex);
     Entity enemy = enemies[index];
-    while (!enemy.isAlive) {
+    while (enemy == null || !enemy.isAlive) {
       index = new Random().nextInt(maxIndex);
       enemy = enemies[index];
     }

@@ -159,10 +159,11 @@ public class Room implements Drawable {
         }
         return;
       }
-      case 3:{
+      case 3: {
         for (int i = 0; i < 4; ++i) {
           chest.add(new WeaponGenerator().generateWeapon(this.level));
-        }for (int i = 0; i < 4; ++i) {
+        }
+        for (int i = 0; i < 4; ++i) {
           chest.add(new ArtifactGenerator().generateArtifact());
         }
         return;
@@ -172,5 +173,18 @@ public class Room implements Drawable {
 
   public void addItemToChest(Item item) {
     this.chest.add(item);
+  }
+
+  public void clearCorpses() {
+    for (int i = 0; i < this.friendlyEntities.length; ++i) {
+      if (this.friendlyEntities[i] != null && !this.friendlyEntities[i].isAlive) {
+        this.friendlyEntities[i] = null;
+      }
+    }
+    for (int i = 0; i < this.hostileEntities.length; ++i) {
+      if (this.hostileEntities[i] != null && !this.hostileEntities[i].isAlive) {
+        this.hostileEntities[i] = null;
+      }
+    }
   }
 }

@@ -60,7 +60,7 @@ public class DamageThreeEntities extends DamagingSkill {
       }
     }
     int index = in.nextInt() - 1;
-    while (!entities[Math.min(Math.max(index, 0), entities.length - 1)].isAlive) {
+    while (entities[Math.min(Math.max(index - 1, 0), entities.length - 1)] == null || !entities[Math.min(Math.max(index - 1, 0), entities.length - 1)].isAlive) {
       System.out.println("do not play with dead!");
       System.out.println("choose another one");
       index = in.nextInt();

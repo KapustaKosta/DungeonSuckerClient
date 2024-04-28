@@ -12,6 +12,7 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import java.util.Arrays;
 
 public class DamageFurthestEnemy extends DamagingSkill {
+  // Todo: rework choosing who to damage.
   boolean isUsedByHostile;
   public DamageFurthestEnemy(Weapon weapon, int damage, DamageTypeSet type, ElementSet element, boolean isMelee, double percentOfElementDamage, boolean isUsedByHostile) {
     this.weapon = weapon;
