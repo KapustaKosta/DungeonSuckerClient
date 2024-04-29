@@ -121,7 +121,7 @@ public class Room implements Drawable {
   public void checkHostileAlive() {
     boolean battleMustEnd = true;
     for (int i = 0; i < this.amountOfHostileEntities; ++i) {
-      if (this.hostileEntities[i].isAlive) {
+      if (this.hostileEntities[i] != null && this.hostileEntities[i].isAlive) {
         battleMustEnd = false;
         System.out.println("Battle shall continue");
       }
