@@ -189,4 +189,8 @@ public class Entity extends InteractiveObject implements Drawable {
   public void heal(int power) {
     this.health = Math.min(this.health + this.power, this.maxHealth);
   }
+
+  public int startMove() {
+    return -1;
+  }
 }

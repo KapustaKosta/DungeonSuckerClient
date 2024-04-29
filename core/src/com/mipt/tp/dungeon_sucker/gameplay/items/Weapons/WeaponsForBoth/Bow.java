@@ -4,17 +4,14 @@ import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.Skills.ChargeWeapon;
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.DamageOneEntity;
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.DamageThreeEntities;
-import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills.DamageOneRandomEnemyWithCrit;
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills.DamageRandomEnemy;
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills.DamageRandomEnemyAndTwoClosest;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.ChargableWeapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 import java.util.Random;
-import java.util.Scanner;
 
 public class Bow extends ChargableWeapon {
 
@@ -80,7 +77,7 @@ public class Bow extends ChargableWeapon {
     this.skills[index].use(room);
   }
 
-  public void useByCreature(Room room) {
+  public void useByCreature(Room room, int indexOfSkillToBeUsed) {
     this.recount();
     int index = new Random().nextInt(this.skills.length);
     System.out.println("Choosing your skill");

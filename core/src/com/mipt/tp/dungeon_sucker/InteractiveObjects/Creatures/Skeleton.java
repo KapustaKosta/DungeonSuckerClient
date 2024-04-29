@@ -6,6 +6,8 @@ import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.F
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth.PointResistance;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
+import java.util.Random;
+
 public class Skeleton extends Creature {
   final int BASE_HEALTH = 3;
   final int BASE_POWER = 1;
@@ -44,11 +46,15 @@ public class Skeleton extends Creature {
     this.experiencePerKill = (int) (Math.sqrt(this.master.level) * this.experiencePerKill);
     this.weapon.recount();
   }
-
+  public int startMove(){
+    int index = new Random().nextInt(this.weapon.skills.length);
+    this.indexOfSkillToBeUsed = index;
+    return this.weapon.creatureSkills[index].identifier;
+  }
   public void makeMove() {
     if (this.isSummoned) {
       System.out.println("Skeleton attacks");
-      this.weapon.useByCreature(this.place);
+      this.weapon.useByCreature(this.place, indexOfSkillToBeUsed);
     }
     super.makeMove();
   }

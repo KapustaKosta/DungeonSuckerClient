@@ -52,6 +52,7 @@ public class DungeonMasster {
     while (true) {
       if (this.orderOfSteps.getFirst().entity.isAlive) {
         this.time = Math.max(this.time, this.orderOfSteps.getFirst().timeOfStep);
+        int typeOfSkill = this.orderOfSteps.getFirst().entity.startMove();
         this.orderOfSteps.getFirst().entity.makeMove();
         Class<Creature> creatureClass = Creature.class;
         if (this.orderOfSteps.getFirst().entity.getClass() == creatureClass) {

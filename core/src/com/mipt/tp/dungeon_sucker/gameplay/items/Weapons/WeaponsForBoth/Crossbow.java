@@ -78,7 +78,7 @@ public class Crossbow extends ChargableWeapon {
     this.skills[index].use(room);
   }
 
-  public void useByCreature(Room room) {
+  public void useByCreature(Room room, int indexOfSkillToBeUsed) {
     this.recount();
     int index = new Random().nextInt(this.skills.length);
     System.out.println("Choosing your skill");

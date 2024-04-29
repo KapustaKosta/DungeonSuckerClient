@@ -5,6 +5,8 @@ import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.S
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForEnemies.BatClaws;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
+import java.util.Random;
+
 public class Slime extends Creature {
   final int BASE_HEALTH = 3;
   final int BASE_POWER = 1;
@@ -46,11 +48,15 @@ public class Slime extends Creature {
     this.weapon.getObtained(this);
     this.weapon.recount();
   }
-
+  public int startMove(){
+    int index = new Random().nextInt(this.weapon.skills.length);
+    this.indexOfSkillToBeUsed = index;
+    return this.weapon.creatureSkills[index].identifier;
+  }
   public void makeMove() {
     if (this.isSummoned) {
       System.out.println("BLOB IS MOVING");
-      this.weapon.useByCreature(this.place);
+      this.weapon.useByCreature(this.place, indexOfSkillToBeUsed);
     }
     super.makeMove();
   }

@@ -17,6 +17,7 @@ public class SummonAlly extends Skill {
 
   public SummonAlly() {
     super();
+    this.identifier = 1;
     this.power = 1;
     this.lastPower = 1;
     this.creatureToSummon = CreaturesToSummon.Rat;
@@ -27,6 +28,7 @@ public class SummonAlly extends Skill {
 
   public SummonAlly(int power, CreaturesToSummon creaturesToSummon, Entity holder) {
     super();
+    this.identifier = 1;
     this.power = power;
     this.lastPower = power;
     this.creatureToSummon = creaturesToSummon;
