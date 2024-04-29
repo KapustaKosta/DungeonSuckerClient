@@ -18,7 +18,7 @@ public class Room implements Drawable {
   public DungeonMasster master;
   protected boolean isCleared;
   public Entity[] friendlyEntities = new Entity[8];
-  public Entity[] hostileEntities = new Entity[90];
+  public Entity[] hostileEntities = new Entity[8];
   private IntVector2 levelPosition;
   private Texture texture;
   private SpriteBatch batch;
@@ -86,9 +86,10 @@ public class Room implements Drawable {
   public void insert(Entity entity, boolean isHostile) {
     if (isHostile) {
       for (int i = 0; i < this.amountOfHostileEntities; ++i) {
-        if (!this.hostileEntities[i].isAlive) {
+        if (hostileEntities[i] != null && !this.hostileEntities[i].isAlive) {
           this.hostileEntities[i] = entity;
           entity.place = this;
+          entity.positionInRoom = i;
           this.master.add(0, entity);
           return;
         }
@@ -96,20 +97,23 @@ public class Room implements Drawable {
       if (this.amountOfHostileEntities < this.hostileEntities.length) {
         this.hostileEntities[this.amountOfHostileEntities++] = entity;
         entity.place = this;
+        entity.positionInRoom = this.amountOfHostileEntities - 1;
         this.master.add(0, entity);
       }
       return;
     }
     entity.place = this;
     for (int i = 0; i < this.amountOfFriendlyEntities; ++i) {
-      if (!this.friendlyEntities[i].isAlive) {
+      if (friendlyEntities[i] != null && !this.friendlyEntities[i].isAlive) {
         this.friendlyEntities[i] = entity;
+        entity.positionInRoom = i;
         this.master.add(0, entity);
         return;
       }
     }
     if (this.amountOfFriendlyEntities < this.friendlyEntities.length) {
       this.friendlyEntities[this.amountOfFriendlyEntities++] = entity;
+      entity.positionInRoom = this.amountOfFriendlyEntities - 1;
       this.master.add(0, entity);
     }
   }

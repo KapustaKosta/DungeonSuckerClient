@@ -30,6 +30,7 @@ public class Entity extends InteractiveObject implements Drawable {
   public int intellect; // +dmg of other weapons
   public int faith; // you guessed it, +dmg of other weapons
   public boolean isFighting = true;
+  public int positionInRoom;
   // +dmg can intersect
   protected Weapon weapon;
   public DungeonMasster master;
