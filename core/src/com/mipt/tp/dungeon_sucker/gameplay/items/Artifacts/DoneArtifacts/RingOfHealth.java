@@ -5,10 +5,9 @@ import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 
 public class RingOfHealth extends Artifact {
-  int effectiveness = 10;
 
   public RingOfHealth() {
-    super();
+    super();    this.effectiveness = 10;
     this.description = "Makes its holder more survivable";
     this.weight = 1;
     this.name = "Ring of Health; weight = " + this.weight;

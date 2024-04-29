@@ -8,7 +8,7 @@ public class FrostResistance extends Artifact {
   public FrostResistance() {
     super();
     this.triggerableByBeingDamaged = true;
-    this.weight = 0;
+    this.weight = 5;
     this.effectiveness = 3;
     this.description = "Fire damage is twice less effective";
     this.name = "Frost Resistance";

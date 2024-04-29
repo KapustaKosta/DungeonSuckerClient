@@ -10,7 +10,7 @@ public class MagicResistance extends Artifact {
   public MagicResistance() {
     super();
     this.triggerableByBeingDamaged = true;
-    this.weight = 0;
+    this.weight = 5;
     this.description = "Magic attacks deal two times less damage";
     this.name = "Magic Resistance";
   }

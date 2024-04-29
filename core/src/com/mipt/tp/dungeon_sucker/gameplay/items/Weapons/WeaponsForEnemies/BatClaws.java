@@ -8,7 +8,6 @@ import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 
 public class BatClaws extends Weapon {
   int damage;
-  String name;
 
   public BatClaws(int damage) {
     super(1);

@@ -17,7 +17,7 @@ public class Vampire extends Creature {
 
   public Vampire(boolean isHostile, Room place, String name) {
     super(3, 1, 3, isHostile, place, name);
-    this.weapon = new VampireClaws(this.power, this);
+    this.weapon = new VampireClaws(this.power);
     this.weapon.getObtained(this);
     new LightVulnerability().getObtained(this);
     new PointVulnerability().getObtained(this);
@@ -29,7 +29,7 @@ public class Vampire extends Creature {
 
   public Vampire(int health, int power, int weight, boolean isHostile, Room place) {
     super(health, power, weight, isHostile, place, "Vampire");
-    this.weapon = new VampireClaws(this.power, this);
+    this.weapon = new VampireClaws(this.power);
     this.weapon.getObtained(this);
     new LightVulnerability().getObtained(this);
     new PointVulnerability().getObtained(this);

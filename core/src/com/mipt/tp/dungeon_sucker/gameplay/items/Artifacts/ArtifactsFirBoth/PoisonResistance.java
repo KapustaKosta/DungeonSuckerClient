@@ -8,7 +8,7 @@ public class PoisonResistance extends Artifact {
   public PoisonResistance() {
     super();
     this.triggerableByBeingDamaged = true;
-    this.weight = 0;
+    this.weight = 5;
     this.effectiveness = 3;
     this.description = "Poison damage is twice less effective";
     this.name = "Poison Resistance";

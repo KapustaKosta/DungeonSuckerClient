@@ -22,8 +22,7 @@ public class IronChestplate extends Artifact {
   @Override
   public void triggerByBeingDamaged(Damage damage) {
     damage.totalDamage = Math.max(damage.totalDamage - this.effectiveness, 0);
-    damage.elementDamage = (int) (damage.totalDamage * damage.percentOfElementDamage);
-    damage.defaultDamage = damage.totalDamage - damage.elementDamage;
+    damage.defaultDamage = Math.max(damage.totalDamage - damage.elementDamage, 0);
   }
 
   public void getObtained(Entity entity) {

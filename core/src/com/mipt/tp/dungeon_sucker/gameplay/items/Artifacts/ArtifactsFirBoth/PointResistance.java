@@ -10,7 +10,7 @@ public class PointResistance extends Artifact {
   public PointResistance() {
     super();
     this.triggerableByBeingDamaged = true;
-    this.weight = 0;
+    this.weight = 5;
     this.description = "Pointing attacks deal two times less damage";
     this.name = "Point Resistance";
   }

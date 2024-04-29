@@ -10,7 +10,7 @@ public class HardShell extends Artifact {
   public HardShell() {
     super();
     this.triggerableByBeingDamaged = true;
-    this.weight = 0;
+    this.weight = 5;
     this.description = "Smashing attacks deal two times less damage";
     this.name = "Hard Shell";
   }

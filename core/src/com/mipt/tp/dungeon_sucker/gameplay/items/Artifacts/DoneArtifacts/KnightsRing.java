@@ -5,10 +5,10 @@ import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 
 public class KnightsRing extends Artifact {
-  int effectiveness = 5;
 
   public KnightsRing() {
     super();
+    this.effectiveness = 5;
     this.description = "Makes its holder more strong";
     this.weight = 1;
     this.name = "Knight's ring; weight = " + this.weight;

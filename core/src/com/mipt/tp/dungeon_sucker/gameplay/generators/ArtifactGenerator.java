@@ -2,10 +2,8 @@ package com.mipt.tp.dungeon_sucker.gameplay.generators;
 
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth.*;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.ElementVulnerability;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts.*;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts.RingOfHealth;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts.RingOfMagicProtection;
 
 import java.util.Random;
 
@@ -24,7 +22,7 @@ public class ArtifactGenerator {
       case 3:
         return new FuryOfTheFallen();
       case 4:
-        return new RingOfMagicProtection();
+        return new RanepaAndMIPT();
       case 5:
         return new HuntersRing();
       case 6:
