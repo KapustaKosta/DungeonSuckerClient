@@ -3,7 +3,6 @@ package com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkill;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
-import com.mipt.tp.dungeon_sucker.gameplay.Skill;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
@@ -14,6 +13,7 @@ import java.util.Arrays;
 public class DamageClosestEnemy extends DamagingSkill {
   // Todo: rework choosing who to damage.
   boolean isUsedByHostile;
+
   public DamageClosestEnemy(Weapon weapon, int damage, DamageTypeSet type, ElementSet element, boolean isMelee, double percentOfElementDamage, boolean isUsedByHostile) {
     this.weapon = weapon;
     this.damage = new Damage(this.weapon.holder, type, element, isMelee, percentOfElementDamage, damage);
@@ -34,9 +34,9 @@ public class DamageClosestEnemy extends DamagingSkill {
     System.out.println(Arrays.toString(enemies));
     Entity enemy = enemies[index];
     while (!enemy.isAlive) {
-      if(isUsedByHostile && index > 0){
+      if (isUsedByHostile && index > 0) {
         --index;
-      }else if(!this.isUsedByHostile && index < room.amountOfHostileEntities - 1){
+      } else if (!this.isUsedByHostile && index < room.amountOfHostileEntities - 1) {
         ++index;
       }
       enemy = enemies[index];

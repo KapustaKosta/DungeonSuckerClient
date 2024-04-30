@@ -13,7 +13,7 @@ public class PeaceRoom extends Room {
   }
 
   public PeaceRoom(IntVector2 position,
-      Texture texture, DungeonMasster masster) {
+                   Texture texture, DungeonMasster masster) {
     super(position, texture, masster);
   }
 }

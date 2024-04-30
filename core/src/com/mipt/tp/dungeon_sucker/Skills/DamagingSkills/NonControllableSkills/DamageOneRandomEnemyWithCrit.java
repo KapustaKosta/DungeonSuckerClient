@@ -1,7 +1,6 @@
 package com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
-import com.mipt.tp.dungeon_sucker.Skills.DamagingSkill;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
@@ -10,7 +9,6 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 import java.util.Arrays;
 import java.util.Random;
-import java.util.Scanner;
 
 public class DamageOneRandomEnemyWithCrit extends DamageRandomEnemy {
   private final int divider;

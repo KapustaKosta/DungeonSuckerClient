@@ -70,7 +70,6 @@ public class Crossbow extends ChargableWeapon {
   public void use(Room room) {
     this.recount();
     int index = getSkillIndex();
-    System.out.println("Choose your skill");
     while (this.chargesForSkill[index] > this.charges) {
       index = getSkillIndex();
     }
@@ -87,5 +86,6 @@ public class Crossbow extends ChargableWeapon {
     }
     System.out.println(this.skills[index].getClass());
     this.skills[index].use(room);
+    this.recount();
   }
 }

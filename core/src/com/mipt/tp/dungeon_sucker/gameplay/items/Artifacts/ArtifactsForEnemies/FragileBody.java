@@ -4,8 +4,6 @@ import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 
-import java.util.Objects;
-
 public class FragileBody extends Artifact {
   public FragileBody() {
     super();

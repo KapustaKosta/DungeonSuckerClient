@@ -27,23 +27,13 @@ public class DamageOneEntity extends DamagingSkill {
     } else {
       return;
     }
-    Scanner in = new Scanner(System.in);
-    System.out.println("choose enemy to punch");
-    for (int i = 0; i < (room).hostileEntities.length; ++i) {
-      if (room.hostileEntities[i] != null) {
-        if (room.hostileEntities[i].isAlive) {
-          System.out.println(i + 1 + ": " + ((room.hostileEntities[i])).name + ": "
-              + ((room).hostileEntities[i]).health + " hp");
-        }
-      }
-    }
-    int index = in.nextInt();
-    while (entities[Math.min(Math.max(index - 1, 0), entities.length - 1)] == null || !entities[Math.min(Math.max(index - 1, 0), entities.length - 1)].isAlive) {
+    int index = chooseVictimToAttack(room);
+    while (entities[Math.min(Math.max(index, 0), entities.length - 1)] == null || !entities[Math.min(Math.max(index, 0), entities.length - 1)].isAlive) {
       System.out.println("do not play with dead!");
       System.out.println("choose another one");
-      index = in.nextInt();
+      index = chooseVictimToAttack(room);
     }
-    index = Math.min(Math.max(index - 1, 0), entities.length - 1);
+    index = Math.min(Math.max(index, 0), entities.length - 1);
     entities[index].getDamaged(new Damage(this.damage, this.lastPower, this.power));
     super.use(room);
   }

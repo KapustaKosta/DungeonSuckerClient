@@ -6,20 +6,18 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Character;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Rat;
-import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.UI.Interface;
 import com.mipt.tp.dungeon_sucker.UI.InventoryWindow;
 import com.mipt.tp.dungeon_sucker.UI.MainWindow;
 import com.mipt.tp.dungeon_sucker.UI.MapWindow;
 import com.mipt.tp.dungeon_sucker.UI.texturePacks.RoomsTexturesPack;
-import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
-import com.mipt.tp.dungeon_sucker.InteractiveObjects.Character;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
+import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.logic.DFSMapGenerator;
-import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
 import com.mipt.tp.dungeon_sucker.gameplay.level.logic.MapGenerator;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
@@ -74,19 +72,19 @@ public class DungeonSuckerGame extends ApplicationAdapter {
         exampleRoom,
         "rat3");
     exampleRoom.hostileEntities = exampleHostileEntities;
-    exampleRoom.friendlyEntities = new Character[] {exampleCharacter};
+    exampleRoom.friendlyEntities = new Character[]{exampleCharacter};
     MainWindow mainWindow = new MainWindow(new IntVector2(10, 25), new IntVector2(42, 0), exampleRoom, new Vector2(400, 250), new Vector2(700, 250));
     mainWindow.setCurrentEntityIndicator(exampleCharacter);
 
     anInterface = new Interface(mapWindow, inventoryWindow, mainWindow);
-	  Gdx.input.setInputProcessor(anInterface);
+    Gdx.input.setInputProcessor(anInterface);
 
     IntVector2 characterPosition = new IntVector2(level.getMap().spawn.getPosition().x, level.getMap().spawn.getPosition().y);
     this.character = new Character(characterPosition, new Texture("character.png"), level, 1, 1);
 
 /*    Texture texture = new Texture("room.png");
-    room = new Room(new IntVector2(10, 10), texture, new DungeonMasster());
-    FightTry.aboba();*/
+    room = new Room(new IntVector2(10, 10), texture, new DungeonMasster());*/
+    //FightTry.aboba();
     //FightTry.generateWeapons();
   }
 

@@ -1,7 +1,6 @@
 package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth;
 
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
-import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 
 public class ElementResistance extends Artifact {

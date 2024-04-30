@@ -5,7 +5,6 @@ import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
-import java.util.Random;
 import java.util.Scanner;
 
 public abstract class Weapon extends Item {
@@ -35,7 +34,8 @@ public abstract class Weapon extends Item {
   public void generateSkill(Skill skill) {
     this.skills[this.amountOfSkills++] = skill;
   }
-  public void generateSkillForCreature(Skill skill){
+
+  public void generateSkillForCreature(Skill skill) {
     this.creatureSkills[this.amountOfCreatureSkills++] = skill;
   }
 
@@ -64,7 +64,7 @@ public abstract class Weapon extends Item {
   }
 
   public int getSkillIndex() {
-    // переписать выбор, когда подкрутите доступ из экрана
+    // todo: переписать выбор, когда подкрутите доступ из экрана. Костя и Кирилл, я это вам
     System.out.println("Choose your skill");
     for (int i = 0; i < this.skills.length; ++i) {
       System.out.println(i + 1 + ": " + skills[i].toString());

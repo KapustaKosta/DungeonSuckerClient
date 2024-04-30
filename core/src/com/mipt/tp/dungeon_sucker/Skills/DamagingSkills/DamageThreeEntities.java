@@ -49,21 +49,11 @@ public class DamageThreeEntities extends DamagingSkill {
       return;
     }
     Entity[] entities = room.hostileEntities;
-    Scanner in = new Scanner(System.in);
-    System.out.println("choose enemy to punch");
-    for (int i = 0; i < (room).hostileEntities.length; ++i) {
-      if (room.hostileEntities[i] != null) {
-        if (room.hostileEntities[i].isAlive) {
-          System.out.println(i + 1 + ": " + ((room.hostileEntities[i])).name + ": "
-              + ((room).hostileEntities[i]).health + " hp");
-        }
-      }
-    }
-    int index = in.nextInt() - 1;
+    int index = this.chooseVictimToAttack(room);
     while (entities[Math.min(Math.max(index, 0), entities.length - 1)] == null || !entities[Math.min(Math.max(index, 0), entities.length - 1)].isAlive) {
       System.out.println("do not play with dead!");
       System.out.println("choose another one");
-      index = in.nextInt() - 1;
+      index = this.chooseVictimToAttack(room);
     }
     if (index <= 0) {
       if (entities[0] != null) {

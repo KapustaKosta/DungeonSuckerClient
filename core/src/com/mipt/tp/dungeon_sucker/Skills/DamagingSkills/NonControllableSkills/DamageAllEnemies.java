@@ -3,7 +3,6 @@ package com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkill;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
-import com.mipt.tp.dungeon_sucker.gameplay.Skill;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
@@ -28,7 +27,7 @@ public class DamageAllEnemies extends DamagingSkill {
     } else {
       enemies = room.hostileEntities;
     }
-    for(int i = 0; i < enemies.length; ++i){
+    for (int i = 0; i < enemies.length; ++i) {
       new DamageNthEnemy(this.weapon, new Damage(this.damage, this.lastPower, this.power), this.isUsedByHostile, i).use(room);
     }
     super.use(room);

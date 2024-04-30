@@ -1,16 +1,14 @@
 package com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForBoth;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.DamageOneEntity;
+import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.DamageThreeEntities;
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills.DamageRandomEnemy;
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills.DamageRandomEnemyAndTwoClosest;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
-import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.DamageOneEntity;
-import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.DamageThreeEntities;
-
-import java.util.Scanner;
 
 public class Club extends Weapon {
 
@@ -64,10 +62,9 @@ public class Club extends Weapon {
 
   public void use(Room room) {
     this.recount();
-    this.recount();
     int index = getSkillIndex();
-    System.out.println("Choose your skill");
     System.out.println(this.skills[index].getClass());
     this.skills[index].use(room);
+    this.recount();
   }
 }

@@ -70,10 +70,9 @@ public class Spear extends Weapon {
 
   public void use(Room room) {
     this.recount();
-    this.recount();
     int index = getSkillIndex();
-    System.out.println("Choose your skill");
     System.out.println(this.skills[index].getClass());
     this.skills[index].use(room);
+    this.recount();
   }
 }

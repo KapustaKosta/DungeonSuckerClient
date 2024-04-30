@@ -1,8 +1,8 @@
 package com.mipt.tp.dungeon_sucker.gameplay.level.logic;
 
+import com.mipt.tp.dungeon_sucker.UI.texturePacks.RoomsTexturesPack;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Map;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
-import com.mipt.tp.dungeon_sucker.UI.texturePacks.RoomsTexturesPack;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.*;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 import com.mipt.tp.dungeon_sucker.math.RandomNumGenerator;
@@ -120,9 +120,6 @@ public class DFSMapGenerator extends MapGenerator {
     if (coordinates.x < 0 || coordinates.x >= map[0].length) {
       return false;
     }
-    if (coordinates.y < 0 || coordinates.y >= map.length) {
-      return false;
-    }
-    return true;
+    return coordinates.y >= 0 && coordinates.y < map.length;
   }
 }

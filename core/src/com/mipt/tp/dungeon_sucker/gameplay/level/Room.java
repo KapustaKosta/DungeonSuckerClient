@@ -1,12 +1,12 @@
 package com.mipt.tp.dungeon_sucker.gameplay.level;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Chest;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
-import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mipt.tp.dungeon_sucker.UI.Drawable;
+import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.ArtifactGenerator;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.WeaponGenerator;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
@@ -142,6 +142,7 @@ public class Room implements Drawable {
     for (int i = 0; i < this.amountOfFriendlyEntities; ++i) {
       if (this.friendlyEntities[i].isAlive) {
         battleMustEnd = false;
+        break;
       }
     }
     if (battleMustEnd) {
@@ -170,7 +171,6 @@ public class Room implements Drawable {
         for (int i = 0; i < 4; ++i) {
           chest.add(new ArtifactGenerator().generateArtifact());
         }
-        return;
       }
     }
   }

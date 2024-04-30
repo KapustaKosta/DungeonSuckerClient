@@ -20,7 +20,7 @@ public class RanepaAndMIPT extends Artifact {
   }
 
   public void triggerByEnteringRoom(Room room) {
-    if(room.amountOfHostileEntities > 1){
+    if (room.amountOfHostileEntities > 1) {
       this.holder.die();
     }
   }

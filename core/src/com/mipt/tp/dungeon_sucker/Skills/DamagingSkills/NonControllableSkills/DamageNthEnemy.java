@@ -41,7 +41,6 @@ public class DamageNthEnemy extends DamagingSkill {
       super.use(room);
     } else {
       super.use(room);
-      return;
     }
   }
 }

@@ -15,7 +15,7 @@ public class ElementalPower extends Weapon {
     this.damage = power;
     this.name = "Pure energy of " + this.element;
     // public DamageRandomEnemy(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, boolean isUsedByHostile)
-    }
+  }
 
   public void getObtained(ElementalSpirit holder) {
     super.getObtained(holder);

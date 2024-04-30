@@ -5,9 +5,6 @@ import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills.Da
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
-import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
-
-import java.util.Random;
 
 public class RatClaws extends Weapon {
   int damage;
@@ -21,7 +18,8 @@ public class RatClaws extends Weapon {
     // public DamageRandomEnemy(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, boolean isUsedByHostile)
     this.generateSkillForCreature(new DamageRandomEnemy(this, this.damage, DamageTypeSet.Point, ElementSet.None, true, 0, this.holder.isHostile));
   }
-  public void getObtained(Entity holder){
+
+  public void getObtained(Entity holder) {
     super.getObtained(holder);
     this.generateSkillForCreature(new DamageRandomEnemy(this, this.damage, DamageTypeSet.Point, ElementSet.None, true, 0, this.holder.isHostile));
   }

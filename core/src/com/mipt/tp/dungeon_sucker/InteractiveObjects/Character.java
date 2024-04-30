@@ -75,6 +75,8 @@ public class Character extends Entity {
   }
 
   public void chooseItemToLeave() {
+    // todo: Костя, это тоже на тебе, ибо я не знаю, как это будет выглядеть. Перепиши с нуля, аналогично, на все могу ответить.
+    // Это с точки зрения бэкенда просто, я добавил все нужные методы. Просто считай инфу и сделай, что хочешь
     int index = 0;
     System.out.println("Choose item to leave (it'll wait you in a rooms chest)");
     Scanner in = new Scanner(System.in);
@@ -113,20 +115,15 @@ public class Character extends Entity {
 
   public void makeMove() {
     super.makeFictionalMove();
-    Scanner in = new Scanner(System.in);
     if (this.isFighting) {
-      System.out.println("wanna try to escape?");
-      System.out.println("1 - YES; 0 - NO");
-      int i = in.nextInt();
+      int i = askIfWantsToEscape();
       if (i == 1) {
         this.tryToEscape();
       } else {
         this.attack();
       }
-    } else if (this.place.threatLevel > 0) {
-      System.out.println("what you wanna do?");
-      System.out.println("1 - use some weaponSkill, 2 - open room's chest, 3 - move to another room");
-      int i = in.nextInt();
+    } else {
+      int i = askWhatToDoWhenNotFighting();
       if (i == 1) {
         this.attack();
       } else if (i == 2) {
@@ -134,17 +131,22 @@ public class Character extends Entity {
       } else {
         this.askToChangeRoom();
       }
-    }else{
-      System.out.println("what you wanna do?");
-      System.out.println("1 - use some weaponSkill, 2 - move to another room");
-      int i = in.nextInt();
-      if (i == 1) {
-        this.attack();
-      } else {
-        this.askToChangeRoom();
-      }
     }
     super.makeMove();
+  }
+
+  private int askWhatToDoWhenNotFighting() {
+    Scanner in = new Scanner(System.in);
+    System.out.println("what you wanna do?");
+    System.out.println("1 - use some weaponSkill, 2 - open room's chest, 3 - move to another room");
+    return in.nextInt();
+  }
+
+  private int askIfWantsToEscape() {
+    Scanner in = new Scanner(System.in);
+    System.out.println("wanna try to escape?");
+    System.out.println("1 - YES; 0 - NO");
+    return in.nextInt();
   }
 
   private void interractWithChest() {
@@ -160,6 +162,7 @@ public class Character extends Entity {
   }
 
   private void askToChangeRoom() {
+    //TODO: Костя, сам это пиши, я хз, как ты это реализуешь. Это достаточно просто с точки зрения бэкенда, мне проще объяснить, как это работает, чем понять, как ты это делаешь
   }
 
   public void moveToRoom(Room room) {

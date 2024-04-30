@@ -3,7 +3,6 @@ package com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForBoth;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.DamageOneEntity;
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.DamageThreeEntities;
-import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills.DamageOneRandomEnemyWithCrit;
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills.DamageRandomEnemy;
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills.DamageRandomEnemyAndTwoClosest;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
@@ -27,6 +26,7 @@ public class GreatSword extends Weapon {
     this.generateSkill(new DamageThreeEntities(this, this.power, DamageTypeSet.Slash, this.element, true, 0.3, 0.5, 1, 0.5));
     this.generateSkill(new DamageThreeEntities(this, this.power, DamageTypeSet.Slash, this.element, true, 0.3, 0.75, 0.5, 0.75));
   }
+
   public void getObtained(Entity holder) {
     super.getObtained(holder);
     this.generateSkillForCreature(new DamageRandomEnemy(
@@ -39,6 +39,7 @@ public class GreatSword extends Weapon {
         this, this.power, DamageTypeSet.Slash, this.element, true,
         0.3, 0.75, 0.5, 0.75, this.holder.isHostile));
   }
+
   private void recountScales() {
     if (this.rarity == RaritySet.Poor) {
       this.strengthScale /= 1.25;
@@ -62,10 +63,9 @@ public class GreatSword extends Weapon {
 
   public void use(Room room) {
     this.recount();
-    this.recount();
     int index = getSkillIndex();
-    System.out.println("Choose your skill");
     System.out.println(this.skills[index].getClass());
     this.skills[index].use(room);
+    this.recount();
   }
 }

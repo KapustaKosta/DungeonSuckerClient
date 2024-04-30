@@ -23,7 +23,8 @@ public class KnightsRing extends Artifact {
   public void getObtained(Entity entity) {
     super.getObtained(entity);
     entity.strength += this.effectiveness;
-    this.holder = entity;try {
+    this.holder = entity;
+    try {
       this.holder.recountWeapon();
     } catch (Exception ignored) {
     }
