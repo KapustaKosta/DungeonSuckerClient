@@ -1,5 +1,6 @@
 package com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForEnemies.RatClaws;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
@@ -13,11 +14,12 @@ public class Rat extends Creature {
   final int VIG_PER_LVL = 1;
   public Rat(boolean isHostile, Room place, String name) {
     super(3, 1, 3, isHostile, place, name);
-    this.weapon = new RatClaws(this.power, this.isHostile);
-    this.weapon.getObtained(this);
+    //this.weapon = new RatClaws(this.power, this.isHostile);
+    //this.weapon.getObtained(this);
     this.name = name;
     this.experiencePerKill = 3;
     this.description = this.name + ", a rat, that crawls everywhere, may bite you, dealing " + this.power + "of physical damage";
+    this.texture = new Texture("rat.png");
   }
 
   public Rat(int health, int power, int weight, boolean isHostile, Room place) {
@@ -26,6 +28,7 @@ public class Rat extends Creature {
     this.name = "Rat";
     this.experiencePerKill = 3;
     this.description = this.name + ", that crawls everywhere, may bite you, dealing " + this.power + "of physical damage";
+    this.texture = new Texture("rat.png");
   }
   public void summon(){
     this.strength = this.STR_PER_LVL * this.master.level;

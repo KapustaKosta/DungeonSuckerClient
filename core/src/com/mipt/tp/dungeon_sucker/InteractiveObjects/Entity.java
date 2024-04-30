@@ -40,7 +40,7 @@ public class Entity extends InteractiveObject implements Drawable {
   protected IntVector2 levelPosition;
   protected Vector2 position;
   protected Level level;
-  private Texture texture;
+  public Texture texture;
   private SpriteBatch batch;
   public int weight;
   public Room place;

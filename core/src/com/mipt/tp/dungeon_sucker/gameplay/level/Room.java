@@ -1,5 +1,6 @@
 package com.mipt.tp.dungeon_sucker.gameplay.level;
 
+import com.badlogic.gdx.math.Vector2;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Chest;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;

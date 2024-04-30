@@ -15,6 +15,6 @@ public class Interface implements LibGDXDrawable{
   public void draw() {
     mapWindow.draw();
     inventoryWindow.draw();;
-    //mainWindow.draw();
+    mainWindow.draw();
   }
 }

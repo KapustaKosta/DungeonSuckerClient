@@ -1,6 +1,7 @@
 package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 
 public class PriestessRing extends Artifact {
@@ -11,6 +12,11 @@ public class PriestessRing extends Artifact {
     this.description = "Makes its holder more faithful";
     this.weight = 1;
     this.name = "Priestess's ring; weight = " + this.weight;
+  }
+
+  @Override
+  public void triggerByBeingDamaged(Damage damage) {
+
   }
 
   public void getObtained(Entity entity) {
