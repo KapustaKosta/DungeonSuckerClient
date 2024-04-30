@@ -87,15 +87,17 @@ public class Entity extends InteractiveObject implements Drawable {
 
   public void getDamaged(Damage damage) {
     damage = damage.copy();
-    this.triggerArtifactsByDamage(damage);
-    int dmgDealt = damage.totalDamage;
-    this.health -= dmgDealt;
-    System.out.println(this.name + " got damaged. Current health: " + this.health);
-    if (this.health <= 0) {
-      this.die();
+    if (this.isAlive) {
+      this.triggerArtifactsByDamage(damage);
+      int dmgDealt = damage.totalDamage;
+      this.health -= dmgDealt;
+      System.out.println(this.name + " got damaged. Current health: " + this.health);
+      if (this.health <= 0) {
+        this.die();
+      }
+      this.removeExtraArtifacts();
+      this.weapon.recount();
     }
-    this.removeExtraArtifacts();
-    this.weapon.recount();
   }
 
   public void makeMove() {

@@ -21,9 +21,8 @@ public class DamageTwoEntities extends DamagingSkill {
     this.firstCoefficient = firstCoefficient;
     this.secondCoefficient = secondCoefficient;
     this.damage = new Damage(this.weapon.holder, type, element, isMelee, percentOfElementDamage, damage);
-    this.description = "deals " + this.damage.totalDamage * this.secondCoefficient + " damage to enemy by your choice." +
-        " Also if possible deals " + this.damage.totalDamage * this.secondCoefficient + " damage to enemy before him and " +
-        this.damage.totalDamage * this.secondCoefficient + " damage to enemy right after him";
+    this.description = "deals " + this.damage.totalDamage * this.firstCoefficient + " damage to enemy by your choice." +
+        " Also if possible deals " + this.damage.totalDamage * this.secondCoefficient + " damage to enemy right after him";
     this.type = type;
     this.firstDamage = this.damage.copy();
     this.firstDamage.totalDamage = (int) (this.firstCoefficient * this.firstDamage.totalDamage);
@@ -54,20 +53,13 @@ public class DamageTwoEntities extends DamagingSkill {
         }
       }
     } else if (index < entities.length - 1) {
-      if (entities[index - 1] != null) {
-        entities[index - 1].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+      if (entities[index ] != null) {
+        entities[index].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
       }
-      if (entities[index] != null) {
-        entities[index].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
+      if (entities[index+1] != null) {
+        entities[index+1].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
       }
-    } else if (index == entities.length - 1) {
-      if (entities[index - 1] != null) {
-        entities[index - 1].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
-      }
-      if (entities[index] != null) {
-        entities[index].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
-      }
-    } else if (index > entities.length - 1) {
+    } else if (index >= entities.length - 1) {
       if (entities[index] != null) {
         entities[index].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
       }
