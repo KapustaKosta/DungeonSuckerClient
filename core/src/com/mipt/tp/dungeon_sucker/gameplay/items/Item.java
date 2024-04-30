@@ -7,7 +7,7 @@ public class Item {
   public String name;
   public Entity holder;
   public Texture texture;
-  protected int weight;
+  public int weight;
   public void getObtained(Entity entity){
     this.holder = entity;
     this.holder.items.add(this);

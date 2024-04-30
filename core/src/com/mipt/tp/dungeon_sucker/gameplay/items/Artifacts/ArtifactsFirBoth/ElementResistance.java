@@ -1,4 +1,4 @@
-package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.UndoneArtifacts;
+package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth;
 
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
@@ -8,7 +8,7 @@ public class ElementResistance extends Artifact {
   public ElementResistance() {
     super();
     this.triggerableByBeingDamaged = true;
-    this.weight = 0;
+    this.weight = 5;
     this.effectiveness = 3;
     this.description = "All elemental damage is twice less effective";
     this.name = "Elemental Resistance";

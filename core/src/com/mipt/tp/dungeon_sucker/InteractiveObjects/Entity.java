@@ -29,6 +29,8 @@ public class Entity extends InteractiveObject implements Drawable {
   public int dexterity; // +dmg of some other weapons
   public int intellect; // +dmg of other weapons
   public int faith; // you guessed it, +dmg of other weapons
+  public boolean isFighting = true;
+  public int positionInRoom;
   // +dmg can intersect
   protected Weapon weapon;
   public DungeonMasster master;
@@ -39,16 +41,17 @@ public class Entity extends InteractiveObject implements Drawable {
   public boolean isAlive = true;
   protected IntVector2 levelPosition;
   protected Vector2 position;
-  protected Level level;
+  protected Level location;
   public Texture texture;
   private SpriteBatch batch;
   public int weight;
   public Room place;
-  public String name;
-  public ArrayList<Item> items;
-  public ArrayList<Artifact> artifacts;
+  public String name = " ";
+  public ArrayList<Item> items = new ArrayList<>();
+  public ArrayList<Artifact> artifacts = new ArrayList<>();
   public boolean isHostile;
   private long lastTimeOfStep;
+  public boolean isCharacter = false;
 
   public Entity(int health, int weight, Room place, String name) {
     this.maxHealth = health;
@@ -57,6 +60,9 @@ public class Entity extends InteractiveObject implements Drawable {
     this.baseWeight = weight - this.carrying;
     this.place = place;
     this.name = name;
+    this.master = place.master;
+    // Todo: убрать то что снизу закомментировано, я закоментировал, чтобы мой код работал сори
+    //this.master.add(0, this);
   }
 
   public Entity(IntVector2 position, Texture texture, Level level) {
@@ -64,7 +70,7 @@ public class Entity extends InteractiveObject implements Drawable {
     this.position = new Vector2(position.x * Constants.cellSize, position.y * Constants.cellSize);
     this.texture = texture;
     this.batch = new SpriteBatch();
-    this.level = level;
+    this.location = level;
   }
 
   @Override
@@ -113,6 +119,8 @@ public class Entity extends InteractiveObject implements Drawable {
     } else {
       this.place.checkFriendlyAlive();
     }
+    this.makeFictionalMove();
+    this.place.clearCorpses();
   }
 
   public void obtainExp(int experiencePerKill) {
@@ -167,12 +175,23 @@ public class Entity extends InteractiveObject implements Drawable {
   }
 
   public void makeFictionalMove() {
-    for(int i = 0; i < this.master.orderOfSteps.size(); ++i){
-      if(this == this.master.orderOfSteps.get(i).entity){
-        this.master.orderOfSteps.remove(i);
-        break;
+    try {
+      for (int i = 0; i < this.master.orderOfSteps.size(); ++i) {
+        if (this == this.master.orderOfSteps.get(i).entity) {
+          this.master.orderOfSteps.remove(i);
+          break;
+        }
       }
+      this.master.add(this.lastTimeOfStep, this);
+    } catch (Exception ignored) {
     }
-    this.master.add(this.lastTimeOfStep, this);
+  }
+
+  public void heal(int power) {
+    this.health = Math.min(this.health + this.power, this.maxHealth);
+  }
+
+  public int startMove() {
+    return -1;
   }
 }

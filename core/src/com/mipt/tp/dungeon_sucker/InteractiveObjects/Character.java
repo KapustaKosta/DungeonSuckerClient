@@ -13,33 +13,32 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Character extends Entity {
-  boolean isFighting;
   String name = "Hero #-1";
   private int baseHealth;
 
   public void getInput() {
     if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
-      if (level.canIGoTo(levelPosition.y + 1, levelPosition.x)) {
+      if (location.canIGoTo(levelPosition.y + 1, levelPosition.x)) {
         levelPosition.y += 1;
         updateRealPosition();
       }
 
     }
     if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
-      if (level.canIGoTo(levelPosition.y, levelPosition.x + 1)) {
+      if (location.canIGoTo(levelPosition.y, levelPosition.x + 1)) {
         levelPosition.x += 1;
         updateRealPosition();
       }
     }
     if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
-      if (level.canIGoTo(levelPosition.y, levelPosition.x - 1)) {
+      if (location.canIGoTo(levelPosition.y, levelPosition.x - 1)) {
         levelPosition.x -= 1;
         updateRealPosition();
       }
 
     }
     if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-      if (level.canIGoTo(levelPosition.y - 1, levelPosition.x)) {
+      if (location.canIGoTo(levelPosition.y - 1, levelPosition.x)) {
         levelPosition.y -= 1;
         updateRealPosition();
       }
@@ -49,20 +48,25 @@ public class Character extends Entity {
 
   public Character() {
     super(new IntVector2(), null, null);
+    this.isCharacter = true;
   }
 
   public Character(int weight, int health, String name, DungeonMasster DM) {
     super(health, weight, new Room(new IntVector2(), new Texture("room.png"), new Creature[0], DM), name);
+    this.isCharacter = true;
     this.weight = weight;
     this.health = health;
     this.maxHealth = health;
     this.baseHealth = health;
     this.name = name;
+    this.isFighting = false;
   }
 
   public Character(IntVector2 position, Texture texture, Level level, int health, int weight) {
     super(position, texture, level);
+    this.isCharacter = true;
     this.health = health;
+    this.isFighting = false;
     this.weight = weight;
   }
 
@@ -108,27 +112,54 @@ public class Character extends Entity {
   }
 
   public void makeMove() {
-    super.makeMove();
+    super.makeFictionalMove();
+    Scanner in = new Scanner(System.in);
     if (this.isFighting) {
-      Scanner in = new Scanner(System.in);
       System.out.println("wanna try to escape?");
       System.out.println("1 - YES; 0 - NO");
       int i = in.nextInt();
       if (i == 1) {
-        this.escape();
+        this.tryToEscape();
       } else {
         this.attack();
+      }
+    } else if (this.place.threatLevel > 0) {
+      System.out.println("what you wanna do?");
+      System.out.println("1 - use some weaponSkill, 2 - open room's chest, 3 - move to another room");
+      int i = in.nextInt();
+      if (i == 1) {
+        this.attack();
+      } else if (i == 2) {
+        this.interractWithChest();
+      } else {
+        this.askToChangeRoom();
+      }
+    }else{
+      System.out.println("what you wanna do?");
+      System.out.println("1 - use some weaponSkill, 2 - move to another room");
+      int i = in.nextInt();
+      if (i == 1) {
+        this.attack();
+      } else {
+        this.askToChangeRoom();
       }
     }
     super.makeMove();
   }
 
-  private void escape() {
+  private void interractWithChest() {
+    this.place.chest.getInteracted(this);
+  }
+
+  private void tryToEscape() {
     int effect = new Random().nextInt(2);
     if (effect == 1) {
-      this.moveToRoom(new Room(new IntVector2(), new Texture("room.png"), this.master));
+      this.askToChangeRoom();
     }
     this.weapon.recount();
+  }
+
+  private void askToChangeRoom() {
   }
 
   public void moveToRoom(Room room) {

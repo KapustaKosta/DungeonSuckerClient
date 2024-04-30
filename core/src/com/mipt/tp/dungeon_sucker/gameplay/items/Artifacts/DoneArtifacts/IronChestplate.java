@@ -12,12 +12,17 @@ public class IronChestplate extends Artifact {
     description = "That is just an Iron chestplate. Somehow it can be worn with more armor. " +
         "Increases your Physical Defence by " + this.effectiveness;
     this.weight = 5;
-    this.name = "Iron Chestplate; weight = " + this.weight;this.holder.recountWeapon();
+    this.name = "Iron Chestplate; weight = " + this.weight;
+    try {
+      this.holder.recountWeapon();
+    } catch (Exception ignored) {
+    }
   }
 
   @Override
   public void triggerByBeingDamaged(Damage damage) {
-
+    damage.totalDamage = Math.max(damage.totalDamage - this.effectiveness, 0);
+    damage.defaultDamage = Math.max(damage.totalDamage - damage.elementDamage, 0);
   }
 
   public void getObtained(Entity entity) {

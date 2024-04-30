@@ -18,7 +18,7 @@ public class DamageRandomEnemy extends DamagingSkill {
     this.weapon = weapon;
     this.damage = new Damage(this.weapon.holder, type, element, isMelee, percentOfElementDamage, damage);
     this.isUsedByHostile = isUsedByHostile;
-    this.description = "Deal " + this.damage + " to a random enemy";
+    this.description = "Deal " + this.damage.totalDamage + " to a random enemy";
     this.type = type;
   }
 
@@ -37,7 +37,7 @@ public class DamageRandomEnemy extends DamagingSkill {
     int index = new Random().nextInt(maxIndex);
     Entity enemy = enemies[index];
     System.out.println("chosen index " + index);
-    while (!enemy.isAlive) {
+    while (enemy == null || !enemy.isAlive) {
       index = new Random().nextInt(maxIndex);
       enemy = enemies[index];
     }

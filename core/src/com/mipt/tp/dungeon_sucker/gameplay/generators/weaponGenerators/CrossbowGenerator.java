@@ -13,7 +13,7 @@ public class CrossbowGenerator {
     if (element.name().equals("None")) {
       name = "";
     }
-    Crossbow crossbow = new Crossbow(level, DEFAULT_DAMAGE, rarity.name() + " " + name + " sword", rarity);
+    Crossbow crossbow = new Crossbow(level, DEFAULT_DAMAGE, rarity.name() + " " + name + " crossbow", rarity);
     WeaponTraitsAdder.addTrait(crossbow);
     return crossbow;
   }

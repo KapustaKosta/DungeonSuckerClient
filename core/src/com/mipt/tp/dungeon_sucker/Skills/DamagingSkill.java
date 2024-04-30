@@ -9,4 +9,7 @@ public class DamagingSkill extends Skill {
   protected Damage damage;
   protected Weapon weapon;
   protected DamageTypeSet type;
+  public DamagingSkill(){
+    this.identifier = 0;
+  }
 }

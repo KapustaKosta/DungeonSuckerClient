@@ -17,7 +17,7 @@ public class DamageAllEnemies extends DamagingSkill {
     this.power = damage;
     this.damage = new Damage(this.weapon.holder, type, element, isMelee, percentOfElementDamage, damage);
     this.isUsedByHostile = isUsedByHostile;
-    this.description = "Deal " + this.damage + " to all enemies in room";
+    this.description = "Deal " + this.damage.totalDamage + " to all enemies in room";
     this.type = type;
   }
 

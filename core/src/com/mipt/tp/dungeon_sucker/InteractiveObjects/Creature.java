@@ -4,12 +4,15 @@ import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-public class Creature extends Entity{
+public class Creature extends Entity {
   protected boolean isSummoned = false;
+  public int indexOfSkillToBeUsed;
+
   public Creature(int health, int power, int weight, boolean isHostile, Room place, String name) {
     super(health, weight, place, name);
     this.power = power;
     this.isHostile = isHostile;
+    this.isSummoned = false;
   }
 
   public void makeMove() {
@@ -21,7 +24,7 @@ public class Creature extends Entity{
   }
 
   private void summon() {
-    throw new NotImplementedException();
+    this.isSummoned = true;
   }
 
   public void setPlace(Room room) {
@@ -30,6 +33,17 @@ public class Creature extends Entity{
 
   public void damage(Entity who, Damage damage, String type) {
     who.getDamaged(damage);
+  }
+
+  public void die() {
+    if (this.isHostile) {
+      for (int i = 0; i < this.place.amountOfFriendlyEntities; ++i) {
+        if (this.place.friendlyEntities[i] != null) {
+          this.place.friendlyEntities[i].obtainExp(this.experiencePerKill);
+        }
+      }
+    }
+    super.die();
   }
 
 }

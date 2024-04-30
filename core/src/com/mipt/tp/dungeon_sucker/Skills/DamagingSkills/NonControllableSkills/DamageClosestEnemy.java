@@ -12,12 +12,13 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import java.util.Arrays;
 
 public class DamageClosestEnemy extends DamagingSkill {
+  // Todo: rework choosing who to damage.
   boolean isUsedByHostile;
   public DamageClosestEnemy(Weapon weapon, int damage, DamageTypeSet type, ElementSet element, boolean isMelee, double percentOfElementDamage, boolean isUsedByHostile) {
     this.weapon = weapon;
     this.damage = new Damage(this.weapon.holder, type, element, isMelee, percentOfElementDamage, damage);
     this.isUsedByHostile = isUsedByHostile;
-    this.description = "Deal " + this.damage + " to the closest enemy";
+    this.description = "Deal " + this.damage.totalDamage + " to the closest enemy";
   }
 
   public void use(Room room) {

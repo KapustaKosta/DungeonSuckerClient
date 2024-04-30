@@ -47,7 +47,7 @@ public class DamageOneRandomEnemyWithCrit extends DamageRandomEnemy {
     int index = new Random().nextInt(maxIndex);
     Entity enemy = enemies[index];
     System.out.println("chosen index " + index);
-    while (!enemy.isAlive) {
+    while (enemy == null || !enemy.isAlive) {
       index = new Random().nextInt(maxIndex);
       enemy = enemies[index];
     }

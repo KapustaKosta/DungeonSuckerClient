@@ -1,4 +1,4 @@
-package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.UndoneArtifacts;
+package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies;
 
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
@@ -6,17 +6,18 @@ import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 
 import java.util.Objects;
 
-public class MagicVulnerability extends Artifact {
-  public MagicVulnerability() {
+public class FragileBody extends Artifact {
+  public FragileBody() {
     super();
     this.triggerableByBeingDamaged = true;
-    this.weight = 0;
-    this.description = "Magic attacks deal two times more damage";
-    this.name = "Magic Vulnerability";
+    this.weight = 2;
+    this.effectiveness = 3;
+    this.description = "Smashing attacks deal twice as much damage as they should've";
+    this.name = "Fragile Body";
   }
 
   public void triggerByBeingDamaged(Damage damage) {
-    if (damage.type == DamageTypeSet.Magic) {
+    if (damage.type == DamageTypeSet.Smash) {
       damage.totalDamage *= 2;
       damage.defaultDamage *= 2;
       damage.elementDamage *= 2;

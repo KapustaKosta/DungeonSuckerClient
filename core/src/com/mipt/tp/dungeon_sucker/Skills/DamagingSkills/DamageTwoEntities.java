@@ -1,8 +1,7 @@
 package com.mipt.tp.dungeon_sucker.Skills.DamagingSkills;
 
-import com.mipt.tp.dungeon_sucker.Skills.DamagingSkill;
-
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.Skills.DamagingSkill;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
@@ -11,19 +10,16 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 import java.util.Scanner;
 
-public class DamageThreeEntities extends DamagingSkill {
+public class DamageTwoEntities extends DamagingSkill {
   double firstCoefficient;
   double secondCoefficient;
-  double thirdCoefficient;
   Damage firstDamage;
   Damage secondDamage;
-  Damage thirdDamage;
 
-  public DamageThreeEntities(Weapon weapon, int damage, DamageTypeSet type, ElementSet element, boolean isMelee, double percentOfElementDamage, double firstCoefficient, double secondCoefficient, double thirdCoefficient) {
+  public DamageTwoEntities(Weapon weapon, int damage, DamageTypeSet type, ElementSet element, boolean isMelee, double percentOfElementDamage, double firstCoefficient, double secondCoefficient) {
     this.weapon = weapon;
     this.firstCoefficient = firstCoefficient;
     this.secondCoefficient = secondCoefficient;
-    this.thirdCoefficient = thirdCoefficient;
     this.damage = new Damage(this.weapon.holder, type, element, isMelee, percentOfElementDamage, damage);
     this.description = "deals " + this.damage.totalDamage * this.secondCoefficient + " damage to enemy by your choice." +
         " Also if possible deals " + this.damage.totalDamage * this.secondCoefficient + " damage to enemy before him and " +
@@ -37,11 +33,6 @@ public class DamageThreeEntities extends DamagingSkill {
     this.secondDamage.totalDamage = (int) (this.secondCoefficient * this.secondDamage.totalDamage);
     this.secondDamage.defaultDamage = (int) (this.secondCoefficient * this.secondDamage.defaultDamage);
     this.secondDamage.elementDamage = (int) (this.secondCoefficient * this.secondDamage.elementDamage);
-    this.thirdDamage = this.damage.copy();
-    this.thirdDamage.totalDamage = (int) (this.thirdCoefficient * this.thirdDamage.totalDamage);
-    this.thirdDamage.defaultDamage = (int) (this.thirdCoefficient * this.thirdDamage.defaultDamage);
-    this.thirdDamage.elementDamage = (int) (this.thirdCoefficient * this.thirdDamage.elementDamage);
-
   }
 
   public void use(Room room) {
@@ -59,18 +50,18 @@ public class DamageThreeEntities extends DamagingSkill {
         }
       }
     }
-    int index = in.nextInt() - 1;
-    while (entities[Math.min(Math.max(index, 0), entities.length - 1)] == null || !entities[Math.min(Math.max(index, 0), entities.length - 1)].isAlive) {
+    int index = in.nextInt();
+    while (entities[Math.min(Math.max(index - 1, 0), entities.length - 1)] == null || !entities[Math.min(Math.max(index - 1, 0), entities.length - 1)].isAlive) {
       System.out.println("do not play with dead!");
       System.out.println("choose another one");
-      index = in.nextInt() - 1;
+      index = in.nextInt();
     }
     if (index <= 0) {
-      if (entities[0] != null) {
-        entities[0].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
-      }
-      if (entities.length > 1 && entities[1] != null) {
-        entities[1].getDamaged(new Damage(this.thirdDamage, this.lastPower, this.power));
+      entities[0].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+      if (entities.length > 1) {
+        if (entities[1] != null) {
+          entities[1].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
+        }
       }
     } else if (index < entities.length - 1) {
       if (entities[index - 1] != null) {
@@ -78,9 +69,6 @@ public class DamageThreeEntities extends DamagingSkill {
       }
       if (entities[index] != null) {
         entities[index].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
-      }
-      if (entities[index + 1] != null) {
-        entities[index + 1].getDamaged(new Damage(this.thirdDamage, this.lastPower, this.power));
       }
     } else if (index == entities.length - 1) {
       if (entities[index - 1] != null) {
@@ -90,18 +78,17 @@ public class DamageThreeEntities extends DamagingSkill {
         entities[index].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
       }
     } else if (index > entities.length - 1) {
-      if (entities[index - 1] != null) {
-        entities[entities.length - 1].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+      if (entities[index] != null) {
+        entities[index].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
       }
     }
     super.use(room);
   }
 
   public String toString() {
-    return "hit three enemies (one by your choice and two surrounding him, dealing "
-        + this.firstDamage.totalDamage + ", "
-        + this.secondDamage.totalDamage + " and "
-        + this.thirdDamage.totalDamage +
-        " to first, second and third of them, respectively. BaseDamage is " + this.damage;
+    return "hit two enemies (one by your choice and one right after thee, dealing "
+        + this.firstDamage.totalDamage + " and "
+        + this.secondDamage.totalDamage +
+        " to first, and second, respectively. BaseDamage is " + this.damage;
   }
 }
