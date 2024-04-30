@@ -67,7 +67,8 @@ public class Entity extends InteractiveObject implements Drawable {
 
   public Entity(IntVector2 position, Texture texture, Level level) {
     this.levelPosition = position;
-    this.position = new Vector2(position.x * Constants.CELL_SIZE, position.y * Constants.CELL_SIZE);
+
+    this.position = new Vector2(position.x * Constants.CELL_SIZE, (15 + position.y) * Constants.CELL_SIZE);
     this.texture = texture;
     this.batch = new SpriteBatch();
     this.location = level;
@@ -81,7 +82,7 @@ public class Entity extends InteractiveObject implements Drawable {
   }
 
   public void updateRealPosition() {
-    this.position = new Vector2(levelPosition.x * Constants.CELL_SIZE, levelPosition.y * Constants.CELL_SIZE);
+    this.position = new Vector2(levelPosition.x * Constants.CELL_SIZE, (15 + levelPosition.y) * Constants.CELL_SIZE);
   }
 
   public void getDamaged(Damage damage) {
