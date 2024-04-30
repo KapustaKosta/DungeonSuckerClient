@@ -31,7 +31,7 @@ public class DungeonSuckerGame extends ApplicationAdapter {
   private Interface anInterface;
 
   private void update() {
-    //character.getInput();
+    character.getInput();
   }
 
   @Override
@@ -79,8 +79,8 @@ public class DungeonSuckerGame extends ApplicationAdapter {
 
     anInterface = new Interface(mapWindow, inventoryWindow, mainWindow);
 
-    //IntVector2 characterPosition = new IntVector2(level.getMap().spawn.getPosition().x, level.getMap().spawn.getPosition().y);
-    //this.character = new Character(characterPosition, new Texture("character.png"), level, 1, 1);
+    IntVector2 characterPosition = new IntVector2(level.getMap().spawn.getPosition().x, level.getMap().spawn.getPosition().y);
+    this.character = new Character(characterPosition, new Texture("character.png"), level, 1, 1);
 
 /*    Texture texture = new Texture("room.png");
     room = new Room(new IntVector2(10, 10), texture, new DungeonMasster());
@@ -93,6 +93,6 @@ public class DungeonSuckerGame extends ApplicationAdapter {
     this.update();
     ScreenUtils.clear(BACKGROUND);
     anInterface.draw();
-    //character.draw();
+    character.draw();
   }
 }
