@@ -136,4 +136,24 @@ public class MainWindow extends Window {
       currentEntityIndicatorBatch.end();
     }
   }
+
+  public void onMouseClick(Entity hostileEntity) {
+    System.out.println(hostileEntity.name);
+  }
+
+  public void onMouseClick(int x, int y) {
+    if (!isPointInWindow(x, y)) {
+      return;
+    }
+    float lastX = hostileEntitiesPosition.x;
+    for (int i = 0; i < hostileEntitiesBatches.length; i++) {
+      if (x >= lastX && x <= lastX + room.hostileEntities[i].texture.getWidth()
+          && y >= hostileEntitiesPosition.y
+          && y <= hostileEntitiesPosition.y + room.hostileEntities[i].texture.getHeight()) {
+        onMouseClick(room.hostileEntities[i]);
+      }
+      lastX += room.hostileEntities[i].texture.getWidth();
+      lastX += hostileEntitiesOffset;
+    }
+  }
 }

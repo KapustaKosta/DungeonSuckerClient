@@ -18,8 +18,8 @@ public class InventoryWindow extends Window {
     this.cellsWidth = cellsWidth;
     this.cellsHeight = cellsHeight;
     cells = new Cell[cellsHeight][cellsWidth];
-    int cellWidth = (width / Constants.cellSize) / cellsWidth;
-    int cellHeight = (height / Constants.cellSize) / cellsHeight;
+    int cellWidth = (width / Constants.CELL_SIZE) / cellsWidth;
+    int cellHeight = (height / Constants.CELL_SIZE) / cellsHeight;
     IntVector2 cellTopLeft = new IntVector2(topLeftPoint);
     IntVector2 cellBottomRight = new IntVector2(topLeftPoint);
     cellBottomRight.moveY(-cellHeight);

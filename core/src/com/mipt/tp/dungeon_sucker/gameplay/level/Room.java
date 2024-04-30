@@ -1,6 +1,5 @@
 package com.mipt.tp.dungeon_sucker.gameplay.level;
 
-import com.badlogic.gdx.math.Vector2;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Chest;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
@@ -66,13 +65,13 @@ public class Room implements Drawable {
   @Override
   public void draw() {
     batch.begin();
-    batch.draw(texture, levelPosition.x * Constants.cellSize, levelPosition.y * Constants.cellSize);
+    batch.draw(texture, levelPosition.x * Constants.CELL_SIZE, levelPosition.y * Constants.CELL_SIZE);
     batch.end();
   }
 
   public void drawWithAnchor(IntVector2 anchor) {
     batch.begin();
-    batch.draw(texture, (levelPosition.x + anchor.x) * Constants.cellSize, (levelPosition.y + anchor.y) * Constants.cellSize);
+    batch.draw(texture, (levelPosition.x + anchor.x) * Constants.CELL_SIZE, (levelPosition.y + anchor.y) * Constants.CELL_SIZE);
     batch.end();
   }
 

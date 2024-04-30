@@ -1,6 +1,7 @@
 package com.mipt.tp.dungeon_sucker;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -78,6 +79,8 @@ public class DungeonSuckerGame extends ApplicationAdapter {
     mainWindow.setCurrentEntityIndicator(exampleCharacter);
 
     anInterface = new Interface(mapWindow, inventoryWindow, mainWindow);
+
+    Gdx.input.setInputProcessor(anInterface);
 
     //IntVector2 characterPosition = new IntVector2(level.getMap().spawn.getPosition().x, level.getMap().spawn.getPosition().y);
     //this.character = new Character(characterPosition, new Texture("character.png"), level, 1, 1);

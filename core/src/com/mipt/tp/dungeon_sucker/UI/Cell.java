@@ -1,6 +1,5 @@
 package com.mipt.tp.dungeon_sucker.UI;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
 import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
@@ -24,7 +23,7 @@ public class Cell extends Window{
     if(item == null) return;
 
     batch.begin();
-    batch.draw(item.texture, bottomLeftPoint.x * Constants.cellSize, bottomLeftPoint.y * Constants.cellSize);
+    batch.draw(item.texture, bottomLeftPoint.x * Constants.CELL_SIZE, bottomLeftPoint.y * Constants.CELL_SIZE);
     batch.end();
   }
 
