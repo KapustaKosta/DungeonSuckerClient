@@ -46,7 +46,7 @@ public class Bat extends Creature {
     return this.weapon.creatureSkills[index].identifier;
   }
   public void makeMove() {
-    if (this.isSummoned) {
+    if (this.isSummoned && this.isFighting) {
       System.out.println("BAT IS MOVING");
       this.weapon.useByCreature(this.place, indexOfSkillToBeUsed);
     }

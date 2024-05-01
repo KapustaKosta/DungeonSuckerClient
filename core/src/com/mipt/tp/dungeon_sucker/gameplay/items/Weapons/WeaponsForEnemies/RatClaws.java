@@ -16,7 +16,6 @@ public class RatClaws extends Weapon {
     this.damage = damage;
     this.name = "Claws of a rat";
     // public DamageRandomEnemy(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, boolean isUsedByHostile)
-    this.generateSkillForCreature(new DamageRandomEnemy(this, this.damage, DamageTypeSet.Point, ElementSet.None, true, 0, this.holder.isHostile));
   }
 
   public void getObtained(Entity holder) {

@@ -126,6 +126,19 @@ public class Entity extends InteractiveObject implements Drawable {
     this.place.clearCorpses();
   }
 
+  public void dieWithoutTriggeringAnything(){
+    this.isAlive = false;
+    if (this.isHostile) {
+      this.place.checkHostileAlive();
+      for (int i = 0; i < this.place.amountOfFriendlyEntities; ++i) {
+        this.place.friendlyEntities[i].obtainExp(this.experiencePerKill);
+      }
+    } else {
+      this.place.checkFriendlyAlive();
+    }
+    this.makeFictionalMove();
+    this.place.clearCorpses();
+  }
   public void obtainExp(int experiencePerKill) {
     return;
   }

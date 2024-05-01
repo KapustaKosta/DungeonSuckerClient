@@ -1,9 +1,7 @@
 package com.mipt.tp.dungeon_sucker;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Skeleton;
-import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Slime;
-import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Vampire;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.*;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.WeaponGenerator;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts.IronChestplate;
@@ -11,7 +9,6 @@ import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForBoth.Club;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Character;
-import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Rat;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
@@ -28,9 +25,9 @@ public class FightTry {
     DM.add(vasya.weight, vasya);//  public Vampire(int health, int power, int weight, boolean isHostile, Room place) {
     Creature[] entities = new Creature[1];
     for (int i = 0; i < 1; ++i) {
-      entities[i] = new Slime(6, 1, 1,
+      entities[i] = new IvanKalinin(6, 1, 1,
           true,
-          new Room(new IntVector2(), new Texture("room.png"), new Creature[0], DM), 3);
+          new Room(new IntVector2(), new Texture("room.png"), new Creature[0], DM), "IVAN KALININ");
     }
     Room room = new Room(new IntVector2(), new Texture("room.png"), entities, DM);
     room.threatLevel = 3;

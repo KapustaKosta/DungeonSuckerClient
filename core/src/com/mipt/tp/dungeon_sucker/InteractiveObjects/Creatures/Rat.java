@@ -49,7 +49,7 @@ public class Rat extends Creature {
     return this.weapon.creatureSkills[index].identifier;
   }
   public void makeMove() {
-    if (this.isSummoned) {
+    if (this.isSummoned && this.isFighting) {
       System.out.println("RAT IS MOVING");
       this.weapon.useByCreature(this.place, indexOfSkillToBeUsed);
     }

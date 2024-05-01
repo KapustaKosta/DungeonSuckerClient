@@ -52,7 +52,7 @@ public class Skeleton extends Creature {
     return this.weapon.creatureSkills[index].identifier;
   }
   public void makeMove() {
-    if (this.isSummoned) {
+    if (this.isSummoned && this.isFighting) {
       System.out.println("Skeleton attacks");
       this.weapon.useByCreature(this.place, indexOfSkillToBeUsed);
     }

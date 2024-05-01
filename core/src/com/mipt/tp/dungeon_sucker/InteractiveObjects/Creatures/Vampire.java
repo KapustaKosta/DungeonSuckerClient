@@ -56,7 +56,7 @@ public class Vampire extends Creature {
     return this.weapon.creatureSkills[index].identifier;
   }
   public void makeMove() {
-    if (this.isSummoned) {
+    if (this.isSummoned && this.isFighting) {
       System.out.println("Vampire is doing something");
       this.heal(this.power);
       this.weapon.useByCreature(this.place, indexOfSkillToBeUsed);

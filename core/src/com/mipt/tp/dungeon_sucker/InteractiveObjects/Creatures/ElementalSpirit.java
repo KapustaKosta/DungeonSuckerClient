@@ -80,13 +80,15 @@ public class ElementalSpirit extends Creature {
     this.weapon.getObtained(this);
     this.weapon.recount();
   }
-  public int startMove(){
+
+  public int startMove() {
     int index = new Random().nextInt(this.weapon.skills.length);
     this.indexOfSkillToBeUsed = index;
     return this.weapon.creatureSkills[index].identifier;
   }
+
   public void makeMove() {
-    if (this.isSummoned) {
+    if (this.isSummoned && this.isFighting) {
       System.out.println("BAT IS MOVING");
       this.weapon.useByCreature(this.place, indexOfSkillToBeUsed);
     }

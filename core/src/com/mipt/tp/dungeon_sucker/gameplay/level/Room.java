@@ -147,6 +147,9 @@ public class Room implements Drawable {
     }
     if (battleMustEnd) {
       System.out.println("Room was taken by evil");
+      for (int i = 0; i < this.amountOfHostileEntities; ++i) {
+        this.hostileEntities[i].isFighting = false;
+      }
     }
   }
 

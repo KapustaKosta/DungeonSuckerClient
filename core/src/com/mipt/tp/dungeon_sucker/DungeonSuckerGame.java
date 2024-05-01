@@ -84,7 +84,7 @@ public class DungeonSuckerGame extends ApplicationAdapter {
 
     /* Texture texture = new Texture("room.png");
     room = new Room(new IntVector2(10, 10), texture, new DungeonMasster());*/
-    FightTry.aboba();
+    // FightTry.aboba();
     // FightTry.generateWeapons();
   }
 

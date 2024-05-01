@@ -54,7 +54,7 @@ public class Slime extends Creature {
     return this.weapon.creatureSkills[index].identifier;
   }
   public void makeMove() {
-    if (this.isSummoned) {
+    if (this.isSummoned && this.isFighting) {
       System.out.println("BLOB IS MOVING");
       this.weapon.useByCreature(this.place, indexOfSkillToBeUsed);
     }
