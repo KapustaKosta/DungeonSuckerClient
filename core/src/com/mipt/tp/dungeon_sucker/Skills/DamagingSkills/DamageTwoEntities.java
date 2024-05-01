@@ -8,8 +8,6 @@ import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
-import java.util.Scanner;
-
 public class DamageTwoEntities extends DamagingSkill {
   double firstCoefficient;
   double secondCoefficient;
@@ -46,22 +44,50 @@ public class DamageTwoEntities extends DamagingSkill {
       index = this.chooseVictimToAttack(room);
     }
     if (index <= 0) {
-      entities[0].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
-      if (entities.length > 1) {
-        if (entities[1] != null) {
-          entities[1].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
+      if (entities[0] != null) {
+        Entity entity1 = null;
+        if (entities.length > 1 && entities[1] != null) {
+          entity1 = entities[1];
+        }
+        Entity entity0 = entities[0];
+        entity0.getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+        if (entity1 != null) {
+          entity1.getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
         }
       }
     } else if (index < entities.length - 1) {
-      if (entities[index ] != null) {
-        entities[index].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+      Entity entity0 = null;
+      Entity entity1 = null;
+      if (entities[index - 1] != null) {
+        entity0 = entities[index - 1];
       }
-      if (entities[index+1] != null) {
-        entities[index+1].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
-      }
-    } else if (index >= entities.length - 1) {
       if (entities[index] != null) {
-        entities[index].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+        entity1 = entities[index];
+      }
+      if (entity0 != null) {
+        entity0.getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+      }
+      if (entity1 != null) {
+        entity1.getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
+      }
+    } else if (index == entities.length - 1) {
+      Entity entity0 = null;
+      Entity entity1 = null;
+      if (entities[index - 1] != null) {
+        entity0 = entities[index - 1];
+      }
+      if (entities[index] != null) {
+        entity1 = entities[index - 1];
+      }
+      if (entity0 != null) {
+        entity0.getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+      }
+      if (entity1 != null) {
+        entity1.getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
+      }
+    } else if (index > entities.length - 1) {
+      if (entities[index - 1] != null) {
+        entities[entities.length - 1].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
       }
     }
     super.use(room);

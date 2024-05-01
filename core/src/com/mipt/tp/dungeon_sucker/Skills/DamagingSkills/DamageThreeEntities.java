@@ -1,15 +1,12 @@
 package com.mipt.tp.dungeon_sucker.Skills.DamagingSkills;
 
-import com.mipt.tp.dungeon_sucker.Skills.DamagingSkill;
-
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.Skills.DamagingSkill;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
-
-import java.util.Scanner;
 
 public class DamageThreeEntities extends DamagingSkill {
   double firstCoefficient;
@@ -57,27 +54,52 @@ public class DamageThreeEntities extends DamagingSkill {
     }
     if (index <= 0) {
       if (entities[0] != null) {
-        entities[0].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
-      }
-      if (entities.length > 1 && entities[1] != null) {
-        entities[1].getDamaged(new Damage(this.thirdDamage, this.lastPower, this.power));
+        Entity entity1 = null;
+        if (entities.length > 1 && entities[1] != null) {
+          entity1 = entities[1];
+        }
+        Entity entity0 = entities[0];
+        entity0.getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
+        if (entity1 != null) {
+          entity1.getDamaged(new Damage(this.thirdDamage, this.lastPower, this.power));
+        }
       }
     } else if (index < entities.length - 1) {
+      Entity entity0 = null;
+      Entity entity1 = null;
+      Entity entity2 = null;
       if (entities[index - 1] != null) {
-        entities[index - 1].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+        entity0 = entities[index - 1];
       }
       if (entities[index] != null) {
-        entities[index].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
+        entity1 = entities[index];
       }
       if (entities[index + 1] != null) {
-        entities[index + 1].getDamaged(new Damage(this.thirdDamage, this.lastPower, this.power));
+        entity2 = entities[index + 1];
+      }
+      if (entity0 != null) {
+        entity0.getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+      }
+      if (entity1 != null) {
+        entity1.getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
+      }
+      if (entity2 != null) {
+        entity2.getDamaged(new Damage(this.thirdDamage, this.lastPower, this.power));
       }
     } else if (index == entities.length - 1) {
+      Entity entity0 = null;
+      Entity entity1 = null;
       if (entities[index - 1] != null) {
-        entities[index - 1].getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+        entity0 = entities[index - 1];
       }
       if (entities[index] != null) {
-        entities[index].getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
+        entity1 = entities[index - 1];
+      }
+      if (entity0 != null) {
+        entity0.getDamaged(new Damage(this.firstDamage, this.lastPower, this.power));
+      }
+      if (entity1 != null) {
+        entity1.getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
       }
     } else if (index > entities.length - 1) {
       if (entities[index - 1] != null) {
