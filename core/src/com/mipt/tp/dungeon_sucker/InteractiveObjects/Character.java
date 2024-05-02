@@ -1,5 +1,8 @@
 package com.mipt.tp.dungeon_sucker.InteractiveObjects;
 
+import com.mipt.tp.dungeon_sucker.UI.Buttons.Button;
+import com.mipt.tp.dungeon_sucker.UI.Buttons.ButtonsGroup;
+import com.mipt.tp.dungeon_sucker.gameplay.Action;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -113,15 +116,21 @@ public class Character extends Entity {
     this.weapon.recount();
   }
 
+
   public void makeMove() {
     super.makeFictionalMove();
     if (this.isFighting) {
       int i = askIfWantsToEscape();
-      if (i == 1) {
-        this.tryToEscape();
-      } else {
-        this.attack();
-      }
+
+      ButtonsGroup.getInstance().clear();
+      ButtonsGroup.getInstance().addButton(new Button("escape", args -> this.tryToEscape()));
+      ButtonsGroup.getInstance().addButton(new Button("escape", args -> this.attack()));
+
+//      if (i == 1) {
+//        this.tryToEscape();
+//      } else {
+//        this.attack();
+//      }
     } else {
       int i = askWhatToDoWhenNotFighting();
       if (i == 1) {
@@ -143,10 +152,22 @@ public class Character extends Entity {
   }
 
   private int askIfWantsToEscape() {
+    ButtonsGroup.getInstance().addButton(new Button("YES", new Action() {
+      @Override
+      public void run(int[] args) {
+
+      }
+    }));
+
     Scanner in = new Scanner(System.in);
     System.out.println("wanna try to escape?");
     System.out.println("1 - YES; 0 - NO");
     return in.nextInt();
+  }
+
+  public void pushResult(int result)
+  {
+
   }
 
   private void interractWithChest() {

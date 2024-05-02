@@ -1,8 +1,7 @@
 package com.mipt.tp.dungeon_sucker.UI.Buttons;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mipt.tp.dungeon_sucker.UI.Drawable;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 
 public class ButtonsGroup {
     private ArrayList<Button> buttons;
-    private IntVector2 buttonGroupSize;
+    private final IntVector2 buttonGroupSize;
     private int realButtonGroupSizeX;
 
     private IntVector2 buttonSize;
@@ -18,10 +17,19 @@ public class ButtonsGroup {
     private int gapY;
     private IntVector2 leftTopCorner;
 
+    private static ButtonsGroup buttonsGroup;
+
+    public static ButtonsGroup getInstance()
+    {
+        if(buttonsGroup != null) return buttonsGroup;
+        return null;
+    }
+
     public ButtonsGroup(IntVector2 buttonGroupSize, IntVector2 leftTopCorner) {
         this.buttonGroupSize = buttonGroupSize;
         this.leftTopCorner = leftTopCorner;
         buttons = new ArrayList<>();
+        buttonsGroup = this;
     }
 
     public void addButton(Button newButton) {
@@ -51,8 +59,11 @@ public class ButtonsGroup {
     }
 
     public void pushBtnOnPos(int posX) {
-        int num = posX / (buttonSize.x / buttons.size());
-        buttons.get(num).push();
+        int num = posX / (buttonGroupSize.x / buttons.size());
+
+        if (buttons.get(num) != null) {
+            buttons.get(num).push();
+        }
     }
 
     public void drawButtons() {

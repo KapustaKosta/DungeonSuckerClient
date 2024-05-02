@@ -3,6 +3,8 @@ package com.mipt.tp.dungeon_sucker.UI.Buttons;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mipt.tp.dungeon_sucker.UI.Drawable;
+import com.mipt.tp.dungeon_sucker.UI.text.Text;
+import com.mipt.tp.dungeon_sucker.gameplay.Action;
 import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
@@ -24,14 +26,24 @@ public class ButtonsGroupUI implements Drawable {
         buttonsGroup = new ButtonsGroup(size, leftTopCorner);
 
         // пример
-        Button button1 = new Button(new Texture("button.png"));
-        Button button2 = new Button(new Texture("button.png"));
-        Button button3 = new Button(new Texture("button.png"));
-        Button button4 = new Button(new Texture("button.png"));
-        buttonsGroup.addButton(button1);
-        buttonsGroup.addButton(button2);
-        buttonsGroup.addButton(button3);
-        buttonsGroup.addButton(button4);
+        for (int i = 0; i < 4; i++) {
+            int finalI = i;
+            Button button = new Button(i + "", new Action() {
+                @Override
+                public void run(int[] args) {
+                    System.out.println(finalI);
+                }
+            });
+            buttonsGroup.addButton(button);
+        }
+    }
+
+    public void click(int x, int y) {
+        if (leftTopCorner.x <= x && size.x + size.x >= x) {
+            if (leftTopCorner.y <= y && leftTopCorner.y + size.y >= y) {
+                buttonsGroup.pushBtnOnPos(x - leftTopCorner.x);
+            }
+        }
     }
 
     @Override

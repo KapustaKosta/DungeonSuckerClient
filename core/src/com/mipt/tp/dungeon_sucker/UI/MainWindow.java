@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.UI.Buttons.ButtonsGroupUI;
 import com.mipt.tp.dungeon_sucker.UI.text.FixedSysFont;
 import com.mipt.tp.dungeon_sucker.UI.text.Text;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
@@ -27,6 +28,8 @@ public class MainWindow extends Window {
   private Batch currentEntityIndicatorBatch;
   private Vector2 currentEntityIndicatorPosition;
 
+  private ButtonsGroupUI buttonsGroupUI;
+
   public MainWindow(IntVector2 topLeftPoint,
       IntVector2 bottomRightPoint, Room room, Vector2 friendlyEntitiesPosition,
       Vector2 hostileEntitiesPosition) {
@@ -35,6 +38,7 @@ public class MainWindow extends Window {
     this.friendlyEntitiesPosition = friendlyEntitiesPosition;
     this.hostileEntitiesPosition = hostileEntitiesPosition;
     this.currentEntityIndicatorBatch = new SpriteBatch();
+    this.buttonsGroupUI = new ButtonsGroupUI(new Texture("buttonHolder.png"));
 
     friendlyEntitiesBatches = new SpriteBatch[room.friendlyEntities.length];
     hostileEntitiesBatches = new SpriteBatch[room.hostileEntities.length];
@@ -135,6 +139,8 @@ public class MainWindow extends Window {
           currentEntityIndicatorPosition.y);
       currentEntityIndicatorBatch.end();
     }
+
+    buttonsGroupUI.draw();
   }
 
   public void onMouseClick(Entity hostileEntity) {
@@ -155,5 +161,6 @@ public class MainWindow extends Window {
       lastX += room.hostileEntities[i].texture.getWidth();
       lastX += hostileEntitiesOffset;
     }
+    buttonsGroupUI.click(x, y);
   }
 }

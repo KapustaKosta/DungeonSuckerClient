@@ -14,7 +14,7 @@ public class Text implements LibGDXDrawable {
   public Text(String text) {
     this.batch = new SpriteBatch();
     this.position = null;
-    this.font = null;
+    this.font = FixedSysFont.getInstance();
     this.text = text;
   }
 
