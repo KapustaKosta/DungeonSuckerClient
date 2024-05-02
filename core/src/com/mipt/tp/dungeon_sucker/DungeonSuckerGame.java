@@ -9,6 +9,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Character;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Rat;
+import com.mipt.tp.dungeon_sucker.UI.Buttons.ButtonsGroup;
+import com.mipt.tp.dungeon_sucker.UI.Buttons.ButtonsGroupUI;
 import com.mipt.tp.dungeon_sucker.UI.Interface;
 import com.mipt.tp.dungeon_sucker.UI.InventoryWindow;
 import com.mipt.tp.dungeon_sucker.UI.MainWindow;
@@ -28,6 +30,7 @@ public class DungeonSuckerGame extends ApplicationAdapter {
   private Room room;
 
   private Interface anInterface;
+  private ButtonsGroupUI buttonsGroupUI;
 
   private void update() {
     character.getInput();
@@ -81,6 +84,7 @@ public class DungeonSuckerGame extends ApplicationAdapter {
 
     IntVector2 characterPosition = new IntVector2(level.getMap().spawn.getPosition().x, level.getMap().spawn.getPosition().y);
     this.character = new Character(characterPosition, new Texture("character.png"), level, 1, 1);
+    this.buttonsGroupUI = new ButtonsGroupUI(new Texture("buttonHolder.png"));
 
     /* Texture texture = new Texture("room.png");
     room = new Room(new IntVector2(10, 10), texture, new DungeonMasster());*/
@@ -94,5 +98,6 @@ public class DungeonSuckerGame extends ApplicationAdapter {
     ScreenUtils.clear(BACKGROUND);
     anInterface.draw();
     character.draw();
+    buttonsGroupUI.draw();
   }
 }
