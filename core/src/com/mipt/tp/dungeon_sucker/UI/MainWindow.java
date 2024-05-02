@@ -67,6 +67,7 @@ public class MainWindow extends Window {
       lastX += room.hostileEntities[i].texture.getWidth();
       lastX += hostileEntitiesOffset;
     }
+    this.buttonsGroupUI = new ButtonsGroupUI(new Texture("buttonHolder.png"));
   }
 
   public boolean setCurrentEntityIndicator(Entity entity) {

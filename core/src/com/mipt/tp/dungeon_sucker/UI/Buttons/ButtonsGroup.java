@@ -19,9 +19,8 @@ public class ButtonsGroup {
 
     private static ButtonsGroup buttonsGroup;
 
-    public static ButtonsGroup getInstance()
-    {
-        if(buttonsGroup != null) return buttonsGroup;
+    public static ButtonsGroup getInstance() {
+        if (buttonsGroup != null) return buttonsGroup;
         return null;
     }
 
@@ -60,8 +59,7 @@ public class ButtonsGroup {
 
     public void pushBtnOnPos(int posX) {
         int num = posX / (buttonGroupSize.x / buttons.size());
-
-        if (buttons.get(num) != null) {
+        if (num < buttons.size()) {
             buttons.get(num).push();
         }
     }
