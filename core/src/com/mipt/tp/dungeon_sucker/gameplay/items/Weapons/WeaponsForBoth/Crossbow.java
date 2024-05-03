@@ -8,6 +8,7 @@ import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills.Da
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills.DamageRandomEnemy;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.WeaponTypes;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.ChargableWeapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
@@ -17,6 +18,7 @@ public class Crossbow extends ChargableWeapon {
 
   public Crossbow(int level, int damage, String name, RaritySet rarity) {
     super(3);
+    this.type = WeaponTypes.ranged;
     this.chargesForSkill = new int[3];
     this.power = damage * level;
     this.level = level;
@@ -27,16 +29,19 @@ public class Crossbow extends ChargableWeapon {
     this.recountScales();
     // public DamageOneEntity(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage)
     //public DamageThreeEntities(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, double firstCoefficient, double secondCoefficient, double thirdCoefficient) {
-    this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Point, this.element, false, 0.3));
-    this.generateSkill(new DamageOneEntityWithCrit(this, this.power, 0.75, DamageTypeSet.Point, this.element, false,
-        0.3, 1, 5, 3));
-    this.generateSkill(new ChargeWeapon(this, 1));
     this.chargesForSkill[0] = 1;
     this.chargesForSkill[1] = 2;
   }
 
   public void getObtained(Entity holder) {
     super.getObtained(holder);
+    this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Point, this.element,
+        false, 0.3));
+    this.generateSkill(new DamageOneEntityWithCrit(this, this.power, 0.75,
+        DamageTypeSet.Point, this.element, false,
+        0.3, 1, 5, 3));
+    this.generateSkill(new ChargeWeapon(this, 1));
+
     this.generateSkillForCreature(new DamageRandomEnemy(
         this, this.power, DamageTypeSet.Point, this.element, false, 0.3, this.holder.isHostile));
     this.generateSkillForCreature(new DamageOneRandomEnemyWithCrit(

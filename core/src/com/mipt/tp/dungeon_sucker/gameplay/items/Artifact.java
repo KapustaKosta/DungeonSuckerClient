@@ -2,11 +2,13 @@ package com.mipt.tp.dungeon_sucker.gameplay.items;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.WeaponTypes;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 public abstract class Artifact extends Item {
+  public WeaponTypes upgradable;
   protected String description;
-  protected int effectiveness;
+  public int effectiveness;
   public boolean mustBeRemoved = false;
   public boolean triggerableByDeath = false;
   protected boolean triggerableByEnteringRoom = false;

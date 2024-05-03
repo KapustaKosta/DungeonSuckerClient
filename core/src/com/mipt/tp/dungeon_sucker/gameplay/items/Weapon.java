@@ -3,11 +3,13 @@ package com.mipt.tp.dungeon_sucker.gameplay.items;
 import com.mipt.tp.dungeon_sucker.gameplay.Skill;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.WeaponTypes;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 import java.util.Scanner;
 
 public abstract class Weapon extends Item {
+  public WeaponTypes type;
   protected RaritySet rarity;
   public int level;
   protected ElementSet element;
@@ -32,11 +34,11 @@ public abstract class Weapon extends Item {
   }
 
   public void generateSkill(Skill skill) {
-    this.skills[this.amountOfSkills++] = skill;
+    this.skills[(this.amountOfSkills++) % this.skills.length] = skill;
   }
 
   public void generateSkillForCreature(Skill skill) {
-    this.creatureSkills[this.amountOfCreatureSkills++] = skill;
+    this.creatureSkills[(this.amountOfCreatureSkills++)%this.skills.length] = skill;
   }
 
   public void use(Room place) {

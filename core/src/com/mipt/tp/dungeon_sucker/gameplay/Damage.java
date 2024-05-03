@@ -26,8 +26,8 @@ public class Damage {
   }
 
 
-
-  public Damage(Damage damage, int lastPower, int power) {this.dealer = damage.dealer;
+  public Damage(Damage damage, int lastPower, int power) {
+    this.dealer = damage.dealer;
     this.type = damage.type;
     this.element = damage.element;
     this.isMelee = damage.isMelee;
@@ -39,5 +39,16 @@ public class Damage {
 
   public Damage copy() {
     return new Damage(this.dealer, this.type, this.element, this.isMelee, this.percentOfElementDamage, this.totalDamage);
+  }
+
+  public void addMasteryScale() {
+    for (int i = 0; i < this.dealer.artifacts.size(); ++i) {
+      if (this.dealer.artifacts.get(i).upgradable == this.dealer.weapon.type) {
+        int newDamage = this.totalDamage + this.dealer.artifacts.get(i).effectiveness;
+        this.defaultDamage = (this.defaultDamage * newDamage / this.totalDamage);
+        this.totalDamage = newDamage;
+        this.elementDamage = this.totalDamage - this.defaultDamage;
+      }
+    }
   }
 }

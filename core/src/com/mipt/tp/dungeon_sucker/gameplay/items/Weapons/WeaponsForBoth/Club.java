@@ -7,6 +7,7 @@ import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills.Da
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills.DamageRandomEnemyAndTwoClosest;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.WeaponTypes;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
@@ -14,6 +15,7 @@ public class Club extends Weapon {
 
   public Club(int level, int damage, String name, RaritySet rarity) {
     super(3);
+    this.type = WeaponTypes.hammer;
     this.power = damage * level;
     this.level = level;
     this.name = name;
@@ -21,13 +23,17 @@ public class Club extends Weapon {
     this.rarity = rarity;
     this.weight = 5;
     this.recountScales();
-    this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Smash, this.element, true, 0.3));
-    this.generateSkill(new DamageThreeEntities(this, this.power, DamageTypeSet.Smash, this.element, true, 0.3, 0.5, 1, 0.5));
-    this.generateSkill(new DamageThreeEntities(this, this.power, DamageTypeSet.Smash, this.element, true, 0.3, 0.75, 0.5, 0.75));
   }
 
   public void getObtained(Entity holder) {
     super.getObtained(holder);
+    this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Smash, this.element, true,
+        0.3));
+    this.generateSkill(new DamageThreeEntities(this, this.power, DamageTypeSet.Smash, this.element, true,
+        0.3, 0.5, 1, 0.5));
+    this.generateSkill(new DamageThreeEntities(this, this.power, DamageTypeSet.Smash, this.element, true,
+        0.3, 0.75, 0.5, 0.75));
+
     this.generateSkillForCreature(new DamageRandomEnemy(
         this, this.power, DamageTypeSet.Smash, this.element, true,
         0.3, this.holder.isHostile));
