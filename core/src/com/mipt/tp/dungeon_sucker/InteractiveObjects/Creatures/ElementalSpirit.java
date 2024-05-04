@@ -76,7 +76,7 @@ public class ElementalSpirit extends Creature {
     this.health = this.BASE_HEALTH + this.VIG_PER_LVL * this.master.level;
     this.maxHealth = this.health;
     this.experiencePerKill = (int) (Math.sqrt(this.master.level) * this.experiencePerKill);
-    this.weapon = new BatClaws(this.power);
+    this.weapon = new ElementalPower(this.power);
     this.weapon.getObtained(this);
     this.weapon.recount();
   }

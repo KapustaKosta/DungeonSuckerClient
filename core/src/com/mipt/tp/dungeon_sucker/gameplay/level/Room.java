@@ -83,10 +83,35 @@ public class Room implements Drawable {
     return isLocked;
   }
 
-  public void insert(Entity entity, boolean isHostile) {
+  public void extract(Entity entity, boolean isHostile) {
     if (isHostile) {
       for (int i = 0; i < this.amountOfHostileEntities; ++i) {
-        if (hostileEntities[i] != null && !this.hostileEntities[i].isAlive) {
+        if (this.hostileEntities[i] == entity) {
+          this.hostileEntities[i] = null;
+          this.checkHostileAlive();
+        }
+      }
+    } else {
+      for (int i = 0; i < this.amountOfFriendlyEntities; ++i) {
+        if (this.friendlyEntities[i] == entity) {
+          this.friendlyEntities[i] = null;
+          this.checkFriendlyAlive();
+        }
+      }
+    }
+  }
+
+  public void insert(Entity entity, boolean isHostile) {
+    if (isHostile) {
+      if (this.isCleared) {
+        for (int i = 0; i < this.amountOfFriendlyEntities; ++i) {
+          this.friendlyEntities[i].isFighting = true;
+        }
+        this.isCleared = false;
+        this.isHaunted = true;
+      }
+      for (int i = 0; i < this.amountOfHostileEntities; ++i) {
+        if (hostileEntities[i] == null || !this.hostileEntities[i].isAlive) {
           this.hostileEntities[i] = entity;
           entity.place = this;
           entity.positionInRoom = i;
@@ -104,7 +129,7 @@ public class Room implements Drawable {
     }
     entity.place = this;
     for (int i = 0; i < this.amountOfFriendlyEntities; ++i) {
-      if (friendlyEntities[i] != null && !this.friendlyEntities[i].isAlive) {
+      if (friendlyEntities[i] == null || !this.friendlyEntities[i].isAlive) {
         this.friendlyEntities[i] = entity;
         entity.positionInRoom = i;
         this.master.add(0, entity);

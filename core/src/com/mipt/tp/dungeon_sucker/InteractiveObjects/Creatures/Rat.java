@@ -3,6 +3,7 @@ package com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures;
 import com.badlogic.gdx.graphics.Texture;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForEnemies.BatClaws;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForEnemies.RatClaws;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 import java.util.Random;
@@ -39,7 +40,7 @@ public class Rat extends Creature {
     this.health = this.BASE_HEALTH + this.VIG_PER_LVL * this.master.level;
     this.maxHealth = this.health;
     this.experiencePerKill = (int)(Math.sqrt(this.master.level) * this.experiencePerKill);
-    this.weapon = new BatClaws(this.power);
+    this.weapon = new RatClaws(this.power);
     this.weapon.getObtained(this);
     this.weapon.recount();
   }
