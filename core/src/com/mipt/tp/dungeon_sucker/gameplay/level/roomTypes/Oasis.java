@@ -5,11 +5,11 @@ import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 public class Oasis extends PeaceRoom {
-  public Oasis(IntVector2 levelPosition, Texture texture) {
-    super(levelPosition, texture);
-  }
+    public Oasis(IntVector2 levelPosition, Texture texture) {
+        super(levelPosition, texture);
+    }
 
-  public Oasis(IntVector2 position, Texture texture, DungeonMasster masster) {
-    super(position, texture, masster);
-  }
+    public Oasis(IntVector2 position, Texture texture, DungeonMasster masster) {
+        super(position, texture, masster);
+    }
 }

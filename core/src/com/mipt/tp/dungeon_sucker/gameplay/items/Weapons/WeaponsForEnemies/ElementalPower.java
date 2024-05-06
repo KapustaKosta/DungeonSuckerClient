@@ -6,22 +6,22 @@ import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 
 public class ElementalPower extends Weapon {
-  int damage;
+    int damage;
 
-  public ElementalPower(int power) {
-    super(power);
-    this.dexterityScale = 0.3;
-    this.strengthScale = 0.2;
-    this.damage = power;
-    this.name = "Pure energy of " + this.element;
-    // public DamageRandomEnemy(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, boolean isUsedByHostile)
-  }
+    public ElementalPower(int power) {
+        super(power);
+        this.dexterityScale = 0.3;
+        this.strengthScale = 0.2;
+        this.damage = power;
+        this.name = "Pure energy of " + this.element;
+        // public DamageRandomEnemy(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, boolean isUsedByHostile)
+    }
 
-  public void getObtained(ElementalSpirit holder) {
-    super.getObtained(holder);
-    this.element = holder.element;
-    this.generateSkillForCreature(new DamageRandomEnemy(this, this.damage, DamageTypeSet.Magic, this.element, true, 1, this.holder.isHostile));
-    this.generateSkillForCreature(new DamageRandomEnemy(this, this.damage, DamageTypeSet.Magic, this.element, true, 1, this.holder.isHostile));
-    this.generateSkillForCreature(new DamageRandomEnemy(this, this.damage, DamageTypeSet.Magic, this.element, false, 1, this.holder.isHostile));
-  }
+    public void getObtained(ElementalSpirit holder) {
+        super.getObtained(holder);
+        this.element = holder.element;
+        this.generateSkillForCreature(new DamageRandomEnemy(this, this.damage, DamageTypeSet.Magic, this.element, true, 1, this.holder.isHostile));
+        this.generateSkillForCreature(new DamageRandomEnemy(this, this.damage, DamageTypeSet.Magic, this.element, true, 1, this.holder.isHostile));
+        this.generateSkillForCreature(new DamageRandomEnemy(this, this.damage, DamageTypeSet.Magic, this.element, false, 1, this.holder.isHostile));
+    }
 }

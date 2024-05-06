@@ -6,15 +6,15 @@ import com.mipt.tp.dungeon_sucker.gameplay.generators.WeaponTraitsAdder;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForBoth.Rapier;
 
 public class RapierGenerator {
-  int DEFAULT_DAMAGE = 3;
+    int DEFAULT_DAMAGE = 3;
 
-  public Rapier generateRapier(RaritySet rarity, ElementSet element, int level) {
-    String name = element.name();
-    if (element.name().equals("None")) {
-      name = "";
+    public Rapier generateRapier(RaritySet rarity, ElementSet element, int level) {
+        String name = element.name();
+        if (element.name().equals("None")) {
+            name = "";
+        }
+        Rapier rapier = new Rapier(level, DEFAULT_DAMAGE, rarity.name() + " " + name + " rapier", rarity);
+        WeaponTraitsAdder.addTrait(rapier);
+        return rapier;
     }
-    Rapier rapier = new Rapier(level, DEFAULT_DAMAGE, rarity.name() + " " + name + " rapier", rarity);
-    WeaponTraitsAdder.addTrait(rapier);
-    return rapier;
-  }
 }

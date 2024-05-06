@@ -6,15 +6,15 @@ import com.mipt.tp.dungeon_sucker.gameplay.generators.WeaponTraitsAdder;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForBoth.Spear;
 
 public class SpearGenerator {
-  int DEFAULT_DAMAGE = 3;
+    int DEFAULT_DAMAGE = 3;
 
-  public Spear generateSpear(RaritySet rarity, ElementSet element, int level) {
-    String name = element.name();
-    if (element.name().equals("None")) {
-      name = "";
+    public Spear generateSpear(RaritySet rarity, ElementSet element, int level) {
+        String name = element.name();
+        if (element.name().equals("None")) {
+            name = "";
+        }
+        Spear spear = new Spear(level, DEFAULT_DAMAGE, rarity.name() + " " + name + " spear", rarity);
+        WeaponTraitsAdder.addTrait(spear);
+        return spear;
     }
-    Spear spear = new Spear(level, DEFAULT_DAMAGE, rarity.name() + " " + name + " spear", rarity);
-    WeaponTraitsAdder.addTrait(spear);
-    return spear;
-  }
 }

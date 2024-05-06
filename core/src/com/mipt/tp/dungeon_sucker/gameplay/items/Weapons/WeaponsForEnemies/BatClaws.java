@@ -7,19 +7,19 @@ import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 
 public class BatClaws extends Weapon {
-  int damage;
+    int damage;
 
-  public BatClaws(int damage) {
-    super(1);
-    this.dexterityScale = 0.3;
-    this.strengthScale = 0.2;
-    this.damage = damage;
-    this.name = "Claws of a bat";
-    // public DamageRandomEnemy(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, boolean isUsedByHostile)
-  }
+    public BatClaws(int damage) {
+        super(1);
+        this.dexterityScale = 0.3;
+        this.strengthScale = 0.2;
+        this.damage = damage;
+        this.name = "Claws of a bat";
+        // public DamageRandomEnemy(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, boolean isUsedByHostile)
+    }
 
-  public void getObtained(Entity holder) {
-    super.getObtained(holder);
-    this.generateSkillForCreature(new DamageRandomEnemy(this, this.damage, DamageTypeSet.Point, ElementSet.None, true, 0, this.holder.isHostile));
-  }
+    public void getObtained(Entity holder) {
+        super.getObtained(holder);
+        this.generateSkillForCreature(new DamageRandomEnemy(this, this.damage, DamageTypeSet.Point, ElementSet.None, true, 0, this.holder.isHostile));
+    }
 }

@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.mipt.tp.dungeon_sucker.UI.Drawable;
 import com.mipt.tp.dungeon_sucker.UI.text.Text;
 import com.mipt.tp.dungeon_sucker.gameplay.Action;
-import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 public class Button implements Drawable {
@@ -31,6 +30,7 @@ public class Button implements Drawable {
                     (float) (leftTopCorner.y + size.y / 2));
         }
     }
+
     public void setSize(IntVector2 newSize) {
         this.size = newSize;
         if (leftTopCorner != null) {

@@ -3,7 +3,6 @@ package com.mipt.tp.dungeon_sucker.UI.Buttons;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mipt.tp.dungeon_sucker.UI.Drawable;
-import com.mipt.tp.dungeon_sucker.UI.text.Text;
 import com.mipt.tp.dungeon_sucker.gameplay.Action;
 import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
@@ -51,7 +50,7 @@ public class ButtonsGroupUI implements Drawable {
         batch.begin();
         batch.draw(texture, leftTopCorner.x, leftTopCorner.y, size.x, size.y);
         batch.end();
-        if (buttonsGroup != null){
+        if (buttonsGroup != null) {
             buttonsGroup.drawButtons();
         }
     }

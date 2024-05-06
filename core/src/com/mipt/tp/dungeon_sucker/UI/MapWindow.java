@@ -1,24 +1,22 @@
 package com.mipt.tp.dungeon_sucker.UI;
 
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
-import java.util.ArrayList;
 
-public class MapWindow extends Window{
-  private Level level;
-  public MapWindow(IntVector2 topLeftPoint,
-      IntVector2 bottomRightPoint, Level level) {
-    super(topLeftPoint, bottomRightPoint);
-    this.level = level;
-    IntVector2 anchor = new IntVector2(topLeftPoint.x, bottomRightPoint.y);
-    level.setAnchor(anchor);
-  }
+public class MapWindow extends Window {
+    private Level level;
 
-  @Override
-  public void draw()
-  {
-    drawBoard();
-    level.draw();
-  }
+    public MapWindow(IntVector2 topLeftPoint,
+                     IntVector2 bottomRightPoint, Level level) {
+        super(topLeftPoint, bottomRightPoint);
+        this.level = level;
+        IntVector2 anchor = new IntVector2(topLeftPoint.x, bottomRightPoint.y);
+        level.setAnchor(anchor);
+    }
+
+    @Override
+    public void draw() {
+        drawBoard();
+        level.draw();
+    }
 }
