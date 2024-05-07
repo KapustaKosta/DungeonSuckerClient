@@ -7,13 +7,13 @@ import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 public class PeaceRoom extends Room {
 
-  public PeaceRoom(IntVector2 levelPosition,
-                   Texture texture) {
-    super(levelPosition, texture);
-  }
+    public PeaceRoom(IntVector2 levelPosition,
+                     Texture texture) {
+        super(levelPosition, texture);
+    }
 
-  public PeaceRoom(IntVector2 position,
-                   Texture texture, DungeonMasster masster) {
-    super(position, texture, masster);
-  }
+    public PeaceRoom(IntVector2 position,
+                     Texture texture, DungeonMasster masster) {
+        super(position, texture, masster);
+    }
 }
