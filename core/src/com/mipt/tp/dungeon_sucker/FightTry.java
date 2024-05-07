@@ -17,12 +17,14 @@ import org.w3c.dom.ls.LSOutput;
 import java.util.LinkedList;
 
 public class FightTry {
+
   public static void aboba() {
     DungeonMasster DM = new DungeonMasster();
     Character vasya = new Character(15, 9999, "Vasya", DM);
     IronChestplate chestplate = new IronChestplate();
     chestplate.getObtained(vasya);
-    DM.add(vasya.weight, vasya);//  public Vampire(int health, int power, int weight, boolean isHostile, Room place) {
+    DM.add(vasya.weight,
+        vasya);//  public Vampire(int health, int power, int weight, boolean isHostile, Room place) {
     Creature[] entities = new Creature[1];
     for (int i = 0; i < 1; ++i) {
       entities[i] = new IvanKalinin(6, 1, 1,

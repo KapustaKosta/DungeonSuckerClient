@@ -44,6 +44,7 @@ public abstract class Weapon extends Item {
 
   public void useByCreature(Room room, int indexOfSkillToBeUsed) {
     this.recount();
+    // оружие можно выводить снизу от существа
     System.out.println("using " + this.name);
     if (indexOfSkillToBeUsed < this.amountOfCreatureSkills) {
       (creatureSkills[indexOfSkillToBeUsed]).use(room);

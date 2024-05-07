@@ -23,6 +23,7 @@ import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 public class DungeonSuckerGame extends ApplicationAdapter {
 
+  private static final boolean testFight = false;
   private static final Color BACKGROUND = Color.valueOf("#222222");
   private Character character;
   private Room room;
@@ -35,6 +36,11 @@ public class DungeonSuckerGame extends ApplicationAdapter {
 
   @Override
   public void create() {
+    if (testFight) {
+      FightTry.aboba();
+      FightTry.generateWeapons();
+      return;
+    }
     RoomsTexturesPack texturesPack = new RoomsTexturesPack();
     texturesPack.emptyRoomTexture = new Texture("emptyRoom.png");
     texturesPack.hauntedRoomTexture = new Texture("room.png");
@@ -49,7 +55,8 @@ public class DungeonSuckerGame extends ApplicationAdapter {
     Level level = new Level(mapGenerator, 10, 10);
     MapWindow mapWindow = new MapWindow(new IntVector2(0, 25), new IntVector2(10, 15), level);
 
-    InventoryWindow inventoryWindow = new InventoryWindow(new IntVector2(0, 15), new IntVector2(10, 0), 4, 4);
+    InventoryWindow inventoryWindow = new InventoryWindow(new IntVector2(0, 15),
+        new IntVector2(10, 0), 4, 4);
     Item exampleItem = new Item();
     exampleItem.name = "knife";
     exampleItem.texture = new Texture("knife.png");
@@ -73,24 +80,24 @@ public class DungeonSuckerGame extends ApplicationAdapter {
         "rat3");
     exampleRoom.hostileEntities = exampleHostileEntities;
     exampleRoom.friendlyEntities = new Character[]{exampleCharacter};
-    MainWindow mainWindow = new MainWindow(new IntVector2(10, 25), new IntVector2(42, 0), exampleRoom, new Vector2(400, 250), new Vector2(700, 250));
+    MainWindow mainWindow = new MainWindow(new IntVector2(10, 25), new IntVector2(42, 0),
+        exampleRoom, new Vector2(400, 250), new Vector2(700, 250));
     mainWindow.setCurrentEntityIndicator(exampleCharacter);
 
     anInterface = new Interface(mapWindow, inventoryWindow, mainWindow);
     Gdx.input.setInputProcessor(anInterface);
 
-    IntVector2 characterPosition = new IntVector2(level.getMap().spawn.getPosition().x, level.getMap().spawn.getPosition().y);
+    IntVector2 characterPosition = new IntVector2(level.getMap().spawn.getPosition().x,
+        level.getMap().spawn.getPosition().y);
     this.character = new Character(characterPosition, new Texture("character.png"), level, 1, 1);
-
-    /* Texture texture = new Texture("room.png");
-    room = new Room(new IntVector2(10, 10), texture, new DungeonMasster());*/
-    // FightTry.aboba();
-    // FightTry.generateWeapons();
   }
 
   @Override
   public void render() {
     this.update();
+    if (testFight) {
+      return;
+    }
     ScreenUtils.clear(BACKGROUND);
     anInterface.draw();
     character.draw();
