@@ -19,7 +19,7 @@ public class Entity implements Drawable {
 
     public Entity(IntVector2 position, Texture texture, Level level) {
         this.levelPosition = position;
-        this.position = new Vector2(position.x * Constants.cellSize, position.y * Constants.cellSize);
+        this.position = new Vector2(position.x * Constants.CELL_SIZE, position.y * Constants.CELL_SIZE);
         this.texture = texture;
         this.batch = new SpriteBatch();
         this.level = level;
@@ -33,7 +33,7 @@ public class Entity implements Drawable {
     }
 
     public void updateRealPosition() {
-        this.position = new Vector2(levelPosition.x * Constants.cellSize, levelPosition.y * Constants.cellSize);
+        this.position = new Vector2(levelPosition.x * Constants.CELL_SIZE, levelPosition.y * Constants.CELL_SIZE);
     }
 
 }
