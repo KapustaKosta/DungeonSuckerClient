@@ -2,9 +2,9 @@ package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
+import com.mipt.tp.dungeon_sucker.gameplay.items.ArtifactTypes.ArtifactTriggerableByBeingDamaged;
 
-public class IronChestplate extends Artifact {
+public class IronChestplate extends ArtifactTriggerableByBeingDamaged {
 
     public IronChestplate() {
         super();

@@ -1,10 +1,9 @@
 package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
-import com.mipt.tp.dungeon_sucker.gameplay.Damage;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
+import com.mipt.tp.dungeon_sucker.gameplay.items.ArtifactTypes.NonTriggerableArtifact;
 
-public class ScholarsRing extends Artifact {
+public class ScholarsRing extends NonTriggerableArtifact {
 
     public ScholarsRing() {
         super();
@@ -12,10 +11,6 @@ public class ScholarsRing extends Artifact {
         this.effectiveness = 5;
         this.weight = 1;
         this.name = "Scholar's ring; weight = " + this.weight;
-    }
-
-    @Override
-    public void triggerByBeingDamaged(Damage damage) {
     }
 
     public void getObtained(Entity entity) {

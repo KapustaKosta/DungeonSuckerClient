@@ -1,10 +1,9 @@
 package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
-import com.mipt.tp.dungeon_sucker.gameplay.Damage;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
+import com.mipt.tp.dungeon_sucker.gameplay.items.ArtifactTypes.NonTriggerableArtifact;
 
-public class KnightsRing extends Artifact {
+public class KnightsRing extends NonTriggerableArtifact {
 
     public KnightsRing() {
         super();
@@ -12,12 +11,6 @@ public class KnightsRing extends Artifact {
         this.description = "Makes its holder more strong";
         this.weight = 1;
         this.name = "Knight's ring; weight = " + this.weight;
-    }
-
-
-    @Override
-    public void triggerByBeingDamaged(Damage damage) {
-
     }
 
     public void getObtained(Entity entity) {

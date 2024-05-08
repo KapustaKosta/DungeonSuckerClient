@@ -1,9 +1,9 @@
 package com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth.DarkResistance;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.LightVulnerability;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.PointVulnerability;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForBoth.ResistancesToElement.DarkResistance;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.VulnerabilitiesToElement.LightVulnerability;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.VulnerabilitiesToDamageType.PointVulnerability;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForEnemies.VampireClaws;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 

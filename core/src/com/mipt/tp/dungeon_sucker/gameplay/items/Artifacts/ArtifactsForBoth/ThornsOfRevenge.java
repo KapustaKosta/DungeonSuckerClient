@@ -1,11 +1,11 @@
-package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth;
+package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForBoth;
 
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
+import com.mipt.tp.dungeon_sucker.gameplay.items.ArtifactTypes.ArtifactTriggerableByBeingDamaged;
 
-public class ThornsOfRevenge extends Artifact {
+public class ThornsOfRevenge extends ArtifactTriggerableByBeingDamaged {
     public ThornsOfRevenge() {
         super();
         this.triggerableByBeingDamaged = true;

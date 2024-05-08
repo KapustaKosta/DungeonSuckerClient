@@ -1,4 +1,4 @@
-package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth;
+package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForBoth.Masteries;
 
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.WeaponTypes;
@@ -17,6 +17,5 @@ public class KnifeMastery extends Mastery {
 
     @Override
     public void triggerByBeingDamaged(Damage damage) {
-        return;
     }
 }

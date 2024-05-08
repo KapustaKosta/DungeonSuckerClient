@@ -2,11 +2,11 @@ package com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth.*;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.DarkVulnerability;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.FireVulnerability;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.FrostVulnerability;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.LightVulnerability;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForBoth.ResistancesToElement.*;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.VulnerabilitiesToElement.DarkVulnerability;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.VulnerabilitiesToElement.FireVulnerability;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.VulnerabilitiesToElement.FrostVulnerability;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.VulnerabilitiesToElement.LightVulnerability;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForEnemies.ElementalPower;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 

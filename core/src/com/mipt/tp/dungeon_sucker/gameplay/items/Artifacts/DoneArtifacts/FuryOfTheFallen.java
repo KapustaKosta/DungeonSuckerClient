@@ -1,9 +1,8 @@
 package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts;
 
-import com.mipt.tp.dungeon_sucker.gameplay.Damage;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
+import com.mipt.tp.dungeon_sucker.gameplay.items.ArtifactTypes.ArtifactsTriggerableByDeath;
 
-public class FuryOfTheFallen extends Artifact {
+public class FuryOfTheFallen extends ArtifactsTriggerableByDeath {
 
     public FuryOfTheFallen() {
         super();
@@ -11,11 +10,6 @@ public class FuryOfTheFallen extends Artifact {
         this.weight = 2;
         this.description = "Makes you respawn after you die, but only once";
         this.name = "Fury Of The Fallen; weight = " + this.weight;
-    }
-
-    @Override
-    public void triggerByBeingDamaged(Damage damage) {
-
     }
 
     public void triggerByDeath() {

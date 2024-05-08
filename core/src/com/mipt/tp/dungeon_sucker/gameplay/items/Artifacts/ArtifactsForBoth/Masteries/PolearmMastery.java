@@ -1,15 +1,12 @@
-package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth;
+package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForBoth.Masteries;
 
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.WeaponTypes;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Mastery;
 
 public class PolearmMastery extends Mastery {
-    public WeaponTypes upgradable = WeaponTypes.polearm;
-
     public PolearmMastery() {
-        super();
-        this.upgradable = WeaponTypes.polearm;
+        super(WeaponTypes.polearm);
         this.triggerableByBeingDamaged = false;
         this.weight = 5;
         this.effectiveness = 3;
@@ -19,6 +16,5 @@ public class PolearmMastery extends Mastery {
 
     @Override
     public void triggerByBeingDamaged(Damage damage) {
-        return;
     }
 }

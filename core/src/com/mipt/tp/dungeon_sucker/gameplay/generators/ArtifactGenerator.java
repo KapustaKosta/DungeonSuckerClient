@@ -1,7 +1,11 @@
 package com.mipt.tp.dungeon_sucker.gameplay.generators;
 
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth.*;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForBoth.ResistancesToDamageType.MagicResistance;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForBoth.ResistancesToDamageType.PointResistance;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForBoth.ResistancesToDamageType.SmashResistance;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForBoth.ResistancesToElement.*;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForBoth.ThornsOfRevenge;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts.*;
 
 import java.util.Random;
@@ -39,7 +43,7 @@ public class ArtifactGenerator {
             case 12:
                 return new FrostResistance();
             case 13:
-                return new HardShell();
+                return new SmashResistance();
             case 14:
                 return new LightResistance();
             case 15:

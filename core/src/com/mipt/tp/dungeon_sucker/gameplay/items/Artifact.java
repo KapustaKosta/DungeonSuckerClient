@@ -16,11 +16,9 @@ public abstract class Artifact extends Item {
 
     public abstract void triggerByBeingDamaged(Damage damage);
 
-    public void triggerByEnteringRoom(Room room) {
-    }
+    public abstract void triggerByEnteringRoom(Room room);
 
-    public void triggerByDeath() {
-    }
+    public abstract void triggerByDeath();
 
     public void getObtained(Entity entity) {
         super.getObtained(entity);

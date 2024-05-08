@@ -7,7 +7,7 @@ import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Rat;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.WeaponGenerator;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth.HammerMastery;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForBoth.Masteries.HammerMastery;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts.IronChestplate;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForBoth.Club;

@@ -2,8 +2,8 @@ package com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.WeaponGenerator;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth.PointResistance;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.FragileBody;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForBoth.ResistancesToDamageType.PointResistance;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.VulnerabilitiesToDamageType.SmashVulnerability;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 import java.util.Random;
@@ -20,7 +20,7 @@ public class Skeleton extends Creature {
         super(3, 1, 3, isHostile, place, name);
         this.weapon = new WeaponGenerator().generateWeapon(this.power);
         this.weapon.getObtained(this);
-        new FragileBody().getObtained(this);
+        new SmashVulnerability().getObtained(this);
         new PointResistance().getObtained(this);
         this.name = name;
         this.experiencePerKill = 3;
@@ -31,7 +31,7 @@ public class Skeleton extends Creature {
         super(health, power, weight, isHostile, place, "Skeleton");
         this.weapon = new WeaponGenerator().generateWeapon(this.power);
         this.weapon.getObtained(this);
-        new FragileBody().getObtained(this);
+        new SmashVulnerability().getObtained(this);
         new PointResistance().getObtained(this);
         this.name = "Skeleton";
         this.experiencePerKill = 3;

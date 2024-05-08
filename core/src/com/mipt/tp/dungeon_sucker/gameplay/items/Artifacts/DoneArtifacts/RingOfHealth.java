@@ -1,10 +1,9 @@
 package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
-import com.mipt.tp.dungeon_sucker.gameplay.Damage;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
+import com.mipt.tp.dungeon_sucker.gameplay.items.ArtifactTypes.NonTriggerableArtifact;
 
-public class RingOfHealth extends Artifact {
+public class RingOfHealth extends NonTriggerableArtifact {
 
     public RingOfHealth() {
         super();
@@ -12,11 +11,6 @@ public class RingOfHealth extends Artifact {
         this.description = "Makes its holder more survivable";
         this.weight = 1;
         this.name = "Ring of Health; weight = " + this.weight;
-    }
-
-    @Override
-    public void triggerByBeingDamaged(Damage damage) {
-
     }
 
     public void getObtained(Entity entity) {

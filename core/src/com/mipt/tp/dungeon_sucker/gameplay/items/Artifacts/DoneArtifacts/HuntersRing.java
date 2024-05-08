@@ -2,9 +2,9 @@ package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
+import com.mipt.tp.dungeon_sucker.gameplay.items.ArtifactTypes.NonTriggerableArtifact;
 
-public class HuntersRing extends Artifact {
+public class HuntersRing extends NonTriggerableArtifact {
     int effectiveness = 5;
 
     public HuntersRing() {
