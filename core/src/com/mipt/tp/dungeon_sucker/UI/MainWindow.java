@@ -103,7 +103,7 @@ public class MainWindow extends Window {
     }
 
     @Override
-    public void draw() {
+    public void drawInLibGDX() {
         drawBoard();
 
         // Отрисовка друзей
@@ -117,7 +117,7 @@ public class MainWindow extends Window {
             lastX += friendlyEntitiesOffset;
 
             friendlyEntitiesHealth[i].setText(getHealthBar(room.friendlyEntities[i]));
-            friendlyEntitiesHealth[i].draw();
+            friendlyEntitiesHealth[i].drawInLibGDX();
         }
 
         // Отрисовка врагов
@@ -131,7 +131,7 @@ public class MainWindow extends Window {
             lastX += hostileEntitiesOffset;
 
             hostileEntitiesHealth[i].setText(getHealthBar(room.hostileEntities[i]));
-            hostileEntitiesHealth[i].draw();
+            hostileEntitiesHealth[i].drawInLibGDX();
         }
 
         if (currentEntityIndicatorPosition != null) {
@@ -141,7 +141,7 @@ public class MainWindow extends Window {
             currentEntityIndicatorBatch.end();
         }
 
-        buttonsGroupUI.draw();
+        buttonsGroupUI.drawInLibGDX();
     }
 
     public void onMouseClick(Entity hostileEntity) {

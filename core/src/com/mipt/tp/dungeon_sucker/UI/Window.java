@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
-public class Window implements LibGDXDrawable {
+public class Window implements Drawable {
 
     // Todo: Переписать на просто Vector2
     protected IntVector2 topLeftPoint;
@@ -54,8 +54,13 @@ public class Window implements LibGDXDrawable {
     }
 
     @Override
-    public void draw() {
+    public void drawInLibGDX() {
         drawBoard();
+    }
+
+    @Override
+    public void drawInConsole() {
+
     }
 
     protected boolean isPointInWindow(int x, int y) {

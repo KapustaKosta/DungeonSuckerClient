@@ -99,7 +99,7 @@ public class DungeonSuckerGame extends ApplicationAdapter {
       return;
     }
     ScreenUtils.clear(BACKGROUND);
-    anInterface.draw();
-    character.draw();
+    anInterface.drawInLibGDX();
+    character.drawInLibGDX();
   }
 }

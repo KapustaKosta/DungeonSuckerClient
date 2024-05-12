@@ -65,7 +65,7 @@ public class ButtonsGroup {
     public void drawButtons() {
         for (Button button :
                 buttons) {
-            button.draw();
+            button.drawInLibGDX();
         }
     }
 }

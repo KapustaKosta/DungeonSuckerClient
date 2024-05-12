@@ -46,12 +46,17 @@ public class ButtonsGroupUI implements Drawable {
     }
 
     @Override
-    public void draw() {
+    public void drawInLibGDX() {
         batch.begin();
         batch.draw(texture, leftTopCorner.x, leftTopCorner.y, size.x, size.y);
         batch.end();
         if (buttonsGroup != null) {
             buttonsGroup.drawButtons();
         }
+    }
+
+    @Override
+    public void drawInConsole() {
+
     }
 }

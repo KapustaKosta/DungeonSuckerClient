@@ -63,10 +63,15 @@ public class Room implements Drawable {
     }
 
     @Override
-    public void draw() {
+    public void drawInLibGDX() {
         batch.begin();
         batch.draw(texture, levelPosition.x * Constants.CELL_SIZE, levelPosition.y * Constants.CELL_SIZE);
         batch.end();
+    }
+
+    @Override
+    public void drawInConsole() {
+
     }
 
     public void drawWithAnchor(IntVector2 anchor) {

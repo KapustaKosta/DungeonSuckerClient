@@ -4,7 +4,7 @@ import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.InputProcessor;
 import com.mipt.tp.dungeon_sucker.helper.Constants;
 
-public class Interface implements LibGDXDrawable, InputProcessor {
+public class Interface implements Drawable, InputProcessor {
     private MapWindow mapWindow;
     private InventoryWindow inventoryWindow;
     private MainWindow mainWindow;
@@ -16,11 +16,15 @@ public class Interface implements LibGDXDrawable, InputProcessor {
     }
 
     @Override
-    public void draw() {
-        mapWindow.draw();
-        inventoryWindow.draw();
-        ;
-        mainWindow.draw();
+    public void drawInLibGDX() {
+        mapWindow.drawInLibGDX();
+        inventoryWindow.drawInLibGDX();;
+        mainWindow.drawInLibGDX();
+    }
+
+    @Override
+    public void drawInConsole() {
+
     }
 
     @Override

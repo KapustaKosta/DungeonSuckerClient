@@ -75,10 +75,15 @@ public class Entity extends InteractiveObject implements Drawable {
     }
 
     @Override
-    public void draw() {
+    public void drawInLibGDX() {
         batch.begin();
         batch.draw(texture, position.x, position.y);
         batch.end();
+    }
+
+    @Override
+    public void drawInConsole() {
+
     }
 
     public void updateRealPosition() {

@@ -3,9 +3,9 @@ package com.mipt.tp.dungeon_sucker.UI.text;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.mipt.tp.dungeon_sucker.UI.LibGDXDrawable;
+import com.mipt.tp.dungeon_sucker.UI.Drawable;
 
-public class Text implements LibGDXDrawable {
+public class Text implements Drawable {
     private BitmapFont font;
     private String text;
     private SpriteBatch batch;
@@ -32,9 +32,14 @@ public class Text implements LibGDXDrawable {
         this.text = text;
     }
 
-    public void draw() {
+    public void drawInLibGDX() {
         batch.begin();
         font.draw(batch, text, position.x, position.y);
         batch.end();
+    }
+
+    @Override
+    public void drawInConsole() {
+
     }
 }

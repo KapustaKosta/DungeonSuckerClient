@@ -19,7 +19,7 @@ public class Cell extends Window {
     }
 
     @Override
-    public void draw() {
+    public void drawInLibGDX() {
         drawBoard();
         if (item == null) return;
 

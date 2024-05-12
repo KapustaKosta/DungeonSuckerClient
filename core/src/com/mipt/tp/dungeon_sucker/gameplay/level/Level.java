@@ -34,12 +34,17 @@ public class Level implements Drawable {
     }
 
     @Override
-    public void draw() {
+    public void drawInLibGDX() {
         for (int i = 0; i < map.rooms.length; i++) {
             for (int j = 0; j < map.rooms[0].length; j++) {
                 map.rooms[i][j].drawWithAnchor(anchor);
             }
         }
+    }
+
+    @Override
+    public void drawInConsole() {
+
     }
 
     public void setAnchor(IntVector2 anchor) {

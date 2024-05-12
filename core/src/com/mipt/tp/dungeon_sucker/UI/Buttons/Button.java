@@ -47,10 +47,15 @@ public class Button implements Drawable {
     }
 
     @Override
-    public void draw() {
+    public void drawInLibGDX() {
         batch.begin();
         batch.draw(texture, leftTopCorner.x, leftTopCorner.y, size.x, size.y);
         batch.end();
-        text.draw();
+        text.drawInLibGDX();
+    }
+
+    @Override
+    public void drawInConsole() {
+
     }
 }
