@@ -119,7 +119,9 @@ public class Character extends Entity {
         // todo: Костя, это тоже на тебе, ибо я не знаю, как это будет выглядеть. Перепиши с нуля, аналогично, на все могу ответить.
         // Это с точки зрения бэкенда просто, я добавил все нужные методы. Просто считай инфу и сделай, что хочешь
         if (!Constants.TEST_FIGHT) {
+
             ButtonsGroup.getInstance().clear();
+            ButtonsGroup.getInstance().setArticle("Choose item to leave");
             for (int i = 0; i < this.items.size(); i++) {
                 int finalI = i;
                 ButtonsGroup.getInstance().addButton(new Button(this.items.get(finalI).name, args -> this.itemToLeave(String.valueOf(finalI))));
@@ -138,6 +140,7 @@ public class Character extends Entity {
         if (this.isFighting) {
             if (!Constants.TEST_FIGHT) {
                 ButtonsGroup.getInstance().clear();
+                ButtonsGroup.getInstance().setArticle("Choose escape or attack");
                 ButtonsGroup.getInstance().addButton(new Button("escape", args -> this.tryToEscape()));
                 ButtonsGroup.getInstance().addButton(new Button("attack", args -> this.attack()));
             } else {
@@ -151,9 +154,10 @@ public class Character extends Entity {
         } else {
             if (!Constants.TEST_FIGHT) {
                 ButtonsGroup.getInstance().clear();
-                ButtonsGroup.getInstance().addButton(new Button("escape", args -> this.attack()));
-                ButtonsGroup.getInstance().addButton(new Button("escape", args -> this.interractWithChest()));
-                ButtonsGroup.getInstance().addButton(new Button("escape", args -> this.askToChangeRoom()));
+                ButtonsGroup.getInstance().setArticle("Choose action");
+                ButtonsGroup.getInstance().addButton(new Button("attack", args -> this.attack()));
+                ButtonsGroup.getInstance().addButton(new Button("interact with chest", args -> this.interractWithChest()));
+                ButtonsGroup.getInstance().addButton(new Button("change room", args -> this.askToChangeRoom()));
             } else {
                 int i = askWhatToDoWhenNotFighting();
                 if (i == 1) {

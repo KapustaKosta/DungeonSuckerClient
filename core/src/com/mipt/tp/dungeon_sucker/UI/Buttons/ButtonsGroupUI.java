@@ -25,6 +25,7 @@ public class ButtonsGroupUI implements Drawable {
         buttonsGroup = new ButtonsGroup(size, leftTopCorner);
 
         // пример
+        buttonsGroup.setArticle("Your choice:");
         for (int i = 0; i < 4; i++) {
             int finalI = i;
             Button button = new Button(i + "", new Action() {
