@@ -26,6 +26,7 @@ public class DamagingSkill extends Skill {
 
   public void chooseVictimToAttack(Room room, Action listener) {
     ButtonsGroup.getInstance().clear();
+    ButtonsGroup.getInstance().setArticle("Choose enemy");
     for (int i = 0; i < (room).hostileEntities.length; ++i) {
       if (room.hostileEntities[i] != null) {
         if (room.hostileEntities[i].isAlive) {

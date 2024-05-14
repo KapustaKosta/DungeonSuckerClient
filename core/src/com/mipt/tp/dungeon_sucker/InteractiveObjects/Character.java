@@ -5,10 +5,12 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.mipt.tp.dungeon_sucker.UI.Buttons.Button;
 import com.mipt.tp.dungeon_sucker.UI.Buttons.ButtonsGroup;
+import com.mipt.tp.dungeon_sucker.UI.Interface;
 import com.mipt.tp.dungeon_sucker.gameplay.Action;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
+import com.mipt.tp.dungeon_sucker.gameplay.level.Map;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
@@ -21,33 +23,34 @@ public class Character extends Entity {
     private int baseHealth;
 
     public void getInput() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
-            if (location.canIGoTo(levelPosition.y + 1, levelPosition.x)) {
-                levelPosition.y += 1;
-                updateRealPosition();
-            }
+        if (!this.isFighting) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
+                if (location.canIGoTo(levelPosition.y + 1, levelPosition.x)) {
+                    levelPosition.y += 1;
+                    updateRealPosition();
+                }
 
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
-            if (location.canIGoTo(levelPosition.y, levelPosition.x + 1)) {
-                levelPosition.x += 1;
-                updateRealPosition();
             }
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
-            if (location.canIGoTo(levelPosition.y, levelPosition.x - 1)) {
-                levelPosition.x -= 1;
-                updateRealPosition();
+            if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
+                if (location.canIGoTo(levelPosition.y, levelPosition.x + 1)) {
+                    levelPosition.x += 1;
+                    updateRealPosition();
+                }
             }
+            if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
+                if (location.canIGoTo(levelPosition.y, levelPosition.x - 1)) {
+                    levelPosition.x -= 1;
+                    updateRealPosition();
+                }
 
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-            if (location.canIGoTo(levelPosition.y - 1, levelPosition.x)) {
-                levelPosition.y -= 1;
-                updateRealPosition();
+            }
+            if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+                if (location.canIGoTo(levelPosition.y - 1, levelPosition.x)) {
+                    levelPosition.y -= 1;
+                    updateRealPosition();
+                }
             }
         }
-
     }
 
     public Character() {

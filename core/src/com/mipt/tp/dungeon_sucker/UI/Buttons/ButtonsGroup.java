@@ -69,9 +69,11 @@ public class ButtonsGroup {
     }
 
     public void pushBtnOnPos(int posX) {
-        int num = posX / (buttonGroupSize.x / buttons.size());
-        if (num < buttons.size()) {
-            buttons.get(num).push();
+        if (!buttons.isEmpty()) {
+            int num = posX / (buttonGroupSize.x / buttons.size());
+            if (num < buttons.size()) {
+                buttons.get(num).push();
+            }
         }
     }
 
