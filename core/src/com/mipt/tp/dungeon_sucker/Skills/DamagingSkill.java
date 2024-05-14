@@ -11,7 +11,6 @@ import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class DamagingSkill extends Skill {
 
