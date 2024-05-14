@@ -24,10 +24,10 @@ public class Sword extends Weapon {
         this.dexterityScale = 0.3;
         this.weight = 5;
         this.recountScales();
-        // public DamageOneEntity(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage)
-        // public DamageOneEntityWithCrit(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, int numerator, int divider, double multiplier) {
     }
 
+    // Todo: дублируемый код убрать
+    // Todo: Сделать класс со static final полями, в которых будут настраиваться все значения (все числа ниже)
     public void getObtained(Entity holder) {
         super.getObtained(holder);
         this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Slash,
@@ -46,6 +46,8 @@ public class Sword extends Weapon {
                 this, this.power, DamageTypeSet.Point, this.element, true, 0.5, this.holder.isHostile));
     }
 
+    // Todo: дублируемый код убрать
+    // Todo: Сделать класс со static final полями, в которых будут настраиваться все значения (все числа ниже)
     private void recountScales() {
         if (this.rarity == RaritySet.Poor) {
             this.strengthScale /= 1.25;
@@ -71,11 +73,12 @@ public class Sword extends Weapon {
         }
     }
 
+    // Todo: дублируемый код убрать
     public void use(Room room) {
         this.recount();
-        int index = getSkillIndex();
-        System.out.println(this.skills[index].getClass());
-        this.skills[index].use(room);
-        this.recount();
+        getSkillIndex(args -> {
+            this.skills[args[0]].use(room);
+            this.recount();
+        });
     }
 }

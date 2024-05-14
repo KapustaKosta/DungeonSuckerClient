@@ -22,13 +22,13 @@ public class GreatSword extends Weapon {
         this.rarity = rarity;
         this.weight = 5;
         this.recountScales();
-        // public DamageOneEntity(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage)
-        //public DamageThreeEntities(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, double firstCoefficient, double secondCoefficient, double thirdCoefficient) {
         this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Slash, this.element, true, 0.3));
         this.generateSkill(new DamageThreeEntities(this, this.power, DamageTypeSet.Slash, this.element, true, 0.3, 0.5, 1, 0.5));
         this.generateSkill(new DamageThreeEntities(this, this.power, DamageTypeSet.Slash, this.element, true, 0.3, 0.75, 0.5, 0.75));
     }
 
+    // Todo: дублируемый код убрать
+    // Todo: Сделать класс со static final полями, в которых будут настраиваться все значения (все числа ниже)
     public void getObtained(Entity holder) {
         super.getObtained(holder);
         this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Slash,
@@ -49,6 +49,8 @@ public class GreatSword extends Weapon {
                 0.3, 0.75, 0.5, 0.75, this.holder.isHostile));
     }
 
+    // Todo: дублируемый код убрать
+    // Todo: Сделать класс со static final полями, в которых будут настраиваться все значения (все числа ниже)
     private void recountScales() {
         if (this.rarity == RaritySet.Poor) {
             this.strengthScale /= 1.25;
@@ -70,11 +72,12 @@ public class GreatSword extends Weapon {
         }
     }
 
+    // Todo: дублируемый код убрать
     public void use(Room room) {
         this.recount();
-        int index = getSkillIndex();
-        System.out.println(this.skills[index].getClass());
-        this.skills[index].use(room);
-        this.recount();
+        getSkillIndex(args -> {
+            this.skills[args[0]].use(room);
+            this.recount();
+        });
     }
 }

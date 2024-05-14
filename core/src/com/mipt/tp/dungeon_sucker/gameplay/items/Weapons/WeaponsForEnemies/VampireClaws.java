@@ -18,7 +18,6 @@ public class VampireClaws extends Weapon {
         this.strengthScale = 0.2;
         this.damage = damage;
         this.name = "Claws of a vampire";
-        // public DamageRandomEnemy(Weapon weapon, int damage, String type, String element, boolean isMelee, double percentOfElementDamage, boolean isUsedByHostile)
     }
 
     public void getObtained(Entity holder) {
