@@ -10,6 +10,7 @@ import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
+import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 import java.util.Random;
@@ -77,12 +78,9 @@ public class Character extends Entity {
         this.items.add(item);
     }
 
-    public void chooseItemToLeave() {
-        // todo: Костя, это тоже на тебе, ибо я не знаю, как это будет выглядеть. Перепиши с нуля, аналогично, на все могу ответить.
-        // Это с точки зрения бэкенда просто, я добавил все нужные методы. Просто считай инфу и сделай, что хочешь
+    private void itemToLeave(String thing) {
         int index = 0;
         System.out.println("Choose item to leave (it'll wait you in a rooms chest)");
-        Scanner in = new Scanner(System.in);
         int chosen = -1;
         for (int i = 0; i < this.items.size() - 5; i = index) {
             for (int j = 0; j < 5; ++j) {
@@ -90,7 +88,7 @@ public class Character extends Entity {
                 ++index;
                 System.out.println();
             }
-            String input = in.nextLine();
+            String input = thing;
             try {
                 chosen = Integer.parseInt(input) + i - 1;
                 break;
@@ -103,7 +101,7 @@ public class Character extends Entity {
                 System.out.printf((index % 5 + 1) + " - " + this.items.get(index).name);
                 System.out.println();
             }
-            String input = in.nextLine();
+            String input = thing;
             try {
                 chosen = Integer.parseInt(input) + (this.items.size() - 1) / 5 * 5;
             } catch (Exception ignored) {
@@ -116,29 +114,54 @@ public class Character extends Entity {
         this.weapon.recount();
     }
 
+    public void chooseItemToLeave() {
+        // todo: Костя, это тоже на тебе, ибо я не знаю, как это будет выглядеть. Перепиши с нуля, аналогично, на все могу ответить.
+        // Это с точки зрения бэкенда просто, я добавил все нужные методы. Просто считай инфу и сделай, что хочешь
+        if (!Constants.TEST_FIGHT) {
+            ButtonsGroup.getInstance().clear();
+            for (int i = 0; i < this.items.size(); i++) {
+                int finalI = i;
+                ButtonsGroup.getInstance().addButton(new Button(this.items.get(finalI).name, args -> this.itemToLeave(String.valueOf(finalI))));
+            }
+        } else {
+            System.out.println("Choose item to leave");
+            Scanner in = new Scanner(System.in);
+            String k = in.nextLine();
+            itemToLeave(k);
+        }
+    }
+
 
     public void makeMove() {
         super.makeFictionalMove();
         if (this.isFighting) {
-            int i = askIfWantsToEscape();
-
-            ButtonsGroup.getInstance().clear();
-            ButtonsGroup.getInstance().addButton(new Button("escape", args -> this.tryToEscape()));
-            ButtonsGroup.getInstance().addButton(new Button("escape", args -> this.attack()));
-
-//      if (i == 1) {
-//        this.tryToEscape();
-//      } else {
-//        this.attack();
-//      }
-        } else {
-            int i = askWhatToDoWhenNotFighting();
-            if (i == 1) {
-                this.attack();
-            } else if (i == 2) {
-                this.interractWithChest();
+            if (!Constants.TEST_FIGHT) {
+                ButtonsGroup.getInstance().clear();
+                ButtonsGroup.getInstance().addButton(new Button("escape", args -> this.tryToEscape()));
+                ButtonsGroup.getInstance().addButton(new Button("attack", args -> this.attack()));
             } else {
-                this.askToChangeRoom();
+                int i = askIfWantsToEscape();
+                if (i == 1) {
+                    this.tryToEscape();
+                } else {
+                    this.attack();
+                }
+            }
+        } else {
+            if (!Constants.TEST_FIGHT) {
+                ButtonsGroup.getInstance().clear();
+                ButtonsGroup.getInstance().addButton(new Button("escape", args -> this.attack()));
+                ButtonsGroup.getInstance().addButton(new Button("escape", args -> this.interractWithChest()));
+                ButtonsGroup.getInstance().addButton(new Button("escape", args -> this.askToChangeRoom()));
+            } else {
+                int i = askWhatToDoWhenNotFighting();
+                if (i == 1) {
+                    this.attack();
+                } else if (i == 2) {
+                    this.interractWithChest();
+                } else {
+                    this.askToChangeRoom();
+                }
             }
         }
         super.makeMove();
@@ -152,13 +175,6 @@ public class Character extends Entity {
     }
 
     private int askIfWantsToEscape() {
-        ButtonsGroup.getInstance().addButton(new Button("YES", new Action() {
-            @Override
-            public void run(int[] args) {
-
-            }
-        }));
-
         Scanner in = new Scanner(System.in);
         System.out.println("wanna try to escape?");
         System.out.println("1 - YES; 0 - NO");

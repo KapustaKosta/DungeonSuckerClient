@@ -3,6 +3,7 @@ package com.mipt.tp.dungeon_sucker.helper;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 public class Constants {
+    public static boolean TEST_FIGHT = false;
     public static final int CELL_SIZE = 36;
     public static final int SCREEN_HEIGHT = 900;
     public static final int SCREEN_WITH = 1512;
