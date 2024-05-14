@@ -26,7 +26,7 @@ public class Button implements Drawable {
     public void setPos(IntVector2 newPos) {
         this.leftTopCorner = newPos;
         if (size != null) {
-            text.position = new Vector2((float) (leftTopCorner.x + size.x / 2),
+            text.position = new Vector2((float) (leftTopCorner.x),
                     (float) (leftTopCorner.y + size.y / 2));
         }
     }
@@ -34,7 +34,7 @@ public class Button implements Drawable {
     public void setSize(IntVector2 newSize) {
         this.size = newSize;
         if (leftTopCorner != null) {
-            text.position = new Vector2((float) (leftTopCorner.x + size.x / 2),
+            text.position = new Vector2((float) (leftTopCorner.x),
                     (float) (leftTopCorner.y + size.y / 2));
         }
     }

@@ -11,7 +11,6 @@ import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class DamagingSkill extends Skill {
 
@@ -27,6 +26,7 @@ public class DamagingSkill extends Skill {
 
   public void chooseVictimToAttack(Room room, Action listener) {
     ButtonsGroup.getInstance().clear();
+    ButtonsGroup.getInstance().setArticle("Choose enemy");
     for (int i = 0; i < (room).hostileEntities.length; ++i) {
       if (room.hostileEntities[i] != null) {
         if (room.hostileEntities[i].isAlive) {

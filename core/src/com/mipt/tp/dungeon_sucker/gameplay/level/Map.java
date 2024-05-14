@@ -8,6 +8,24 @@ public class Map {
     public Spawn spawn;
     public ExitRoom exit;
 
+    private static Map map;
+
+    static void setInstance(Map newMap) {
+        map = newMap;
+    }
+
+    public static Map getInstance() {
+        return map;
+    }
+
+    public Room getRoom(int y, int x) {
+        try {
+            return rooms[y][x];
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public Map(Room[][] rooms, Spawn spawn, ExitRoom exit) {
         this.rooms = rooms;
         this.spawn = spawn;

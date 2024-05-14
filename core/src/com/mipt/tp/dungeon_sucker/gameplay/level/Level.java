@@ -20,6 +20,7 @@ public class Level implements Drawable {
   private void generateMap() {
     int targetRoomCount = RandomNumGenerator.generateFromRange(15, 42);
     map = mapGenerator.generate(map, targetRoomCount);
+    Map.setInstance(map);
   }
 
   public Map getMap() {

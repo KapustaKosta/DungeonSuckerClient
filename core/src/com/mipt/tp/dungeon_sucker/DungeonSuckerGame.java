@@ -14,6 +14,7 @@ import com.mipt.tp.dungeon_sucker.UI.InventoryWindow;
 import com.mipt.tp.dungeon_sucker.UI.MainWindow;
 import com.mipt.tp.dungeon_sucker.UI.MapWindow;
 import com.mipt.tp.dungeon_sucker.UI.texturePacks.RoomsTexturesPack;
+import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
@@ -31,6 +32,7 @@ public class DungeonSuckerGame extends ApplicationAdapter {
 
   private void update() {
     character.getInput();
+    DungeonMasster.getInstance().move();
   }
 
   @Override
@@ -40,6 +42,7 @@ public class DungeonSuckerGame extends ApplicationAdapter {
       FightTry.generateWeapons();
       return;
     }
+
     RoomsTexturesPack texturesPack = new RoomsTexturesPack();
     texturesPack.emptyRoomTexture = new Texture("emptyRoom.png");
     texturesPack.hauntedRoomTexture = new Texture("room.png");
@@ -89,6 +92,8 @@ public class DungeonSuckerGame extends ApplicationAdapter {
     IntVector2 characterPosition = new IntVector2(level.getMap().spawn.getPosition().x,
         level.getMap().spawn.getPosition().y);
     this.character = new Character(characterPosition, new Texture("character.png"), level, 1, 1);
+    // FightTry.aboba();
+    // FightTry.generateWeapons();
   }
 
   @Override

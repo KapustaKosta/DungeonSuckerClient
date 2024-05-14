@@ -76,6 +76,7 @@ public abstract class Weapon extends Item {
 
   public void getSkillIndex(Action listener) {
     ButtonsGroup.getInstance().clear();
+    ButtonsGroup.getInstance().setArticle("Choose skill:");
     for (int i = 0; i < this.skills.length; ++i) {
       final int index = i;
       ButtonsGroup.getInstance()
@@ -86,6 +87,7 @@ public abstract class Weapon extends Item {
 
   public void getSkillIndexUntilPredicate(Action listener, Predicate predicate) {
     ButtonsGroup.getInstance().clear();
+    ButtonsGroup.getInstance().setArticle("Choose your skill:");
     for (int i = 0; i < this.skills.length; ++i) {
       final int index = i;
       ButtonsGroup.getInstance()

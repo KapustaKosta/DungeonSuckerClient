@@ -18,7 +18,7 @@ import java.util.LinkedList;
 
 public class FightTry {
     public static void aboba() {
-        DungeonMasster DM = new DungeonMasster();
+        DungeonMasster DM = DungeonMasster.getInstance();
         Character vasya = new Character(15, 9999, "Vasya", DM);
         IronChestplate chestplate = new IronChestplate();
         chestplate.getObtained(vasya);
