@@ -51,7 +51,6 @@ public abstract class Weapon extends Item {
 
   public void useByCreature(Room room, int indexOfSkillToBeUsed) {
     this.recount();
-    //System.out.println("using " + this.name);
     if (indexOfSkillToBeUsed < this.amountOfCreatureSkills) {
       (creatureSkills[indexOfSkillToBeUsed]).use(room);
     }
@@ -80,7 +79,7 @@ public abstract class Weapon extends Item {
     listeners.add(listener);
   }
 
-  public void getSkillIndexUntilPredicate(Action listener, WeaponPredicate predicate) {
+  public void getSkillIndexUntilPredicate(Action listener, Predicate predicate) {
     ButtonsGroup.getInstance().clear();
     for (int i = 0; i < this.skills.length; ++i) {
       final int index = i;
@@ -91,7 +90,7 @@ public abstract class Weapon extends Item {
     listeners.add(listener);
   }
 
-  public void onGetSkillIndexWithPredicate(int index, WeaponPredicate predicate) {
+  public void onGetSkillIndexWithPredicate(int index, Predicate predicate) {
     if (!predicate.valueFits(index)) {
       getSkillIndexUntilPredicate(null, predicate);
       return;

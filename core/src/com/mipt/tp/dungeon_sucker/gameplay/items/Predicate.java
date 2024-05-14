@@ -1,6 +1,6 @@
 package com.mipt.tp.dungeon_sucker.gameplay.items;
 
-public interface WeaponPredicate {
+public interface Predicate {
 
   boolean valueFits(int value);
 }

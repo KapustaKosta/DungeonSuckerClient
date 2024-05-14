@@ -37,7 +37,6 @@ public class SummonAlly extends Skill {
     }
 
     public void use(Room room) {
-        System.out.println("SUMMON!");
         switch (this.creatureToSummon) {
             case Bat: {
                 room.insert(new Bat(1, this.power, 3, this.createsHostile, room), this.createsHostile);

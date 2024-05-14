@@ -14,6 +14,7 @@ public class Damage {
     public int elementDamage; // значение стихийного урона
     public int totalDamage;
 
+    // Todo: переписать два конструктора на паттерн Builder
     public Damage(Entity dealer, DamageTypeSet type, ElementSet element, boolean isMelee, double percentOfElementDamage, int totalDamage) {
         this.dealer = dealer;
         this.type = type;
