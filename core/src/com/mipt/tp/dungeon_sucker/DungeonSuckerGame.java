@@ -19,11 +19,10 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.logic.DFSMapGenerator;
 import com.mipt.tp.dungeon_sucker.gameplay.level.logic.MapGenerator;
+import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 public class DungeonSuckerGame extends ApplicationAdapter {
-
-  private static final boolean testFight = false;
   private static final Color BACKGROUND = Color.valueOf("#222222");
   private Character character;
   private Room room;
@@ -36,7 +35,7 @@ public class DungeonSuckerGame extends ApplicationAdapter {
 
   @Override
   public void create() {
-    if (testFight) {
+    if (Constants.TEST_FIGHT) {
       FightTry.aboba();
       FightTry.generateWeapons();
       return;
@@ -95,7 +94,7 @@ public class DungeonSuckerGame extends ApplicationAdapter {
   @Override
   public void render() {
     this.update();
-    if (testFight) {
+    if (Constants.TEST_FIGHT) {
       return;
     }
     ScreenUtils.clear(BACKGROUND);
