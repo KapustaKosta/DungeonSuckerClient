@@ -8,7 +8,7 @@ import com.mipt.tp.dungeon_sucker.math.IntVector2;
 import java.util.ArrayList;
 
 public class ButtonsGroup {
-    private String article = "Your choice:";
+    private String article = "Test test test test";
     private ArrayList<Button> buttons;
     private final IntVector2 buttonGroupSize;
     private int realButtonGroupSizeX;
