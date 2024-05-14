@@ -1,11 +1,14 @@
 package com.mipt.tp.dungeon_sucker.UI.Buttons;
 
+import com.badlogic.gdx.math.Vector2;
+import com.mipt.tp.dungeon_sucker.UI.text.Text;
 import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 import java.util.ArrayList;
 
 public class ButtonsGroup {
+    private String article = "Your choice:";
     private ArrayList<Button> buttons;
     private final IntVector2 buttonGroupSize;
     private int realButtonGroupSizeX;
@@ -13,18 +16,23 @@ public class ButtonsGroup {
     private IntVector2 buttonSize;
     private int gapX;
     private int gapY;
-    private IntVector2 leftTopCorner;
+    private IntVector2 leftDownCorner;
 
     private static ButtonsGroup buttonsGroup;
+
+    private Text articleText;
 
     public static ButtonsGroup getInstance() {
         if (buttonsGroup != null) return buttonsGroup;
         return null;
     }
 
-    public ButtonsGroup(IntVector2 buttonGroupSize, IntVector2 leftTopCorner) {
+    public ButtonsGroup(IntVector2 buttonGroupSize, IntVector2 leftDownCorner) {
         this.buttonGroupSize = buttonGroupSize;
-        this.leftTopCorner = leftTopCorner;
+        articleText = new Text(article);
+        this.articleText.position = new Vector2(new Vector2(leftDownCorner.x, leftDownCorner.y + buttonGroupSize.y + 42));
+        this.leftDownCorner = leftDownCorner;
+
         buttons = new ArrayList<>();
         buttonsGroup = this;
     }
@@ -32,6 +40,11 @@ public class ButtonsGroup {
     public void addButton(Button newButton) {
         buttons.add(newButton);
         resetButtonSizes();
+    }
+
+    public void setArticle(String newArticle) {
+        this.article = newArticle;
+        articleText.setText(article);
     }
 
     public void clear() {
@@ -45,10 +58,10 @@ public class ButtonsGroup {
             realButtonGroupSizeX = buttonGroupSize.x - gapX * (buttons.size() + 1);
             buttonSize = new IntVector2(realButtonGroupSizeX / buttons.size(),
                     buttonGroupSize.y * (100 - 2 * Constants.BUTTON_GROUP_GAP_PERCENTS) / 100);
-            int currPos = gapX + leftTopCorner.x;
+            int currPos = gapX + leftDownCorner.x;
             for (Button button :
                     buttons) {
-                button.setPos(new IntVector2(currPos, leftTopCorner.y + gapY));
+                button.setPos(new IntVector2(currPos, leftDownCorner.y + gapY));
                 button.setSize(buttonSize);
                 currPos += gapX + buttonSize.x;
             }
@@ -63,6 +76,7 @@ public class ButtonsGroup {
     }
 
     public void drawButtons() {
+        articleText.drawInLibGDX();
         for (Button button :
                 buttons) {
             button.drawInLibGDX();
