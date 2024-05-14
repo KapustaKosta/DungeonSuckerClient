@@ -50,6 +50,7 @@ public class Character extends Entity {
 
     }
 
+    // Todo: слишком много конструкторов, используй паттерн builder
     public Character() {
         super(new IntVector2(), null, null);
         this.isCharacter = true;
