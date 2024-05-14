@@ -10,70 +10,64 @@ import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.WeaponTypes;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
+import com.mipt.tp.dungeon_sucker.helper.WeaponConfis.DaggerConfig;
 
 public class Dagger extends Weapon {
 
-  public Dagger(int level, int damage, String name, RaritySet rarity) {
-    super(3);
-    this.type = WeaponTypes.knife;
-    this.power = damage * level;
-    this.level = level;
-    this.name = name;
-    this.dexterityScale = 0.5;
-    this.rarity = rarity;
-    this.weight = 5;
-    this.recountScales();
-  }
+    public Dagger(int level, int damage, String name, RaritySet rarity) {
+        super(3);
+        this.type = WeaponTypes.knife;
+        this.power = damage * level;
+        this.level = level;
+        this.name = name;
+        this.dexterityScale = DaggerConfig.BASE_DEXTERITY_SCALE;
+        this.rarity = rarity;
+        this.weight = 5;
+        this.recountScales();
+    }
+    public void getObtained(Entity holder) {
+        super.getObtained(holder);
+        this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Point, this.element,
+                true, DaggerConfig.PERCENT_OF_ELEMENTAL_DAMAGE));
+        this.generateSkill(new DamageOneEntityWithCrit(this, this.power,
+                DaggerConfig.COEFFICIENT_TO_CRIT_IF_NO_CRIT, DamageTypeSet.Point,
+                this.element, true,
+                DaggerConfig.PERCENT_OF_ELEMENTAL_DAMAGE,
+                DaggerConfig.NUMERATOR_OF_CHANCE_TO_CRIT,
+                DaggerConfig.DIVIDER_OF_CHANCE_TO_CRIT,
+                DaggerConfig.CRIT_MULTIPLIER));
+        this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Slash,
+                this.element, true, DaggerConfig.PERCENT_OF_ELEMENTAL_DAMAGE));
 
-  // Todo: дублируемый код убрать
-  // Todo: Сделать класс со static final полями, в которых будут настраиваться все значения (все числа ниже)
-  public void getObtained(Entity holder) {
-    super.getObtained(holder);
-    this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Point, this.element,
-        true, 0.3));
-    this.generateSkill(new DamageOneEntityWithCrit(this, this.power, 0.75, DamageTypeSet.Point,
-        this.element, true, 0.25, 1, 5, 3));
-    this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Slash,
-        this.element, true, 0.3));
-
-    this.generateSkillForCreature(new DamageRandomEnemy(
-        this, this.power, DamageTypeSet.Point, this.element, true, 0.3, this.holder.isHostile));
-    this.generateSkillForCreature(new DamageOneRandomEnemyWithCrit(
-        this, this.power, 0.75, DamageTypeSet.Point, this.element, true,
-        0.25, 1, 5, 3, this.holder.isHostile));
-    this.generateSkillForCreature(new DamageRandomEnemy(
-        this, this.power, DamageTypeSet.Slash, this.element, true, 0.3, this.holder.isHostile));
-  }
-
-  // Todo: дублируемый код убрать
-  // Todo: Сделать класс со static final полями, в которых будут настраиваться все значения (все числа ниже)
-  private void recountScales() {
-    if (this.rarity == RaritySet.Poor) {
-      this.dexterityScale /= 1.25;
+        this.generateSkillForCreature(new DamageRandomEnemy(
+                this, this.power, DamageTypeSet.Point, this.element, true, DaggerConfig.PERCENT_OF_ELEMENTAL_DAMAGE, this.holder.isHostile));
+        this.generateSkillForCreature(new DamageOneRandomEnemyWithCrit(
+                this, this.power, DaggerConfig.COEFFICIENT_TO_CRIT_IF_NO_CRIT, DamageTypeSet.Point, this.element, true,
+                DaggerConfig.PERCENT_OF_ELEMENTAL_DAMAGE,
+                DaggerConfig.NUMERATOR_OF_CHANCE_TO_CRIT,
+                DaggerConfig.DIVIDER_OF_CHANCE_TO_CRIT,
+                DaggerConfig.CRIT_MULTIPLIER, this.holder.isHostile));
+        this.generateSkillForCreature(new DamageRandomEnemy(
+                this, this.power, DamageTypeSet.Slash, this.element, true, DaggerConfig.PERCENT_OF_ELEMENTAL_DAMAGE, this.holder.isHostile));
     }
-    if (this.rarity == RaritySet.Uncommon) {
-      this.dexterityScale *= 1.2;
+    private void recountScales() {
+        if (this.rarity == RaritySet.Poor) {
+            this.dexterityScale *= DaggerConfig.COEFFICIENT_TO_DEXTERITY_IF_POOR;
+        }
+        if (this.rarity == RaritySet.Uncommon) {
+            this.dexterityScale *= DaggerConfig.COEFFICIENT_TO_DEXTERITY_IF_UNCOMMON;
+        }
+        if (this.rarity == RaritySet.Rare) {
+            this.dexterityScale *= DaggerConfig.COEFFICIENT_TO_DEXTERITY_IF_RARE;
+        }
+        if (this.rarity == RaritySet.Epic) {
+            this.dexterityScale *= DaggerConfig.COEFFICIENT_TO_DEXTERITY_IF_EPIC;
+        }
+        if (this.rarity == RaritySet.Legendary) {
+            this.dexterityScale *= DaggerConfig.COEFFICIENT_TO_DEXTERITY_IF_LEGENDARY;
+            this.strengthScale = DaggerConfig.STRENGTH_SCALE_IF_LEGENDARY;
+            this.power = this.power * 3 / 2;
+            this.weight = this.weight * 3 / 2;
+        }
     }
-    if (this.rarity == RaritySet.Rare) {
-      this.dexterityScale *= 1.4;
-    }
-    if (this.rarity == RaritySet.Epic) {
-      this.dexterityScale *= 2;
-    }
-    if (this.rarity == RaritySet.Legendary) {
-      this.dexterityScale *= 3;
-      this.strengthScale = 1;
-      this.power = this.power * 3 / 2;
-      this.weight = this.weight * 3 / 2;
-    }
-  }
-
-  // Todo: дублируемый код убрать
-  public void use(Room room) {
-    this.recount();
-    getSkillIndex(args -> {
-      this.skills[args[0]].use(room);
-      this.recount();
-    });
-  }
 }

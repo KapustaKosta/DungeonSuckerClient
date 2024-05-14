@@ -46,7 +46,12 @@ public abstract class Weapon extends Item {
     this.creatureSkills[(this.amountOfCreatureSkills++) % this.skills.length] = skill;
   }
 
-  public void use(Room place) {
+  public void use(Room room) {
+    this.recount();
+    getSkillIndex(args -> {
+      this.skills[args[0]].use(room);
+      this.recount();
+    });
   }
 
   public void useByCreature(Room room, int indexOfSkillToBeUsed) {

@@ -9,7 +9,7 @@ import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.WeaponTypes;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
-import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
+import com.mipt.tp.dungeon_sucker.helper.WeaponConfis.SwordConfig;
 
 public class Sword extends Weapon {
 
@@ -20,65 +20,61 @@ public class Sword extends Weapon {
         this.level = level;
         this.name = name;
         this.rarity = rarity;
-        this.strengthScale = 0.5;
-        this.dexterityScale = 0.3;
+        this.strengthScale = SwordConfig.BASE_STRENGTH_SCALE;
+        this.dexterityScale = SwordConfig.BASE_DEXTERITY_SCALE;
         this.weight = 5;
         this.recountScales();
     }
 
-    // Todo: дублируемый код убрать
-    // Todo: Сделать класс со static final полями, в которых будут настраиваться все значения (все числа ниже)
     public void getObtained(Entity holder) {
         super.getObtained(holder);
         this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Slash,
-                this.element, true, 0.25));
-        this.generateSkill(new DamageOneEntityWithCrit(this, this.power, 0.75,
-                DamageTypeSet.Slash, this.element, true, 0.25, 1, 3, 2));
+                this.element, true, SwordConfig.PERCENT_OF_ELEMENTAL_DAMAGE));
+        this.generateSkill(new DamageOneEntityWithCrit(this, this.power, SwordConfig.COEFFICIENT_TO_CRIT_IF_NO_CRIT,
+                DamageTypeSet.Slash, this.element, true, SwordConfig.PERCENT_OF_ELEMENTAL_DAMAGE,
+                SwordConfig.NUMERATOR_OF_CHANCE_TO_CRIT,
+                SwordConfig.DIVIDER_OF_CHANCE_TO_CRIT,
+                SwordConfig.CRIT_MULTIPLIER));
         this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Point,
-                this.element, true, 0.5));
+                this.element, true, SwordConfig.PERCENT_OF_ELEMENTAL_DAMAGE_FOR_THIRD_SKILL));
 
         this.generateSkillForCreature(new DamageRandomEnemy(
-                this, this.power, DamageTypeSet.Slash, this.element, true, 0.25, this.holder.isHostile));
+                this, this.power, DamageTypeSet.Slash, this.element, true,
+                SwordConfig.PERCENT_OF_ELEMENTAL_DAMAGE, this.holder.isHostile));
         this.generateSkillForCreature(new DamageOneRandomEnemyWithCrit(
-                this, this.power, 0.75, DamageTypeSet.Slash, this.element, true,
-                0.25, 1, 3, 2, this.holder.isHostile));
+                this, this.power, SwordConfig.COEFFICIENT_TO_CRIT_IF_NO_CRIT, DamageTypeSet.Slash, this.element, true,
+                SwordConfig.PERCENT_OF_ELEMENTAL_DAMAGE,
+                SwordConfig.NUMERATOR_OF_CHANCE_TO_CRIT,
+                SwordConfig.DIVIDER_OF_CHANCE_TO_CRIT,
+                SwordConfig.CRIT_MULTIPLIER, this.holder.isHostile));
         this.generateSkillForCreature(new DamageRandomEnemy(
-                this, this.power, DamageTypeSet.Point, this.element, true, 0.5, this.holder.isHostile));
+                this, this.power, DamageTypeSet.Point, this.element, true,
+                SwordConfig.PERCENT_OF_ELEMENTAL_DAMAGE_FOR_THIRD_SKILL, this.holder.isHostile));
     }
 
-    // Todo: дублируемый код убрать
-    // Todo: Сделать класс со static final полями, в которых будут настраиваться все значения (все числа ниже)
     private void recountScales() {
         if (this.rarity == RaritySet.Poor) {
-            this.strengthScale /= 1.25;
-            this.dexterityScale /= 1.25;
+            this.strengthScale *= SwordConfig.COEFFICIENT_TO_EXISTING_STATS_IF_POOR;
+            this.dexterityScale *= SwordConfig.COEFFICIENT_TO_EXISTING_STATS_IF_POOR;
         }
         if (this.rarity == RaritySet.Uncommon) {
-            this.strengthScale *= 1.2;
-            this.dexterityScale *= 1.2;
+            this.strengthScale *= SwordConfig.COEFFICIENT_TO_EXISTING_STATS_IF_UNCOMMON;
+            this.dexterityScale *= SwordConfig.COEFFICIENT_TO_EXISTING_STATS_IF_UNCOMMON;
         }
         if (this.rarity == RaritySet.Rare) {
-            this.strengthScale *= 1.4;
-            this.strengthScale *= 1.4;
+            this.strengthScale *= SwordConfig.COEFFICIENT_TO_EXISTING_STATS_IF_RARE;
+            this.strengthScale *= SwordConfig.COEFFICIENT_TO_EXISTING_STATS_IF_RARE;
         }
         if (this.rarity == RaritySet.Epic) {
-            this.strengthScale *= 2;
-            this.dexterityScale *= 2;
+            this.strengthScale *= SwordConfig.COEFFICIENT_TO_EXISTING_STATS_IF_EPIC;
+            this.dexterityScale *= SwordConfig.COEFFICIENT_TO_EXISTING_STATS_IF_EPIC;
         }
         if (this.rarity == RaritySet.Legendary) {
-            this.strengthScale *= 3;
-            this.dexterityScale = 1;
+            this.strengthScale *= SwordConfig.COEFFICIENT_TO_EXISTING_STATS_IF_LEGENDARY;
+            this.dexterityScale *= SwordConfig.COEFFICIENT_TO_EXISTING_STATS_IF_LEGENDARY;
+            this.intellectScale = SwordConfig.INTELLECT_SCALE_IF_LEGENDARY;
             this.power = this.power * 3 / 2;
             this.weight = this.weight * 3 / 2;
         }
-    }
-
-    // Todo: дублируемый код убрать
-    public void use(Room room) {
-        this.recount();
-        getSkillIndex(args -> {
-            this.skills[args[0]].use(room);
-            this.recount();
-        });
     }
 }
