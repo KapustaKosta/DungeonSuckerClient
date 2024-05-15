@@ -1,6 +1,8 @@
 package com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
+import com.mipt.tp.dungeon_sucker.gameplay.Action;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth.DarkResistance;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.LightVulnerability;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.PointVulnerability;
@@ -27,6 +29,7 @@ public class Vampire extends Creature {
         this.name = name;
         this.experiencePerKill = 3;
         this.description = this.name + ", a noble vampire that heals every time he bites you";
+        this.texture = new Texture("vampire.png");
     }
 
     public Vampire(int health, int power, int weight, boolean isHostile, Room place) {
@@ -39,6 +42,7 @@ public class Vampire extends Creature {
         this.name = "Vampire";
         this.experiencePerKill = 3;
         this.description = this.name + ", a noble vampire that heals every time he bites you";
+        this.texture = new Texture("vampire.png");
     }
 
     public void summon() {
@@ -51,18 +55,14 @@ public class Vampire extends Creature {
         this.weapon.recount();
     }
 
-    public int startMove() {
-        int index = new Random().nextInt(this.weapon.skills.length);
-        this.indexOfSkillToBeUsed = index;
-        return this.weapon.creatureSkills[index].identifier;
-    }
-
-    public void makeMove() {
+    public void makeMove(Action doAfterMove) {
+        System.out.println(this.isSummoned + " " + this.isFighting);
         if (this.isSummoned && this.isFighting) {
             System.out.println("Vampire is doing something");
             this.heal(this.power);
-            this.weapon.useByCreature(this.place, indexOfSkillToBeUsed);
+            this.weapon.useByCreature(this.place, indexOfSkillToBeUsed, doAfterMove);
         }
-        super.makeMove();
+        else doAfterMove.run();
+        super.makeMove(doAfterMove);
     }
 }

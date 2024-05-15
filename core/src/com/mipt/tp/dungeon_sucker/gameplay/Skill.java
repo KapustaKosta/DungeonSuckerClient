@@ -8,8 +8,9 @@ public class Skill {
     public int identifier;
     protected String description;
 
-    public void use(Room room) {
+    public void use(Room room, Action doAfterUse) {
         this.lastPower = this.power;
+        doAfterUse.run();
     }
 
     public void setPower(int power) {

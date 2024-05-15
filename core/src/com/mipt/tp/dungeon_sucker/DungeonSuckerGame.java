@@ -7,15 +7,18 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Character;
-import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
-import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Rat;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.gameplay.level.Map;
 import com.mipt.tp.dungeon_sucker.UI.Interface;
 import com.mipt.tp.dungeon_sucker.UI.InventoryWindow;
 import com.mipt.tp.dungeon_sucker.UI.MainWindow;
 import com.mipt.tp.dungeon_sucker.UI.MapWindow;
 import com.mipt.tp.dungeon_sucker.UI.texturePacks.RoomsTexturesPack;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth.HammerMastery;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForBoth.Club;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.logic.DFSMapGenerator;
@@ -24,15 +27,16 @@ import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 public class DungeonSuckerGame extends ApplicationAdapter {
+
   private static final Color BACKGROUND = Color.valueOf("#222222");
   private Character character;
-  private Room room;
 
   private Interface anInterface;
 
-  private void update() {
-    character.getInput();
-    DungeonMasster.getInstance().move();
+  public static boolean allowToChangeRoom = false;
+
+  private void update() throws InterruptedException {
+    if(allowToChangeRoom) character.getInput();
   }
 
   @Override
@@ -55,7 +59,16 @@ public class DungeonSuckerGame extends ApplicationAdapter {
     MapGenerator mapGenerator = new DFSMapGenerator(texturesPack);
 
     Level level = new Level(mapGenerator, 10, 10);
+    Map startMap = level.getMap();
     MapWindow mapWindow = new MapWindow(new IntVector2(0, 25), new IntVector2(10, 15), level);
+
+    DungeonMasster dungeonMasster = DungeonMasster.getInstance();
+    IntVector2 characterPosition = new IntVector2(startMap.spawn.getPosition().x, startMap.spawn.getPosition().y);
+    character = new Character(characterPosition, new Texture("knight.png"), level, 25, 50);
+    character.maxHealth = character.health;
+    character.master = dungeonMasster;
+    character.mapTexture = new Texture("character.png");
+    startMap.spawn.friendlyEntities = new Entity[] {character};
 
     InventoryWindow inventoryWindow = new InventoryWindow(new IntVector2(0, 15),
         new IntVector2(10, 0), 4, 4);
@@ -64,41 +77,38 @@ public class DungeonSuckerGame extends ApplicationAdapter {
     exampleItem.texture = new Texture("knife.png");
     inventoryWindow.addItem(exampleItem);
 
-    Room exampleRoom = new Room();
-    Character exampleCharacter = new Character(15, 100, "Vasya", null);
-    exampleCharacter.texture = new Texture("knight.png");
-    Creature[] exampleHostileEntities = new Creature[3];
-    exampleHostileEntities[0] = new Rat(
-        true,
-        exampleRoom,
-        "rat1");
-    exampleHostileEntities[1] = new Rat(
-        true,
-        exampleRoom,
-        "rat2");
-    exampleHostileEntities[2] = new Rat(
-        true,
-        exampleRoom,
-        "rat3");
-    exampleRoom.hostileEntities = exampleHostileEntities;
-    exampleRoom.friendlyEntities = new Character[]{exampleCharacter};
     MainWindow mainWindow = new MainWindow(new IntVector2(10, 25), new IntVector2(42, 0),
-        exampleRoom, new Vector2(400, 250), new Vector2(700, 250));
-    mainWindow.setCurrentEntityIndicator(exampleCharacter);
+        startMap.spawn, new Vector2(400, 250), new Vector2(700, 250));
+    mainWindow.setCurrentEntityIndicator(character);
 
     anInterface = new Interface(mapWindow, inventoryWindow, mainWindow);
     Gdx.input.setInputProcessor(anInterface);
 
-    IntVector2 characterPosition = new IntVector2(level.getMap().spawn.getPosition().x,
-        level.getMap().spawn.getPosition().y);
-    this.character = new Character(characterPosition, new Texture("character.png"), level, 1, 1);
-    // FightTry.aboba();
-    // FightTry.generateWeapons();
+    Club club = new Club(1, 1, "club", RaritySet.Common);
+    club.getObtained(character);
+    new HammerMastery().getObtained(character);
+    character.setActiveWeapon(club);
+    character.addOnMoveListener(args -> {
+      Room nowRoom = startMap.getRoom(args[1], args[0]);
+      nowRoom.master = dungeonMasster;
+      nowRoom.insert(character, false);
+      for(Entity entity : nowRoom.hostileEntities) {
+        dungeonMasster.add(0, entity);
+      }
+      mainWindow.setRoom(nowRoom);
+      character.place = nowRoom;
+    });
+    dungeonMasster.add(character.weight, character);
+    DungeonMasster.getInstance().move();
   }
 
   @Override
   public void render() {
-    this.update();
+    try {
+      this.update();
+    } catch (InterruptedException e) {
+      throw new RuntimeException(e);
+    }
     if (Constants.TEST_FIGHT) {
       return;
     }

@@ -20,8 +20,8 @@ public class Room implements Drawable {
   public Chest chest = new Chest(0, this);
   public DungeonMasster master;
   protected boolean isCleared;
-  public Entity[] friendlyEntities = new Entity[8];
-  public Entity[] hostileEntities = new Entity[8];
+  public Entity[] friendlyEntities = new Entity[1];
+  public Entity[] hostileEntities = new Entity[0];
   private IntVector2 levelPosition;
   private Texture texture;
   private SpriteBatch batch;
@@ -125,7 +125,9 @@ public class Room implements Drawable {
           this.hostileEntities[i] = entity;
           entity.place = this;
           entity.positionInRoom = i;
+/*
           this.master.add(0, entity);
+*/
           return;
         }
       }
@@ -133,23 +135,34 @@ public class Room implements Drawable {
         this.hostileEntities[this.amountOfHostileEntities++] = entity;
         entity.place = this;
         entity.positionInRoom = this.amountOfHostileEntities - 1;
+/*
         this.master.add(0, entity);
+*/
       }
       return;
+    }
+    for (int i = 0; i < this.amountOfHostileEntities; ++i) {
+      if (hostileEntities[i] != null) {
+        this.hostileEntities[i].isFighting = true;
+      }
     }
     entity.place = this;
     for (int i = 0; i < this.amountOfFriendlyEntities; ++i) {
       if (friendlyEntities[i] == null || !this.friendlyEntities[i].isAlive) {
         this.friendlyEntities[i] = entity;
         entity.positionInRoom = i;
+/*
         this.master.add(0, entity);
+*/
         return;
       }
     }
     if (this.amountOfFriendlyEntities < this.friendlyEntities.length) {
       this.friendlyEntities[this.amountOfFriendlyEntities++] = entity;
       entity.positionInRoom = this.amountOfFriendlyEntities - 1;
+/*
       this.master.add(0, entity);
+*/
     }
   }
 
@@ -183,7 +196,8 @@ public class Room implements Drawable {
       ButtonsGroup.getInstance().addButton(new Button("Room was taken by evil", args -> {
       }));
       for (int i = 0; i < this.amountOfHostileEntities; ++i) {
-        this.hostileEntities[i].isFighting = false;
+        if(this.hostileEntities[i] != null){
+        this.hostileEntities[i].isFighting = false;}
       }
     }
   }

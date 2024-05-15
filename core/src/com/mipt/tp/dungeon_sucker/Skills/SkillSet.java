@@ -1,5 +1,6 @@
 package com.mipt.tp.dungeon_sucker.Skills;
 
+import com.mipt.tp.dungeon_sucker.gameplay.Action;
 import com.mipt.tp.dungeon_sucker.gameplay.Skill;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
@@ -17,9 +18,9 @@ public class SkillSet extends Skill {
         this.identifier = this.skills.getFirst().identifier;
     }
 
-    public void use(Room room) {
+    public void use(Room room, Action doAfterUse) {
         for (Skill skill : this.skills) {
-            skill.use(room);
+            skill.use(room, doAfterUse);
         }
     }
 }

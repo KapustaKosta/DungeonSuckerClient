@@ -1,6 +1,8 @@
 package com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
+import com.mipt.tp.dungeon_sucker.gameplay.Action;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.WeaponGenerator;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth.PointResistance;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.FragileBody;
@@ -25,6 +27,7 @@ public class Skeleton extends Creature {
         this.name = name;
         this.experiencePerKill = 3;
         this.description = this.name + ", a skeleton, may hit you with its weapon, " + this.weapon.name;
+        this.texture = new Texture("skeleton.png");
     }
 
     public Skeleton(int health, int power, int weight, boolean isHostile, Room place) {
@@ -36,6 +39,7 @@ public class Skeleton extends Creature {
         this.name = "Skeleton";
         this.experiencePerKill = 3;
         this.description = this.name + ", a skeleton, may hit you with its weapon, " + this.weapon.name;
+        this.texture = new Texture("skeleton.png");
     }
 
     public void summon() {
@@ -47,17 +51,13 @@ public class Skeleton extends Creature {
         this.weapon.recount();
     }
 
-    public int startMove() {
-        int index = new Random().nextInt(this.weapon.skills.length);
-        this.indexOfSkillToBeUsed = index;
-        return this.weapon.creatureSkills[index].identifier;
-    }
-
-    public void makeMove() {
+    public void makeMove(Action doAfterMove) {
+        System.out.println(this.isSummoned + " " + this.isFighting);
         if (this.isSummoned && this.isFighting) {
             System.out.println("Skeleton attacks");
-            this.weapon.useByCreature(this.place, indexOfSkillToBeUsed);
+            this.weapon.useByCreature(this.place, indexOfSkillToBeUsed, doAfterMove);
         }
-        super.makeMove();
+        else doAfterMove.run();
+        super.makeMove(doAfterMove);
     }
 }

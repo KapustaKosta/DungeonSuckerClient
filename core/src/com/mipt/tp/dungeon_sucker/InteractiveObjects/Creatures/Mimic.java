@@ -2,6 +2,7 @@ package com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Chest;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
+import com.mipt.tp.dungeon_sucker.gameplay.Action;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.ItemGenerator;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForEnemies.MimicClaws;
 
@@ -37,18 +38,13 @@ public class Mimic extends Creature {
         this.weapon.recount();
     }
 
-    public int startMove() {
-        int index = new Random().nextInt(this.weapon.skills.length);
-        this.indexOfSkillToBeUsed = index;
-        return this.weapon.creatureSkills[index].identifier;
-    }
-
-    public void makeMove() {
+    public void makeMove(Action doAfterMove) {
         if (this.isSummoned && this.isFighting) {
             System.out.println("MIMIC IS MOVING");
-            this.weapon.useByCreature(this.place, indexOfSkillToBeUsed);
+            this.weapon.useByCreature(this.place, indexOfSkillToBeUsed, doAfterMove);
         }
-        super.makeMove();
+        else doAfterMove.run();
+        super.makeMove(doAfterMove);
     }
 
     public void die() {

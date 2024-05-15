@@ -34,8 +34,8 @@ public abstract class Weapon extends Item {
     this.creatureSkills = new Skill[numberOfSkills];
   }
 
-  public void useSkill(int index, Room room) {
-    this.skills[index].use(room);
+  public void useSkill(int index, Room room, Action doAfterUse) {
+    this.skills[index].use(room, doAfterUse);
   }
 
   public void generateSkill(Skill skill) {
@@ -46,18 +46,23 @@ public abstract class Weapon extends Item {
     this.creatureSkills[(this.amountOfCreatureSkills++) % this.skills.length] = skill;
   }
 
-  public void use(Room room) {
+  public void use(Room room, Action doAfterUse) {
     this.recount();
     getSkillIndex(args -> {
-      this.skills[args[0]].use(room);
+      System.out.println(this.skills[args[0]].toString());
+      this.skills[args[0]].use(room, doAfterUse);
       this.recount();
     });
   }
 
-  public void useByCreature(Room room, int indexOfSkillToBeUsed) {
+  public void useByCreature(Room room, int indexOfSkillToBeUsed, Action doAfterUse) {
     this.recount();
+    System.out.println(indexOfSkillToBeUsed + " " + this.amountOfCreatureSkills);
     if (indexOfSkillToBeUsed < this.amountOfCreatureSkills) {
-      (creatureSkills[indexOfSkillToBeUsed]).use(room);
+      (creatureSkills[indexOfSkillToBeUsed]).use(room, doAfterUse);
+    }
+    else {
+      doAfterUse.run();
     }
   }
 

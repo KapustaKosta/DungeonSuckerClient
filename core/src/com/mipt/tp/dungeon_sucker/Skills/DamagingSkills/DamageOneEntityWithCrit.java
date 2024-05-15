@@ -1,6 +1,7 @@
 package com.mipt.tp.dungeon_sucker.Skills.DamagingSkills;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.gameplay.Action;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
@@ -32,7 +33,7 @@ public class DamageOneEntityWithCrit extends DamageOneEntity {
   }
 
   // Todo: дублируемый код убрать
-  public void use(Room room) {
+  public void use(Room room, Action doAfterUse) {
     int a = new Random().nextInt(this.divider);
     final Damage damage = a < numerator? this.criticalDamage : this.damage;
     Entity[] entities;
@@ -46,7 +47,7 @@ public class DamageOneEntityWithCrit extends DamageOneEntity {
           int index = args[0];
           index = Math.min(Math.max(index, 0), entities.length - 1);
           entities[index].getDamaged(new Damage(damage, this.lastPower, this.power));
-          super.use(room);
+          super.use(room, doAfterUse);
         },
         value -> !(entities[Math.min(Math.max(value, 0), entities.length - 1)] == null
             || !entities[Math.min(Math.max(value, 0), entities.length - 1)].isAlive));

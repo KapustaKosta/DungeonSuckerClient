@@ -4,8 +4,8 @@ import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 
-public class FrostResistance extends Artifact {
-    public FrostResistance() {
+public class WaterResistance extends Artifact {
+    public WaterResistance() {
         super();
         this.triggerableByBeingDamaged = true;
         this.weight = 5;
@@ -15,7 +15,7 @@ public class FrostResistance extends Artifact {
     }
 
     public void triggerByBeingDamaged(Damage damage) {
-        if (damage.element == ElementSet.Frost) {
+        if (damage.element == ElementSet.Water) {
             damage.elementDamage /= 2;
             damage.totalDamage = damage.defaultDamage + damage.elementDamage;
         }

@@ -1,6 +1,8 @@
 package com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
+import com.mipt.tp.dungeon_sucker.gameplay.Action;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForEnemies.BatClaws;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
@@ -21,6 +23,7 @@ public class Bat extends Creature {
         this.weapon = new BatClaws(this.power);
         this.weapon.getObtained(this);
         this.description = this.name + ", basically a winged rat, may also bite you, dealing " + this.power + "of physical damage";
+        this.texture = new Texture("bat.png");
     }
 
     public Bat(int health, int power, int weight, boolean isHostile, Room place) {
@@ -30,6 +33,7 @@ public class Bat extends Creature {
         this.weapon = new BatClaws(this.power);
         this.weapon.getObtained(this);
         this.description = this.name + ", basically a winged rat, may also bite you, dealing " + this.power + "of physical damage";
+        this.texture = new Texture("bat.png");
     }
 
     public void summon() {
@@ -43,17 +47,13 @@ public class Bat extends Creature {
         this.weapon.recount();
     }
 
-    public int startMove() {
-        int index = new Random().nextInt(this.weapon.skills.length);
-        this.indexOfSkillToBeUsed = index;
-        return this.weapon.creatureSkills[index].identifier;
-    }
-
-    public void makeMove() {
+  public void makeMove(Action doAfterMove) {
+        System.out.println(this.isSummoned + " " + this.isFighting);
         if (this.isSummoned && this.isFighting) {
             System.out.println("BAT IS MOVING");
-            this.weapon.useByCreature(this.place, indexOfSkillToBeUsed);
+            this.weapon.useByCreature(this.place, indexOfSkillToBeUsed, doAfterMove);
         }
-        super.makeMove();
+        else doAfterMove.run();
+        super.makeMove(doAfterMove);
     }
 }

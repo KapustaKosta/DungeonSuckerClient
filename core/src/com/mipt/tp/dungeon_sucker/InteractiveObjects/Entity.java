@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mipt.tp.dungeon_sucker.UI.Drawable;
+import com.mipt.tp.dungeon_sucker.gameplay.Action;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
@@ -43,7 +44,7 @@ public class Entity extends InteractiveObject implements Drawable {
     protected Vector2 position;
     protected Level location;
     public Texture texture;
-    private SpriteBatch batch;
+    protected SpriteBatch batch;
     public int weight;
     public Room place;
     public String name = " ";
@@ -106,10 +107,11 @@ public class Entity extends InteractiveObject implements Drawable {
         }
     }
 
-    public void makeMove() {
+    public void makeMove(Action action) {
+        System.out.println(name +  " is walking");
         this.lastTimeOfStep = this.master.orderOfSteps.getFirst().timeOfStep;
         this.recountWeight();
-        this.weapon.recount();
+        if(this.weapon != null) this.weapon.recount();
     }
 
     public void recountWeight() {
@@ -199,13 +201,16 @@ public class Entity extends InteractiveObject implements Drawable {
 
     public void makeFictionalMove() {
         try {
+            boolean flag = false;
             for (int i = 0; i < this.master.orderOfSteps.size(); ++i) {
                 if (this == this.master.orderOfSteps.get(i).entity) {
                     this.master.orderOfSteps.remove(i);
+                    flag = true;
                     break;
                 }
             }
-            this.master.add(this.lastTimeOfStep, this);
+            if(flag){
+            this.master.add(this.lastTimeOfStep, this);}
         } catch (Exception ignored) {
         }
     }

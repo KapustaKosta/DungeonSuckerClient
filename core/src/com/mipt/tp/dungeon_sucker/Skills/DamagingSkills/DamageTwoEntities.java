@@ -2,6 +2,7 @@ package com.mipt.tp.dungeon_sucker.Skills.DamagingSkills;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkill;
+import com.mipt.tp.dungeon_sucker.gameplay.Action;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
@@ -42,7 +43,7 @@ public class DamageTwoEntities extends DamagingSkill {
   }
 
     // Todo: дублируемый код убрать
-  public void use(Room room) {
+  public void use(Room room, Action doAfterUse) {
     if (!room.isHaunted) {
       return;
     }
@@ -51,14 +52,14 @@ public class DamageTwoEntities extends DamagingSkill {
     chooseVictimToAttackUntilPredicate(room,
         args -> {
           int index = args[0];
-          useByIndex(index, room);
+          useByIndex(index, room, doAfterUse);
         },
         value -> !(entities[Math.min(Math.max(value, 0), entities.length - 1)] == null
             || !entities[Math.min(Math.max(value, 0), entities.length - 1)].isAlive));
   }
 
     // Todo: дублируемый код убрать
-  private void useByIndex(int index, Room room) {
+  private void useByIndex(int index, Room room, Action doAfterUse) {
     Entity[] entities = room.hostileEntities;
 
     if (index <= 0) {
@@ -109,7 +110,7 @@ public class DamageTwoEntities extends DamagingSkill {
             new Damage(this.firstDamage, this.lastPower, this.power));
       }
     }
-    super.use(room);
+    super.use(room, doAfterUse);
   }
 
   public String toString() {

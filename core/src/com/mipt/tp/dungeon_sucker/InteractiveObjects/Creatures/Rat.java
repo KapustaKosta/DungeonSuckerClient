@@ -2,6 +2,7 @@ package com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
+import com.mipt.tp.dungeon_sucker.gameplay.Action;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForEnemies.BatClaws;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForEnemies.RatClaws;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
@@ -47,17 +48,13 @@ public class Rat extends Creature {
         this.weapon.recount();
     }
 
-    public int startMove() {
-        int index = new Random().nextInt(this.weapon.skills.length);
-        this.indexOfSkillToBeUsed = index;
-        return this.weapon.creatureSkills[index].identifier;
-    }
-
-    public void makeMove() {
+    public void makeMove(Action doAfterMove) {
+        System.out.println(this.isSummoned + " " + this.isFighting);
         if (this.isSummoned && this.isFighting) {
             System.out.println("RAT IS MOVING");
-            this.weapon.useByCreature(this.place, indexOfSkillToBeUsed);
+            this.weapon.useByCreature(this.place, indexOfSkillToBeUsed, doAfterMove);
         }
-        super.makeMove();
+        else doAfterMove.run();
+        super.makeMove(doAfterMove);
     }
 }

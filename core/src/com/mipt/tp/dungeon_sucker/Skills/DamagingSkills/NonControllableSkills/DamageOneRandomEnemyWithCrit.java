@@ -1,6 +1,7 @@
 package com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
+import com.mipt.tp.dungeon_sucker.gameplay.Action;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
@@ -26,7 +27,7 @@ public class DamageOneRandomEnemyWithCrit extends DamageRandomEnemy {
         this.description = "Deals " + this.damage.totalDamage + " damage to enemy by your choice, has " + numerator + "/" + divider + "chance to deal" + this.criticalDamage.totalDamage + " damage instead";
     }
 
-    public void use(Room room) {
+    public void use(Room room, Action doAfterUse) {
         int a = new Random().nextInt(this.divider);
         Damage damage = this.damage;
         if (a < numerator) {
@@ -51,7 +52,7 @@ public class DamageOneRandomEnemyWithCrit extends DamageRandomEnemy {
         }
         System.out.println("punching " + enemy.name);
         enemy.getDamaged(new Damage(damage, this.lastPower, this.power));
-        super.use(room);
+        super.use(room, doAfterUse);
     }
 }
 

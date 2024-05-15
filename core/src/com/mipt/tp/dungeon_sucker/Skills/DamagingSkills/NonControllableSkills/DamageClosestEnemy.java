@@ -2,6 +2,7 @@ package com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkill;
+import com.mipt.tp.dungeon_sucker.gameplay.Action;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
@@ -21,7 +22,7 @@ public class DamageClosestEnemy extends DamagingSkill {
         this.description = "Deal " + this.damage.totalDamage + " to the closest enemy";
     }
 
-    public void use(Room room) {
+    public void use(Room room, Action doAfterUse) {
         Entity[] enemies;
         int index;
         if (this.isUsedByHostile) {
@@ -43,6 +44,6 @@ public class DamageClosestEnemy extends DamagingSkill {
         }
         System.out.println("punching " + enemy.name);
         enemy.getDamaged(new Damage(this.damage, this.lastPower, this.power));
-        super.use(room);
+        super.use(room, doAfterUse);
     }
 }

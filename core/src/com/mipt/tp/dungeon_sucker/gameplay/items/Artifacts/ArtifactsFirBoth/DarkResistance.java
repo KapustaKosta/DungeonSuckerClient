@@ -15,7 +15,7 @@ public class DarkResistance extends Artifact {
     }
 
     public void triggerByBeingDamaged(Damage damage) {
-        if (damage.element == ElementSet.Dark) {
+        if (damage.element == ElementSet.Stone) {
             damage.elementDamage /= 2;
             damage.totalDamage = damage.defaultDamage + damage.elementDamage;
         }

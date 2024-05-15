@@ -2,6 +2,7 @@ package com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkill;
+import com.mipt.tp.dungeon_sucker.gameplay.Action;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
@@ -38,7 +39,7 @@ public class DamageRandomEnemyAndTheNext extends DamagingSkill {
         this.secondDamage.elementDamage = (int) (this.secondCoefficient * this.secondDamage.elementDamage);
     }
 
-    public void use(Room room) {
+    public void use(Room room, Action doAfterUse) {
         System.out.println("choosing guy to punch");
         Entity[] enemies;
         int maxIndex;
@@ -65,7 +66,7 @@ public class DamageRandomEnemyAndTheNext extends DamagingSkill {
         }
         System.out.println("punching " + enemy.name);
         enemy.getDamaged(new Damage(this.secondDamage, this.lastPower, this.power));
-        super.use(room);
+        super.use(room, doAfterUse);
     }
 
     public String toString() {

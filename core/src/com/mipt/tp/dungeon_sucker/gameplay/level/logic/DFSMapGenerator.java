@@ -1,6 +1,18 @@
 package com.mipt.tp.dungeon_sucker.gameplay.level.logic;
 
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Bat;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.ElementalSpirit;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.IvanKalinin;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Mimic;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Rat;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Skeleton;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Slime;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Vampire;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.UI.texturePacks.RoomsTexturesPack;
+import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Map;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.*;
@@ -102,11 +114,10 @@ public class DFSMapGenerator extends MapGenerator {
         if (roomType == 0) {
             rooms[coordinates.y][coordinates.x] = new Oasis(roomPosition, roomsTexturesPack.oasisTexture);
         }
-        if (roomType > 0 && roomType < 6) {
-            rooms[coordinates.y][coordinates.x] = new Room(roomPosition,
-                    roomsTexturesPack.hauntedRoomTexture);
+        if (roomType > 0 && roomType < 8) {
+            rooms[coordinates.y][coordinates.x] = generateHauntedRoom(roomPosition);
         }
-        if (roomType >= 6 && roomType < 9) {
+        if (roomType >= 8 && roomType < 9) {
             rooms[coordinates.y][coordinates.x] = new PeaceRoom(roomPosition,
                     roomsTexturesPack.peaceRoomTexture);
         }
@@ -114,6 +125,59 @@ public class DFSMapGenerator extends MapGenerator {
             rooms[coordinates.y][coordinates.x] = new PeaceRoom(roomPosition,
                     roomsTexturesPack.shopTexture);
         }
+    }
+
+    private HauntedRoom generateHauntedRoom(IntVector2 position)
+    {
+        HauntedRoom result = new HauntedRoom(position, roomsTexturesPack.hauntedRoomTexture);
+        int enemiesCount = RandomNumGenerator.generateFromRange(1, 5);
+        result.hostileEntities = new Entity[enemiesCount];
+        result.master = DungeonMasster.getInstance();
+        for(int i = 0 ; i < enemiesCount ; i++)
+        {
+            int creatureIndex = RandomNumGenerator.generateFromRange(0, 6);
+            switch (creatureIndex)
+            {
+                // Todo: mimic и генерация chest
+                case 0:
+                {
+                    result.insert(new Bat(true, result, "Bat" + (i + 1)), true);
+                    break;
+                }
+                case 1:
+                {
+                    result.insert(new ElementalSpirit(true, result, "Elemental spirit" + (i + 1), ElementSet.getRandom()), true);
+                    break;
+                }
+                case 2:
+                {
+                    result.insert(new IvanKalinin(result), true);
+                    break;
+                }
+                case 3:
+                {
+                    result.insert(new Rat(true, result, "Rat" + (i + 1)), true);
+                    break;
+                }
+                case 4:
+                {
+                    result.insert(new Skeleton(true, result, "Skeleton" + (i + 1)), true);
+                    break;
+                }
+                case 5:
+                {
+                    result.insert(new Slime(true, result, "Slime" + (i + 1), RandomNumGenerator.generateFromRange(0, 3)), true);
+                    break;
+                }
+                case 6:
+                {
+                    result.insert(new Vampire(true, result, "Vampire" + (i + 1)), true);
+                    break;
+                }
+            }
+        }
+        result.isHaunted = true;
+        return result;
     }
 
     private boolean isCoordinatesOnMap(IntVector2 coordinates, Room[][] map) {

@@ -2,6 +2,7 @@ package com.mipt.tp.dungeon_sucker.Skills.DamagingSkills.NonControllableSkills;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.Skills.DamagingSkill;
+import com.mipt.tp.dungeon_sucker.gameplay.Action;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
@@ -26,7 +27,7 @@ public class DamageNthEnemy extends DamagingSkill {
         new DamageNthEnemy(this.weapon, damage.totalDamage, damage.type, damage.element, damage.isMelee, damage.percentOfElementDamage, isUsedByHostile, i);
     }
 
-    public void use(Room room) {
+    public void use(Room room, Action doAfterUse) {
         Entity[] enemies;
         if (this.isUsedByHostile) {
             enemies = room.friendlyEntities;
@@ -38,9 +39,9 @@ public class DamageNthEnemy extends DamagingSkill {
         if (enemy != null && enemy.isAlive) {
             System.out.println("punching " + enemy.name);
             enemy.getDamaged(new Damage(this.damage, this.lastPower, this.power));
-            super.use(room);
+            super.use(room, doAfterUse);
         } else {
-            super.use(room);
+            super.use(room, doAfterUse);
         }
     }
 }

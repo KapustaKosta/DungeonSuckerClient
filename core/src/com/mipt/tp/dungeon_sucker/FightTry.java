@@ -15,6 +15,7 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class FightTry {
     public static void aboba() {
@@ -41,6 +42,8 @@ public class FightTry {
     }
 
     public static void generateWeapons() {
+        Scanner in =   new Scanner(System.in);
+        in.nextInt();
         LinkedList<Weapon> weapons = new LinkedList<>();
         for (int i = 0; i < 1000; ++i) {
             Weapon weapon = new WeaponGenerator().generateWeapon(1);

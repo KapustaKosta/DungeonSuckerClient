@@ -37,7 +37,7 @@ public class ArtifactGenerator {
             case 11:
                 return new FireResistance();
             case 12:
-                return new FrostResistance();
+                return new WaterResistance();
             case 13:
                 return new HardShell();
             case 14:
