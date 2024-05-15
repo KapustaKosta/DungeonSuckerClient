@@ -18,7 +18,8 @@ public class Interface implements Drawable, InputProcessor {
     @Override
     public void drawInLibGDX() {
         mapWindow.drawInLibGDX();
-        inventoryWindow.drawInLibGDX();;
+        inventoryWindow.drawInLibGDX();
+        ;
         mainWindow.drawInLibGDX();
     }
 

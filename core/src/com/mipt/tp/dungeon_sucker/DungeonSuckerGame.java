@@ -28,92 +28,92 @@ import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 public class DungeonSuckerGame extends ApplicationAdapter {
 
-  private static final Color BACKGROUND = Color.valueOf("#222222");
-  private Character character;
+    private static final Color BACKGROUND = Color.valueOf("#222222");
+    private Character character;
 
-  private Interface anInterface;
+    private Interface anInterface;
 
-  public static boolean allowToChangeRoom = false;
+    public static boolean allowToChangeRoom = false;
 
-  private void update() throws InterruptedException {
-    if(allowToChangeRoom) character.getInput();
-  }
-
-  @Override
-  public void create() {
-    if (Constants.TEST_FIGHT) {
-      FightTry.aboba();
-      FightTry.generateWeapons();
-      return;
+    private void update() throws InterruptedException {
+        if (allowToChangeRoom) character.getInput();
     }
 
-    RoomsTexturesPack texturesPack = new RoomsTexturesPack();
-    texturesPack.emptyRoomTexture = new Texture("emptyRoom.png");
-    texturesPack.hauntedRoomTexture = new Texture("room.png");
-    texturesPack.exitRoomTexture = new Texture("exitRoom.png");
-    texturesPack.oasisTexture = new Texture("room.png");
-    texturesPack.peaceRoomTexture = new Texture("room.png");
-    texturesPack.spawnTexture = new Texture("spawn.png");
-    texturesPack.shopTexture = new Texture("room.png");
-    texturesPack.shopTexture = new Texture("room.png");
-    MapGenerator mapGenerator = new DFSMapGenerator(texturesPack);
+    @Override
+    public void create() {
+        if (Constants.TEST_FIGHT) {
+            FightTry.aboba();
+            FightTry.generateWeapons();
+            return;
+        }
 
-    Level level = new Level(mapGenerator, 10, 10);
-    Map startMap = level.getMap();
-    MapWindow mapWindow = new MapWindow(new IntVector2(0, 25), new IntVector2(10, 15), level);
+        RoomsTexturesPack texturesPack = new RoomsTexturesPack();
+        texturesPack.emptyRoomTexture = new Texture("emptyRoom.png");
+        texturesPack.hauntedRoomTexture = new Texture("room.png");
+        texturesPack.exitRoomTexture = new Texture("exitRoom.png");
+        texturesPack.oasisTexture = new Texture("room.png");
+        texturesPack.peaceRoomTexture = new Texture("room.png");
+        texturesPack.spawnTexture = new Texture("spawn.png");
+        texturesPack.shopTexture = new Texture("room.png");
+        texturesPack.shopTexture = new Texture("room.png");
+        MapGenerator mapGenerator = new DFSMapGenerator(texturesPack);
 
-    DungeonMasster dungeonMasster = DungeonMasster.getInstance();
-    IntVector2 characterPosition = new IntVector2(startMap.spawn.getPosition().x, startMap.spawn.getPosition().y);
-    character = new Character(characterPosition, new Texture("knight.png"), level, 25, 50);
-    character.maxHealth = character.health;
-    character.master = dungeonMasster;
-    character.mapTexture = new Texture("character.png");
-    startMap.spawn.friendlyEntities = new Entity[] {character};
+        Level level = new Level(mapGenerator, 10, 10);
+        Map startMap = level.getMap();
+        MapWindow mapWindow = new MapWindow(new IntVector2(0, 25), new IntVector2(10, 15), level);
 
-    InventoryWindow inventoryWindow = new InventoryWindow(new IntVector2(0, 15),
-        new IntVector2(10, 0), 4, 4);
-    Item exampleItem = new Item();
-    exampleItem.name = "knife";
-    exampleItem.texture = new Texture("knife.png");
-    inventoryWindow.addItem(exampleItem);
+        DungeonMasster dungeonMasster = DungeonMasster.getInstance();
+        IntVector2 characterPosition = new IntVector2(startMap.spawn.getPosition().x, startMap.spawn.getPosition().y);
+        character = new Character(characterPosition, new Texture("knight.png"), level, 25, 50);
+        character.maxHealth = character.health;
+        character.master = dungeonMasster;
+        character.mapTexture = new Texture("character.png");
+        startMap.spawn.friendlyEntities = new Entity[]{character};
 
-    MainWindow mainWindow = new MainWindow(new IntVector2(10, 25), new IntVector2(42, 0),
-        startMap.spawn, new Vector2(400, 250), new Vector2(700, 250));
-    mainWindow.setCurrentEntityIndicator(character);
+        InventoryWindow inventoryWindow = new InventoryWindow(new IntVector2(0, 15),
+                new IntVector2(10, 0), 4, 4);
+        Item exampleItem = new Item();
+        exampleItem.name = "knife";
+        exampleItem.texture = new Texture("knife.png");
+        inventoryWindow.addItem(exampleItem);
 
-    anInterface = new Interface(mapWindow, inventoryWindow, mainWindow);
-    Gdx.input.setInputProcessor(anInterface);
+        MainWindow mainWindow = new MainWindow(new IntVector2(10, 25), new IntVector2(42, 0),
+                startMap.spawn, new Vector2(400, 250), new Vector2(700, 250));
+        mainWindow.setCurrentEntityIndicator(character);
 
-    Club club = new Club(1, 1, "club", RaritySet.Common);
-    club.getObtained(character);
-    new HammerMastery().getObtained(character);
-    character.setActiveWeapon(club);
-    character.addOnMoveListener(args -> {
-      Room nowRoom = startMap.getRoom(args[1], args[0]);
-      nowRoom.master = dungeonMasster;
-      nowRoom.insert(character, false);
-      for(Entity entity : nowRoom.hostileEntities) {
-        dungeonMasster.add(0, entity);
-      }
-      mainWindow.setRoom(nowRoom);
-      character.place = nowRoom;
-    });
-    dungeonMasster.add(character.weight, character);
-    DungeonMasster.getInstance().move();
-  }
+        anInterface = new Interface(mapWindow, inventoryWindow, mainWindow);
+        Gdx.input.setInputProcessor(anInterface);
 
-  @Override
-  public void render() {
-    try {
-      this.update();
-    } catch (InterruptedException e) {
-      throw new RuntimeException(e);
+        Club club = new Club(1, 1, "club", RaritySet.Common);
+        club.getObtained(character);
+        new HammerMastery().getObtained(character);
+        character.setActiveWeapon(club);
+        character.addOnMoveListener(args -> {
+            Room nowRoom = startMap.getRoom(args[1], args[0]);
+            nowRoom.master = dungeonMasster;
+            nowRoom.insert(character, false);
+            for (Entity entity : nowRoom.hostileEntities) {
+                dungeonMasster.add(0, entity);
+            }
+            mainWindow.setRoom(nowRoom);
+            character.place = nowRoom;
+        });
+        dungeonMasster.add(character.weight, character);
+        DungeonMasster.getInstance().move();
     }
-    if (Constants.TEST_FIGHT) {
-      return;
+
+    @Override
+    public void render() {
+        try {
+            this.update();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        if (Constants.TEST_FIGHT) {
+            return;
+        }
+        ScreenUtils.clear(BACKGROUND);
+        anInterface.drawInLibGDX();
+        character.drawInLibGDX();
     }
-    ScreenUtils.clear(BACKGROUND);
-    anInterface.drawInLibGDX();
-    character.drawInLibGDX();
-  }
 }

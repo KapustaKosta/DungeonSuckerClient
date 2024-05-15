@@ -7,8 +7,8 @@ import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 public class HauntedRoom extends Room {
 
-  public HauntedRoom(IntVector2 levelPosition,
-                     Texture texture) {
-    super(levelPosition, texture);
-  }
+    public HauntedRoom(IntVector2 levelPosition,
+                       Texture texture) {
+        super(levelPosition, texture);
+    }
 }

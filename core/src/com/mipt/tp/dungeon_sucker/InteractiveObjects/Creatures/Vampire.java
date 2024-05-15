@@ -61,8 +61,7 @@ public class Vampire extends Creature {
             System.out.println("Vampire is doing something");
             this.heal(this.power);
             this.weapon.useByCreature(this.place, indexOfSkillToBeUsed, doAfterMove);
-        }
-        else doAfterMove.run();
+        } else doAfterMove.run();
         super.makeMove(doAfterMove);
     }
 }

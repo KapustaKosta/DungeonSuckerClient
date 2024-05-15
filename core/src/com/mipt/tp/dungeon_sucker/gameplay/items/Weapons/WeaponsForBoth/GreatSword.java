@@ -23,7 +23,8 @@ public class GreatSword extends Weapon {
         this.rarity = rarity;
         this.weight = 5;
         this.recountScales();
-        }
+    }
+
     public void getObtained(Entity holder) {
         super.getObtained(holder);
         this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Slash,

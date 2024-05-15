@@ -56,8 +56,7 @@ public class Skeleton extends Creature {
         if (this.isSummoned && this.isFighting) {
             System.out.println("Skeleton attacks");
             this.weapon.useByCreature(this.place, indexOfSkillToBeUsed, doAfterMove);
-        }
-        else doAfterMove.run();
+        } else doAfterMove.run();
         super.makeMove(doAfterMove);
     }
 }

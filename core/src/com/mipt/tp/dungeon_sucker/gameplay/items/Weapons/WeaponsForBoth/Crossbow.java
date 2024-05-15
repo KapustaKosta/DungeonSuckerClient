@@ -29,6 +29,7 @@ public class Crossbow extends ChargableWeapon {
         this.chargesForSkill[0] = CrossbowConfig.CHARGES_FOR_FIRST_SKILL;
         this.chargesForSkill[1] = CrossbowConfig.CHARGES_FOR_SECOND_SKILL;
     }
+
     public void getObtained(Entity holder) {
         super.getObtained(holder);
         this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Point, this.element,
@@ -52,6 +53,7 @@ public class Crossbow extends ChargableWeapon {
                 this.holder.isHostile));
         this.generateSkillForCreature(new ChargeWeapon(this, 1));
     }
+
     private void recountScales() {
         if (this.rarity == RaritySet.Poor) {
             this.dexterityScale *= CrossbowConfig.COEFFICIENT_TO_DEXTERITY_IF_POOR;

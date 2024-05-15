@@ -127,50 +127,40 @@ public class DFSMapGenerator extends MapGenerator {
         }
     }
 
-    private HauntedRoom generateHauntedRoom(IntVector2 position)
-    {
+    private HauntedRoom generateHauntedRoom(IntVector2 position) {
         HauntedRoom result = new HauntedRoom(position, roomsTexturesPack.hauntedRoomTexture);
         int enemiesCount = RandomNumGenerator.generateFromRange(1, 5);
         result.hostileEntities = new Entity[enemiesCount];
         result.master = DungeonMasster.getInstance();
-        for(int i = 0 ; i < enemiesCount ; i++)
-        {
+        for (int i = 0; i < enemiesCount; i++) {
             int creatureIndex = RandomNumGenerator.generateFromRange(0, 6);
-            switch (creatureIndex)
-            {
+            switch (creatureIndex) {
                 // Todo: mimic и генерация chest
-                case 0:
-                {
+                case 0: {
                     result.insert(new Bat(true, result, "Bat" + (i + 1)), true);
                     break;
                 }
-                case 1:
-                {
+                case 1: {
                     result.insert(new ElementalSpirit(true, result, "Elemental spirit" + (i + 1), ElementSet.getRandom()), true);
                     break;
                 }
-                case 2:
-                {
+                case 2: {
                     result.insert(new IvanKalinin(result), true);
                     break;
                 }
-                case 3:
-                {
+                case 3: {
                     result.insert(new Rat(true, result, "Rat" + (i + 1)), true);
                     break;
                 }
-                case 4:
-                {
+                case 4: {
                     result.insert(new Skeleton(true, result, "Skeleton" + (i + 1)), true);
                     break;
                 }
-                case 5:
-                {
+                case 5: {
                     result.insert(new Slime(true, result, "Slime" + (i + 1), RandomNumGenerator.generateFromRange(0, 3)), true);
                     break;
                 }
-                case 6:
-                {
+                case 6: {
                     result.insert(new Vampire(true, result, "Vampire" + (i + 1)), true);
                     break;
                 }

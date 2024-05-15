@@ -47,13 +47,12 @@ public class Bat extends Creature {
         this.weapon.recount();
     }
 
-  public void makeMove(Action doAfterMove) {
+    public void makeMove(Action doAfterMove) {
         System.out.println(this.isSummoned + " " + this.isFighting);
         if (this.isSummoned && this.isFighting) {
             System.out.println("BAT IS MOVING");
             this.weapon.useByCreature(this.place, indexOfSkillToBeUsed, doAfterMove);
-        }
-        else doAfterMove.run();
+        } else doAfterMove.run();
         super.makeMove(doAfterMove);
     }
 }

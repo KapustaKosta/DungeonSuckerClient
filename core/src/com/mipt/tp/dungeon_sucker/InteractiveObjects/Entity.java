@@ -108,10 +108,10 @@ public class Entity extends InteractiveObject implements Drawable {
     }
 
     public void makeMove(Action action) {
-        System.out.println(name +  " is walking");
+        System.out.println(name + " is walking");
         this.lastTimeOfStep = this.master.orderOfSteps.getFirst().timeOfStep;
         this.recountWeight();
-        if(this.weapon != null) this.weapon.recount();
+        if (this.weapon != null) this.weapon.recount();
     }
 
     public void recountWeight() {
@@ -209,8 +209,9 @@ public class Entity extends InteractiveObject implements Drawable {
                     break;
                 }
             }
-            if(flag){
-            this.master.add(this.lastTimeOfStep, this);}
+            if (flag) {
+                this.master.add(this.lastTimeOfStep, this);
+            }
         } catch (Exception ignored) {
         }
     }

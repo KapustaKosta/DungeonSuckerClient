@@ -25,7 +25,8 @@ public class Rapier extends Weapon {
         this.weight = 5;
         this.recountScales();
     }
-public void getObtained(Entity holder) {
+
+    public void getObtained(Entity holder) {
         super.getObtained(holder);
         this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Point,
                 this.element, true, RapierConfig.PERCENT_OF_ELEMENTAL_DAMAGE));
@@ -53,6 +54,7 @@ public void getObtained(Entity holder) {
                 RapierConfig.PERCENT_OF_ELEMENTAL_DAMAGE,
                 this.holder.isHostile));
     }
+
     private void recountScales() {
         if (this.rarity == RaritySet.Poor) {
             this.dexterityScale *= RapierConfig.COEFFICIENT_TO_DEXTERITY_IF_POOR;

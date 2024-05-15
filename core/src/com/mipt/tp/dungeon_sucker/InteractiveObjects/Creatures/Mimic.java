@@ -42,8 +42,7 @@ public class Mimic extends Creature {
         if (this.isSummoned && this.isFighting) {
             System.out.println("MIMIC IS MOVING");
             this.weapon.useByCreature(this.place, indexOfSkillToBeUsed, doAfterMove);
-        }
-        else doAfterMove.run();
+        } else doAfterMove.run();
         super.makeMove(doAfterMove);
     }
 

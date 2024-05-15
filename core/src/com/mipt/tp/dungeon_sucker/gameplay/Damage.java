@@ -46,7 +46,7 @@ public class Damage {
         for (int i = 0; i < this.dealer.artifacts.size(); ++i) {
             if (this.dealer.artifacts.get(i).upgradable == this.dealer.weapon.type) {
                 int newDamage = this.totalDamage + this.dealer.artifacts.get(i).effectiveness;
-                this.defaultDamage = (this.totalDamage == 0? 0 : this.defaultDamage * newDamage / this.totalDamage);
+                this.defaultDamage = (this.totalDamage == 0 ? 0 : this.defaultDamage * newDamage / this.totalDamage);
                 this.totalDamage = newDamage;
                 this.elementDamage = this.totalDamage - this.defaultDamage;
             }

@@ -28,7 +28,7 @@ public class Spear extends Weapon {
         this.recountScales();
     }
 
- public void getObtained(Entity holder) {
+    public void getObtained(Entity holder) {
         super.getObtained(holder);
         this.generateSkill(new DamageOneEntity(this, this.power, DamageTypeSet.Point,
                 this.element, true, SpearConfig.PERCENT_OF_ELEMENTAL_DAMAGE));
@@ -61,6 +61,7 @@ public class Spear extends Weapon {
                 SpearConfig.SECOND_COEFFICIENT_IN_FIRST_SKILL_THAT_ATTACKS_MULTIPLE_TARGETS,
                 SpearConfig.THIRD_COEFFICIENT_IN_FIRST_SKILL_THAT_ATTACKS_MULTIPLE_TARGETS, this.holder.isHostile));
     }
+
     private void recountScales() {
         if (this.rarity == RaritySet.Poor) {
             this.strengthScale *= SpearConfig.COEFFICIENT_TO_EXISTING_STATS_IF_POOR;

@@ -42,7 +42,7 @@ public class FightTry {
     }
 
     public static void generateWeapons() {
-        Scanner in =   new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
         in.nextInt();
         LinkedList<Weapon> weapons = new LinkedList<>();
         for (int i = 0; i < 1000; ++i) {
