@@ -96,7 +96,6 @@ public class Character extends Entity {
         this.health = health;
         this.isFighting = false;
         this.weight = weight;
-        this.name = "UEBOK, BLYAT";
     }
 
     public void addItem(Item item) {

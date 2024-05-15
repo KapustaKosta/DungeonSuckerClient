@@ -68,6 +68,7 @@ public class DungeonSuckerGame extends ApplicationAdapter {
         character.maxHealth = character.health;
         character.master = dungeonMasster;
         character.mapTexture = new Texture("character.png");
+        character.name = "Vasya";
         startMap.spawn.friendlyEntities = new Entity[]{character};
 
         InventoryWindow inventoryWindow = new InventoryWindow(new IntVector2(0, 15),

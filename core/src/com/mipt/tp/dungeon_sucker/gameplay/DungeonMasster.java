@@ -29,7 +29,6 @@ public class DungeonMasster {
 
     public void add(long timeOfStep, Entity entity) {
         entity.master = this;
-        System.out.println(entity.name + " " + timeOfStep);
         for (int i = 0; i < this.orderOfSteps.size(); ++i) {
             if (this.orderOfSteps.get(i).entity == entity) {
                 this.orderOfSteps.remove(i);
@@ -59,14 +58,11 @@ public class DungeonMasster {
 
     // вынести в update
     public void move() {
-        System.out.println("I'm gonna move, I'm " + this.orderOfSteps.getFirst().entity.name);
         if (this.orderOfSteps.getFirst().entity.isAlive) {
             this.time = Math.max(this.time, this.orderOfSteps.getFirst().timeOfStep);
             int typeOfSkill = this.orderOfSteps.getFirst().entity.startMove();
             System.out.println(this.orderOfSteps.getFirst().entity.name);
-            System.out.println("NUMBER OF PIDORASY = " + this.orderOfSteps.size());
             this.orderOfSteps.getFirst().entity.makeMove(args -> {
-                System.out.println(this.orderOfSteps.getFirst().entity.name + " has moved");
                 Class<Creature> creatureClass = Creature.class;
                 if (this.orderOfSteps.getFirst().entity.getClass() == creatureClass) {
                     this.add((this.orderOfSteps.getFirst().entity).weight
