@@ -30,6 +30,7 @@ public class Vampire extends Creature {
         this.experiencePerKill = 3;
         this.description = this.name + ", a noble vampire";
         this.texture = new Texture("vampire.png");
+        this.moveMessage = this.name + " is moving";
     }
 
     public Vampire(int health, int power, int weight, boolean isHostile, Room place) {
@@ -43,6 +44,7 @@ public class Vampire extends Creature {
         this.experiencePerKill = 3;
         this.description = this.name + ", a noble vampire";
         this.texture = new Texture("vampire.png");
+        this.moveMessage = this.name + " is moving";
     }
 
     public void summon() {
@@ -53,15 +55,5 @@ public class Vampire extends Creature {
         this.maxHealth = this.health;
         this.experiencePerKill = (int) (Math.sqrt(this.master.level) * this.experiencePerKill);
         this.weapon.recount();
-    }
-
-    public void makeMove(Action doAfterMove) {
-        System.out.println(this.isSummoned + " " + this.isFighting);
-        if (this.isSummoned && this.isFighting) {
-            System.out.println("Vampire is doing something");
-            this.heal(this.power);
-            this.weapon.useByCreature(this.place, indexOfSkillToBeUsed, doAfterMove);
-        } else doAfterMove.run();
-        super.makeMove(doAfterMove);
     }
 }

@@ -186,10 +186,13 @@ public class Room implements Drawable {
     public void checkFriendlyAlive() {
         boolean battleMustEnd = true;
         for (int i = 0; i < this.amountOfFriendlyEntities; ++i) {
-            if (this.friendlyEntities[i].isAlive) {
+            if (this.friendlyEntities[i] != null && this.friendlyEntities[i].isAlive) {
                 battleMustEnd = false;
                 break;
             }
+        }
+        if(!this.isHaunted || this.isCleared){
+            battleMustEnd = false;
         }
         if (battleMustEnd) {
             ButtonsGroup.getInstance().clear();

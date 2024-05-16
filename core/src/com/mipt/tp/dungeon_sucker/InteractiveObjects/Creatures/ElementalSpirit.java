@@ -35,6 +35,7 @@ public class ElementalSpirit extends Creature {
                 this.name + ", wrath of the very nature in a cute body, may harm you, dealing " + this.power
                         + "of elemental damage";
         this.texture = ElementSet.getTexture(element);
+        this.moveMessage = this.name + " IS MOVING";
     }
 
     public ElementalSpirit(int health, int power, int weight, boolean isHostile, Room place,
@@ -89,14 +90,4 @@ public class ElementalSpirit extends Creature {
         this.weapon.recount();
     }
 
-    public void makeMove(Action doAfterMove) {
-        System.out.println(this.isSummoned + " " + this.isFighting);
-        if (this.isSummoned && this.isFighting) {
-            System.out.println("Elemental Spirit IS MOVING");
-            this.weapon.useByCreature(this.place, indexOfSkillToBeUsed, doAfterMove);
-        } else {
-            doAfterMove.run();
-        }
-        super.makeMove(doAfterMove);
-    }
 }

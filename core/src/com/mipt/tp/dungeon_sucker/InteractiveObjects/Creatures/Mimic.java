@@ -25,6 +25,7 @@ public class Mimic extends Creature {
         this.weapon = new MimicClaws(this.power);
         this.weapon.getObtained(this);
         this.description = this.name + ", it was looking just like a chest, I promise";
+        this.moveMessage = "MIMIC IS MOVING";
     }
 
     public void summon() {
@@ -36,14 +37,6 @@ public class Mimic extends Creature {
         this.weapon = new MimicClaws(this.power);
         this.weapon.getObtained(this);
         this.weapon.recount();
-    }
-
-    public void makeMove(Action doAfterMove) {
-        if (this.isSummoned && this.isFighting) {
-            System.out.println("MIMIC IS MOVING");
-            this.weapon.useByCreature(this.place, indexOfSkillToBeUsed, doAfterMove);
-        } else doAfterMove.run();
-        super.makeMove(doAfterMove);
     }
 
     public void die() {

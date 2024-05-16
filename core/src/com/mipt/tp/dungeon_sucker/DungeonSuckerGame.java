@@ -8,7 +8,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Character;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
-import com.mipt.tp.dungeon_sucker.gameplay.level.Map;
 import com.mipt.tp.dungeon_sucker.UI.Interface;
 import com.mipt.tp.dungeon_sucker.UI.InventoryWindow;
 import com.mipt.tp.dungeon_sucker.UI.MainWindow;
@@ -20,6 +19,7 @@ import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth.Hamm
 import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForBoth.Club;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
+import com.mipt.tp.dungeon_sucker.gameplay.level.Map;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.logic.DFSMapGenerator;
 import com.mipt.tp.dungeon_sucker.gameplay.level.logic.MapGenerator;
@@ -91,9 +91,12 @@ public class DungeonSuckerGame extends ApplicationAdapter {
         character.addOnMoveListener(args -> {
             Room nowRoom = startMap.getRoom(args[1], args[0]);
             nowRoom.master = dungeonMasster;
+            character.place.extract(character, false);
             nowRoom.insert(character, false);
             for (Entity entity : nowRoom.hostileEntities) {
-                dungeonMasster.add(0, entity);
+                if (entity != null) {
+                    dungeonMasster.add(0, entity);
+                }
             }
             mainWindow.setRoom(nowRoom);
             character.place = nowRoom;

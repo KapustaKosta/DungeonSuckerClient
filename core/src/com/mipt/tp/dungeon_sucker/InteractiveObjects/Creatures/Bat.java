@@ -24,6 +24,7 @@ public class Bat extends Creature {
         this.weapon.getObtained(this);
         this.description = this.name + ", basically a winged rat, may also bite you, dealing " + this.power + "of physical damage";
         this.texture = new Texture("bat.png");
+        this.moveMessage = this.name + " is moving";
     }
 
     public Bat(int health, int power, int weight, boolean isHostile, Room place) {
@@ -34,6 +35,7 @@ public class Bat extends Creature {
         this.weapon.getObtained(this);
         this.description = this.name + ", basically a winged rat, may also bite you, dealing " + this.power + "of physical damage";
         this.texture = new Texture("bat.png");
+        this.moveMessage = this.name + " is moving";
     }
 
     public void summon() {
@@ -45,14 +47,5 @@ public class Bat extends Creature {
         this.weapon = new BatClaws(this.power);
         this.weapon.getObtained(this);
         this.weapon.recount();
-    }
-
-    public void makeMove(Action doAfterMove) {
-        System.out.println(this.isSummoned + " " + this.isFighting);
-        if (this.isSummoned && this.isFighting) {
-            System.out.println("BAT IS MOVING");
-            this.weapon.useByCreature(this.place, indexOfSkillToBeUsed, doAfterMove);
-        } else doAfterMove.run();
-        super.makeMove(doAfterMove);
     }
 }

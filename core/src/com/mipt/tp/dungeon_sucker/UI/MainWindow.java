@@ -70,15 +70,18 @@ public class MainWindow extends Window {
         lastX = hostileEntitiesPosition.x;
         for (int i = 0; i < hostileEntitiesBatches.length; i++) {
             hostileEntitiesBatches[i] = new SpriteBatch();
-            hostileEntitiesHealth[i] = new Text(FixedSysFont.getInstance(),
-                    getHealthBar(room.hostileEntities[i]),
-                    new Vector2(lastX,
-                            hostileEntitiesPosition.y + room.hostileEntities[i].texture.getHeight()
-                                    + healthIndent));
-            lastX += room.hostileEntities[i].texture.getWidth();
+            if (room.hostileEntities[i] != null) {
+                hostileEntitiesHealth[i] = new Text(FixedSysFont.getInstance(),
+                        getHealthBar(room.hostileEntities[i]),
+                        new Vector2(lastX,
+                                hostileEntitiesPosition.y + room.hostileEntities[i].texture.getHeight()
+                                        + healthIndent));
+            }
+            if (room.hostileEntities[i] != null) {
+                lastX += room.hostileEntities[i].texture.getWidth();
+                hostileEntitiesTextureWidths[i] = room.hostileEntities[i].texture.getWidth();
+            }
             lastX += hostileEntitiesOffset;
-
-            hostileEntitiesTextureWidths[i] = room.hostileEntities[i].texture.getWidth();
         }
     }
 
@@ -149,11 +152,10 @@ public class MainWindow extends Window {
             lastX += hostileEntitiesTextureWidths[i];
             lastX += hostileEntitiesOffset;
 
-            if (room.hostileEntities[i] == null) {
-                continue;
+            if (room.hostileEntities[i] != null) {
+                hostileEntitiesHealth[i].setText(getHealthBar(room.hostileEntities[i]));
+                hostileEntitiesHealth[i].drawInLibGDX();
             }
-            hostileEntitiesHealth[i].setText(getHealthBar(room.hostileEntities[i]));
-            hostileEntitiesHealth[i].drawInLibGDX();
         }
 
         if (currentEntityIndicatorPosition != null) {

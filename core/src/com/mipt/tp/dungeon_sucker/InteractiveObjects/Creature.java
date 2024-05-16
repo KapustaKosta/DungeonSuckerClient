@@ -10,6 +10,7 @@ public class Creature extends Entity {
 
     protected boolean isSummoned = false;
     public int indexOfSkillToBeUsed;
+    protected String moveMessage = "";
 
     public Creature(int health, int power, int weight, boolean isHostile, Room place, String name) {
         super(health, weight, place, name);
@@ -22,15 +23,19 @@ public class Creature extends Entity {
     public void makeMove(Action doAfterMove) {
         if (this.isFighting) {
             if (this.isSummoned) {
-                super.makeMove(doAfterMove);
+                System.out.println(this.moveMessage);
+                this.weapon.useByCreature(this.place, indexOfSkillToBeUsed, doAfterMove);
             } else {
-                this.summon();
+                System.out.println(this.name + "is summoning");
+                this.summon(doAfterMove);
             }
         }
+        super.makeMove(doAfterMove);
     }
 
-    private void summon() {
+    private void summon(Action action) {
         this.isSummoned = true;
+        action.run();
     }
 
     public void setPlace(Room room) {

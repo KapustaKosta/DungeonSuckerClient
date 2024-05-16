@@ -111,7 +111,10 @@ public class Entity extends InteractiveObject implements Drawable {
         System.out.println(name + " is walking");
         this.lastTimeOfStep = this.master.orderOfSteps.getFirst().timeOfStep;
         this.recountWeight();
-        if (this.weapon != null) this.weapon.recount();
+        if (this.weapon != null) {
+            this.weapon.recount();
+        }
+        // action.run();
     }
 
     public void recountWeight() {
@@ -125,7 +128,9 @@ public class Entity extends InteractiveObject implements Drawable {
         if (this.isHostile) {
             this.place.checkHostileAlive();
             for (int i = 0; i < this.place.amountOfFriendlyEntities; ++i) {
-                this.place.friendlyEntities[i].obtainExp(this.experiencePerKill);
+                if (this.place.friendlyEntities[i] != null) {
+                    this.place.friendlyEntities[i].obtainExp(this.experiencePerKill);
+                }
             }
         } else {
             this.place.checkFriendlyAlive();

@@ -145,7 +145,7 @@ public class DFSMapGenerator extends MapGenerator {
                     break;
                 }
                 case 2: {
-                    result.insert(new IvanKalinin(result), true);
+                    // result.insert(new IvanKalinin(result), true);
                     break;
                 }
                 case 3: {

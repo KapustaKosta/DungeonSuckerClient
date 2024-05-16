@@ -88,6 +88,7 @@ public class Character extends Entity {
         this.baseHealth = health;
         this.name = name;
         this.isFighting = false;
+        this.place = new Room();
     }
 
     public Character(IntVector2 position, Texture texture, Level level, int health, int weight) {
@@ -96,7 +97,8 @@ public class Character extends Entity {
         this.health = health;
         this.isFighting = false;
         this.weight = weight;
-        this.name = "UEBOK, BLYAT";
+        this.name = "Brave Hero";
+        this.place = new Room();
     }
 
     public void addItem(Item item) {

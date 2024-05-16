@@ -6,6 +6,7 @@ import com.mipt.tp.dungeon_sucker.InteractiveObjects.Upgrader;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class DungeonMasster {
 
@@ -64,7 +65,10 @@ public class DungeonMasster {
             this.time = Math.max(this.time, this.orderOfSteps.getFirst().timeOfStep);
             int typeOfSkill = this.orderOfSteps.getFirst().entity.startMove();
             System.out.println(this.orderOfSteps.getFirst().entity.name);
-            System.out.println("NUMBER OF PIDORASY = " + this.orderOfSteps.size());
+            if(Objects.equals(this.orderOfSteps.getFirst().entity.name, "GodObject")){
+                System.out.println("CURRENT LEVEL IS " + this.level);
+            }
+            System.out.println("NUMBER OF ENTITIES = " + this.orderOfSteps.size());
             this.orderOfSteps.getFirst().entity.makeMove(args -> {
                 System.out.println(this.orderOfSteps.getFirst().entity.name + " has moved");
                 Class<Creature> creatureClass = Creature.class;

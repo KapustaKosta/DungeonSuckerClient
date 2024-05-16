@@ -28,6 +28,7 @@ public class Slime extends Creature {
         this.slimeLevel = slimeLevel;
         this.description = this.name + ", a blob full of something gooey, looks like he's capable of dealing " + this.power + "of physical damage";
         this.texture = new Texture("slime.png");
+        this.moveMessage = this.name + " is moving";
     }
 
     public Slime(int health, int power, int weight, boolean isHostile, Room place, int slimeLevel) {
@@ -40,6 +41,7 @@ public class Slime extends Creature {
         new Split().getObtained(this);
         this.description = this.name + ", a blob full of something gooey, looks like he's capable of dealing " + this.power + "of physical damage";
         this.texture = new Texture("slime.png");
+        this.moveMessage = this.name + " is moving";
     }
 
     public void summon() {
@@ -53,12 +55,4 @@ public class Slime extends Creature {
         this.weapon.recount();
     }
 
-    public void makeMove(Action doAfterMove) {
-        System.out.println(this.isSummoned + " " + this.isFighting);
-        if (this.isSummoned && this.isFighting) {
-            System.out.println("BLOB IS MOVING");
-            this.weapon.useByCreature(this.place, indexOfSkillToBeUsed, doAfterMove);
-        } else doAfterMove.run();
-        super.makeMove(doAfterMove);
-    }
 }
