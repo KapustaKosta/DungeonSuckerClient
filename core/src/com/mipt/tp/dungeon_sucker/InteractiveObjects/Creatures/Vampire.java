@@ -28,7 +28,7 @@ public class Vampire extends Creature {
         new DarkResistance().getObtained(this);
         this.name = name;
         this.experiencePerKill = 3;
-        this.description = this.name + ", a noble vampire that heals every time he bites you";
+        this.description = this.name + ", a noble vampire";
         this.texture = new Texture("vampire.png");
     }
 
@@ -41,7 +41,7 @@ public class Vampire extends Creature {
         new DarkResistance().getObtained(this);
         this.name = "Vampire";
         this.experiencePerKill = 3;
-        this.description = this.name + ", a noble vampire that heals every time he bites you";
+        this.description = this.name + ", a noble vampire";
         this.texture = new Texture("vampire.png");
     }
 
