@@ -43,6 +43,6 @@ public class DamageOneEntity extends DamagingSkill {
     }
 
     public String toString() {
-        return "punch one enemy by your choice, dealing " + this.damage + " damage";
+        return "punch one enemy by your choice, dealing " + this.damage.totalDamage + " damage";
     }
 }

@@ -73,4 +73,7 @@ public class DamagingSkill extends Skill {
         }
         listeners.clear();
     }
+    public String toString(){
+        return this.description;
+    }
 }
