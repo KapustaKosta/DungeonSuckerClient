@@ -125,9 +125,6 @@ public class Room implements Drawable {
                     this.hostileEntities[i] = entity;
                     entity.place = this;
                     entity.positionInRoom = i;
-/*
-          this.master.add(0, entity);
-*/
                     return;
                 }
             }
@@ -135,15 +132,14 @@ public class Room implements Drawable {
                 this.hostileEntities[this.amountOfHostileEntities++] = entity;
                 entity.place = this;
                 entity.positionInRoom = this.amountOfHostileEntities - 1;
-/*
-        this.master.add(0, entity);
-*/
             }
             return;
         }
+        boolean shouldStartFighting = false;
         for (int i = 0; i < this.amountOfHostileEntities; ++i) {
             if (hostileEntities[i] != null) {
                 this.hostileEntities[i].isFighting = true;
+                shouldStartFighting = true;
             }
         }
         entity.place = this;
@@ -151,19 +147,14 @@ public class Room implements Drawable {
             if (friendlyEntities[i] == null || !this.friendlyEntities[i].isAlive) {
                 this.friendlyEntities[i] = entity;
                 entity.positionInRoom = i;
-/*
-        this.master.add(0, entity);
-*/
                 return;
             }
         }
         if (this.amountOfFriendlyEntities < this.friendlyEntities.length) {
             this.friendlyEntities[this.amountOfFriendlyEntities++] = entity;
             entity.positionInRoom = this.amountOfFriendlyEntities - 1;
-/*
-      this.master.add(0, entity);
-*/
         }
+        entity.isFighting = shouldStartFighting;
     }
 
     public void checkHostileAlive() {

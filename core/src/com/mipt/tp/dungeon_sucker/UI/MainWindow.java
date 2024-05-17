@@ -152,7 +152,7 @@ public class MainWindow extends Window {
             lastX += hostileEntitiesTextureWidths[i];
             lastX += hostileEntitiesOffset;
 
-            if (room.hostileEntities[i] != null) {
+            if (room.hostileEntities[i] != null && hostileEntitiesHealth[i] != null) {
                 hostileEntitiesHealth[i].setText(getHealthBar(room.hostileEntities[i]));
                 hostileEntitiesHealth[i].drawInLibGDX();
             }
