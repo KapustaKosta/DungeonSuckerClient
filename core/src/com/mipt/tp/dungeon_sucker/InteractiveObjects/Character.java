@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.mipt.tp.dungeon_sucker.DungeonSuckerGame;
 import com.mipt.tp.dungeon_sucker.UI.Buttons.Button;
 import com.mipt.tp.dungeon_sucker.UI.Buttons.ButtonsGroup;
+import com.mipt.tp.dungeon_sucker.UI.InventoryWindow;
 import com.mipt.tp.dungeon_sucker.gameplay.Action;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
@@ -23,6 +24,8 @@ public class Character extends Entity {
     private int baseHealth;
     private ArrayList<Action> onMoveListeners = new ArrayList<>();
     public Texture mapTexture;
+
+    private InventoryWindow inventoryWindow;
 
     public void getInput() {
         if (!this.isFighting) {
@@ -78,20 +81,7 @@ public class Character extends Entity {
         this.isCharacter = true;
     }
 
-    public Character(int weight, int health, String name, DungeonMasster DM) {
-        super(health + 100, weight, new Room(new IntVector2(), new Texture("room.png"), new Creature[0], DM),
-                name);
-        this.isCharacter = true;
-        this.weight = weight;
-        this.health = health + 100;
-        this.maxHealth = health + 100;
-        this.baseHealth = health + 100;
-        this.name = name;
-        this.isFighting = false;
-        this.place = new Room();
-    }
-
-    public Character(IntVector2 position, Texture texture, Level level, int health, int weight) {
+    public Character(IntVector2 position, Texture texture, Level level, int health, int weight, InventoryWindow inventoryWindow) {
         super(position, texture, level);
         this.isCharacter = true;
         this.health = health + 100;
@@ -101,10 +91,15 @@ public class Character extends Entity {
         this.weight = weight;
         this.name = "Brave Hero";
         this.place = new Room();
+        this.inventoryWindow = inventoryWindow;
     }
 
     public void addItem(Item item) {
         this.items.add(item);
+    }
+
+    public void updateInventory() {
+        inventoryWindow.update(this.items);
     }
 
     private void itemToLeave(String thing) {

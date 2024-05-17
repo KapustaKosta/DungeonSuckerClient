@@ -24,7 +24,9 @@ public class Cell extends Window {
         if (item == null) return;
 
         batch.begin();
-        batch.draw(item.texture, bottomLeftPoint.x * Constants.CELL_SIZE, bottomLeftPoint.y * Constants.CELL_SIZE);
+        if (item.texture != null) {
+            batch.draw(item.texture, bottomLeftPoint.x * Constants.CELL_SIZE, bottomLeftPoint.y * Constants.CELL_SIZE, 100, 100);
+        }
         batch.end();
     }
 

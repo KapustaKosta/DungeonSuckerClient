@@ -11,6 +11,7 @@ import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.WeaponTypes;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.helper.WeaponConfis.GreatSwordConfig;
+import com.mipt.tp.dungeon_sucker.itemSpriteGenerator.ItemSpriteGenerator;
 
 public class GreatSword extends Weapon {
     public GreatSword(int level, int damage, String name, RaritySet rarity) {
@@ -23,6 +24,7 @@ public class GreatSword extends Weapon {
         this.rarity = rarity;
         this.weight = 5;
         this.recountScales();
+        this.texture = ItemSpriteGenerator.generateTexture(this);
     }
 
     public void getObtained(Entity holder) {

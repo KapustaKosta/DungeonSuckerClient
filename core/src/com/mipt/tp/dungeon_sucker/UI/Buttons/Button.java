@@ -45,6 +45,9 @@ public class Button implements Drawable {
         int add = 0;
         for (int i = 1; i <= count; i++) {
             int position = i * interval + add;
+            if (position >= message.length()) {
+                break;
+            }
             message = message.substring(0, position) + "\n" + message.substring(position);
             add += 2; // длина \n
         }

@@ -13,6 +13,7 @@ import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.WeaponTypes;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.helper.WeaponConfis.SpearConfig;
+import com.mipt.tp.dungeon_sucker.itemSpriteGenerator.ItemSpriteGenerator;
 
 public class Spear extends Weapon {
     public Spear(int level, int damage, String name, RaritySet rarity) {
@@ -26,6 +27,7 @@ public class Spear extends Weapon {
         this.rarity = rarity;
         this.weight = 5;
         this.recountScales();
+        this.texture = ItemSpriteGenerator.generateTexture(this);
     }
 
     public void getObtained(Entity holder) {

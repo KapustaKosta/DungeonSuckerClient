@@ -13,4 +13,5 @@ public class Constants {
 
     public static final int CHAR_SIZE = 17;
     public static final int MARGIN_PERCENT = 5;
+    public static final String WEAPON_TEXTURES_FOLDER = "items";
 }

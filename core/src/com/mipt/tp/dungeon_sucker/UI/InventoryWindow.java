@@ -3,6 +3,7 @@ package com.mipt.tp.dungeon_sucker.UI;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
 import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Character;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
@@ -12,6 +13,8 @@ public class InventoryWindow extends Window {
     private int cellsWidth;
     private int cellsHeight;
     private Cell[][] cells;
+
+    private Character character;
 
     public InventoryWindow(IntVector2 topLeftPoint,
                            IntVector2 bottomRightPoint, int cellsWidth, int cellsHeight) {
@@ -35,6 +38,19 @@ public class InventoryWindow extends Window {
             }
             cellTopLeft.moveY(-cellHeight);
             cellBottomRight.moveY(-cellHeight);
+        }
+    }
+
+    public void update(ArrayList<Item> items) {
+        this.items = items;
+        updateTextures();
+    }
+
+    public void updateTextures() {
+        for (int i = 0; i < this.items.size(); i++) {
+            int x = i % cells[0].length;
+            int y = i / cells[0].length;
+            cells[y][x].setItem(items.get(i));
         }
     }
 
