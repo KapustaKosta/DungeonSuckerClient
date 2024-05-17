@@ -79,13 +79,13 @@ public class Character extends Entity {
     }
 
     public Character(int weight, int health, String name, DungeonMasster DM) {
-        super(health, weight, new Room(new IntVector2(), new Texture("room.png"), new Creature[0], DM),
+        super(health + 100, weight, new Room(new IntVector2(), new Texture("room.png"), new Creature[0], DM),
                 name);
         this.isCharacter = true;
         this.weight = weight;
-        this.health = health;
-        this.maxHealth = health;
-        this.baseHealth = health;
+        this.health = health + 100;
+        this.maxHealth = health + 100;
+        this.baseHealth = health + 100;
         this.name = name;
         this.isFighting = false;
         this.place = new Room();
@@ -94,8 +94,9 @@ public class Character extends Entity {
     public Character(IntVector2 position, Texture texture, Level level, int health, int weight) {
         super(position, texture, level);
         this.isCharacter = true;
-        this.health = health;
-        this.isFighting = false;
+        this.health = health + 100;
+        this.maxHealth = health + 100;
+        this.baseHealth = health + 100;        this.isFighting = false;
         this.weight = weight;
         this.name = "Brave Hero";
         this.place = new Room();
