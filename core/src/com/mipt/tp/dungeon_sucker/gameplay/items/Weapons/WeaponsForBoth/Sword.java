@@ -10,6 +10,7 @@ import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.WeaponTypes;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.helper.WeaponConfis.SwordConfig;
+import com.mipt.tp.dungeon_sucker.itemSpriteGenerator.ItemSpriteGenerator;
 
 public class Sword extends Weapon {
 
@@ -24,6 +25,7 @@ public class Sword extends Weapon {
         this.dexterityScale = SwordConfig.BASE_DEXTERITY_SCALE;
         this.weight = 5;
         this.recountScales();
+        this.texture = ItemSpriteGenerator.generateTexture(this);
     }
 
     public void getObtained(Entity holder) {

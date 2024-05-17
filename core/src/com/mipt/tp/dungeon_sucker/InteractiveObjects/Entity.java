@@ -91,6 +91,10 @@ public class Entity extends InteractiveObject implements Drawable {
         this.position = new Vector2(levelPosition.x * Constants.CELL_SIZE, (15 + levelPosition.y) * Constants.CELL_SIZE);
     }
 
+    public void updateInventory() {
+        
+    }
+
     public void getDamaged(Damage damage) {
         damage = damage.copy();
         damage.addMasteryScale();

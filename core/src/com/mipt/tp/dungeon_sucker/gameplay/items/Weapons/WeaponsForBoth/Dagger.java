@@ -11,6 +11,7 @@ import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.WeaponTypes;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.helper.WeaponConfis.DaggerConfig;
+import com.mipt.tp.dungeon_sucker.itemSpriteGenerator.ItemSpriteGenerator;
 
 public class Dagger extends Weapon {
 
@@ -24,6 +25,7 @@ public class Dagger extends Weapon {
         this.rarity = rarity;
         this.weight = 5;
         this.recountScales();
+        this.texture = ItemSpriteGenerator.generateTexture(this);
     }
 
     public void getObtained(Entity holder) {

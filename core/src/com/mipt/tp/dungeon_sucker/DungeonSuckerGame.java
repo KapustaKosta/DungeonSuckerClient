@@ -63,15 +63,16 @@ public class DungeonSuckerGame extends ApplicationAdapter {
         MapWindow mapWindow = new MapWindow(new IntVector2(0, 25), new IntVector2(10, 15), level);
 
         DungeonMasster dungeonMasster = DungeonMasster.getInstance();
+        InventoryWindow inventoryWindow = new InventoryWindow(new IntVector2(0, 15),
+                new IntVector2(10, 0), 4, 4);
+
         IntVector2 characterPosition = new IntVector2(startMap.spawn.getPosition().x, startMap.spawn.getPosition().y);
-        character = new Character(characterPosition, new Texture("knight.png"), level, 25, 50);
+        character = new Character(characterPosition, new Texture("knight.png"), level, 25, 50, inventoryWindow);
         character.maxHealth = character.health;
         character.master = dungeonMasster;
         character.mapTexture = new Texture("character.png");
         startMap.spawn.friendlyEntities = new Entity[]{character};
 
-        InventoryWindow inventoryWindow = new InventoryWindow(new IntVector2(0, 15),
-                new IntVector2(10, 0), 4, 4);
         Item exampleItem = new Item();
         exampleItem.name = "knife";
         exampleItem.texture = new Texture("knife.png");
@@ -84,7 +85,7 @@ public class DungeonSuckerGame extends ApplicationAdapter {
         anInterface = new Interface(mapWindow, inventoryWindow, mainWindow);
         Gdx.input.setInputProcessor(anInterface);
 
-        Club club = new Club(1, 1, "club", RaritySet.Common);
+        Club club = new Club(1, 1, "Bat", RaritySet.Common);
         club.getObtained(character);
         new HammerMastery().getObtained(character);
         character.setActiveWeapon(club);
