@@ -96,7 +96,8 @@ public class Character extends Entity {
         this.isCharacter = true;
         this.health = health + 100;
         this.maxHealth = health + 100;
-        this.baseHealth = health + 100;        this.isFighting = false;
+        this.baseHealth = health + 100;
+        this.isFighting = false;
         this.weight = weight;
         this.name = "Brave Hero";
         this.place = new Room();
@@ -188,11 +189,15 @@ public class Character extends Entity {
             }
         } else {
             if (!Constants.TEST_FIGHT) {
-                ButtonsGroup.getInstance().clear();
+                if (ButtonsGroup.getInstance() != null) {
+                    ButtonsGroup.getInstance().clear();
+                }
                 ButtonsGroup.getInstance().setArticle("Choose action");
-                ButtonsGroup.getInstance().addButton(new Button("attack", args -> {
-                    this.attack(doAfterMove);
-                }));
+/*                if (isFighting) {
+                    ButtonsGroup.getInstance().addButton(new Button("use weapon skill", args -> {
+                        this.attack(doAfterMove);
+                    }));
+                }*/
                 ButtonsGroup.getInstance()
                         .addButton(new Button("interact with chest", args -> {
                             this.interractWithChest();
