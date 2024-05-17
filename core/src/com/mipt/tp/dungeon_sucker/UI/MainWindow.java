@@ -16,8 +16,8 @@ public class MainWindow extends Window {
     private Room room;
     private int leftBorderMargin = 10;
     private int bottomBorderMargin = 300;
-    private int spaceBetweenFriendlyAndHostile = 150;
-    private int minSpaceBetweenFriendlyAndHostile = 50;
+    private int spaceBetweenFriendlyAndHostile = 250;
+    private int minSpaceBetweenFriendlyAndHostile = 100;
     private SpriteBatch[] friendlyEntitiesBatches;
     private SpriteBatch[] hostileEntitiesBatches;
     private int[] friendlyEntitiesTextureWidths;
@@ -69,8 +69,9 @@ public class MainWindow extends Window {
         if (totalEntitiesWidth > width) {
             float delta = totalEntitiesWidth - width;
             totalEntitiesWidth -= spaceBetweenFriendlyAndHostile;
-            spaceBetweenFriendlyAndHostile = Integer.min(minSpaceBetweenFriendlyAndHostile, (int) (spaceBetweenFriendlyAndHostile - delta));
+            spaceBetweenFriendlyAndHostile = Integer.max(minSpaceBetweenFriendlyAndHostile, (int) (spaceBetweenFriendlyAndHostile - delta));
             totalEntitiesWidth += spaceBetweenFriendlyAndHostile;
+            delta = totalEntitiesWidth - width;
             if (delta >= 0) {
                 scale = width / totalEntitiesWidth;
             }

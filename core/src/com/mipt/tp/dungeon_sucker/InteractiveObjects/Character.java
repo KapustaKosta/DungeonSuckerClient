@@ -189,8 +189,15 @@ public class Character extends Entity {
             }
         } else {
             if (!Constants.TEST_FIGHT) {
-                ButtonsGroup.getInstance().clear();
+                if (ButtonsGroup.getInstance() != null) {
+                    ButtonsGroup.getInstance().clear();
+                }
                 ButtonsGroup.getInstance().setArticle("Choose action");
+/*                if (isFighting) {
+                    ButtonsGroup.getInstance().addButton(new Button("use weapon skill", args -> {
+                        this.attack(doAfterMove);
+                    }));
+                }*/
                 ButtonsGroup.getInstance()
                         .addButton(new Button("interact with chest", args -> {
                             this.interractWithChest();

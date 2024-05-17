@@ -10,4 +10,7 @@ public class Constants {
     public static final IntVector2 BUTTON_GROUP_POS_IN_PERCENTS = new IntVector2(27, 2);
     public static final IntVector2 BUTTON_GROUP_SIZE_IN_PERCENTS = new IntVector2(70, 20);
     public static final int BUTTON_GROUP_GAP_PERCENTS = 10;
+
+    public static final int CHAR_SIZE = 17;
+    public static final int MARGIN_PERCENT = 5;
 }

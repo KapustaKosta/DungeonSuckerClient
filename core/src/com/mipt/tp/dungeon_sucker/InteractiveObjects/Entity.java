@@ -225,7 +225,10 @@ public class Entity extends InteractiveObject implements Drawable {
         this.health = Math.min(this.health + this.power, this.maxHealth);
     }
 
-    public int startMove() {
-        return -1;
+    public void startMove(Action action) {
+        this.shakeBeforeMoving();
+        action.run();
     }
+    //todo: make shakeBeforeMoving
+    protected void shakeBeforeMoving(){}
 }

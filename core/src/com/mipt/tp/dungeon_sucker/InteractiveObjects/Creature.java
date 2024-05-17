@@ -56,16 +56,12 @@ public class Creature extends Entity {
         }
         super.die();
     }
-
-    public int startMove() {
+//todo: make sure that shakeBeforeMoving() works correctly
+    public void startMove(Action action) {
         if (this.isSummoned) {
-            int index = new Random().nextInt(this.weapon.skills.length);
-            this.indexOfSkillToBeUsed = index;
-            if (this.weapon.creatureSkills[index] == null) {
-                return -1;
-            }
-            return this.weapon.creatureSkills[index].identifier;
+            this.indexOfSkillToBeUsed = new Random().nextInt(this.weapon.skills.length);
         }
-        return -1;
+        this.shakeBeforeMoving();
+        action.run();
     }
 }

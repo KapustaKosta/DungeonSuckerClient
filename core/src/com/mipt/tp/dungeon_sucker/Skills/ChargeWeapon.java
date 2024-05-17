@@ -19,4 +19,7 @@ public class ChargeWeapon extends Skill {
     public void use(Room room) {
         this.weapon.charges += (int) this.power;
     }
+    public String toString(){
+        return "charge your weapon, gaining " + this.power + " of charges";
+    }
 }

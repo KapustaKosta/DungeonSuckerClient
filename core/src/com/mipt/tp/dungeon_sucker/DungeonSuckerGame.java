@@ -58,6 +58,11 @@ public class DungeonSuckerGame extends ApplicationAdapter {
         texturesPack.shopTexture = new Texture("room.png");
         MapGenerator mapGenerator = new DFSMapGenerator(texturesPack);
 
+        generateGame(mapGenerator);
+    }
+
+    private void generateGame(MapGenerator mapGenerator)
+    {
         Level level = new Level(mapGenerator, 10, 10);
         Map startMap = level.getMap();
         MapWindow mapWindow = new MapWindow(new IntVector2(0, 25), new IntVector2(10, 15), level);
@@ -98,6 +103,9 @@ public class DungeonSuckerGame extends ApplicationAdapter {
                     dungeonMasster.add(0, entity);
                 }
             }
+            nowRoom.setOnTryAgain(args1 -> {
+                generateGame(mapGenerator);
+            });
             mainWindow.setRoom(nowRoom);
             character.place = nowRoom;
         });
