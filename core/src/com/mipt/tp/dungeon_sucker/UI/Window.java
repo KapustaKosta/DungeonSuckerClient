@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
@@ -13,6 +14,7 @@ public class Window implements Drawable {
     // Todo: Переписать на просто Vector2
     protected IntVector2 topLeftPoint;
     protected IntVector2 bottomRightPoint;
+    protected Vector2 bottomLeftPoint;
     protected int width;
     protected int height;
     private Pixmap pixmap;
@@ -23,6 +25,7 @@ public class Window implements Drawable {
     public Window(IntVector2 topLeftPoint, IntVector2 bottomRightPoint) {
         this.topLeftPoint = new IntVector2(topLeftPoint);
         this.bottomRightPoint = new IntVector2(bottomRightPoint);
+        this.bottomLeftPoint = new Vector2(topLeftPoint.x * Constants.CELL_SIZE, bottomRightPoint.y * Constants.CELL_SIZE);
         width = (bottomRightPoint.x - topLeftPoint.x) * Constants.CELL_SIZE;
         height = (topLeftPoint.y - bottomRightPoint.y) * Constants.CELL_SIZE;
         pixmap = new Pixmap(width, height, Format.RGBA8888);

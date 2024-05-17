@@ -78,7 +78,7 @@ public class DungeonSuckerGame extends ApplicationAdapter {
         inventoryWindow.addItem(exampleItem);
 
         MainWindow mainWindow = new MainWindow(new IntVector2(10, 25), new IntVector2(42, 0),
-                startMap.spawn, new Vector2(400, 250), new Vector2(700, 250));
+                startMap.spawn);
         mainWindow.setCurrentEntityIndicator(character);
 
         anInterface = new Interface(mapWindow, inventoryWindow, mainWindow);

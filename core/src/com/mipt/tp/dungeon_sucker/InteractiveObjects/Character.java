@@ -96,7 +96,8 @@ public class Character extends Entity {
         this.isCharacter = true;
         this.health = health + 100;
         this.maxHealth = health + 100;
-        this.baseHealth = health + 100;        this.isFighting = false;
+        this.baseHealth = health + 100;
+        this.isFighting = false;
         this.weight = weight;
         this.name = "Brave Hero";
         this.place = new Room();
@@ -190,23 +191,16 @@ public class Character extends Entity {
             if (!Constants.TEST_FIGHT) {
                 ButtonsGroup.getInstance().clear();
                 ButtonsGroup.getInstance().setArticle("Choose action");
-                if(isFighting) {
-                    ButtonsGroup.getInstance().addButton(new Button("attack", args -> {
-                        this.attack(doAfterMove);
-                    }));
-                }
-                {
-                    ButtonsGroup.getInstance()
-                            .addButton(new Button("interact with chest", args -> {
-                                this.interractWithChest();
-                                doAfterMove.run();
-                            }));
-                    ButtonsGroup.getInstance()
-                            .addButton(new Button("change room", args -> {
-                                this.askToChangeRoom();
-                                doAfterMove.run();
-                            }));
-                }
+                ButtonsGroup.getInstance()
+                        .addButton(new Button("interact with chest", args -> {
+                            this.interractWithChest();
+                            doAfterMove.run();
+                        }));
+                ButtonsGroup.getInstance()
+                        .addButton(new Button("change room", args -> {
+                            this.askToChangeRoom();
+                            doAfterMove.run();
+                        }));
             } else {
                 int i = askWhatToDoWhenNotFighting();
                 if (i == 1) {

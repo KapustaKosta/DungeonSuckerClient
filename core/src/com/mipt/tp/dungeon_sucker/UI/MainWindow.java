@@ -14,12 +14,15 @@ import com.mipt.tp.dungeon_sucker.math.IntVector2;
 public class MainWindow extends Window {
 
     private Room room;
-    private Vector2 friendlyEntitiesPosition;
-    private Vector2 hostileEntitiesPosition;
+    private int leftBorderMargin = 10;
+    private int bottomBorderMargin = 300;
+    private int spaceBetweenFriendlyAndHostile = 150;
+    private int minSpaceBetweenFriendlyAndHostile = 50;
     private SpriteBatch[] friendlyEntitiesBatches;
     private SpriteBatch[] hostileEntitiesBatches;
     private int[] friendlyEntitiesTextureWidths;
     private int[] hostileEntitiesTextureWidths;
+    private float scale = 1;
     private final static int friendlyEntitiesOffset = 10;
     private final static int hostileEntitiesOffset = 15;
     private Text[] friendlyEntitiesHealth;
@@ -33,11 +36,8 @@ public class MainWindow extends Window {
     private ButtonsGroupUI buttonsGroupUI;
 
     public MainWindow(IntVector2 topLeftPoint,
-                      IntVector2 bottomRightPoint, Room room, Vector2 friendlyEntitiesPosition,
-                      Vector2 hostileEntitiesPosition) {
+                      IntVector2 bottomRightPoint, Room room) {
         super(topLeftPoint, bottomRightPoint);
-        this.friendlyEntitiesPosition = friendlyEntitiesPosition;
-        this.hostileEntitiesPosition = hostileEntitiesPosition;
         this.currentEntityIndicatorBatch = new SpriteBatch();
         this.buttonsGroupUI = new ButtonsGroupUI(new Texture("buttonHolder.png"));
         setRoom(room);
@@ -54,63 +54,69 @@ public class MainWindow extends Window {
         friendlyEntitiesTextureWidths = new int[room.friendlyEntities.length];
         hostileEntitiesTextureWidths = new int[room.hostileEntities.length];
 
-        float lastX = friendlyEntitiesPosition.x;
+        float totalEntitiesWidth = leftBorderMargin;
         for (int i = 0; i < friendlyEntitiesBatches.length; i++) {
-            friendlyEntitiesBatches[i] = new SpriteBatch();
-            friendlyEntitiesHealth[i] = new Text(FixedSysFont.getInstance(),
-                    getHealthBar(room.friendlyEntities[i]),
-                    new Vector2(lastX,
-                            friendlyEntitiesPosition.y + room.friendlyEntities[i].texture.getHeight()
-                                    + healthIndent));
-            lastX += room.friendlyEntities[i].texture.getWidth();
-            lastX += friendlyEntitiesOffset;
-
-            friendlyEntitiesTextureWidths[i] = room.friendlyEntities[i].texture.getWidth();
+            if (room.friendlyEntities[i] == null) continue;
+            totalEntitiesWidth += room.friendlyEntities[i].texture.getWidth();
+            if (i != friendlyEntitiesBatches.length - 1) totalEntitiesWidth += friendlyEntitiesOffset;
         }
-        lastX = hostileEntitiesPosition.x;
+        totalEntitiesWidth += spaceBetweenFriendlyAndHostile;
         for (int i = 0; i < hostileEntitiesBatches.length; i++) {
-            hostileEntitiesBatches[i] = new SpriteBatch();
-            if (room.hostileEntities[i] != null) {
-                hostileEntitiesHealth[i] = new Text(FixedSysFont.getInstance(),
-                        getHealthBar(room.hostileEntities[i]),
-                        new Vector2(lastX,
-                                hostileEntitiesPosition.y + room.hostileEntities[i].texture.getHeight()
-                                        + healthIndent));
-            }
-            if (room.hostileEntities[i] != null) {
-                lastX += room.hostileEntities[i].texture.getWidth();
-                hostileEntitiesTextureWidths[i] = room.hostileEntities[i].texture.getWidth();
-            }
-            lastX += hostileEntitiesOffset;
+            if (room.hostileEntities[i] == null) continue;
+            totalEntitiesWidth += room.hostileEntities[i].texture.getWidth();
+            if (i != hostileEntitiesBatches.length - 1) totalEntitiesWidth += hostileEntitiesOffset;
         }
+        if (totalEntitiesWidth > width) {
+            float delta = totalEntitiesWidth - width;
+            totalEntitiesWidth -= spaceBetweenFriendlyAndHostile;
+            spaceBetweenFriendlyAndHostile = Integer.min(minSpaceBetweenFriendlyAndHostile, (int) (spaceBetweenFriendlyAndHostile - delta));
+            totalEntitiesWidth += spaceBetweenFriendlyAndHostile;
+            if (delta >= 0) {
+                scale = width / totalEntitiesWidth;
+            }
+        }
+
+        iterateOnEntitiesAndDoAction(args -> {
+            float x = (float) args[0];
+            int index = (Integer) args[1];
+            friendlyEntitiesBatches[index] = new SpriteBatch();
+            friendlyEntitiesHealth[index] = new Text(FixedSysFont.getInstance(),
+                    getHealthBar(room.friendlyEntities[index]),
+                    new Vector2(x,
+                            bottomLeftPoint.y + bottomBorderMargin + room.friendlyEntities[index].texture.getHeight() * scale
+                                    + healthIndent * scale));
+        }, args -> {
+            float x = (float) args[0];
+            int index = (Integer) args[1];
+            hostileEntitiesBatches[index] = new SpriteBatch();
+            if (room.hostileEntities[index] != null) {
+                hostileEntitiesHealth[index] = new Text(FixedSysFont.getInstance(),
+                        getHealthBar(room.hostileEntities[index]),
+                        new Vector2(x,
+                                bottomLeftPoint.y + bottomBorderMargin + room.hostileEntities[index].texture.getHeight() * scale
+                                        + healthIndent * scale));
+            }
+        });
     }
 
-    public boolean setCurrentEntityIndicator(Entity entity) {
-        float lastX = friendlyEntitiesPosition.x;
-        for (int i = 0; i < friendlyEntitiesBatches.length; i++) {
-            if (entity.equals(room.friendlyEntities[i])) {
-                currentEntityIndicatorPosition = new Vector2(lastX,
-                        friendlyEntitiesPosition.y + room.friendlyEntities[i].texture.getHeight()
-                                + currentEntityIndicatorIndent);
-                return true;
+    public void setCurrentEntityIndicator(Entity entity) {
+        iterateOnEntitiesAndDoAction(args -> {
+            float x = (float) args[0];
+            int index = (Integer) args[1];
+            if (entity.equals(room.friendlyEntities[index])) {
+                currentEntityIndicatorPosition = new Vector2(x,
+                        bottomLeftPoint.y + bottomBorderMargin + room.friendlyEntities[index].texture.getHeight() * scale
+                                + currentEntityIndicatorIndent * scale);
             }
-            lastX += friendlyEntitiesTextureWidths[i];
-            lastX += friendlyEntitiesOffset;
-        }
-
-        lastX = hostileEntitiesPosition.x;
-        for (int i = 0; i < hostileEntitiesBatches.length; i++) {
-            if (entity.equals(room.hostileEntities[i])) {
-                currentEntityIndicatorPosition = new Vector2(lastX,
-                        hostileEntitiesPosition.y + room.hostileEntities[i].texture.getHeight()
-                                + currentEntityIndicatorIndent);
-                return true;
+        }, args -> {
+            float x = (float) args[0];
+            int index = (Integer) args[1];
+            if (entity.equals(room.friendlyEntities[index])) {
+                currentEntityIndicatorPosition = new Vector2(x,
+                        bottomLeftPoint.y + bottomBorderMargin + room.friendlyEntities[index].texture.getHeight() * scale
+                                + currentEntityIndicatorIndent * scale);
             }
-            lastX += hostileEntitiesTextureWidths[i];
-            lastX += hostileEntitiesOffset;
-        }
-
-        return false;
+        });
     }
 
     private static String getHealthBar(Entity entity) {
@@ -121,42 +127,35 @@ public class MainWindow extends Window {
     public void drawInLibGDX() {
         drawBoard();
 
-        // Отрисовка друзей
-        float lastX = friendlyEntitiesPosition.x;
-        for (int i = 0; i < friendlyEntitiesBatches.length; i++) {
-            if (room.friendlyEntities[i] != null) {
-                friendlyEntitiesBatches[i].begin();
-                friendlyEntitiesBatches[i].draw(room.friendlyEntities[i].texture,
-                        lastX, friendlyEntitiesPosition.y);
-                friendlyEntitiesBatches[i].end();
+        iterateOnEntitiesAndDoAction(args -> {
+            float x = (float) args[0];
+            int index = (Integer) args[1];
+            if (room.friendlyEntities[index] != null) {
+                friendlyEntitiesBatches[index].begin();
+                friendlyEntitiesBatches[index].draw(room.friendlyEntities[index].texture,
+                        x, bottomLeftPoint.y + bottomBorderMargin, room.friendlyEntities[index].texture.getWidth() * scale, room.friendlyEntities[index].texture.getHeight() * scale);
+                friendlyEntitiesBatches[index].end();
             }
-            lastX += friendlyEntitiesTextureWidths[i];
-            lastX += friendlyEntitiesOffset;
 
-            if (room.friendlyEntities[i] == null) {
-                continue;
+            if (friendlyEntitiesHealth[index] != null && room.friendlyEntities[index] != null) {
+                friendlyEntitiesHealth[index].setText(getHealthBar(room.friendlyEntities[index]));
+                friendlyEntitiesHealth[index].drawInLibGDX();
             }
-            friendlyEntitiesHealth[i].setText(getHealthBar(room.friendlyEntities[i]));
-            friendlyEntitiesHealth[i].drawInLibGDX();
-        }
+        }, args -> {
+            float x = (float) args[0];
+            int index = (Integer) args[1];
+            if (room.hostileEntities[index] != null) {
+                hostileEntitiesBatches[index].begin();
+                hostileEntitiesBatches[index].draw(room.hostileEntities[index].texture,
+                        x, bottomLeftPoint.y + bottomBorderMargin, room.hostileEntities[index].texture.getWidth() * scale, room.hostileEntities[index].texture.getHeight() * scale);
+                hostileEntitiesBatches[index].end();
+            }
 
-        // Отрисовка врагов
-        lastX = hostileEntitiesPosition.x;
-        for (int i = 0; i < hostileEntitiesBatches.length; i++) {
-            if (room.hostileEntities[i] != null) {
-                hostileEntitiesBatches[i].begin();
-                hostileEntitiesBatches[i].draw(room.hostileEntities[i].texture,
-                        lastX, hostileEntitiesPosition.y);
-                hostileEntitiesBatches[i].end();
+            if (hostileEntitiesHealth[index] != null && room.hostileEntities[index] != null) {
+                hostileEntitiesHealth[index].setText(getHealthBar(room.hostileEntities[index]));
+                hostileEntitiesHealth[index].drawInLibGDX();
             }
-            lastX += hostileEntitiesTextureWidths[i];
-            lastX += hostileEntitiesOffset;
-
-            if (room.hostileEntities[i] != null && hostileEntitiesHealth[i] != null) {
-                hostileEntitiesHealth[i].setText(getHealthBar(room.hostileEntities[i]));
-                hostileEntitiesHealth[i].drawInLibGDX();
-            }
-        }
+        });
 
         if (currentEntityIndicatorPosition != null) {
             currentEntityIndicatorBatch.begin();
@@ -168,6 +167,39 @@ public class MainWindow extends Window {
         buttonsGroupUI.drawInLibGDX();
     }
 
+    public void iterateOnEntitiesAndDoAction(ObjectAction doWithFriendly, ObjectAction doWithHostile) {
+        float lastX = bottomLeftPoint.x + leftBorderMargin * scale;
+        for (int i = 0; i < friendlyEntitiesBatches.length; i++) {
+            int textureWidth = 0;
+            if (room.friendlyEntities[i] != null) {
+                textureWidth = (int) (room.friendlyEntities[i].texture.getWidth() * scale);
+                friendlyEntitiesTextureWidths[i] = textureWidth;
+            } else {
+                textureWidth = friendlyEntitiesTextureWidths[i];
+            }
+
+            doWithFriendly.run(lastX, i);
+
+            lastX += textureWidth;
+            if (i != friendlyEntitiesBatches.length - 1) lastX += friendlyEntitiesOffset * scale;
+        }
+        lastX += spaceBetweenFriendlyAndHostile;
+        for (int i = 0; i < hostileEntitiesBatches.length; i++) {
+            int textureWidth = 0;
+            if (room.hostileEntities[i] != null) {
+                textureWidth = (int) (room.hostileEntities[i].texture.getWidth() * scale);
+                hostileEntitiesTextureWidths[i] = textureWidth;
+            } else {
+                textureWidth = hostileEntitiesTextureWidths[i];
+            }
+
+            doWithHostile.run(lastX, i);
+
+            lastX += textureWidth;
+            if (i != hostileEntitiesBatches.length - 1) lastX += hostileEntitiesOffset * scale;
+        }
+    }
+
     public void onMouseClick(Entity hostileEntity) {
         System.out.println(hostileEntity.name);
     }
@@ -176,16 +208,17 @@ public class MainWindow extends Window {
         if (!isPointInWindow(x, y)) {
             return;
         }
-        float lastX = hostileEntitiesPosition.x;
-        for (int i = 0; i < hostileEntitiesBatches.length; i++) {
-            if (room.hostileEntities[i] != null && x >= lastX && x <= lastX + hostileEntitiesTextureWidths[i]
-                    && y >= hostileEntitiesPosition.y
-                    && y <= hostileEntitiesPosition.y + room.hostileEntities[i].texture.getHeight()) {
-                onMouseClick(room.hostileEntities[i]);
+
+        iterateOnEntitiesAndDoAction(args -> {
+        }, args -> {
+            float xPos = (float) args[0];
+            int index = (Integer) args[1];
+            if (room.hostileEntities[index] != null && x >= xPos && x <= xPos + hostileEntitiesTextureWidths[index]
+                    && y >= bottomLeftPoint.y + bottomBorderMargin
+                    && y <= bottomLeftPoint.y + bottomBorderMargin + room.hostileEntities[index].texture.getHeight() * scale) {
+                onMouseClick(room.hostileEntities[index]);
             }
-            lastX += hostileEntitiesTextureWidths[i];
-            lastX += hostileEntitiesOffset;
-        }
+        });
         buttonsGroupUI.click(x, y);
     }
 }
