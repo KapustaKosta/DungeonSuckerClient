@@ -189,19 +189,23 @@ public class Character extends Entity {
             if (!Constants.TEST_FIGHT) {
                 ButtonsGroup.getInstance().clear();
                 ButtonsGroup.getInstance().setArticle("Choose action");
-                ButtonsGroup.getInstance().addButton(new Button("attack", args -> {
-                    this.attack(doAfterMove);
-                }));
-                ButtonsGroup.getInstance()
-                        .addButton(new Button("interact with chest", args -> {
-                            this.interractWithChest();
-                            doAfterMove.run();
-                        }));
-                ButtonsGroup.getInstance()
-                        .addButton(new Button("change room", args -> {
-                            this.askToChangeRoom();
-                            doAfterMove.run();
-                        }));
+                if(isFighting) {
+                    ButtonsGroup.getInstance().addButton(new Button("attack", args -> {
+                        this.attack(doAfterMove);
+                    }));
+                }
+                {
+                    ButtonsGroup.getInstance()
+                            .addButton(new Button("interact with chest", args -> {
+                                this.interractWithChest();
+                                doAfterMove.run();
+                            }));
+                    ButtonsGroup.getInstance()
+                            .addButton(new Button("change room", args -> {
+                                this.askToChangeRoom();
+                                doAfterMove.run();
+                            }));
+                }
             } else {
                 int i = askWhatToDoWhenNotFighting();
                 if (i == 1) {
