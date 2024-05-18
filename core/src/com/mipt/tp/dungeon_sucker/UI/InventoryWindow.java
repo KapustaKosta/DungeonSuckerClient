@@ -23,21 +23,21 @@ public class InventoryWindow extends Window {
         this.cellsWidth = cellsWidth;
         this.cellsHeight = cellsHeight;
         cells = new Cell[cellsHeight][cellsWidth];
-        int cellWidth = (width / Constants.CELL_SIZE) / cellsWidth;
-        int cellHeight = (height / Constants.CELL_SIZE) / cellsHeight;
+        int cellSize = (width / Constants.CELL_SIZE) / cellsWidth;
         IntVector2 cellTopLeft = new IntVector2(topLeftPoint);
         IntVector2 cellBottomRight = new IntVector2(topLeftPoint);
-        cellBottomRight.moveY(-cellHeight);
+        cellBottomRight.moveY(-cellSize);
         for (int i = 0; i < cellsHeight; i++) {
             cellTopLeft.x = topLeftPoint.x;
             cellBottomRight.x = topLeftPoint.x + cellsWidth;
             for (int j = 0; j < cellsWidth; j++) {
                 cells[i][j] = new Cell(cellTopLeft, cellBottomRight, null);
-                cellTopLeft.moveX(cellWidth);
-                cellBottomRight.moveX(cellWidth);
+                cells[i][j].setSize(cellSize * Constants.CELL_SIZE);
+                cellTopLeft.moveX(cellSize);
+                cellBottomRight.moveX(cellSize);
             }
-            cellTopLeft.moveY(-cellHeight);
-            cellBottomRight.moveY(-cellHeight);
+            cellTopLeft.moveY(-cellSize);
+            cellBottomRight.moveY(-cellSize);
         }
     }
 
