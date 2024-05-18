@@ -61,6 +61,7 @@ public class Chest extends InteractiveObject {
                     int index = Math.min(i - 1, this.inventory.size() - 1);
                     this.inventory.get(index).getObtained(player);
                     this.extractItem(index);
+                    doAfterMove.run();
                 }));
             }
         }));
