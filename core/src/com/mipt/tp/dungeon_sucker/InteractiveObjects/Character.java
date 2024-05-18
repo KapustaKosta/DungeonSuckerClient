@@ -179,11 +179,13 @@ public class Character extends Entity {
             ButtonsGroup.getInstance().clear();
         }
         ButtonsGroup.getInstance().setArticle("Choose action");
+        Button interactWithChestBtn = new Button("interact with chest", args -> {
+            this.interractWithChest(doAfterMove);
+            // doAfterMove.run();
+        });
+        interactWithChestBtn.setDeleteWhenPressed(true);
         ButtonsGroup.getInstance()
-                .addButton(new Button("interact with chest", args -> {
-                    this.interractWithChest();
-                    doAfterMove.run();
-                }));
+                .addButton(interactWithChestBtn);
         ButtonsGroup.getInstance()
                 .addButton(new Button("change room", args -> {
                     this.askToChangeRoom();
@@ -214,7 +216,7 @@ public class Character extends Entity {
                 if (i == 1) {
                     this.attack(doAfterMove);
                 } else if (i == 2) {
-                    this.interractWithChest();
+                    this.interractWithChest(doAfterMove);
                 } else {
                     this.askToChangeRoom();
                 }
@@ -241,8 +243,8 @@ public class Character extends Entity {
 
     }
 
-    private void interractWithChest() {
-        this.place.chest.getInteracted(this);
+    private void interractWithChest(Action doAfterMove) {
+        this.place.chest.getInteracted(this, doAfterMove);
     }
 
     private void tryToEscape() {
