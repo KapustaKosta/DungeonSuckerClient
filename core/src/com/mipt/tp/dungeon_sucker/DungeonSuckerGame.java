@@ -104,6 +104,9 @@ public class DungeonSuckerGame extends ApplicationAdapter {
                     dungeonMasster.add(0, entity);
                 }
             }
+            if(character.isFighting) {
+                character.showFightingButtons();
+            }
             nowRoom.setOnTryAgain(args1 -> {
                 generateGame(mapGenerator);
             });

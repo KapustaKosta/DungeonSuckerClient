@@ -24,8 +24,8 @@ public class Character extends Entity {
     private int baseHealth;
     private ArrayList<Action> onMoveListeners = new ArrayList<>();
     public Texture mapTexture;
-
     private InventoryWindow inventoryWindow;
+    private Action doAfterMove = null;
 
     public void getInput() {
         if (!this.isFighting) {
@@ -158,22 +158,46 @@ public class Character extends Entity {
         }
     }
 
+    public void showFightingButtons()
+    {
+        ButtonsGroup.getInstance().clear();
+        ButtonsGroup.getInstance().setArticle("Choose escape or attack");
+        ButtonsGroup.getInstance().addButton(new Button("escape", args ->
+        {
+            this.tryToEscape();
+            doAfterMove.run();
+        }));
+        ButtonsGroup.getInstance().addButton(new Button("attack", args ->
+        {
+            this.attack(doAfterMove);
+        }));
+    }
+
+    public void showLevelButtons()
+    {
+        if (ButtonsGroup.getInstance() != null) {
+            ButtonsGroup.getInstance().clear();
+        }
+        ButtonsGroup.getInstance().setArticle("Choose action");
+        ButtonsGroup.getInstance()
+                .addButton(new Button("interact with chest", args -> {
+                    this.interractWithChest();
+                    doAfterMove.run();
+                }));
+        ButtonsGroup.getInstance()
+                .addButton(new Button("change room", args -> {
+                    this.askToChangeRoom();
+                    doAfterMove.run();
+                }));
+    }
 
     public void makeMove(Action doAfterMove) {
+        this.doAfterMove = doAfterMove != null? doAfterMove : this.doAfterMove;
+
         super.makeFictionalMove();
         if (this.isFighting) {
             if (!Constants.TEST_FIGHT) {
-                ButtonsGroup.getInstance().clear();
-                ButtonsGroup.getInstance().setArticle("Choose escape or attack");
-                ButtonsGroup.getInstance().addButton(new Button("escape", args ->
-                {
-                    this.tryToEscape();
-                    doAfterMove.run();
-                }));
-                ButtonsGroup.getInstance().addButton(new Button("attack", args ->
-                {
-                    this.attack(doAfterMove);
-                }));
+                showFightingButtons();
             } else {
                 int i = askIfWantsToEscape();
                 if (i == 1) {
@@ -184,25 +208,7 @@ public class Character extends Entity {
             }
         } else {
             if (!Constants.TEST_FIGHT) {
-                if (ButtonsGroup.getInstance() != null) {
-                    ButtonsGroup.getInstance().clear();
-                }
-                ButtonsGroup.getInstance().setArticle("Choose action");
-/*                if (isFighting) {
-                    ButtonsGroup.getInstance().addButton(new Button("use weapon skill", args -> {
-                        this.attack(doAfterMove);
-                    }));
-                }*/
-                ButtonsGroup.getInstance()
-                        .addButton(new Button("interact with chest", args -> {
-                            this.interractWithChest();
-                            doAfterMove.run();
-                        }));
-                ButtonsGroup.getInstance()
-                        .addButton(new Button("change room", args -> {
-                            this.askToChangeRoom();
-                            doAfterMove.run();
-                        }));
+                showLevelButtons();
             } else {
                 int i = askWhatToDoWhenNotFighting();
                 if (i == 1) {
