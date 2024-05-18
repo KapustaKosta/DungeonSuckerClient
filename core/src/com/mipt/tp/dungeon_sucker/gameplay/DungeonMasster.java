@@ -6,6 +6,7 @@ import com.mipt.tp.dungeon_sucker.InteractiveObjects.Upgrader;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class DungeonMasster {
 
@@ -29,6 +30,7 @@ public class DungeonMasster {
 
     public void add(long timeOfStep, Entity entity) {
         entity.master = this;
+        System.out.println(entity.name + " " + timeOfStep);
         for (int i = 0; i < this.orderOfSteps.size(); ++i) {
             if (this.orderOfSteps.get(i).entity == entity) {
                 this.orderOfSteps.remove(i);
@@ -58,20 +60,27 @@ public class DungeonMasster {
 
     // вынести в update
     public void move() {
+        System.out.println("I'm gonna move, I'm " + this.orderOfSteps.getFirst().entity.name);
         if (this.orderOfSteps.getFirst().entity.isAlive) {
             this.time = Math.max(this.time, this.orderOfSteps.getFirst().timeOfStep);
-            int typeOfSkill = this.orderOfSteps.getFirst().entity.startMove();
-            System.out.println(this.orderOfSteps.getFirst().entity.name);
-            this.orderOfSteps.getFirst().entity.makeMove(args -> {
-                Class<Creature> creatureClass = Creature.class;
-                if (this.orderOfSteps.getFirst().entity.getClass() == creatureClass) {
-                    this.add((this.orderOfSteps.getFirst().entity).weight
-                            + this.time, this.orderOfSteps.getFirst().entity);
-                } else {
-                    this.add((this.orderOfSteps.getFirst().entity).weight
-                            + this.time, this.orderOfSteps.getFirst().entity);
+            this.orderOfSteps.getFirst().entity.startMove(args -> {
+                System.out.println(this.orderOfSteps.getFirst().entity.name);
+                if (Objects.equals(this.orderOfSteps.getFirst().entity.name, "GodObject")) {
+                    System.out.println("CURRENT LEVEL IS " + this.level);
                 }
-                this.move();
+                System.out.println("NUMBER OF ENTITIES = " + this.orderOfSteps.size());
+                this.orderOfSteps.getFirst().entity.makeMove(brgs -> {
+                    System.out.println(this.orderOfSteps.getFirst().entity.name + " has moved");
+                    Class<Creature> creatureClass = Creature.class;
+                    if (this.orderOfSteps.getFirst().entity.getClass() == creatureClass) {
+                        this.add((this.orderOfSteps.getFirst().entity).weight
+                                + this.time, this.orderOfSteps.getFirst().entity);
+                    } else {
+                        this.add((this.orderOfSteps.getFirst().entity).weight
+                                + this.time, this.orderOfSteps.getFirst().entity);
+                    }
+                    this.move();
+                });
             });
         } else {
             System.out.println("O-o-o-o-o-ops, I guess, I'm too dead do move");

@@ -129,10 +129,10 @@ public class DamageThreeEntities extends DamagingSkill {
     }
 
     public String toString() {
-        return "hit three enemies (one by your choice and two surrounding him, dealing "
+        return "hit three enemies (one\nby your choice and two\nsurrounding him,\ndealing "
                 + this.firstDamage.totalDamage + ", "
                 + this.secondDamage.totalDamage + " and "
                 + this.thirdDamage.totalDamage +
-                " to first, second and third of them, respectively. BaseDamage is " + this.damage;
+                " to first, second and\nthird of them, respectively.\nBaseDamage is " + this.damage;
     }
 }

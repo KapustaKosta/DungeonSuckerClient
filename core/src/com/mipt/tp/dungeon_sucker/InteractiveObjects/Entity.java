@@ -91,6 +91,10 @@ public class Entity extends InteractiveObject implements Drawable {
         this.position = new Vector2(levelPosition.x * Constants.CELL_SIZE, (15 + levelPosition.y) * Constants.CELL_SIZE);
     }
 
+    public void updateInventory() {
+        
+    }
+
     public void getDamaged(Damage damage) {
         damage = damage.copy();
         damage.addMasteryScale();
@@ -111,7 +115,10 @@ public class Entity extends InteractiveObject implements Drawable {
         System.out.println(name + " is walking");
         this.lastTimeOfStep = this.master.orderOfSteps.getFirst().timeOfStep;
         this.recountWeight();
-        if (this.weapon != null) this.weapon.recount();
+        if (this.weapon != null) {
+            this.weapon.recount();
+        }
+        // action.run();
     }
 
     public void recountWeight() {
@@ -125,7 +132,9 @@ public class Entity extends InteractiveObject implements Drawable {
         if (this.isHostile) {
             this.place.checkHostileAlive();
             for (int i = 0; i < this.place.amountOfFriendlyEntities; ++i) {
-                this.place.friendlyEntities[i].obtainExp(this.experiencePerKill);
+                if (this.place.friendlyEntities[i] != null) {
+                    this.place.friendlyEntities[i].obtainExp(this.experiencePerKill);
+                }
             }
         } else {
             this.place.checkFriendlyAlive();
@@ -220,7 +229,10 @@ public class Entity extends InteractiveObject implements Drawable {
         this.health = Math.min(this.health + this.power, this.maxHealth);
     }
 
-    public int startMove() {
-        return -1;
+    public void startMove(Action action) {
+        this.shakeBeforeMoving();
+        action.run();
     }
+    //todo: make shakeBeforeMoving
+    protected void shakeBeforeMoving(){}
 }

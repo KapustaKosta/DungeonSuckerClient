@@ -27,8 +27,8 @@ public class DamageOneEntityWithCrit extends DamageOneEntity {
         this.divider = divider;
         this.numerator = numerator;
         this.description =
-                "Deals " + this.damage.totalDamage + " damage to enemy by your choice, has " + numerator
-                        + "/" + divider + "chance to deal" + this.criticalDamage.totalDamage
+                "Deals " + this.damage.totalDamage + " damage to enemy by\n your choice, has " + numerator
+                        + "/" + divider + "chance\nto deal" + this.criticalDamage.totalDamage
                         + " damage instead";
     }
 

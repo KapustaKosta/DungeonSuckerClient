@@ -8,7 +8,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Character;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
-import com.mipt.tp.dungeon_sucker.gameplay.level.Map;
 import com.mipt.tp.dungeon_sucker.UI.Interface;
 import com.mipt.tp.dungeon_sucker.UI.InventoryWindow;
 import com.mipt.tp.dungeon_sucker.UI.MainWindow;
@@ -20,6 +19,7 @@ import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth.Hamm
 import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForBoth.Club;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
+import com.mipt.tp.dungeon_sucker.gameplay.level.Map;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.logic.DFSMapGenerator;
 import com.mipt.tp.dungeon_sucker.gameplay.level.logic.MapGenerator;
@@ -58,44 +58,59 @@ public class DungeonSuckerGame extends ApplicationAdapter {
         texturesPack.shopTexture = new Texture("room.png");
         MapGenerator mapGenerator = new DFSMapGenerator(texturesPack);
 
+        generateGame(mapGenerator);
+    }
+
+    private void generateGame(MapGenerator mapGenerator)
+    {
         Level level = new Level(mapGenerator, 10, 10);
         Map startMap = level.getMap();
         MapWindow mapWindow = new MapWindow(new IntVector2(0, 25), new IntVector2(10, 15), level);
 
         DungeonMasster dungeonMasster = DungeonMasster.getInstance();
+        InventoryWindow inventoryWindow = new InventoryWindow(new IntVector2(0, 15),
+                new IntVector2(10, 0), 4, 4);
+
         IntVector2 characterPosition = new IntVector2(startMap.spawn.getPosition().x, startMap.spawn.getPosition().y);
-        character = new Character(characterPosition, new Texture("knight.png"), level, 25, 50);
+        character = new Character(characterPosition, new Texture("knight.png"), level, 25, 50, inventoryWindow);
         character.maxHealth = character.health;
         character.master = dungeonMasster;
         character.mapTexture = new Texture("character.png");
         character.name = "Vasya";
         startMap.spawn.friendlyEntities = new Entity[]{character};
 
-        InventoryWindow inventoryWindow = new InventoryWindow(new IntVector2(0, 15),
-                new IntVector2(10, 0), 4, 4);
         Item exampleItem = new Item();
         exampleItem.name = "knife";
         exampleItem.texture = new Texture("knife.png");
         inventoryWindow.addItem(exampleItem);
 
         MainWindow mainWindow = new MainWindow(new IntVector2(10, 25), new IntVector2(42, 0),
-                startMap.spawn, new Vector2(400, 250), new Vector2(700, 250));
+                startMap.spawn);
         mainWindow.setCurrentEntityIndicator(character);
 
         anInterface = new Interface(mapWindow, inventoryWindow, mainWindow);
         Gdx.input.setInputProcessor(anInterface);
 
-        Club club = new Club(1, 1, "club", RaritySet.Common);
+        Club club = new Club(1, 1, "Bat", RaritySet.Common);
         club.getObtained(character);
         new HammerMastery().getObtained(character);
         character.setActiveWeapon(club);
         character.addOnMoveListener(args -> {
             Room nowRoom = startMap.getRoom(args[1], args[0]);
             nowRoom.master = dungeonMasster;
+            character.place.extract(character, false);
             nowRoom.insert(character, false);
             for (Entity entity : nowRoom.hostileEntities) {
-                dungeonMasster.add(0, entity);
+                if (entity != null) {
+                    dungeonMasster.add(0, entity);
+                }
             }
+            if(character.isFighting) {
+                character.showFightingButtons();
+            }
+            nowRoom.setOnTryAgain(args1 -> {
+                generateGame(mapGenerator);
+            });
             mainWindow.setRoom(nowRoom);
             character.place = nowRoom;
         });

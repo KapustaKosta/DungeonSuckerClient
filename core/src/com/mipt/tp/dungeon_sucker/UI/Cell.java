@@ -10,6 +10,8 @@ public class Cell extends Window {
     private SpriteBatch batch;
     private IntVector2 bottomLeftPoint;
 
+    private int size;
+
     public Cell(IntVector2 topLeftPoint,
                 IntVector2 bottomRightPoint, Item item) {
         super(topLeftPoint, bottomRightPoint);
@@ -18,13 +20,19 @@ public class Cell extends Window {
         batch = new SpriteBatch();
     }
 
+    public void setSize(int cellSize) {
+        this.size = cellSize;
+    }
+
     @Override
     public void drawInLibGDX() {
         drawBoard();
         if (item == null) return;
 
         batch.begin();
-        batch.draw(item.texture, bottomLeftPoint.x * Constants.CELL_SIZE, bottomLeftPoint.y * Constants.CELL_SIZE);
+        if (item.texture != null) {
+            batch.draw(item.texture, bottomLeftPoint.x * Constants.CELL_SIZE, bottomLeftPoint.y * Constants.CELL_SIZE, size, size);
+        }
         batch.end();
     }
 

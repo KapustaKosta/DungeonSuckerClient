@@ -8,6 +8,7 @@ import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.WeaponTypes;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
+import com.mipt.tp.dungeon_sucker.itemSpriteGenerator.ItemSpriteGenerator;
 
 import java.util.ArrayList;
 
@@ -32,6 +33,21 @@ public abstract class Weapon extends Item {
     public Weapon(int numberOfSkills) {
         this.skills = new Skill[numberOfSkills];
         this.creatureSkills = new Skill[numberOfSkills];
+    }
+
+    public String getRarity() {
+        if (rarity != null) {
+            return rarity.name();
+        }
+        return "Null";
+    }
+
+    public String getElement() {
+        if (element != null) {
+            System.out.println( element.name());
+            return element.name();
+        }
+        return "Null";
     }
 
     public void useSkill(int index, Room room, Action doAfterUse) {

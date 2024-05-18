@@ -3,6 +3,7 @@ package com.mipt.tp.dungeon_sucker.UI;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
 import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Character;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
@@ -13,6 +14,8 @@ public class InventoryWindow extends Window {
     private int cellsHeight;
     private Cell[][] cells;
 
+    private Character character;
+
     public InventoryWindow(IntVector2 topLeftPoint,
                            IntVector2 bottomRightPoint, int cellsWidth, int cellsHeight) {
         super(topLeftPoint, bottomRightPoint);
@@ -20,21 +23,34 @@ public class InventoryWindow extends Window {
         this.cellsWidth = cellsWidth;
         this.cellsHeight = cellsHeight;
         cells = new Cell[cellsHeight][cellsWidth];
-        int cellWidth = (width / Constants.CELL_SIZE) / cellsWidth;
-        int cellHeight = (height / Constants.CELL_SIZE) / cellsHeight;
+        int cellSize = (width / Constants.CELL_SIZE) / cellsWidth;
         IntVector2 cellTopLeft = new IntVector2(topLeftPoint);
         IntVector2 cellBottomRight = new IntVector2(topLeftPoint);
-        cellBottomRight.moveY(-cellHeight);
+        cellBottomRight.moveY(-cellSize);
         for (int i = 0; i < cellsHeight; i++) {
             cellTopLeft.x = topLeftPoint.x;
             cellBottomRight.x = topLeftPoint.x + cellsWidth;
             for (int j = 0; j < cellsWidth; j++) {
                 cells[i][j] = new Cell(cellTopLeft, cellBottomRight, null);
-                cellTopLeft.moveX(cellWidth);
-                cellBottomRight.moveX(cellWidth);
+                cells[i][j].setSize(cellSize * Constants.CELL_SIZE);
+                cellTopLeft.moveX(cellSize);
+                cellBottomRight.moveX(cellSize);
             }
-            cellTopLeft.moveY(-cellHeight);
-            cellBottomRight.moveY(-cellHeight);
+            cellTopLeft.moveY(-cellSize);
+            cellBottomRight.moveY(-cellSize);
+        }
+    }
+
+    public void update(ArrayList<Item> items) {
+        this.items = items;
+        updateTextures();
+    }
+
+    public void updateTextures() {
+        for (int i = 0; i < this.items.size(); i++) {
+            int x = i % cells[0].length;
+            int y = i / cells[0].length;
+            cells[y][x].setItem(items.get(i));
         }
     }
 

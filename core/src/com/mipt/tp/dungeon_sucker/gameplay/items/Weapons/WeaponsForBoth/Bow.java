@@ -11,6 +11,7 @@ import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.WeaponTypes;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.ChargableWeapon;
 import com.mipt.tp.dungeon_sucker.helper.WeaponConfis.BowConfig;
+import com.mipt.tp.dungeon_sucker.itemSpriteGenerator.ItemSpriteGenerator;
 
 public class Bow extends ChargableWeapon {
     public int chargesPerChargeUse = 1;
@@ -28,6 +29,7 @@ public class Bow extends ChargableWeapon {
         this.recountScales();
         this.chargesForSkill[0] = BowConfig.CHARGES_FOR_FIRST_SKILL;
         this.chargesForSkill[1] = BowConfig.CHARGES_FOR_SECOND_SKILL;
+        this.texture = ItemSpriteGenerator.generateTexture(this);
     }
 
     public void getObtained(Entity holder) {

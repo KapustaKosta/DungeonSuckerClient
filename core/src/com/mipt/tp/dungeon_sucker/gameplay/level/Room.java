@@ -8,6 +8,7 @@ import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.UI.Buttons.Button;
 import com.mipt.tp.dungeon_sucker.UI.Buttons.ButtonsGroup;
 import com.mipt.tp.dungeon_sucker.UI.Drawable;
+import com.mipt.tp.dungeon_sucker.gameplay.Action;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.ArtifactGenerator;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.WeaponGenerator;
@@ -33,6 +34,7 @@ public class Room implements Drawable {
     public int level;
     public int threatLevel = 0; // 0 - just a room, 1 - fighting encounter, 2 - elite encounter, 3 - Boss encounter
 
+    private Action onTryAgain = null;
     public Room(IntVector2 levelPosition, Texture texture) {
         this.levelPosition = levelPosition;
         this.texture = texture;
@@ -125,9 +127,6 @@ public class Room implements Drawable {
                     this.hostileEntities[i] = entity;
                     entity.place = this;
                     entity.positionInRoom = i;
-/*
-          this.master.add(0, entity);
-*/
                     return;
                 }
             }
@@ -135,15 +134,14 @@ public class Room implements Drawable {
                 this.hostileEntities[this.amountOfHostileEntities++] = entity;
                 entity.place = this;
                 entity.positionInRoom = this.amountOfHostileEntities - 1;
-/*
-        this.master.add(0, entity);
-*/
             }
             return;
         }
+        boolean shouldStartFighting = false;
         for (int i = 0; i < this.amountOfHostileEntities; ++i) {
             if (hostileEntities[i] != null) {
                 this.hostileEntities[i].isFighting = true;
+                shouldStartFighting = true;
             }
         }
         entity.place = this;
@@ -151,19 +149,14 @@ public class Room implements Drawable {
             if (friendlyEntities[i] == null || !this.friendlyEntities[i].isAlive) {
                 this.friendlyEntities[i] = entity;
                 entity.positionInRoom = i;
-/*
-        this.master.add(0, entity);
-*/
                 return;
             }
         }
         if (this.amountOfFriendlyEntities < this.friendlyEntities.length) {
             this.friendlyEntities[this.amountOfFriendlyEntities++] = entity;
             entity.positionInRoom = this.amountOfFriendlyEntities - 1;
-/*
-      this.master.add(0, entity);
-*/
         }
+        entity.isFighting = shouldStartFighting;
     }
 
     public void checkHostileAlive() {
@@ -186,14 +179,19 @@ public class Room implements Drawable {
     public void checkFriendlyAlive() {
         boolean battleMustEnd = true;
         for (int i = 0; i < this.amountOfFriendlyEntities; ++i) {
-            if (this.friendlyEntities[i].isAlive) {
+            if (this.friendlyEntities[i] != null && this.friendlyEntities[i].isAlive) {
                 battleMustEnd = false;
                 break;
             }
         }
+        if(!this.isHaunted || this.isCleared){
+            battleMustEnd = false;
+        }
         if (battleMustEnd) {
             ButtonsGroup.getInstance().clear();
-            ButtonsGroup.getInstance().addButton(new Button("Room was taken by evil", args -> {
+            ButtonsGroup.getInstance().setArticle("Room was taken by evil");
+            ButtonsGroup.getInstance().addButton(new Button("try again", args -> {
+                onTryAgain.run();
             }));
             for (int i = 0; i < this.amountOfHostileEntities; ++i) {
                 if (this.hostileEntities[i] != null) {
@@ -243,5 +241,10 @@ public class Room implements Drawable {
                 this.hostileEntities[i] = null;
             }
         }
+    }
+
+    public void setOnTryAgain(Action action)
+    {
+        this.onTryAgain = action;
     }
 }

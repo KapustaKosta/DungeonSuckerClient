@@ -129,7 +129,7 @@ public class DFSMapGenerator extends MapGenerator {
 
     private HauntedRoom generateHauntedRoom(IntVector2 position) {
         HauntedRoom result = new HauntedRoom(position, roomsTexturesPack.hauntedRoomTexture);
-        int enemiesCount = RandomNumGenerator.generateFromRange(1, 5);
+        int enemiesCount = RandomNumGenerator.generateFromRange(1, 7);
         result.hostileEntities = new Entity[enemiesCount];
         result.master = DungeonMasster.getInstance();
         for (int i = 0; i < enemiesCount; i++) {
@@ -145,7 +145,7 @@ public class DFSMapGenerator extends MapGenerator {
                     break;
                 }
                 case 2: {
-                    result.insert(new IvanKalinin(result), true);
+                    // result.insert(new IvanKalinin(result), true);
                     break;
                 }
                 case 3: {

@@ -25,6 +25,7 @@ public class Rat extends Creature {
         this.weapon.getObtained(this);
         this.description = this.name + ", a rat that crawls everywhere, may bite you, dealing " + this.power + "of physical damage";
         this.texture = new Texture("rat.png");
+        this.moveMessage = this.name + " is moving";
     }
 
     public Rat(int health, int power, int weight, boolean isHostile, Room place) {
@@ -35,6 +36,7 @@ public class Rat extends Creature {
         this.weapon.getObtained(this);
         this.description = this.name + ", a rat that crawls everywhere, may bite you, dealing  " + this.power + "of physical damage";
         this.texture = new Texture("rat.png");
+        this.moveMessage = this.name + " is moving";
     }
 
     public void summon() {
@@ -46,14 +48,5 @@ public class Rat extends Creature {
         this.weapon = new RatClaws(this.power);
         this.weapon.getObtained(this);
         this.weapon.recount();
-    }
-
-    public void makeMove(Action doAfterMove) {
-        System.out.println(this.isSummoned + " " + this.isFighting);
-        if (this.isSummoned && this.isFighting) {
-            System.out.println("RAT IS MOVING");
-            this.weapon.useByCreature(this.place, indexOfSkillToBeUsed, doAfterMove);
-        } else doAfterMove.run();
-        super.makeMove(doAfterMove);
     }
 }

@@ -12,6 +12,7 @@ public class Item {
     public void getObtained(Entity entity) {
         this.holder = entity;
         this.holder.items.add(this);
+        this.holder.updateInventory();
         this.holder.baseWeight += this.weight;
         this.holder.recountWeight();
         this.holder.makeFictionalMove();

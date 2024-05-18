@@ -28,6 +28,7 @@ public class Skeleton extends Creature {
         this.experiencePerKill = 3;
         this.description = this.name + ", a skeleton, may hit you with its weapon, " + this.weapon.name;
         this.texture = new Texture("skeleton.png");
+        this.moveMessage = this.name + " attacks";
     }
 
     public Skeleton(int health, int power, int weight, boolean isHostile, Room place) {
@@ -40,6 +41,7 @@ public class Skeleton extends Creature {
         this.experiencePerKill = 3;
         this.description = this.name + ", a skeleton, may hit you with its weapon, " + this.weapon.name;
         this.texture = new Texture("skeleton.png");
+        this.moveMessage = "Skeleton attacks";
     }
 
     public void summon() {
@@ -49,14 +51,5 @@ public class Skeleton extends Creature {
         this.maxHealth = this.health;
         this.experiencePerKill = (int) (Math.sqrt(this.master.level) * this.experiencePerKill);
         this.weapon.recount();
-    }
-
-    public void makeMove(Action doAfterMove) {
-        System.out.println(this.isSummoned + " " + this.isFighting);
-        if (this.isSummoned && this.isFighting) {
-            System.out.println("Skeleton attacks");
-            this.weapon.useByCreature(this.place, indexOfSkillToBeUsed, doAfterMove);
-        } else doAfterMove.run();
-        super.makeMove(doAfterMove);
     }
 }

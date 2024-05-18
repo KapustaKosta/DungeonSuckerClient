@@ -114,9 +114,9 @@ public class DamageTwoEntities extends DamagingSkill {
     }
 
     public String toString() {
-        return "hit two enemies (one by your choice and one right after thee, dealing "
+        return "hit two enemies (one\nby your choice and one right after\nthee, dealing "
                 + this.firstDamage.totalDamage + " and "
                 + this.secondDamage.totalDamage +
-                " to first, and second, respectively. BaseDamage is " + this.damage;
+                " to first, and second,\nrespectively. BaseDamage is " + this.damage;
     }
 }

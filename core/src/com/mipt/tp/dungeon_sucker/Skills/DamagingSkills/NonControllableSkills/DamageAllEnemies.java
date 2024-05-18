@@ -33,4 +33,7 @@ public class DamageAllEnemies extends DamagingSkill {
         }
         super.use(room, doAfterUse);
     }
+    public String toString(){
+        return "damage all enemies in room, dealing " + this.damage.totalDamage + " to everyone";
+    }
 }
