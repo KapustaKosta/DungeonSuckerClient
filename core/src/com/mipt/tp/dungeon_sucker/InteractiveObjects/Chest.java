@@ -58,7 +58,7 @@ public class Chest extends InteractiveObject {
             for (int k = 0; k < this.inventory.size(); ++k) {
                 final int i = k;
                 ButtonsGroup.getInstance().addButton(new Button(this.inventory.get(k).name, args1 -> {
-                    int index = Math.min(i - 1, this.inventory.size() - 1);
+                    int index = Math.max(0, Math.min(i - 1, this.inventory.size() - 1));
                     this.inventory.get(index).getObtained(player);
                     this.extractItem(index);
                     doAfterMove.run();

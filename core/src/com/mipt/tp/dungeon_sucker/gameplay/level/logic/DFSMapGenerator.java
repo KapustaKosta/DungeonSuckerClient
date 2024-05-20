@@ -1,5 +1,6 @@
 package com.mipt.tp.dungeon_sucker.gameplay.level.logic;
 
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Chest;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Bat;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.ElementalSpirit;
@@ -115,7 +116,10 @@ public class DFSMapGenerator extends MapGenerator {
             rooms[coordinates.y][coordinates.x] = new Oasis(roomPosition, roomsTexturesPack.oasisTexture);
         }
         if (roomType > 0 && roomType < 8) {
-            rooms[coordinates.y][coordinates.x] = generateHauntedRoom(roomPosition);
+            Room room = generateHauntedRoom(roomPosition);
+            rooms[coordinates.y][coordinates.x] = room;
+            room.level = 1;
+            room.chest = new Chest(room.level, room);
         }
         if (roomType >= 8 && roomType < 9) {
             rooms[coordinates.y][coordinates.x] = new PeaceRoom(roomPosition,

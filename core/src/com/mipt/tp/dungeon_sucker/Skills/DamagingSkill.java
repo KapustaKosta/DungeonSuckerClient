@@ -48,6 +48,7 @@ public class DamagingSkill extends Skill {
 
     public void chooseVictimToAttackUntilPredicate(Room room, Action listener, Predicate predicate) {
         ButtonsGroup.getInstance().clear();
+        ButtonsGroup.getInstance().setArticle("Choose enemy to attack:");
         for (int i = 0; i < (room).hostileEntities.length; ++i) {
             if (room.hostileEntities[i] != null) {
                 if (room.hostileEntities[i].isAlive) {
