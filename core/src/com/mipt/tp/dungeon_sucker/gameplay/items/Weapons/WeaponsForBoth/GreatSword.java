@@ -16,6 +16,7 @@ import com.mipt.tp.dungeon_sucker.itemSpriteGenerator.ItemSpriteGenerator;
 public class GreatSword extends Weapon {
     public GreatSword(int level, int damage, String name, RaritySet rarity) {
         super(3);
+        this.classID = 4;
         this.type = WeaponTypes.sword;
         this.power = damage * level;
         this.level = level;

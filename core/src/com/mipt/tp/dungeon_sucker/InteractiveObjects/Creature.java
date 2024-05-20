@@ -33,8 +33,9 @@ public class Creature extends Entity {
         super.makeMove(doAfterMove);
     }
 
-    private void summon(Action action) {
+    protected void summon(Action action) {
         this.isSummoned = true;
+        this.makeFictionalMove();
         action.run();
     }
 

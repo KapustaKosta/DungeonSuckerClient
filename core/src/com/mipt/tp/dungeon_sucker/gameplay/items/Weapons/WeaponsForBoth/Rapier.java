@@ -17,6 +17,7 @@ public class Rapier extends Weapon {
 
     public Rapier(int level, int damage, String name, RaritySet rarity) {
         super(3);
+        this.classID = 5;
         this.type = WeaponTypes.sword;
         this.power = damage * level;
         this.level = level;

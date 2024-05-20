@@ -1,17 +1,17 @@
 package com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.gameplay.Action;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth.*;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForBoth.ElementalResistances.DarkResistance;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForBoth.ElementalResistances.FireResistance;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForBoth.ElementalResistances.FreezeResistance;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForBoth.ElementalResistances.PoisonResistance;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.FireVulnerability;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.FrostVulnerability;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.LightVulnerability;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForEnemies.ElementalPower;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
-
-import java.util.Random;
 
 public class ElementalSpirit extends Creature {
 
@@ -59,7 +59,7 @@ public class ElementalSpirit extends Creature {
                 new LightResistance().getObtained(this);
                 new DarkVulnerability().getObtained(this);
             }*/
-            case Stone: {
+            case Dark: {
                 new DarkResistance().getObtained(this);
                 new LightVulnerability().getObtained(this);
             }
@@ -67,11 +67,11 @@ public class ElementalSpirit extends Creature {
                 new FireResistance().getObtained(this);
                 new FrostVulnerability().getObtained(this);
             }
-            case Water: {
-                new WaterResistance().getObtained(this);
+            case Freeze: {
+                new FreezeResistance().getObtained(this);
                 new FireVulnerability().getObtained(this);
             }
-            case Nature: {
+            case Poison: {
                 new PoisonResistance().getObtained(this);
             }
             case None: {
@@ -79,7 +79,7 @@ public class ElementalSpirit extends Creature {
         }
     }
 
-    public void summon() {
+    public void summon(Action doAfterMove) {
         this.strength = this.STR_PER_LVL * this.master.level;
         this.dexterity = this.DEX_PER_LVL * this.master.level;
         this.health = this.BASE_HEALTH + this.VIG_PER_LVL * this.master.level;
@@ -88,6 +88,8 @@ public class ElementalSpirit extends Creature {
         this.weapon = new ElementalPower(this.power);
         this.weapon.getObtained(this);
         this.weapon.recount();
+        super.summon(doAfterMove);
+
     }
 
 }

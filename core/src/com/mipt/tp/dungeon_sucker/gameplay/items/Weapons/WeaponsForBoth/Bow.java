@@ -21,6 +21,7 @@ public class Bow extends ChargableWeapon {
         this.chargesForSkill = new int[3];
         this.type = WeaponTypes.ranged;
         this.power = damage * level;
+        this.classID = 0;
         this.level = level;
         this.name = name;
         this.strengthScale = BowConfig.BASE_STRENGTH_SCALE;

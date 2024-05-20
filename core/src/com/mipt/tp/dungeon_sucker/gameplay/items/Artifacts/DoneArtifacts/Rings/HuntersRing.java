@@ -1,26 +1,28 @@
-package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts;
+package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts.Rings;
 
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 
-public class ScholarsRing extends Artifact {
+public class HuntersRing extends Artifact {
+    int effectiveness = 5;
 
-    public ScholarsRing() {
+    public HuntersRing() {
         super();
-        this.description = "Makes its holder more intelligent";
-        this.effectiveness = 5;
+        this.id = 15;
+        this.description = "Makes its holder more agile";
         this.weight = 1;
-        this.name = "Scholar's ring; weight = " + this.weight;
+        this.name = "Hunter's ring; weight = " + this.weight;
     }
 
     @Override
     public void triggerByBeingDamaged(Damage damage) {
+
     }
 
     public void getObtained(Entity entity) {
         super.getObtained(entity);
-        entity.intellect += this.effectiveness;
+        entity.dexterity += this.effectiveness;
         this.holder = entity;
         try {
             this.holder.recountWeapon();
@@ -30,7 +32,7 @@ public class ScholarsRing extends Artifact {
 
 
     public void getLost() {
-        this.holder.intellect -= this.effectiveness;
+        this.holder.dexterity -= this.effectiveness;
         super.getLost();
     }
 }

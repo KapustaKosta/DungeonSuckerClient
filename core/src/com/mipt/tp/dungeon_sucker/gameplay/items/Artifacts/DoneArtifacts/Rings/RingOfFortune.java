@@ -1,4 +1,4 @@
-package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts;
+package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts.Rings;
 
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
@@ -6,6 +6,7 @@ import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 public class RingOfFortune extends Artifact {
     public RingOfFortune() {
         super();
+        this.id = 20;
         this.description = "Makes you much more lucky. Definitely";   //not really
         this.effectiveness = 0; //not a useful line, just a reminder. IT IS USELESS!
         this.weight = 1; // so it's even harmful

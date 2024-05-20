@@ -63,6 +63,7 @@ public class MainWindow extends Window {
         totalEntitiesWidth += spaceBetweenFriendlyAndHostile;
         for (int i = 0; i < hostileEntitiesBatches.length; i++) {
             if (room.hostileEntities[i] == null) continue;
+            if (room.hostileEntities[i].texture == null) continue;
             totalEntitiesWidth += room.hostileEntities[i].texture.getWidth();
             if (i != hostileEntitiesBatches.length - 1) totalEntitiesWidth += hostileEntitiesOffset;
         }

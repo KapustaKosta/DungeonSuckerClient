@@ -8,7 +8,8 @@ import com.mipt.tp.dungeon_sucker.UI.Buttons.Button;
 import com.mipt.tp.dungeon_sucker.UI.Buttons.ButtonsGroup;
 import com.mipt.tp.dungeon_sucker.UI.InventoryWindow;
 import com.mipt.tp.dungeon_sucker.gameplay.Action;
-import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
+import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Level;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
@@ -158,8 +159,7 @@ public class Character extends Entity {
         }
     }
 
-    public void showFightingButtons()
-    {
+    public void showFightingButtons() {
         ButtonsGroup.getInstance().clear();
         ButtonsGroup.getInstance().setArticle("Choose escape or attack");
         ButtonsGroup.getInstance().addButton(new Button("escape", args ->
@@ -173,8 +173,7 @@ public class Character extends Entity {
         }));
     }
 
-    public void showLevelButtons()
-    {
+    public void showLevelButtons() {
         if (ButtonsGroup.getInstance() != null) {
             ButtonsGroup.getInstance().clear();
         }
@@ -194,7 +193,7 @@ public class Character extends Entity {
     }
 
     public void makeMove(Action doAfterMove) {
-        this.doAfterMove = doAfterMove != null? doAfterMove : this.doAfterMove;
+        this.doAfterMove = doAfterMove != null ? doAfterMove : this.doAfterMove;
 
         super.makeFictionalMove();
         if (this.isFighting) {
@@ -340,5 +339,33 @@ public class Character extends Entity {
         batch.begin();
         batch.draw(mapTexture, position.x, position.y);
         batch.end();
+    }
+
+    public int[] getStatsForMakingCreature() {
+        return new int[]{
+                this.power, this.baseWeight,
+                this.vigor, this.carrying, this.strength,
+                this.dexterity, this.intellect, this.faith,
+                this.baseHealth, this.weight
+        };
+    }
+
+    public int[] getArtifactsForMakingCreature() {
+        int[] res = new int[this.artifacts.size()];
+        for (int i = 0; i < this.artifacts.size(); ++i) {
+            Artifact a = this.artifacts.get(0);
+            res[i] = this.artifacts.get(0).id;
+            a.getLost();
+        }
+        return res;
+    }
+
+    public int[] getWeaponForMakingCreature() {
+        return new int[]{ElementSet.getID(
+                this.weapon.getElement()),
+                this.weapon.getClassID(),
+                this.weapon.getRarityID(),
+                this.weapon.power,
+                this.weapon.level,};
     }
 }

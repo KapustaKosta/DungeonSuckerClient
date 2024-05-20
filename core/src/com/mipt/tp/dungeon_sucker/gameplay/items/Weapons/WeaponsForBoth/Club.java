@@ -17,6 +17,7 @@ public class Club extends Weapon {
 
     public Club(int level, int damage, String name, RaritySet rarity) {
         super(3);
+        this.classID = 1;
         this.type = WeaponTypes.hammer;
         this.power = damage * level;
         this.level = level;

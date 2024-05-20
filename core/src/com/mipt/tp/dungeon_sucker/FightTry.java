@@ -1,19 +1,7 @@
 package com.mipt.tp.dungeon_sucker;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.mipt.tp.dungeon_sucker.InteractiveObjects.Character;
-import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
-import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Rat;
-import com.mipt.tp.dungeon_sucker.UI.InventoryWindow;
-import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
-import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.WeaponGenerator;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth.HammerMastery;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts.IronChestplate;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForBoth.Club;
-import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
-import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 import java.util.LinkedList;
 import java.util.Scanner;

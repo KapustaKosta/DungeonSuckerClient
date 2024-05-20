@@ -7,6 +7,7 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 public abstract class Artifact extends Item {
     public WeaponTypes upgradable;
+    public int id = -1;
     protected String description;
     public int effectiveness;
     public boolean mustBeRemoved = false;

@@ -19,9 +19,10 @@ public class IvanKalinin extends Creature {
         this.moveMessage = "YOUR CODESTYLE SUCKS!";
     }
 
-    public void summon() {
+    public void summon(Action doAfterMove) {
         this.strength = Integer.MAX_VALUE;
         this.dexterity = Integer.MAX_VALUE;
         this.intellect = Integer.MAX_VALUE;
+        super.summon(doAfterMove);
     }
 }

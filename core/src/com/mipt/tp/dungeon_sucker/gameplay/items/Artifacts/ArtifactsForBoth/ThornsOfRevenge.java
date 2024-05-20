@@ -1,4 +1,4 @@
-package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth;
+package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForBoth;
 
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.DamageTypeSet;
@@ -8,6 +8,7 @@ import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 public class ThornsOfRevenge extends Artifact {
     public ThornsOfRevenge() {
         super();
+        this.id = 14;
         this.triggerableByBeingDamaged = true;
         this.weight = 2;
         this.effectiveness = 3;

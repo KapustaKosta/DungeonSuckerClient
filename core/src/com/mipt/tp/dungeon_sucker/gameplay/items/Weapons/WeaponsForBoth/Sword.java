@@ -16,6 +16,7 @@ public class Sword extends Weapon {
 
     public Sword(int level, int damage, String name, RaritySet rarity) {
         super(3);
+        this.classID = 7;
         this.type = WeaponTypes.sword;
         this.power = damage * level;
         this.level = level;

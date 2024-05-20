@@ -3,13 +3,11 @@ package com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures;
 import com.badlogic.gdx.graphics.Texture;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.gameplay.Action;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth.DarkResistance;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForBoth.ElementalResistances.DarkResistance;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.LightVulnerability;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.PointVulnerability;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForEnemies.VampireClaws;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
-
-import java.util.Random;
 
 public class Vampire extends Creature {
     final int BASE_HEALTH = 3;
@@ -47,7 +45,7 @@ public class Vampire extends Creature {
         this.moveMessage = this.name + " is moving";
     }
 
-    public void summon() {
+    public void summon(Action doAfterMove) {
         this.strength = this.STR_PER_LVL * this.master.level;
         this.dexterity = this.DEX_PER_LVL * this.master.level;
         this.health = this.BASE_HEALTH + this.VIG_PER_LVL * this.master.level;
@@ -55,5 +53,6 @@ public class Vampire extends Creature {
         this.maxHealth = this.health;
         this.experiencePerKill = (int) (Math.sqrt(this.master.level) * this.experiencePerKill);
         this.weapon.recount();
+        super.summon(doAfterMove);
     }
 }

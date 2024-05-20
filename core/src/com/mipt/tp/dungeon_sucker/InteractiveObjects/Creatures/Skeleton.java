@@ -4,11 +4,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.gameplay.Action;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.WeaponGenerator;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth.PointResistance;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForBoth.PointResistance;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForEnemies.FragileBody;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
-
-import java.util.Random;
 
 public class Skeleton extends Creature {
     final int BASE_HEALTH = 3;
@@ -44,12 +42,13 @@ public class Skeleton extends Creature {
         this.moveMessage = "Skeleton attacks";
     }
 
-    public void summon() {
+    public void summon(Action doAfterMove) {
         this.strength = this.STR_PER_LVL * this.master.level;
         this.dexterity = this.DEX_PER_LVL * this.master.level;
         this.health = this.BASE_HEALTH + this.VIG_PER_LVL * this.master.level;
         this.maxHealth = this.health;
         this.experiencePerKill = (int) (Math.sqrt(this.master.level) * this.experiencePerKill);
         this.weapon.recount();
+        super.summon(doAfterMove);
     }
 }

@@ -8,7 +8,6 @@ import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.WeaponTypes;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
-import com.mipt.tp.dungeon_sucker.itemSpriteGenerator.ItemSpriteGenerator;
 
 import java.util.ArrayList;
 
@@ -28,6 +27,7 @@ public abstract class Weapon extends Item {
     protected double vigorScale = 0;
     public int power;
     private int amountOfCreatureSkills = 0;
+    public int classID = -1;
     private ArrayList<Action> listeners = new ArrayList<>();
 
     public Weapon(int numberOfSkills) {
@@ -42,12 +42,41 @@ public abstract class Weapon extends Item {
         return "Null";
     }
 
-    public String getElement() {
+    public String getElementName() {
         if (element != null) {
-            System.out.println( element.name());
+            System.out.println(element.name());
             return element.name();
         }
         return "Null";
+    }
+
+    public ElementSet getElement() {
+        return this.element;
+    }
+
+    public int getClassID() {
+        return this.classID;
+    }
+    public int getRarityID(){
+        return RaritySet.getID(this.rarity);
+    }
+
+    public int getElementID() {
+        switch (this.element) {
+            case None:
+                return 0;
+            case Dark:
+                return 1;
+            case Fire:
+                return 2;
+            case Freeze:
+                return 3;
+            case Poison:
+                return 4;
+            case Light:
+                return 5;
+        }
+        return 0;
     }
 
     public void useSkill(int index, Room room, Action doAfterUse) {

@@ -28,7 +28,7 @@ public class Mimic extends Creature {
         this.moveMessage = "MIMIC IS MOVING";
     }
 
-    public void summon() {
+    public void summon(Action doAfterMove) {
         this.strength = this.STR_PER_LVL * this.master.level;
         this.dexterity = this.DEX_PER_LVL * this.master.level;
         this.health = this.BASE_HEALTH + this.VIG_PER_LVL * this.master.level;
@@ -37,6 +37,7 @@ public class Mimic extends Creature {
         this.weapon = new MimicClaws(this.power);
         this.weapon.getObtained(this);
         this.weapon.recount();
+        super.summon(doAfterMove);
     }
 
     public void die() {
