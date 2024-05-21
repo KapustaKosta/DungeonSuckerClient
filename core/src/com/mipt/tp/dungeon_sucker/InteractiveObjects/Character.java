@@ -3,6 +3,7 @@ package com.mipt.tp.dungeon_sucker.InteractiveObjects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
+import com.google.gson.Gson;
 import com.mipt.tp.dungeon_sucker.DungeonSuckerGame;
 import com.mipt.tp.dungeon_sucker.UI.Buttons.Button;
 import com.mipt.tp.dungeon_sucker.UI.Buttons.ButtonsGroup;
@@ -78,7 +79,11 @@ public class Character extends Entity {
 
     // Todo: слишком много конструкторов, используй паттерн builder
     public Character() {
-        super(new IntVector2(), null, null);
+        super(new IntVector2(), new Texture("knight.png"), null);
+        this.isCharacter = true;
+    }
+    public Character(Texture texture){
+        super(new IntVector2(), texture, null);
         this.isCharacter = true;
     }
 
@@ -367,5 +372,13 @@ public class Character extends Entity {
                 this.weapon.getRarityID(),
                 this.weapon.power,
                 this.weapon.level,};
+    }
+
+    public String getAllDataForMakingCreature() {
+        int[] artifactInfo = this.getArtifactsForMakingCreature();
+        int[] weaponInfo = this.getWeaponForMakingCreature();
+        int[] statsIfo = this.getStatsForMakingCreature();
+        Gson gson = new Gson();
+        return gson.toJson(new String[]{gson.toJson(artifactInfo), gson.toJson(weaponInfo), gson.toJson(statsIfo)});
     }
 }

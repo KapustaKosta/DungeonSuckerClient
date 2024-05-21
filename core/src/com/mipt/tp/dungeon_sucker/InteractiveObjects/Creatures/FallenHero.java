@@ -1,5 +1,6 @@
 package com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures;
 
+import com.google.gson.Gson;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Character;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
 import com.mipt.tp.dungeon_sucker.gameplay.Action;
@@ -10,6 +11,10 @@ import com.mipt.tp.dungeon_sucker.gameplay.generators.WeaponGenerator;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 
 public class FallenHero extends Creature {
+    public FallenHero(String jsonObject, boolean isHostile, Room place){
+        this(new Gson().fromJson(jsonObject, int[][].class)[2], new Gson().fromJson(jsonObject, int[][].class)[0],
+                new Gson().fromJson(jsonObject, int[][].class)[1], isHostile, place);
+    }
 
     public FallenHero(int[] stats, int[] artifactsForObtaining, int[] weaponInfo, boolean isHostile, Room place) {
         super(stats[8], stats[0], stats[1], isHostile, place, "Fallen Hero");

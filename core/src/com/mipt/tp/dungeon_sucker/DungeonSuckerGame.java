@@ -60,8 +60,7 @@ public class DungeonSuckerGame extends ApplicationAdapter {
         generateGame(mapGenerator);
     }
 
-    private void generateGame(MapGenerator mapGenerator)
-    {
+    private void generateGame(MapGenerator mapGenerator) {
         Level level = new Level(mapGenerator, 10, 10);
         Map startMap = level.getMap();
         MapWindow mapWindow = new MapWindow(new IntVector2(0, 25), new IntVector2(10, 15), level);
@@ -103,7 +102,7 @@ public class DungeonSuckerGame extends ApplicationAdapter {
                     dungeonMasster.add(0, entity);
                 }
             }
-            if(character.isFighting) {
+            if (character.isFighting) {
                 character.showFightingButtons();
             }
             nowRoom.setOnTryAgain(args1 -> {
