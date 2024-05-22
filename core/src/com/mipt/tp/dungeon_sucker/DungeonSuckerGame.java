@@ -115,7 +115,7 @@ public class DungeonSuckerGame extends ApplicationAdapter {
                 new IntVector2(10, 0), 4, 4);
 
         IntVector2 characterPosition = new IntVector2(startMap.spawn.getPosition().x, startMap.spawn.getPosition().y);
-        character = new Character(characterPosition, new Texture("knight.png"), level, 25, 50, inventoryWindow);
+        character = new Character(characterPosition, new Texture("knight.png"), level, -50, 50, inventoryWindow);
         character.maxHealth = character.health;
         character.master = dungeonMasster;
         character.mapTexture = new Texture("character.png");
@@ -193,23 +193,25 @@ public class DungeonSuckerGame extends ApplicationAdapter {
         return response.body().equals("Пользователь успешно зарегистрирован");
     }
 
-    private static void sendDeadPlayerData(String data) throws IOException, InterruptedException, URISyntaxException {
-        HttpRequest request = HttpRequest.newBuilder(new URI("http://localhost:8080/sendDeadPlayerData"))
+    public static void sendDeadPlayerData(String data) throws IOException, InterruptedException, URISyntaxException {
+        HttpRequest request = HttpRequest.newBuilder(new URI("http://localhost:8080/office/sendDeadPlayerData"))
                 .POST(HttpRequest.BodyPublishers.ofString(data))
                 .header("LOGIN", login)
                 .header("PASSWORD", password)
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println(response);
     }
 
-    private static String receiveDeadPlayerData() throws IOException, InterruptedException, URISyntaxException {
-        HttpRequest request = HttpRequest.newBuilder(new URI("http://localhost:8080/receiveDeadPlayerData"))
+    public static String receiveDeadPlayerData() throws IOException, InterruptedException, URISyntaxException {
+        HttpRequest request = HttpRequest.newBuilder(new URI("http://localhost:8080/office/receiveDeadPlayerData"))
                 .header("LOGIN", login)
                 .header("PASSWORD", password)
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println(response);
         return response.body();
     }
 }

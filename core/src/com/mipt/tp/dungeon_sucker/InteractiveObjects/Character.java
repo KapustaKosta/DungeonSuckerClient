@@ -327,6 +327,11 @@ public class Character extends Entity {
 
     public void die() {
         System.out.println("Oh no! I, " + this.name + " failed!");
+        try {
+            DungeonSuckerGame.sendDeadPlayerData(getAllDataForMakingCreature());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         super.die();
     }
 
@@ -366,8 +371,8 @@ public class Character extends Entity {
     }
 
     public int[] getWeaponForMakingCreature() {
-        return new int[]{ElementSet.getID(
-                this.weapon.getElement()),
+        return new int[]{
+                this.weapon.getElement() == null? 0 : ElementSet.getID(this.weapon.getElement()),
                 this.weapon.getClassID(),
                 this.weapon.getRarityID(),
                 this.weapon.power,
