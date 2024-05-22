@@ -57,7 +57,7 @@ public class Creature extends Entity {
         }
         super.die();
     }
-//todo: make sure that shakeBeforeMoving() works correctly
+    //todo: make sure that shakeBeforeMoving() works correctly
     public void startMove(Action action) {
         if (this.isSummoned) {
             this.indexOfSkillToBeUsed = new Random().nextInt(this.weapon.skills.length);

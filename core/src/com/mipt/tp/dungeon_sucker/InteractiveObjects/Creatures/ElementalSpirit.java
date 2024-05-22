@@ -29,7 +29,8 @@ public class ElementalSpirit extends Creature {
         this.element = element;
         this.experiencePerKill = 3;
         this.weapon = new ElementalPower(this.power);
-        this.weapon.getObtained(this);
+        this.weapon.holder = this;
+        //this.weapon.getObtained(this);
         this.addElementTraits();
         this.description =
                 this.name + ", wrath of the very nature in a cute body, may harm you, dealing " + this.power
@@ -45,7 +46,8 @@ public class ElementalSpirit extends Creature {
         this.element = element;
         this.experiencePerKill = 3;
         this.weapon = new ElementalPower(this.power);
-        this.weapon.getObtained(this);
+        this.weapon.holder = this;
+        //this.weapon.getObtained(this);
         this.addElementTraits();
         this.description =
                 this.name + ", wrath of the very nature in a cute body, may harm you, dealing " + this.power

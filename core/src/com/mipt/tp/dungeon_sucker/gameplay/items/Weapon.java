@@ -118,8 +118,8 @@ public abstract class Weapon extends Item {
                         + this.holder.intellect * this.intellectScale
                         + this.holder.vigor * this.vigorScale
                         + 1));
-        for (int i = 0; i < this.amountOfSkills; ++i) {
-            this.skills[i].setPower(effectiveness);
+        for (int i = 0; i < this.skills.length; ++i) {
+            if(this.skills[i] != null) this.skills[i].setPower(effectiveness);
         }
     }
 

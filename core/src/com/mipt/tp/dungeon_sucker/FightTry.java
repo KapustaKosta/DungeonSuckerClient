@@ -55,7 +55,7 @@ public class FightTry {
         {
             //todo: Дайте мне запустить этот метод
             DungeonMasster DM = DungeonMasster.getInstance();
-            Character vasya = new Character(new Texture("C:\\Users\\Lenovo\\Documents\\DungeonSucker\\assets\\knight.png"));
+            Character vasya = new Character(new Texture("knight.png"));
             vasya.maxHealth = 100;
             vasya.health = 100;
             vasya.baseWeight = 15;

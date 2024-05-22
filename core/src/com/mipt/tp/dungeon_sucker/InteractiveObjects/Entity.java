@@ -95,7 +95,7 @@ public class Entity extends InteractiveObject implements Drawable {
     }
 
     public void updateInventory() {
-        
+
     }
 
     public void getDamaged(Damage damage) {
