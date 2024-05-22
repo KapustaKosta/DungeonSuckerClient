@@ -11,16 +11,33 @@ import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 public class Button implements Drawable {
     private Action action;
-    private int[] args;
+    private boolean deleteWhenPressed = false;
     private Text text;
     private Texture texture;
     private SpriteBatch batch;
     private IntVector2 leftTopCorner;
     private IntVector2 size;
 
-    public void push() {
+    private boolean enabled = true;
 
-        action.run(args);
+    public void push() {
+        action.run();
+        if (deleteWhenPressed) {
+            disable();
+        }
+    }
+
+    public void disable() {
+        enabled = false;
+        ButtonsGroup.getInstance().resetButtonSizes();
+    }
+
+    public void enable() {
+        enabled = true;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
     }
 
     public void setPos(IntVector2 newPos) {
@@ -60,6 +77,11 @@ public class Button implements Drawable {
         this.text = new Text(text);
         this.action = action;
     }
+
+    public void setDeleteWhenPressed(boolean value) {
+        this.deleteWhenPressed = value;
+    }
+
 
     @Override
     public void drawInLibGDX() {

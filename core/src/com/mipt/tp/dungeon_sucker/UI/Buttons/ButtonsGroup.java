@@ -61,9 +61,11 @@ public class ButtonsGroup {
             int currPos = gapX + leftDownCorner.x;
             for (Button button :
                     buttons) {
-                button.setPos(new IntVector2(currPos, leftDownCorner.y + gapY));
-                button.setSize(buttonSize);
-                currPos += gapX + buttonSize.x;
+                if (button.isEnabled()) {
+                    button.setPos(new IntVector2(currPos, leftDownCorner.y + gapY));
+                    button.setSize(buttonSize);
+                    currPos += gapX + buttonSize.x;
+                }
             }
         }
     }

@@ -17,6 +17,7 @@ public class Dagger extends Weapon {
 
     public Dagger(int level, int damage, String name, RaritySet rarity) {
         super(3);
+        this.classID = 3;
         this.type = WeaponTypes.knife;
         this.power = damage * level;
         this.level = level;

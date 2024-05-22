@@ -29,6 +29,7 @@ public class DungeonMasster {
     }
 
     public void add(long timeOfStep, Entity entity) {
+        System.out.println("adding " + entity.name + " " + timeOfStep);
         entity.master = this;
         System.out.println(entity.name + " " + timeOfStep);
         for (int i = 0; i < this.orderOfSteps.size(); ++i) {

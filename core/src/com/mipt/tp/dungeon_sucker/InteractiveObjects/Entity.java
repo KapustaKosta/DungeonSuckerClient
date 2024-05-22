@@ -3,6 +3,7 @@ package com.mipt.tp.dungeon_sucker.InteractiveObjects;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.mipt.tp.dungeon_sucker.DungeonSuckerGame;
 import com.mipt.tp.dungeon_sucker.UI.Drawable;
 import com.mipt.tp.dungeon_sucker.gameplay.Action;
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
@@ -15,6 +16,8 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class Entity extends InteractiveObject implements Drawable {
@@ -92,7 +95,7 @@ public class Entity extends InteractiveObject implements Drawable {
     }
 
     public void updateInventory() {
-        
+
     }
 
     public void getDamaged(Damage damage) {

@@ -1,4 +1,4 @@
-package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth;
+package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForBoth.Masteries;
 
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.WeaponTypes;
@@ -9,6 +9,7 @@ public class RangedMastery extends Mastery {
 
     public RangedMastery() {
         super();
+        this.id = 9;
         this.upgradable = WeaponTypes.ranged;
         this.triggerableByBeingDamaged = false;
         this.weight = 5;

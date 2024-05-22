@@ -18,6 +18,7 @@ import com.mipt.tp.dungeon_sucker.itemSpriteGenerator.ItemSpriteGenerator;
 public class Spear extends Weapon {
     public Spear(int level, int damage, String name, RaritySet rarity) {
         super(3);
+        this.classID = 6;
         this.type = WeaponTypes.polearm;
         this.power = damage * level;
         this.level = level;

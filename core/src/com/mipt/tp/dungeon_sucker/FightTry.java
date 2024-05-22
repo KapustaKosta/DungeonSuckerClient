@@ -2,18 +2,15 @@ package com.mipt.tp.dungeon_sucker;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Character;
-import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
-import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Rat;
-import com.mipt.tp.dungeon_sucker.UI.InventoryWindow;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.FallenHero;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.RaritySet;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.WeaponGenerator;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth.HammerMastery;
-import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts.IronChestplate;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts.Rings.RingOfFortune;
+import com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.DoneArtifacts.Rings.RingOfHealth;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapons.WeaponsForBoth.Club;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
-import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -52,5 +49,21 @@ public class FightTry {
             System.out.println(weapon.name);
         }
         System.out.println("lol");
+    }
+
+    public static void main(String[] args) {
+        {
+            //todo: Дайте мне запустить этот метод
+            DungeonMasster DM = DungeonMasster.getInstance();
+            Character vasya = new Character(new Texture("knight.png"));
+            vasya.maxHealth = 100;
+            vasya.health = 100;
+            vasya.baseWeight = 15;
+            new Club(2, 5, "Club", RaritySet.Common).getObtained(vasya);
+            new RingOfFortune().getObtained(vasya);
+            new RingOfHealth().getObtained(vasya);
+            FallenHero deadVasya = new FallenHero(vasya.getAllDataForMakingCreature(), true, new Room());
+            System.out.println("lol");
+        }
     }
 }

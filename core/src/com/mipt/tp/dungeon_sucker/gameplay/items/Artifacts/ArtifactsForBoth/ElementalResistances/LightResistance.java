@@ -1,4 +1,4 @@
-package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth;
+package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForBoth.ElementalResistances;
 
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.ElementSet;
@@ -7,6 +7,7 @@ import com.mipt.tp.dungeon_sucker.gameplay.items.Artifact;
 public class LightResistance extends Artifact {
     public LightResistance() {
         super();
+        this.id = 2;
         this.triggerableByBeingDamaged = true;
         this.weight = 5;
         this.effectiveness = 3;
@@ -15,9 +16,9 @@ public class LightResistance extends Artifact {
     }
 
     public void triggerByBeingDamaged(Damage damage) {
-/*        if (damage.element == ElementSet.Light) {
+        if (damage.element == ElementSet.Light) {
             damage.elementDamage /= 2;
             damage.totalDamage = damage.defaultDamage + damage.elementDamage;
-        }*/
+        }
     }
 }

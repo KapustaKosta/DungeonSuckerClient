@@ -33,8 +33,9 @@ public class Creature extends Entity {
         super.makeMove(doAfterMove);
     }
 
-    private void summon(Action action) {
+    protected void summon(Action action) {
         this.isSummoned = true;
+        this.makeFictionalMove();
         action.run();
     }
 
@@ -56,7 +57,7 @@ public class Creature extends Entity {
         }
         super.die();
     }
-//todo: make sure that shakeBeforeMoving() works correctly
+    //todo: make sure that shakeBeforeMoving() works correctly
     public void startMove(Action action) {
         if (this.isSummoned) {
             this.indexOfSkillToBeUsed = new Random().nextInt(this.weapon.skills.length);

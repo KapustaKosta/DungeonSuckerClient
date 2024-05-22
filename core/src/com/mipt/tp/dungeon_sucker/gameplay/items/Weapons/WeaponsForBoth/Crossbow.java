@@ -18,6 +18,7 @@ public class Crossbow extends ChargableWeapon {
 
     public Crossbow(int level, int damage, String name, RaritySet rarity) {
         super(3);
+        this.classID = 2;
         this.type = WeaponTypes.ranged;
         this.chargesForSkill = new int[3];
         this.power = damage * level;

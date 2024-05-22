@@ -8,6 +8,7 @@ public class IronChestplate extends Artifact {
 
     public IronChestplate() {
         super();
+        this.id = 22;
         this.effectiveness = 3;
         description = "That is just an Iron chestplate. Somehow it can be worn with more armor. " +
                 "Increases your Physical Defence by " + this.effectiveness;

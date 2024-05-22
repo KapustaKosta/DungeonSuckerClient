@@ -39,7 +39,7 @@ public class Rat extends Creature {
         this.moveMessage = this.name + " is moving";
     }
 
-    public void summon() {
+    public void summon(Action doAfterMove) {
         this.strength = this.STR_PER_LVL * this.master.level;
         this.dexterity = this.DEX_PER_LVL * this.master.level;
         this.health = this.BASE_HEALTH + this.VIG_PER_LVL * this.master.level;
@@ -48,5 +48,6 @@ public class Rat extends Creature {
         this.weapon = new RatClaws(this.power);
         this.weapon.getObtained(this);
         this.weapon.recount();
+        super.summon(doAfterMove);
     }
 }

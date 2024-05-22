@@ -7,6 +7,7 @@ public class FuryOfTheFallen extends Artifact {
 
     public FuryOfTheFallen() {
         super();
+        this.id = 21;
         this.triggerableByDeath = true;
         this.weight = 2;
         this.description = "Makes you respawn after you die, but only once";

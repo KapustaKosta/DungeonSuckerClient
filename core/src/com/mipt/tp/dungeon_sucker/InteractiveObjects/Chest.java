@@ -3,6 +3,7 @@ package com.mipt.tp.dungeon_sucker.InteractiveObjects;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Mimic;
 import com.mipt.tp.dungeon_sucker.UI.Buttons.Button;
 import com.mipt.tp.dungeon_sucker.UI.Buttons.ButtonsGroup;
+import com.mipt.tp.dungeon_sucker.gameplay.Action;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.ItemGenerator;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Item;
 import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
@@ -39,7 +40,7 @@ public class Chest extends InteractiveObject {
         this.inventory.remove(index);
     }
 
-    public void getInteracted(Character player) {
+    public void getInteracted(Character player, Action doAfterMove) {
         super.getInteracted(player);
         if (isMimic) {
             this.room.insert(new Mimic(this, true), true);
@@ -51,20 +52,22 @@ public class Chest extends InteractiveObject {
         ButtonsGroup.getInstance().addButton(new Button("Take something", args -> {
             ButtonsGroup.getInstance().clear();
             ButtonsGroup.getInstance().addButton(new Button("nothing, I'm just watching", args1 -> {
+                doAfterMove.run();
             }));
 
             for (int k = 0; k < this.inventory.size(); ++k) {
                 final int i = k;
                 ButtonsGroup.getInstance().addButton(new Button(this.inventory.get(k).name, args1 -> {
-                    int index = Math.min(i - 1, this.inventory.size() - 1);
+                    int index = Math.max(0, Math.min(i - 1, this.inventory.size() - 1));
                     this.inventory.get(index).getObtained(player);
                     this.extractItem(index);
+                    doAfterMove.run();
                 }));
             }
         }));
 
         ButtonsGroup.getInstance().addButton(new Button("Don't take", args -> {
-
+            doAfterMove.run();
         }));
     }
 }

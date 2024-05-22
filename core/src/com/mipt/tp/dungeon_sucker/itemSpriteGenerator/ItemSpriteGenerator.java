@@ -2,17 +2,14 @@ package com.mipt.tp.dungeon_sucker.itemSpriteGenerator;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.TextureData;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Weapon;
 import com.mipt.tp.dungeon_sucker.helper.Constants;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.util.Arrays;
 
 public class ItemSpriteGenerator {
@@ -21,7 +18,7 @@ public class ItemSpriteGenerator {
 
     public static Texture generateTexture(Weapon weapon) {
         File template_file = new File(Constants.WEAPON_TEXTURES_FOLDER + "/templates/" + weapon.type + '/' + weapon.level + ".png");
-        File texture_file = new File(Constants.WEAPON_TEXTURES_FOLDER + "/textures/" + weapon.getElement() + ".png");
+        File texture_file = new File(Constants.WEAPON_TEXTURES_FOLDER + "/textures/" + weapon.getElementName() + ".png");
         File rarity_file = new File(Constants.WEAPON_TEXTURES_FOLDER + "/rarity/" + weapon.getRarity() + ".png");
         File cell_file = new File(Constants.WEAPON_TEXTURES_FOLDER + "/cell.png");
         try {

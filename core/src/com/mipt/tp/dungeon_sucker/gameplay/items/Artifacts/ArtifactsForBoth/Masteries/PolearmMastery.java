@@ -1,20 +1,21 @@
-package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth;
+package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForBoth.Masteries;
 
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.WeaponTypes;
 import com.mipt.tp.dungeon_sucker.gameplay.items.Mastery;
 
-public class SwordMastery extends Mastery {
-    public WeaponTypes upgradable = WeaponTypes.sword;
+public class PolearmMastery extends Mastery {
+    public WeaponTypes upgradable = WeaponTypes.polearm;
 
-    public SwordMastery() {
+    public PolearmMastery() {
         super();
-        this.upgradable = WeaponTypes.sword;
+        this.id = 8;
+        this.upgradable = WeaponTypes.polearm;
         this.triggerableByBeingDamaged = false;
         this.weight = 5;
         this.effectiveness = 3;
-        this.description = "You feel much better when using sword";
-        this.name = "Sword mastery";
+        this.description = "You feel much better when using polearm weapons";
+        this.name = "Polearm mastery";
     }
 
     @Override

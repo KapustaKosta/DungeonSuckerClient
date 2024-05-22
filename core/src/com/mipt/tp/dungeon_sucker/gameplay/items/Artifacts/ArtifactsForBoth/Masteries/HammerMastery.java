@@ -1,4 +1,4 @@
-package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsFirBoth;
+package com.mipt.tp.dungeon_sucker.gameplay.items.Artifacts.ArtifactsForBoth.Masteries;
 
 import com.mipt.tp.dungeon_sucker.gameplay.Damage;
 import com.mipt.tp.dungeon_sucker.gameplay.generators.Sets.WeaponTypes;
@@ -7,6 +7,7 @@ import com.mipt.tp.dungeon_sucker.gameplay.items.Mastery;
 public class HammerMastery extends Mastery {
     public HammerMastery() {
         super();
+        this.id = 6;
         this.upgradable = WeaponTypes.hammer;
         this.triggerableByBeingDamaged = false;
         this.weight = 5;
