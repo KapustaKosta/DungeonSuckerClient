@@ -1,15 +1,9 @@
 package com.mipt.tp.dungeon_sucker.gameplay.level.logic;
 
+import com.mipt.tp.dungeon_sucker.DungeonSuckerGame;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Chest;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
-import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Bat;
-import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.ElementalSpirit;
-import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.IvanKalinin;
-import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Mimic;
-import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Rat;
-import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Skeleton;
-import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Slime;
-import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.Vampire;
+import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures.*;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Entity;
 import com.mipt.tp.dungeon_sucker.UI.texturePacks.RoomsTexturesPack;
 import com.mipt.tp.dungeon_sucker.gameplay.DungeonMasster;
@@ -19,6 +13,9 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.Room;
 import com.mipt.tp.dungeon_sucker.gameplay.level.roomTypes.*;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 import com.mipt.tp.dungeon_sucker.math.RandomNumGenerator;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class DFSMapGenerator extends MapGenerator {
 
@@ -149,7 +146,14 @@ public class DFSMapGenerator extends MapGenerator {
                     break;
                 }
                 case 2: {
-                    // result.insert(new IvanKalinin(result), true);
+                    try {
+                        String randomFallenHeroData = DungeonSuckerGame.receiveDeadPlayerData();
+                        result.insert(new FallenHero(randomFallenHeroData, true, result), true);
+                        System.out.println("Generated fallen hero");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                     break;
                 }
                 case 3: {

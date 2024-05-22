@@ -115,7 +115,7 @@ public class DungeonSuckerGame extends ApplicationAdapter {
                 new IntVector2(10, 0), 4, 4);
 
         IntVector2 characterPosition = new IntVector2(startMap.spawn.getPosition().x, startMap.spawn.getPosition().y);
-        character = new Character(characterPosition, new Texture("knight.png"), level, -50, 50, inventoryWindow);
+        character = new Character(characterPosition, new Texture("knight.png"), level, -75, 50, inventoryWindow);
         character.maxHealth = character.health;
         character.master = dungeonMasster;
         character.mapTexture = new Texture("character.png");
@@ -156,6 +156,7 @@ public class DungeonSuckerGame extends ApplicationAdapter {
             mainWindow.setRoom(nowRoom);
             character.place = nowRoom;
         });
+        System.out.println(character.getAllDataForMakingCreature());
         dungeonMasster.add(character.weight, character);
         DungeonMasster.getInstance().move();
     }

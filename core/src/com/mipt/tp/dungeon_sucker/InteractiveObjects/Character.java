@@ -384,6 +384,6 @@ public class Character extends Entity {
         int[] weaponInfo = this.getWeaponForMakingCreature();
         int[] statsIfo = this.getStatsForMakingCreature();
         Gson gson = new Gson();
-        return gson.toJson(new String[]{gson.toJson(artifactInfo), gson.toJson(weaponInfo), gson.toJson(statsIfo)});
+        return gson.toJson(new String[]{gson.toJson(artifactInfo), gson.toJson(weaponInfo), gson.toJson(statsIfo)}).replaceAll("\n", "").replaceAll("\"", "");
     }
 }

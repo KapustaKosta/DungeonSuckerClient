@@ -1,5 +1,6 @@
 package com.mipt.tp.dungeon_sucker.InteractiveObjects.Creatures;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.google.gson.Gson;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Character;
 import com.mipt.tp.dungeon_sucker.InteractiveObjects.Creature;
@@ -42,6 +43,7 @@ public class FallenHero extends Creature {
         this.weapon = new WeaponGenerator().generateWeapon(ElementSet.getByID(weaponInfo[0]),
                 weaponInfo[1], RaritySet.getByID(weaponInfo[2]), weaponInfo[4]);
         this.recountWeight();
+        this.texture = new Texture("knight.png");
     }
     public void summon(Action doAfterMove){
         this.weapon.getObtained(this);
