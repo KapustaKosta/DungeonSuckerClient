@@ -25,14 +25,24 @@ import com.mipt.tp.dungeon_sucker.gameplay.level.logic.MapGenerator;
 import com.mipt.tp.dungeon_sucker.helper.Constants;
 import com.mipt.tp.dungeon_sucker.math.IntVector2;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.Scanner;
+
 public class DungeonSuckerGame extends ApplicationAdapter {
 
     private static final Color BACKGROUND = Color.valueOf("#222222");
     private Character character;
-
     private Interface anInterface;
-
     public static boolean allowToChangeRoom = false;
+    private static HttpClient client;
+    private boolean isSignIn = false;
+    private static String login = "";
+    private static String password = "";
 
     private void update() throws InterruptedException {
         if (allowToChangeRoom) character.getInput();
@@ -40,10 +50,45 @@ public class DungeonSuckerGame extends ApplicationAdapter {
 
     @Override
     public void create() {
-        if (Constants.TEST_FIGHT) {
-            FightTry.aboba();
-            FightTry.generateWeapons();
-            return;
+        client = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_1_1)
+                .build();
+
+        while (!isSignIn) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Write:\n0, if you want to log in to your account\n1, if you want to register");
+            int input = scanner.nextInt();
+            if (input == 0) {
+                System.out.println("Enter your login");
+                this.login = scanner.next().trim();
+                System.out.println("Enter your password");
+                this.password = scanner.next().trim();
+                try {
+                    isSignIn = signIn(this.login, this.password);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if(!isSignIn){
+                    System.out.println("Invalid login or password");
+                }
+            }
+            if (input == 1) {
+                System.out.println("Enter new login");
+                String login = scanner.next().trim();
+                System.out.println("Enter new password");
+                String password = scanner.next().trim();
+                System.out.println("Enter you email");
+                String email = scanner.next().trim();
+                boolean registrationResult = false;
+                try {
+                    registrationResult = register(login, password, email);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if(registrationResult){
+                    System.out.println("You are registered in the system!");
+                }
+            }
         }
 
         RoomsTexturesPack texturesPack = new RoomsTexturesPack();
@@ -122,11 +167,49 @@ public class DungeonSuckerGame extends ApplicationAdapter {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        if (Constants.TEST_FIGHT) {
-            return;
-        }
         ScreenUtils.clear(BACKGROUND);
         anInterface.drawInLibGDX();
         character.drawInLibGDX();
+    }
+
+    private static boolean signIn(String login, String password) throws URISyntaxException, IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder(new URI("http://localhost:8080/office/myOffice"))
+                //.POST(HttpRequest.BodyPublishers.noBody())
+                .header("LOGIN", login)
+                .header("PASSWORD", password)
+                .build();
+        HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return response.body().equals("You are in my office!");
+    }
+
+    private static boolean register(String login, String password, String email) throws IOException, InterruptedException, URISyntaxException {
+        HttpRequest request = HttpRequest.newBuilder(new URI("http://localhost:8080/register"))
+                .POST(HttpRequest.BodyPublishers.noBody())
+                .header("LOGIN", login)
+                .header("PASSWORD", password)
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return response.body().equals("Пользователь успешно зарегистрирован");
+    }
+
+    private static void sendDeadPlayerData(String data) throws IOException, InterruptedException, URISyntaxException {
+        HttpRequest request = HttpRequest.newBuilder(new URI("http://localhost:8080/sendDeadPlayerData"))
+                .POST(HttpRequest.BodyPublishers.ofString(data))
+                .header("LOGIN", login)
+                .header("PASSWORD", password)
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+    }
+
+    private static String receiveDeadPlayerData() throws IOException, InterruptedException, URISyntaxException {
+        HttpRequest request = HttpRequest.newBuilder(new URI("http://localhost:8080/receiveDeadPlayerData"))
+                .header("LOGIN", login)
+                .header("PASSWORD", password)
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return response.body();
     }
 }
